@@ -11,21 +11,28 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.os.AsyncTask;
 
+/**
+ * The user can change their avatar from MyProfile so we need a separate task in order to update the server database record.
+ * A separate asynctask class (UploadUserAvatarToServerAsync.class) is used to upload the image file itself
+ * 
+ * @author Kaloyan Roussev
+ * 
+ */
 public class SetUserAvatarAsync extends AsyncTask<String, String, String> {
-	
+
 	private int serverResponseCode;
 	private String userId;
 	private String userAvatarPath;
 	private JSONParser jsonParser = new JSONParser();
 
-	public SetUserAvatarAsync(String userId, String userAvatarPath) { 
+	public SetUserAvatarAsync(String userId, String userAvatarPath) {
 		this.userId = userId;
 		this.userAvatarPath = userAvatarPath;
 	}
 
 	@Override
 	protected String doInBackground(String... args) {
-		
+
 		try {
 			List<NameValuePair> changeAvatarAttempt = new ArrayList<NameValuePair>();
 			changeAvatarAttempt.add(new BasicNameValuePair(C.DBColumns.USER_ID, userId));
@@ -37,7 +44,7 @@ public class SetUserAvatarAsync extends AsyncTask<String, String, String> {
 
 			if (serverResponseCode == C.HttpResponses.SUCCESS) {
 				return C.Tagz.SUCCESS;
-			} else{
+			} else {
 				return null;
 			}
 		} catch (JSONException e) {
@@ -48,5 +55,5 @@ public class SetUserAvatarAsync extends AsyncTask<String, String, String> {
 			return null;
 		}
 	} // End of doInBackground
-	
+
 } // End of Class

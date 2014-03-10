@@ -1,6 +1,5 @@
 package net.shiftinpower.localsqlitedb;
 
-import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import net.shiftinpower.core.C;
 import net.shiftinpower.interfaces.OnGetSubcategoriesListener;
@@ -8,9 +7,15 @@ import net.shiftinpower.objects.ItemSubcategory;
 import net.shiftinpower.utilities.ShowLoadingMessage;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 
+/**
+ * After having obtained a fresh set of Categories from the Server Database, now we have it at hand locally for immediate
+ * access
+ * 
+ * @author Kaloyan Roussev
+ * 
+ */
 public class GetSubcategoriesFromDB extends AsyncTask<Void, Void, LinkedHashSet<ItemSubcategory>> {
 
 	private DBTools dbTools;
@@ -43,15 +48,15 @@ public class GetSubcategoriesFromDB extends AsyncTask<Void, Void, LinkedHashSet<
 		Cursor cursor = dbTools.database.rawQuery(SQLQueries.getSubcategories(subcategoryParentId), null);
 
 		if (cursor.moveToFirst()) {
-			
+
 			do {
-				
+
 				ItemSubcategory itemSubcategory = new ItemSubcategory();
 				itemSubcategory.setId(cursor.getInt(cursor.getColumnIndex(C.DBColumns.SUBCATEGORY_ID)));
 				itemSubcategory.setName(cursor.getString(cursor.getColumnIndex(C.DBColumns.SUBCATEGORY_NAME)));
-				
+
 				itemSubcategories.add(itemSubcategory);
-				
+
 			} while (cursor.moveToNext());
 		}
 

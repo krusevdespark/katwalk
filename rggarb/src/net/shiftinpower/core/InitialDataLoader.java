@@ -20,22 +20,21 @@ import net.shiftinpower.objects.ItemSubcategory;
 import net.shiftinpower.objects.UserExtended;
 import net.shiftinpower.objects.ItemBasic;
 import net.shiftinpower.utilities.PhotoHandler;
-import net.shiftinpower.utilities.ToastMaker;
-import net.shiftinpower.utilities.Transporter;
 import net.shiftinpower.asynctasks.DownloadUserInfoFromServerAsync;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.widget.Toast;
 
 /**
  * After the user signs up or logs in, we are connecting to the server and we are pulling certain items from there in the
- * beginning So we can reference them later locally and not depend on the server. This way screen and spinner load time is
+ * beginning So we can reference them later locally and not depend on the server. 
+ * 
+ * This way screen and spinner load time is
  * reduced.
+ * 
+ * There should be no worries, information is updated regularly throughout the use of the app.
  * 
  * Here is the Sequence:
  * 
@@ -145,8 +144,6 @@ public class InitialDataLoader extends RggarbSlidingMenu implements OnGetCategor
 		 * (not to float, because we will lose precision. Then send the long value, and in the receiving class, convert to
 		 * double.
 		 */
-		
-		Transporter.instance().instanceOfTheCurrentUser = userDetailsAndStats;
 		double userMoneySpentOnItemsDouble = userDetailsAndStats.getUserMoneySpentOnItems();
 		long userMoneySpentOnItemsLong = Double.doubleToRawLongBits(userMoneySpentOnItemsDouble);
 

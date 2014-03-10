@@ -1314,10 +1314,10 @@ containing a value of this type.
     public static final class id {
         public static final int FrameLayout01=0x7f040109;
         public static final int LinearLayout01=0x7f04010a;
-        public static final int abAddNewItem=0x7f040287;
-        public static final int abFeed=0x7f040285;
-        public static final int abNotifications=0x7f040286;
-        public static final int abSearch=0x7f040288;
+        public static final int abAddNewItem=0x7f040285;
+        public static final int abFeed=0x7f040283;
+        public static final int abNotifications=0x7f040284;
+        public static final int abSearch=0x7f040286;
         public static final int abs__action_bar=0x7f040027;
         public static final int abs__action_bar_container=0x7f040026;
         public static final int abs__action_bar_subtitle=0x7f040018;
@@ -1357,7 +1357,7 @@ containing a value of this type.
         public static final int abs__textButton=0x7f04001a;
         public static final int abs__title=0x7f040022;
         public static final int abs__up=0x7f04000d;
-        public static final int action_custom_title=0x7f04027b;
+        public static final int action_custom_title=0x7f040279;
         public static final int asd=0x7f0401c8;
         public static final int authButton=0x7f0400e4;
         public static final int authButtonAtSignupPage=0x7f040179;
@@ -1460,11 +1460,11 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_login_button=0x7f0401a7;
         public static final int com_facebook_usersettingsfragment_logo_image=0x7f0401a5;
         public static final int com_facebook_usersettingsfragment_profile_name=0x7f0401a6;
-        public static final int customToastBackground=0x7f04027c;
-        public static final int customToastBackgroundB=0x7f04027d;
-        public static final int customToastBackgroundC=0x7f04027e;
-        public static final int customToastBackgroundD=0x7f04027f;
-        public static final int customToastBackgroundE=0x7f040280;
+        public static final int customToastBackground=0x7f04027a;
+        public static final int customToastBackgroundB=0x7f04027b;
+        public static final int customToastBackgroundC=0x7f04027c;
+        public static final int customToastBackgroundD=0x7f04027d;
+        public static final int customToastBackgroundE=0x7f04027e;
         public static final int disableHome=0x7f04000b;
         public static final int edit_query=0x7f04002d;
         public static final int etAddAnItemBrandManufacturer=0x7f040069;
@@ -1618,8 +1618,7 @@ containing a value of this type.
         public static final int innerRelativeLayout=0x7f04003c;
         public static final int ivMessageFromUserImage=0x7f04024a;
         public static final int ivMessageFromUserSentOrReceivedIndicator=0x7f04024b;
-        public static final int ivSlidingMenuUserAvatar=0x7f040282;
-        public static final int ivViewPagerSlide=0x7f04027a;
+        public static final int ivSlidingMenuUserAvatar=0x7f040280;
         public static final int iv_icon=0x7f0401a8;
         public static final int large=0x7f040002;
         public static final int left=0x7f040012;
@@ -1640,13 +1639,12 @@ containing a value of this type.
         public static final int llSearchUsers=0x7f040146;
         public static final int llSearchUsersResults=0x7f04014e;
         public static final int llStats=0x7f040045;
-        public static final int llViewPagerSlide=0x7f040279;
         public static final int lvMessagesHolder=0x7f0400ee;
         public static final int lvMyProfileCommentsHolder=0x7f0400f4;
         public static final int lvMyProfileFriendsHolder=0x7f040104;
         public static final int lvMyProfileItemsHolder=0x7f040115;
         public static final int margin=0x7f040014;
-        public static final int menu_frame=0x7f040284;
+        public static final int menu_frame=0x7f040282;
         public static final int myItemProfileActionButtonsHolder=0x7f040090;
         public static final int normal=0x7f040001;
         public static final int notImplementedYet=0x7f040119;
@@ -1931,7 +1929,7 @@ containing a value of this type.
         public static final int tvSearchUsersTitle=0x7f040147;
         public static final int tvSettingsTitle=0x7f04015f;
         public static final int tvSignupTitle=0x7f040178;
-        public static final int tvSlidingMenuUserName=0x7f040283;
+        public static final int tvSlidingMenuUserName=0x7f040281;
         public static final int tvSortBySearchItemsResults=0x7f04013d;
         public static final int tvSortBySearchUsersResults=0x7f040157;
         public static final int tvUserEmailSettings=0x7f040161;
@@ -1955,7 +1953,7 @@ containing a value of this type.
         public static final int tvWhoCanInteractWithYourActivitySettings=0x7f04016d;
         public static final int tvWhoCanSendYouMessagesSettings=0x7f04016b;
         public static final int tv_name=0x7f0401a9;
-        public static final int twSlidingMenuHeader=0x7f040281;
+        public static final int twSlidingMenuHeader=0x7f04027f;
         public static final int useLogo=0x7f040006;
         public static final int userProfileActionButtonsHolder=0x7f04018a;
         public static final int userProfileActivityHolder=0x7f04018d;

@@ -15,6 +15,12 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.os.AsyncTask;
 
+/**
+ * We would like to call the user by name when we are sending them a Reset Password email
+ * 
+ * @author Kaloyan Roussev
+ * 
+ */
 public class ForgottenPasswordGetUserNameAndSendEmail extends AsyncTask<String, String, String> {
 
 	private int serverResponseCode;
@@ -24,8 +30,9 @@ public class ForgottenPasswordGetUserNameAndSendEmail extends AsyncTask<String, 
 	private JSONParser jsonParser = new JSONParser();
 	private String userWithSuchForgottenPasswordUserName;
 	private String reason;
-	
-	public ForgottenPasswordGetUserNameAndSendEmail(Context context, OnForgottenPasswordEmailSentListener listener, String userWithForgottenPasswordsEmailAddress) {
+
+	public ForgottenPasswordGetUserNameAndSendEmail(Context context, OnForgottenPasswordEmailSentListener listener,
+			String userWithForgottenPasswordsEmailAddress) {
 		this.context = context;
 		this.listener = listener;
 		this.userWithForgottenPasswordsEmailAddress = userWithForgottenPasswordsEmailAddress;
@@ -36,11 +43,11 @@ public class ForgottenPasswordGetUserNameAndSendEmail extends AsyncTask<String, 
 		ShowLoadingMessage.loading(context);
 		super.onPreExecute();
 	}
-	
+
 	private void setReason(String reason) {
 		this.reason = reason;
 	}
-	
+
 	@Override
 	protected String doInBackground(String... params) {
 		try {
@@ -73,7 +80,7 @@ public class ForgottenPasswordGetUserNameAndSendEmail extends AsyncTask<String, 
 		} catch (Exception e) {
 			e.printStackTrace();
 			setReason(C.Tagz.UNKNOWN_PROBLEM);
-			return null;				
+			return null;
 		}
 	} // End of doInBackground
 
@@ -81,10 +88,12 @@ public class ForgottenPasswordGetUserNameAndSendEmail extends AsyncTask<String, 
 	protected void onPostExecute(String result) {
 		ShowLoadingMessage.dismissDialog();
 		if (listener != null) {
-			if (result!=null) {
+			if (result != null) {
 				if (result.contentEquals(C.Tagz.SUCCESS)) {
 					try {
-						new EmailSender(userWithForgottenPasswordsEmailAddress, C.Emailz.FORGOTTEN_PASSWORD_RESET_ADDRESS, C.Emailz.FORGOTTEN_PASSWORD_RESET_SUBJECT, C.Emailz.FORGOTTEN_PASSWORD_RESET_BODY(userWithSuchForgottenPasswordUserName), null).execute();
+						new EmailSender(userWithForgottenPasswordsEmailAddress, C.Emailz.FORGOTTEN_PASSWORD_RESET_ADDRESS,
+								C.Emailz.FORGOTTEN_PASSWORD_RESET_SUBJECT, C.Emailz.FORGOTTEN_PASSWORD_RESET_BODY(userWithSuchForgottenPasswordUserName), null)
+								.execute();
 						listener.onForgottenPasswordEmailSentSuccess();
 					} catch (Exception e) {
 						e.printStackTrace();

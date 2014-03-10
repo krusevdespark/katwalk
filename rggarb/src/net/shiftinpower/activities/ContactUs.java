@@ -19,6 +19,11 @@ import net.shiftinpower.core.RggarbSlidingMenu;
 import net.shiftinpower.interfaces.OnContactUsSendEmailListener;
 import net.shiftinpower.koldrain.R;
 
+/**
+ * Just a draft. 
+ * @author Kaloyan Kalinov
+ * 
+ */
 public class ContactUs extends RggarbSlidingMenu implements OnContactUsSendEmailListener{
 	
 	// Set up XML View Components

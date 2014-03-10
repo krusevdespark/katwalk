@@ -2,9 +2,6 @@ package net.shiftinpower.activities;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 import net.shiftinpower.core.C;
 import net.shiftinpower.core.RggarbSlidingMenu;
 import net.shiftinpower.interfaces.OnGetCategoriesListener;
@@ -27,6 +24,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
+
+/**
+ * This class is laid out and the activity is visible in the app but it does not do Search work yet.
+ * 
+ * @author Kaloyan Roussev
+ *
+ */
 public class SearchItems extends RggarbSlidingMenu implements OnGetCategoriesListener, OnGetSubcategoriesListener {
 
 	// XML view elements

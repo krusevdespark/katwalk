@@ -17,7 +17,6 @@ import net.shiftinpower.utilities.LoadSpinnerData;
 import net.shiftinpower.utilities.Transporter;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
@@ -32,7 +31,14 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
+/**
+ * While the images from step one are being uploaded asynchronously, the user is going to enter the data
+ * regarding the item - name, brand, category, where they got it from, how much did it cost etc.
+ * 
+ * Autocomplete feature will be implemented in the future, so creating different products due to different spellings is avoided as much as possible
+ * @author Kaloyan Roussev
+ *
+ */
 public class ItemAddStepTwoData extends RggarbSlidingMenu implements OnAddNewItemToServerListener, OnGetCategoriesListener, OnGetSubcategoriesListener {
 
 	// Set up XML View Components
@@ -280,10 +286,9 @@ public class ItemAddStepTwoData extends RggarbSlidingMenu implements OnAddNewIte
 		 * itemAddPhotoDescriptions = new Intent(this, ItemProfile.class);
 		 * itemAddPhotoDescriptions.putExtras(dataRegardingTheItemJustAdded); startActivity(itemAddPhotoDescriptions); }
 		 */
-		Intent home = new Intent(this, Home.class);
+		Intent home = new Intent(this, MyProfileItems.class);
 		home.putExtras(dataRegardingTheItemJustAdded);
-		startActivity(home); // TODO this is a temporary action becase at the moment we arent ready with placeedit or
-								// itemprofile classes
+		startActivity(home); // TODO this is a temporary action becase at the moment we arent ready with placeedit class
 
 	} // End of onAddNewItemSuccess
 

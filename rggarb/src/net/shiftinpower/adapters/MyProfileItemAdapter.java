@@ -4,13 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Locale;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
-
-import net.shiftinpower.activities.item.ItemProfileMine;
-import net.shiftinpower.activities.item.ItemProfilePublic;
+import com.applidium.shutterbug.FetchableImageView;
+import net.shiftinpower.activities.ItemProfileMine;
 import net.shiftinpower.core.C;
-import net.shiftinpower.customviews.SquareImageView;
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.objects.ItemBasic;
 import net.shiftinpower.utilities.Transporter;
@@ -24,6 +20,12 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+ * This adapter supports autocomplete and uses the shutterburg library for lazy load of images
+ * 
+ * @author Kaloyan Roussev
+ *
+ */
 public class MyProfileItemAdapter extends BaseAdapter {
 
 	private ArrayList<String> itemNames = new ArrayList<String>();
@@ -41,10 +43,9 @@ public class MyProfileItemAdapter extends BaseAdapter {
 	private int itemId;
 	private int selectedCategoryId;
 	private CharSequence autocompleteInput;
-	private ImageLoader imageLoader;
 
 	static class ViewHolder {
-		SquareImageView iMyItemsFeedItemImage;
+		FetchableImageView iMyItemsFeedItemImage;
 		TextView tvMyItemsFeedItemName;
 		TextView tvMyItemsFeedItemPrice;
 		TextView tvMyItemsFeedItemRatingAndComments;
@@ -63,12 +64,10 @@ public class MyProfileItemAdapter extends BaseAdapter {
 
 		this.context = context;
 		this.myItems = myItems;
-		
-		imageLoader = ImageLoader.getInstance();
+
 		layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		prepareItemsList(myItems);
-		
 	}
 
 	// Constructor allowing items from a given category to be displayed only
@@ -77,12 +76,10 @@ public class MyProfileItemAdapter extends BaseAdapter {
 		this.context = context;
 		this.myItems = myItems;
 		this.selectedCategoryId = selectedCategoryId;
-		
-		imageLoader = ImageLoader.getInstance();
+
 		layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		prepareItemsList(myItems, selectedCategoryId);
-		
 	}
 
 	// Constructor used from the search edittext, passing a part of a string, so the adapter only shows items who correspond
@@ -92,12 +89,10 @@ public class MyProfileItemAdapter extends BaseAdapter {
 		this.context = context;
 		this.myItems = myItems;
 		this.autocompleteInput = autocompleteInput;
-		
-		imageLoader = ImageLoader.getInstance();
+
 		layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		prepareItemsList(myItems, autocompleteInput);
-		
 	}
 
 	@Override
@@ -117,12 +112,11 @@ public class MyProfileItemAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		
 		if (convertView == null) {
 			convertView = layoutInflater.inflate(R.layout.item_adapterable_my_profile_item, parent, false);
 		}
 		ViewHolder holder = new ViewHolder();
-		holder.iMyItemsFeedItemImage = (SquareImageView) convertView.findViewById(R.id.iMyItemsFeedItemImage);
+		holder.iMyItemsFeedItemImage = (FetchableImageView) convertView.findViewById(R.id.iMyItemsFeedItemImage);
 		holder.tvMyItemsFeedItemName = (TextView) convertView.findViewById(R.id.tvMyItemsFeedItemName);
 		holder.tvMyItemsFeedItemPrice = (TextView) convertView.findViewById(R.id.tvMyItemsFeedItemPrice);
 		holder.tvMyItemsFeedItemRatingAndComments = (TextView) convertView.findViewById(R.id.tvMyItemsFeedItemRatingAndComments);
@@ -142,11 +136,8 @@ public class MyProfileItemAdapter extends BaseAdapter {
 		holder.tvMyItemsFeedItemBoughtFrom.setText(itemsBoughtFromPlaceName.get(position));
 
 		holder.iMyItemsFeedItemImage.setVisibility(View.VISIBLE);
-		//holder.iMyItemsFeedItemImage.setImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_THUMBNAIL + itemImages.get(position),
-				//R.drawable.images_default_product);
-		
-		
-		imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_THUMBNAIL + itemImages.get(position), holder.iMyItemsFeedItemImage);
+		holder.iMyItemsFeedItemImage.setImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_THUMBNAIL + itemImages.get(position),
+				R.drawable.images_default_product);
 
 		if (itemRatings.get(position) == 0) {
 			holder.tvMyItemsFeedItemRatingAndComments.setText("No ratings yet");

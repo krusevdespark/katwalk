@@ -13,6 +13,13 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
+/**
+ * 
+ * NOTE: This is just a draft ot the class with the Empty List View implemented
+ * 
+ * @author Kaloyan Kalinov
+ * 
+ */
 public class Messages extends RggarbSlidingMenu {
 
 	// XML view elements

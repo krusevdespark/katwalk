@@ -19,6 +19,11 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.os.AsyncTask;
 
+/**
+ * This asynctask is part of the InitialDataloader sequence of tasks obtaining vital information from the server
+ * @author Kaloyan Roussev
+ *
+ */
 public class GetCategoriesFromServerAsync extends AsyncTask<String, String, LinkedHashSet<ItemCategory>> {
 
 	private int serverResponseCode;

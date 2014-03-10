@@ -5,7 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
+/**
+ * This is just a draft
+ * @author Kaloyan Roussev
+ *
+ */
 public class FeedPlacesContainer extends SherlockListFragment {
 
 	  @Override

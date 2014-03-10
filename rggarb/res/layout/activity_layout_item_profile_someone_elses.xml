@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <net.shiftinpower.customviews.SquareImageView
+            <net.shiftinpower.customviews.SquareFetchableImageView
                 android:id="@+id/iItemProfileImageSlotOne"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
                 android:layout_marginBottom="10sp"
                 android:weightSum="4" >
 
-                <net.shiftinpower.customviews.SquareImageView
+                <net.shiftinpower.customviews.SquareFetchableImageView
                     android:id="@+id/iItemProfileImageSlotTwo"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -49,7 +49,7 @@
                     android:src="@drawable/images_default_product"
                     android:visibility="gone" />
 
-                <net.shiftinpower.customviews.SquareImageView
+                <net.shiftinpower.customviews.SquareFetchableImageView
                     android:id="@+id/iItemProfileImageSlotThree"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -60,7 +60,7 @@
                     android:src="@drawable/images_default_product"
                     android:visibility="gone" />
 
-                <net.shiftinpower.customviews.SquareImageView
+                <net.shiftinpower.customviews.SquareFetchableImageView
                     android:id="@+id/iItemProfileImageSlotFour"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -71,7 +71,7 @@
                     android:src="@drawable/images_default_product"
                     android:visibility="gone" />
 
-                <net.shiftinpower.customviews.SquareImageView
+                <net.shiftinpower.customviews.SquareFetchableImageView
                     android:id="@+id/iItemProfileImageSlotFive"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -401,7 +401,7 @@
                     android:layout_margin="2sp"
                     android:weightSum="4" >
 
-                    <net.shiftinpower.customviews.SquareImageView
+                    <net.shiftinpower.customviews.SquareFetchableImageView
                         android:id="@+id/iItemProfileUserImageSlotOne"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -412,7 +412,7 @@
                         android:src="@drawable/images_default_avatar_male"
                         android:visibility="gone" />
 
-                    <net.shiftinpower.customviews.SquareImageView
+                    <net.shiftinpower.customviews.SquareFetchableImageView
                         android:id="@+id/iItemProfileUserImageSlotTwo"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -423,7 +423,7 @@
                         android:src="@drawable/images_default_avatar_male"
                         android:visibility="gone" />
 
-                    <net.shiftinpower.customviews.SquareImageView
+                    <net.shiftinpower.customviews.SquareFetchableImageView
                         android:id="@+id/iItemProfileUserImageSlotThree"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -434,7 +434,7 @@
                         android:src="@drawable/images_default_avatar_male"
                         android:visibility="gone" />
 
-                    <net.shiftinpower.customviews.SquareImageView
+                    <net.shiftinpower.customviews.SquareFetchableImageView
                         android:id="@+id/iItemProfileUserImageSlotFour"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
@@ -480,7 +480,7 @@
                     android:layout_margin="2sp"
                     android:weightSum="4" >
 
-                    <net.shiftinpower.customviews.SquareImageView
+                    <net.shiftinpower.customviews.SquareFetchableImageView
                         android:id="@+id/iItemProfileFriendImageSlotOne"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -492,7 +492,7 @@
                         android:src="@drawable/images_default_avatar_male"
                         android:visibility="visible" />
 
-                    <net.shiftinpower.customviews.SquareImageView
+                    <net.shiftinpower.customviews.SquareFetchableImageView
                         android:id="@+id/iItemProfileFriendImageSlotTwo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -504,7 +504,7 @@
                         android:src="@drawable/images_default_avatar_male"
                         android:visibility="visible" />
 
-                    <net.shiftinpower.customviews.SquareImageView
+                    <net.shiftinpower.customviews.SquareFetchableImageView
                         android:id="@+id/iItemProfileFriendImageSlotThree"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -516,7 +516,7 @@
                         android:src="@drawable/images_default_avatar_male"
                         android:visibility="visible" />
 
-                    <net.shiftinpower.customviews.SquareImageView
+                    <net.shiftinpower.customviews.SquareFetchableImageView
                         android:id="@+id/iItemProfileFriendImageSlotFour"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -603,7 +603,7 @@
                     android:layout_margin="2sp"
                     android:weightSum="4" >
 
-                    <net.shiftinpower.customviews.SquareImageView
+                    <net.shiftinpower.customviews.SquareFetchableImageView
                         android:id="@+id/iItemProfilePlaceImageSlotOne"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -615,7 +615,7 @@
                         android:src="@drawable/images_default_shop"
                         android:visibility="visible" />
 
-                    <net.shiftinpower.customviews.SquareImageView
+                    <net.shiftinpower.customviews.SquareFetchableImageView
                         android:id="@+id/iItemProfilePlaceImageSlotTwo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -627,7 +627,7 @@
                         android:src="@drawable/images_default_shop"
                         android:visibility="visible" />
 
-                    <net.shiftinpower.customviews.SquareImageView
+                    <net.shiftinpower.customviews.SquareFetchableImageView
                         android:id="@+id/iItemProfilePlaceImageSlotThree"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -639,7 +639,7 @@
                         android:src="@drawable/images_default_shop"
                         android:visibility="visible" />
 
-                    <net.shiftinpower.customviews.SquareImageView
+                    <net.shiftinpower.customviews.SquareFetchableImageView
                         android:id="@+id/iItemProfilePlaceImageSlotFour"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -686,7 +686,7 @@
                     android:layout_margin="2sp"
                     android:weightSum="4" >
 
-                    <net.shiftinpower.customviews.SquareImageView
+                    <net.shiftinpower.customviews.SquareFetchableImageView
                         android:id="@+id/iItemProfileUserSellingTheirItemSlotOne"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -698,7 +698,7 @@
                         android:src="@drawable/images_default_avatar_male"
                         android:visibility="visible" />
 
-                    <net.shiftinpower.customviews.SquareImageView
+                    <net.shiftinpower.customviews.SquareFetchableImageView
                         android:id="@+id/iItemProfileUserSellingTheirItemSlotTwo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -710,7 +710,7 @@
                         android:src="@drawable/images_default_avatar_male"
                         android:visibility="visible" />
 
-                    <net.shiftinpower.customviews.SquareImageView
+                    <net.shiftinpower.customviews.SquareFetchableImageView
                         android:id="@+id/iItemProfileUserSellingTheirItemSlotThree"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -722,7 +722,7 @@
                         android:src="@drawable/images_default_avatar_male"
                         android:visibility="visible" />
 
-                    <net.shiftinpower.customviews.SquareImageView
+                    <net.shiftinpower.customviews.SquareFetchableImageView
                         android:id="@+id/iItemProfileUserSellingTheirItemSlotFour"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -800,7 +800,7 @@
                     android:layout_margin="2sp"
                     android:weightSum="4" >
 
-                    <net.shiftinpower.customviews.SquareImageView
+                    <net.shiftinpower.customviews.SquareFetchableImageView
                         android:id="@+id/iItemProfileSimilarItemsSlotOne"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -812,7 +812,7 @@
                         android:src="@drawable/images_default_product"
                         android:visibility="visible" />
 
-                    <net.shiftinpower.customviews.SquareImageView
+                    <net.shiftinpower.customviews.SquareFetchableImageView
                         android:id="@+id/iItemProfileSimilarItemsSlotTwo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -824,7 +824,7 @@
                         android:src="@drawable/images_default_product"
                         android:visibility="visible" />
 
-                    <net.shiftinpower.customviews.SquareImageView
+                    <net.shiftinpower.customviews.SquareFetchableImageView
                         android:id="@+id/iItemProfileSimilarItemsSlotThree"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
@@ -836,7 +836,7 @@
                         android:src="@drawable/images_default_product"
                         android:visibility="visible" />
 
-                    <net.shiftinpower.customviews.SquareImageView
+                    <net.shiftinpower.customviews.SquareFetchableImageView
                         android:id="@+id/iItemProfileSimilarItemsSlotFour"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"

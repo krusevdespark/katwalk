@@ -17,6 +17,20 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 
+/**
+ * This is one of three asynctask classes that work together in order to efficiently add a user's item to the server database
+ * 
+ * When a user clicks Add an item, they are taken to a screen where they upload up to 5 images and their descriptions When
+ * they submit that screen UploadItemPhotoFilesToServerAsync.class starts In the meantime user is busy entering name, brand,
+ * category, description etc for their item When they submit that screen this task is called and it creates a record in the
+ * server database for the new item
+ * 
+ * We already know where on the servers item images will be saved and how they will be called, so we take that information
+ * along with the image descriptions and start AddItemPhotoPathsAndDescriptionsInServerAsync.class when we are finished here
+ * 
+ * @author Wizard
+ * 
+ */
 public class AddNewItemToServerAsync extends AsyncTask<String, String, Bundle> {
 
 	private Context context;
@@ -103,6 +117,7 @@ public class AddNewItemToServerAsync extends AsyncTask<String, String, Bundle> {
 				transactionId = json.getInt(C.Tagz.TRANSACTION_ID);
 				timeItemWasAddedToDB = json.getString(C.Tagz.TIME_ITEM_WAS_ADDED_TO_DB);
 
+				// We might need this if we decide to display the item we've just created right away
 				Bundle dataRegardingTheItemJustAdded = new Bundle();
 				dataRegardingTheItemJustAdded.putInt("itemId", itemId);
 				dataRegardingTheItemJustAdded.putInt("transactionId", transactionId);
@@ -121,8 +136,7 @@ public class AddNewItemToServerAsync extends AsyncTask<String, String, Bundle> {
 			} else if (serverResponseCode == C.HttpResponses.FAILURE_DATABASE_PROBLEM) {
 
 				setReason(C.Tagz.DB_PROBLEM);
-				String message = json.getString("message");
-				Log.d("message", message);
+
 				return null;
 
 			} else {
@@ -151,7 +165,7 @@ public class AddNewItemToServerAsync extends AsyncTask<String, String, Bundle> {
 	protected void onPostExecute(Bundle dataRegardingTheItemJustAdded) {
 
 		ShowLoadingMessage.dismissDialog();
-		
+
 		if (listener != null) {
 			if (dataRegardingTheItemJustAdded != null) {
 

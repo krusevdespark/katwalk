@@ -24,11 +24,25 @@ import net.shiftinpower.koldrain.R;
 import net.shiftinpower.utilities.PhotoHandler;
 import net.shiftinpower.utilities.ToastMaker;
 
-/* Unfortunately we cannot use most of the global variables and features here because we cannot extend the RggarbCore class
- * The RggarbCore class is using the Sherlock library because it enables older versions of Android to use the Action bar and the Sliding menu
- * The Sherlock Library does not allow an activity to use Theme.Dialog, but only Theme.Sherlock.xx themes, which do not include a Dialog theme for quite some time now
- * So we have to instantiate some variables and utility classes all over again, and when starting this activity, we are including some data along with the intent.
- * To work with this class you need to pass extra data to the intent - currentImageExists (so this class knows to display it) and imagePath (where to get it from)
+/**
+ * 
+ * This is an activity that looks like a dialog It is used throughout the app when a user wants to view/change/delete an
+ * image
+ * 
+ * Unfortunately we cannot use most of the global variables and features here because we cannot extend the RggarbCore class
+ * The RggarbCore class is using the Sherlock library because it enables older versions of Android to use the Action bar and
+ * the Sliding menu The Sherlock Library does not allow an activity to use Theme.Dialog, but only Theme.Sherlock.xx themes,
+ * which do not include a Dialog theme for quite some time now So we have to instantiate some variables and utility classes
+ * all over again, and when starting this activity, we are including some data along with the intent. To work with this class
+ * you need to pass extra data to the intent - currentImageExists (so this class knows to display it) and imagePath (where to
+ * get it from)
+ * 
+ * NOTE: When I have time, I will make use of the global variables so we dont have to instantiate fonts, utility classes and
+ * shared prefs here
+ * 
+ * NOTE: Better memory management and Bitmap handling will be implemented in the future, both in this class and PhotoHandler as well.
+ * 
+ * @author Kaloyan Roussev
  */
 public class ProvideImageDialog extends Activity {
 
@@ -93,13 +107,14 @@ public class ProvideImageDialog extends Activity {
 
 		} else {
 			// This version of the Dialog layout enables the user to
-			// delete the avatar they just uploaded, also they can view
-			// it
+			// delete the avatar they just uploaded, also they can view it
+
 			setContentView(R.layout.image_upload_with_image);
 
-			// setting the views that exist on this layout only
+			// Setting the views that exist on this layout only
 			imageView = (ImageButton) findViewById(R.id.iImage);
 			bDeletePhoto = (Button) findViewById(R.id.bDeleteImage);
+
 			// Setting font
 			try {
 				bDeletePhoto.setTypeface(font1);
@@ -223,8 +238,8 @@ public class ProvideImageDialog extends Activity {
 
 				// The Camera intent has provided the photo in the file created
 				// eariler on, we need to deal with it
-				if(!(photoHandler.handleBigCameraPhoto())) {
-					
+				if (!(photoHandler.handleBigCameraPhoto())) {
+
 					// Something went wrong while dealing with the image
 					// Remove visible avatar on the screen
 					imagePath = C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE;
@@ -234,12 +249,12 @@ public class ProvideImageDialog extends Activity {
 					intent.putExtra(C.ImageHandling.INTENT_EXTRA_IMAGE_PATH_KEY, imagePath);
 					setResult(RESULT_OK, intent);
 					finish();
-				} 
+				}
 
 			} else if (requestCode == C.ImageHandling.REQUEST_CODE_PICK_IMAGE && resultCode == RESULT_OK && null != data) {
 
 				// obtaining the path to the new bitmap and setting the userAvatar
-				if(!(photoHandler.handleGalleryPhoto(data))) {
+				if (!(photoHandler.handleGalleryPhoto(data))) {
 					// Something went wrong while dealing with the image
 					// Remove visible avatar on the screen
 					imagePath = C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE;

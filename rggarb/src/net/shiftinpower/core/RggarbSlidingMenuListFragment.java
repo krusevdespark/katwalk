@@ -1,8 +1,6 @@
 package net.shiftinpower.core;
 
 import net.shiftinpower.activities.*;
-import net.shiftinpower.activities.person.MyProfile;
-import net.shiftinpower.activities.person.PersonProfileItems;
 import net.shiftinpower.koldrain.R;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -76,13 +74,12 @@ public class RggarbSlidingMenuListFragment extends SherlockListFragment {
 			startActivity(feed);
 		} else if (itemSelected(v, C.SlidingMenuItems.MY_PROFILE)) {
 			Intent myProfile = new Intent(getActivity(), MyProfile.class);
-			myProfile.putExtra("currentUser", true);
 			startActivity(myProfile);
 		} else if (itemSelected(v, C.SlidingMenuItems.ITEM_ADD)) {
 			Intent addItem = new Intent(getActivity(), ItemAddStepOnePhotos.class);
 			startActivity(addItem);
 		} else if (itemSelected(v, C.SlidingMenuItems.MY_ITEMS)) {
-			Intent userItems = new Intent(getActivity(), PersonProfileItems.class);
+			Intent userItems = new Intent(getActivity(), MyProfileItems.class);
 			startActivity(userItems);
 		} else if (itemSelected(v, C.SlidingMenuItems.SEARCH_ITEMS)) {
 			Intent searchItems = new Intent(getActivity(), SearchItems.class);

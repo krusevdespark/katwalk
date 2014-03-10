@@ -37,6 +37,25 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.TextView.OnEditorActionListener;
 
+/**
+ * 
+ * NOTE: The Facebook log in feature is NOT implemented properly. Just drafted.
+ * 
+ * NOTE: oauth or another way of secure usage still not implemented
+ * 
+ * NOTE:
+ * 
+ * Ideally, all the classes extend a global class from the net.shiftinpower.core package, so global variables and classes 
+ * are initiated once and used throughout
+ * 
+ * Fonts, utility classes, shared preferences are initiated and accessed from there.
+ * 
+ * However, the case with MainActivity, Login and Signup screens is a bit special, as they do not employ the ActionBar and Sliding menu
+ * I can fix this, but I havent had the time to do so.
+ * 
+ *  @author Kaloyan Kalinov
+ */
+
 public class Login extends SherlockActivity implements OnClickListener, OnUserLoginAttemptListener, OnForgottenPasswordEmailSentListener, OnFacebookUserRegisteredListener {
 
 	// Set up XML View Components
@@ -57,18 +76,18 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 	public boolean dialogShown = false;
 	boolean emailIsInDatabase = false;
 	private boolean isUserLoggedIn;
-
-	// Forgotten Password Dialog and its XML Components
+	
+	//Forgotten Password Dialog and its XML Components
 	public Dialog forgottenPasswordDialog;
 	private EditText etForgottenPasswordEmail;
 	private Button bForgottenPasswordDialogSubmit;
 	private Button bForgottenPasswordDialogCancel;
-
-	// Shared Preferences
+	
+	//Shared Preferences
 	private Editor sharedPreferencesEditor;
 	private SharedPreferences sharedPreferences;
 	private static final String APP_SHARED_PREFS = C.Preferences.SHARED_PREFERENCES_FILENAME;
-
+	
 	// Fonts
 	private Typeface font1;
 	private Typeface font2;
@@ -81,7 +100,7 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 
 	// This class hashes passwords
 	private HashPassword hashPassword = new HashPassword();
-
+	
 	// facebook variables
 	private String userFBId;
 	private String userName;
@@ -93,14 +112,15 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-
+		
 		// If the user has connected the storage to the PC, they will be unable to use the app.
 		// In this case it makes no sense for us to start it, so we are making them disconnect the storage first.
-		if (!StorageStatusChecker.isExternalStorageAvailable()) {
+		if(!StorageStatusChecker.isExternalStorageAvailable()) {
 			toastMaker.toast(net.shiftinpower.activities.Login.this, C.Errorz.DISCONNECT_STORAGE_FIRST, Toast.LENGTH_SHORT);
 			finish();
 		}
-
+		
+		
 		// This is the second part of a double check for whether the user is logged in.
 		// If they are logged in and accidentally came here using the back button, they are sent back to home screen.
 		sharedPreferences = getApplicationContext().getSharedPreferences(APP_SHARED_PREFS, Context.MODE_PRIVATE);
@@ -111,16 +131,16 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 			startActivity(intent);
 			finish();
 		}
-
+		
 		super.onCreate(savedInstanceState);
-
+		
 		// Assign and inflate an XML file as the view component for this screen
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		setContentView(R.layout.activity_layout_login);
-
+		
 		// This app operates in Full Screen, so this is what we are setting here
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+		
 		// Inflate the XML View components and Link them to the corresponding Java Objects in this class
 		tvBraggrLogoLoginPage = (TextView) findViewById(R.id.tvBraggrLogoLoginPage);
 		tvLoginTitle = (TextView) findViewById(R.id.tvLoginTitle);
@@ -140,7 +160,7 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 			tvLoginTitle.setTypeface(font2);
 			tvOrLoginPage.setTypeface(font2);
 			bLoginLoginPage.setTypeface(font1);
-		} catch (Exception e) {
+		} catch (Exception e) { 
 			// Nothing can be done here
 			e.printStackTrace();
 		}
@@ -151,7 +171,7 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 
 		bForgottenPasswordDialogSubmit = (Button) forgottenPasswordDialog.findViewById(R.id.bForgottenPasswordDialogSubmit);
 		bForgottenPasswordDialogCancel = (Button) forgottenPasswordDialog.findViewById(R.id.bCancelForgottenPasswordDialog);
-
+		
 		// Set fonts
 		try {
 			bForgottenPasswordDialogSubmit.setTypeface(font1);
@@ -160,10 +180,10 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 			// Nothing can be done here
 			e.printStackTrace();
 		}
-
-		// The Facebook Login / Signup Option DOES NOT WORK at the moment. There was no time to properly implement it.
-		authButton.setReadPermissions(Arrays.asList("basic_info", "email", "user_likes", "user_status"));
-		authButton.setOnClickListener(this);
+		
+		// The Facebook Login / Signup Option DOES  NOT WORK at the moment. There was no time to properly implement it.
+		//authButton.setReadPermissions(Arrays.asList("basic_info", "email", "user_likes", "user_status"));
+		//authButton.setOnClickListener(this);
 		bLoginLoginPage.setOnClickListener(this);
 		tvForgottenPasswordLoginPage.setOnClickListener(new OnClickListener() {
 
@@ -188,7 +208,7 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 				dialogShown = true;
 			}
 
-		});
+		}); 
 
 		etUserEmailLoginPage.setOnFocusChangeListener(new OnFocusChangeListener() {
 
@@ -200,10 +220,10 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 
 				// Check whether email entered is a valid email.
 				// Toast about it not being valid if it isnt
-				if (userEmailLoginPage.length() > 0) {
+				if(userEmailLoginPage.length() >0){
 					if (!emailVerifier.isEmailValid(userEmailLoginPage)) {
 						toastMaker.toast(net.shiftinpower.activities.Login.this, C.Errorz.ENTER_VALID_EMAIL, Toast.LENGTH_SHORT);
-					}
+					}				
 				}
 
 			}
@@ -213,6 +233,11 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 			@Override
 			public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 				if (actionId == EditorInfo.IME_ACTION_DONE) {
+					// Get the user password from the input
+					userPasswordLoginPage = etUserPasswordLoginPage.getText().toString();
+
+					// Hash the password so we can transfer it to the db and check it.
+					userPasswordLoginPageHashed = hashPassword.computeSHAHash(userPasswordLoginPage);
 
 					// When user hits "next" on their on-screen keyboard, this will try to automatically log them in.
 					bLoginLoginPage.performClick();
@@ -227,34 +252,21 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 	public void onClick(View v) {
 		int id = v.getId();
 		if (id == R.id.authButton) {
-			/*
-			 * if (hasFacebookPermissions(Arrays.asList("basic_info", "email", "user_likes", "user_status"))) { // The user
-			 * is already logged in } else { OpenRequest openrequest = new
-			 * OpenRequest(this).setPermissions(Arrays.asList("basic_info", "email", "user_likes", "user_status")); Session
-			 * session = new Session(Login.this); session.openForRead(openrequest);
-			 * 
-			 * Session.openActiveSession(this, true, callback);
-			 * 
-			 * }
-			 */
+		/*	if (hasFacebookPermissions(Arrays.asList("basic_info", "email", "user_likes", "user_status"))) {
+				// The user is already logged in
+			} else {
+				OpenRequest openrequest = new OpenRequest(this).setPermissions(Arrays.asList("basic_info", "email", "user_likes", "user_status"));
+				Session session = new Session(Login.this);
+				session.openForRead(openrequest);
+
+				Session.openActiveSession(this, true, callback);
+
+			}*/
 
 		} else if (id == R.id.bLoginLoginPage) {
-
-			// Get the user email entered in the input box
-			userEmailLoginPage = etUserEmailLoginPage.getText().toString();
-			
-			// Get the user password from the input
-			userPasswordLoginPage = etUserPasswordLoginPage.getText().toString();
-
 			if (userPasswordLoginPage == null || userEmailLoginPage == null) {
-				
 				toastMaker.toast(net.shiftinpower.activities.Login.this, C.Errorz.FILL_IN_LOGIN_CREDENTIALS, Toast.LENGTH_SHORT);
-				
 			} else {
-
-				// Hash the password so we can transfer it to the db and check it.
-				userPasswordLoginPageHashed = hashPassword.computeSHAHash(userPasswordLoginPage);
-
 				// We try to log the user in. check wether email is in DB and password is correct
 				// If there is something wrong, AttemptLogin will Toast about it.
 				new LogUserInAsync(this, this, userEmailLoginPage, userPasswordLoginPageHashed).execute();
@@ -263,51 +275,71 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 		}
 	}
 
-	/*
-	 * // Facebook callback private Session.StatusCallback callback = new Session.StatusCallback() {
-	 * 
-	 * @Override public void call(Session session, SessionState state, Exception exception) { onSessionStateChange(session,
-	 * state, exception); } };
-	 * 
-	 * // Facebook session management private void onSessionStateChange(Session session, SessionState state, Exception
-	 * exception) {
-	 * 
-	 * if (state.isOpened()) { makeMeRequest(session); } else if (state.isClosed()) {
-	 * 
-	 * Session sessionw = new Session(this); Session.setActiveSession(sessionw); sessionw.openForRead(new
-	 * Session.OpenRequest(this).setCallback(callback).setPermissions(Arrays.asList("basic_info", "email", "user_likes",
-	 * "user_status"))); } }
-	 * 
-	 * // Make an API call to get user data from Facebook and define a new callback to handle the response. private void
-	 * makeMeRequest(final Session session) {
-	 * 
-	 * Request request = Request.newMeRequest(session, new Request.GraphUserCallback() {
-	 * 
-	 * @Override public void onCompleted(GraphUser user, Response response) { // If the response is successful if (session ==
-	 * Session.getActiveSession()) { if (user != null) { userFBId = user.getId(); userName = user.getName(); userEmail =
-	 * (String) user.asMap().get("email"); userSex = (String) user.getProperty("gender"); userFacebookAvatar =
-	 * "http://graph.facebook.com/" + user.getId() + "/picture?type=large&redirect=true&width=400&height=400";
-	 * 
-	 * new RegisterFacebookUserOnServerAsync(Login.this, Login.this, userName, userEmail, userSex,
-	 * userFacebookAvatar).execute(); } } if (response.getError() != null) {
-	 * System.out.println(response.getError().toString()); } } }); request.executeAsync(); }
-	 */
+/*	// Facebook callback
+	private Session.StatusCallback callback = new Session.StatusCallback() {
+		@Override
+		public void call(Session session, SessionState state, Exception exception) {
+			onSessionStateChange(session, state, exception);
+		}
+	};
+
+	// Facebook session management
+	private void onSessionStateChange(Session session, SessionState state, Exception exception) {
+
+		if (state.isOpened()) {
+			makeMeRequest(session);
+		} else if (state.isClosed()) {
+
+			Session sessionw = new Session(this);
+			Session.setActiveSession(sessionw);
+			sessionw.openForRead(new Session.OpenRequest(this).setCallback(callback).setPermissions(Arrays.asList("basic_info", "email", "user_likes", "user_status")));
+		}
+	}
+
+	// Make an API call to get user data from Facebook and define a new callback to handle the response.	 
+	private void makeMeRequest(final Session session) {
+
+		Request request = Request.newMeRequest(session, new Request.GraphUserCallback() {
+			@Override
+			public void onCompleted(GraphUser user, Response response) {
+				// If the response is successful
+				if (session == Session.getActiveSession()) {
+					if (user != null) {
+						userFBId = user.getId();
+						userName = user.getName();
+						userEmail = (String) user.asMap().get("email");
+						userSex = (String) user.getProperty("gender");
+						userFacebookAvatar = "http://graph.facebook.com/" + user.getId() + "/picture?type=large&redirect=true&width=400&height=400";
+
+						new RegisterFacebookUserOnServerAsync(Login.this, Login.this, userName, userEmail, userSex, userFacebookAvatar).execute();
+					}
+				}
+				if (response.getError() != null) {
+					System.out.println(response.getError().toString());
+				}
+			}
+		});
+		request.executeAsync();
+	}*/
+
 	public void forgottenPasswordSubmitOnClick() {
 		userWithForgottenPasswordsEmailAddress = etForgottenPasswordEmail.getText().toString();
 		if (!emailVerifier.isEmailValid(userWithForgottenPasswordsEmailAddress)) {
 			toastMaker.toast(net.shiftinpower.activities.Login.this, C.Errorz.ENTER_VALID_EMAIL, Toast.LENGTH_SHORT);
 		} else {
+			// This asynctask will get user's name and send them an email so they can reset their password
 			new ForgottenPasswordGetUserNameAndSendEmail(this, this, userWithForgottenPasswordsEmailAddress).execute();
 		}
-
+		
 		// this will check if email exists in database
 		// if email exists, we will send an email with a way for them to reset their password
 		// if email doesnt exist, we will toast about it.
-
+		
 	}
 
 	@Override
 	public void onBackPressed() {
+		// Keep the user logged out. 
 		sharedPreferencesEditor = sharedPreferences.edit();
 		sharedPreferencesEditor.putBoolean("userLoggedInState", false);
 		sharedPreferencesEditor.putInt("currentLoggedInUserId", 0);
@@ -324,7 +356,7 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 		sharedPreferencesEditor.putBoolean(C.SharedPreferencesItems.USER_LOGGED_IN_STATE, true);
 		sharedPreferencesEditor.putInt(C.SharedPreferencesItems.USER_ID, userId);
 		sharedPreferencesEditor.commit();
-
+		
 		Intent signupSuccessHome = new Intent(this, InitialDataLoader.class);
 		startActivity(signupSuccessHome);
 		finish();
@@ -333,7 +365,7 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 
 	@Override
 	public void onUserLoginAttemptFailure(String reason) {
-
+		
 		if (reason.contentEquals(C.Tagz.INVALID_CREDENTIALS)) {
 			toastMaker.toast(net.shiftinpower.activities.Login.this, C.Errorz.INCORRECT_EMAIL_PASSWORD_COMBINATION, Toast.LENGTH_SHORT);
 		} else if (reason.contentEquals(C.Tagz.DB_PROBLEM) || reason.contentEquals(C.Tagz.BAD_REQUEST) || reason.contentEquals(C.Tagz.NOT_FOUND)) {
@@ -363,7 +395,7 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 
 	@Override
 	public void OnFacebookUserRegisteredSuccess(int userId) {
-		sharedPreferencesEditor = sharedPreferences.edit();
+/*		sharedPreferencesEditor = sharedPreferences.edit();
 		sharedPreferencesEditor.putBoolean(C.SharedPreferencesItems.USER_LOGGED_IN_STATE, true);
 		sharedPreferencesEditor.putBoolean(C.SharedPreferencesItems.USER_REGISTERED_VIA_FB, true);
 		sharedPreferencesEditor.putInt(C.SharedPreferencesItems.USER_ID, userId);
@@ -373,17 +405,17 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 		Intent signupSuccessHome = new Intent(this, InitialDataLoader.class);
 
 		startActivity(signupSuccessHome);
-		finish();
+		finish();*/
 
 	}
 
 	@Override
 	public void OnFacebookUserRegisteredFailure() {
 
-		toastMaker.toast(net.shiftinpower.activities.Login.this, C.Errorz.FACEBOOK_LOGIN_FAILURE, Toast.LENGTH_LONG);
+		//toastMaker.toast(net.shiftinpower.activities.Login.this, C.Errorz.FACEBOOK_LOGIN_FAILURE, Toast.LENGTH_LONG);
 	}
 
-	@Override
+/*	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 		if (requestCode == REAUTH_ACTIVITY_CODE) {
@@ -400,6 +432,6 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 
 	public static boolean hasFacebookPermissions(List<String> permissions) {
 		return Session.getActiveSession() != null && Session.getActiveSession().getPermissions().containsAll(permissions);
-	}
+	}*/
 
 } // End of Class

@@ -12,6 +12,17 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.os.AsyncTask;
 
+/**
+ * This was my first asynctask class and it has a lot of unnecessary code within in, but I havent had the time to refactor
+ * it. It is a very important class - it is a part of the InitialDataloader sequence of asynctasks carried out right after login/signup.
+ * 
+ * It downloads the user data from the server and stores it in a POJO (Plain old java object) In a newer, but unstable
+ * version of the app, this class is also used to get other users information
+ * 
+ * 
+ * @author Kaloyan Roussev
+ * 
+ */
 public class DownloadUserInfoFromServerAsync {
 
 	private String userId;
@@ -125,8 +136,8 @@ public class DownloadUserInfoFromServerAsync {
 	public void setUserActivityCount(int userActivityCount) {
 		this.userActivityCount = userActivityCount;
 	}
-	
-	public void setUserMoneySpentOnItems(double userMoneySpentOnItems){
+
+	public void setUserMoneySpentOnItems(double userMoneySpentOnItems) {
 		this.userMoneySpentOnItems = userMoneySpentOnItems;
 	}
 
@@ -142,7 +153,7 @@ public class DownloadUserInfoFromServerAsync {
 
 			try {
 				List<NameValuePair> parameters = new ArrayList<NameValuePair>();
-				parameters.add(new BasicNameValuePair("user_id", userId));
+				parameters.add(new BasicNameValuePair(C.DBColumns.USER_ID, userId));
 
 				final JSONObject json = jsonParser.makeHttpRequest(C.API.WEB_ADDRESS + C.API.GET_USER_DATA, "GET", parameters);
 
@@ -190,8 +201,10 @@ public class DownloadUserInfoFromServerAsync {
 
 					}
 
-					UserExtended userDetailsAndStats = new UserExtended(userName, userEmail, userSex, userPassword, userLastSeen, userAvatarPath, userDateRegistered, userQuote, userPoints, userShowsMoney, userShowsStats, userAcceptsMessages,
-							userInteractsWithActivities, userItemsCount, userReviewsCount, userFollowingItemsCount, userFriendsCount, userGalleryPhotosCount, userActivityCount, userMoneySpentOnItems);
+					UserExtended userDetailsAndStats = new UserExtended(userName, userEmail, userSex, userPassword, userLastSeen, userAvatarPath,
+							userDateRegistered, userQuote, userPoints, userShowsMoney, userShowsStats, userAcceptsMessages, userInteractsWithActivities,
+							userItemsCount, userReviewsCount, userFollowingItemsCount, userFriendsCount, userGalleryPhotosCount, userActivityCount,
+							userMoneySpentOnItems);
 					return userDetailsAndStats;
 				} else if (serverResponseCode == C.HttpResponses.FAILURE_BAD_REQUEST) {
 					setReason(C.Tagz.BAD_REQUEST);
@@ -213,7 +226,7 @@ public class DownloadUserInfoFromServerAsync {
 			} catch (Exception e) {
 				e.printStackTrace();
 				setReason(C.Tagz.UNKNOWN_PROBLEM);
-				return null;				
+				return null;
 			}
 		} // End of doInBackground
 
@@ -231,5 +244,5 @@ public class DownloadUserInfoFromServerAsync {
 		} // End of onPostExecute
 
 	} // End of DownloaderTask
-	
-} // End of Class 
+
+} // End of Class

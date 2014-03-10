@@ -16,6 +16,14 @@ import net.shiftinpower.utilities.ShowLoadingMessage;
 import android.content.Context;
 import android.os.AsyncTask;
 
+/**
+ * This asynctask is part of the InitialDataloader sequence of tasks obtaining vital information from the server It gets the
+ * basic sets of data for the user items. Extended item data is obtained using the GetItemDataFromServerAsync.class for each
+ * item
+ * 
+ * @author Kaloyan Roussev
+ * 
+ */
 public class GetUserItemsFromServerAsync extends AsyncTask<String, String, LinkedHashSet<ItemBasic>> {
 
 	private int serverResponseCode;
@@ -100,14 +108,13 @@ public class GetUserItemsFromServerAsync extends AsyncTask<String, String, Linke
 					} else {
 						itemWasAGift = false;
 					}
-					
+
 					int itemRating;
-					if((String.valueOf(userItemJSONFormat.getString(C.DBColumns.ITEM_RATING))).contentEquals("null")) {
+					if ((String.valueOf(userItemJSONFormat.getString(C.DBColumns.ITEM_RATING))).contentEquals("null")) {
 						itemRating = 0;
 					} else {
 						itemRating = userItemJSONFormat.getInt(C.DBColumns.ITEM_RATING);
 					}
-
 
 					userItem.setItemBeingSold(itemBeingSold);
 					userItem.setItemBoughtFromPlace(itemBoughtFromPlace);
@@ -118,7 +125,7 @@ public class GetUserItemsFromServerAsync extends AsyncTask<String, String, Linke
 					userItem.setItemName(userItemJSONFormat.getString(C.DBColumns.ITEM_NAME));
 					userItem.setItemDescription(userItemJSONFormat.getString(C.DBColumns.ITEM_DESCRIPTION));
 					userItem.setItemRating(itemRating);
-					
+
 					userItem.setItemId(userItemJSONFormat.getInt(C.DBColumns.ITEM_ID));
 					userItem.setItemOwnerId(userItemJSONFormat.getInt(C.DBColumns.ITEM_OWNER_ID));
 					userItem.setItemPriceAquired(userItemJSONFormat.getDouble(C.DBColumns.ITEM_PRICE_AQUIRED));

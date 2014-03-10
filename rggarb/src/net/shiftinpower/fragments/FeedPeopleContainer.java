@@ -14,7 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
+/**
+ * This is just a draft
+ * @author Kaloyan Roussev
+ *
+ */
 public class FeedPeopleContainer extends SherlockListFragment {
 				
 	@Override

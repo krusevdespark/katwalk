@@ -14,6 +14,13 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.os.AsyncTask;
 
+/**
+ * This will probably become obsolete and the regular user registration asynctask class will be used instead with a couple of
+ * tweaks
+ * 
+ * @author Kaloyan Roussev
+ * 
+ */
 public class RegisterFacebookUserOnServerAsync extends AsyncTask<String, String, Integer> {
 
 	private Context context;
@@ -29,7 +36,8 @@ public class RegisterFacebookUserOnServerAsync extends AsyncTask<String, String,
 	private OnFacebookUserRegisteredListener listener;
 	private String reason;
 
-	public RegisterFacebookUserOnServerAsync(Context context, OnFacebookUserRegisteredListener listener, String userName, String userEmail, String userSex, String userAvatarPath) {
+	public RegisterFacebookUserOnServerAsync(Context context, OnFacebookUserRegisteredListener listener, String userName, String userEmail, String userSex,
+			String userAvatarPath) {
 		this.context = context;
 		this.listener = listener;
 		this.userName = userName;
@@ -50,9 +58,9 @@ public class RegisterFacebookUserOnServerAsync extends AsyncTask<String, String,
 
 	@Override
 	protected Integer doInBackground(String... args) {
-		
+
 		int serverResponseCode;
-		
+
 		try {
 
 			List<NameValuePair> params = new ArrayList<NameValuePair>();

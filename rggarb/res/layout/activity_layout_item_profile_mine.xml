@@ -21,7 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
-            <net.shiftinpower.customviews.SquareImageView
+            <net.shiftinpower.customviews.SquareFetchableImageView
                 android:id="@+id/iItemProfilePrivateImageSlotOne"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
                 android:layout_marginBottom="10sp"
                 android:weightSum="4" >
 
-                <net.shiftinpower.customviews.SquareImageView
+                <net.shiftinpower.customviews.SquareFetchableImageView
                     android:id="@+id/iItemProfilePrivateImageSlotTwo"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -49,7 +49,7 @@
                     android:src="@drawable/images_default_product"
                     android:visibility="gone" />
 
-                <net.shiftinpower.customviews.SquareImageView
+                <net.shiftinpower.customviews.SquareFetchableImageView
                     android:id="@+id/iItemProfilePrivateImageSlotThree"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -60,7 +60,7 @@
                     android:src="@drawable/images_default_product"
                     android:visibility="gone" />
 
-                <net.shiftinpower.customviews.SquareImageView
+                <net.shiftinpower.customviews.SquareFetchableImageView
                     android:id="@+id/iItemProfilePrivateImageSlotFour"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
@@ -71,7 +71,7 @@
                     android:src="@drawable/images_default_product"
                     android:visibility="gone" />
 
-                <net.shiftinpower.customviews.SquareImageView
+                <net.shiftinpower.customviews.SquareFetchableImageView
                     android:id="@+id/iItemProfilePrivateImageSlotFive"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"

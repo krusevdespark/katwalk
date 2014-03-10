@@ -11,7 +11,7 @@ public class PrivacyPolicy extends RggarbSlidingMenu {
 	
 	private TextView tvPrivacyPolicyTitle;
 	private TextView tvPrivacyPolicyContent;
-	SpannableString privacyPolicyRichTextContent = new SpannableString("src/assets/privacy_policy.xml");
+	//SpannableString privacyPolicyRichTextContent = new SpannableString("src/assets/privacy_policy.xml"); // This doesnt work
 	
 	public PrivacyPolicy() {
 		super(R.string.app_name);
@@ -26,7 +26,7 @@ public class PrivacyPolicy extends RggarbSlidingMenu {
 		tvPrivacyPolicyTitle = (TextView) findViewById(R.id.tvPrivacyPolicyTitle);
 		tvPrivacyPolicyContent = (TextView) findViewById(R.id.tvPrivacyPolicyContent);
 		
-		tvPrivacyPolicyContent.setText(privacyPolicyRichTextContent);
+		//tvPrivacyPolicyContent.setText(privacyPolicyRichTextContent);
 		
 	}
 }

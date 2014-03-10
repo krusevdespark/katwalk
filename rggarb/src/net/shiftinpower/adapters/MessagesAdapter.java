@@ -11,7 +11,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
+/**
+ * Just a draft
+ * 
+ * @author Kaloyan Roussev
+ * 
+ */
 public class MessagesAdapter extends BaseAdapter {
 
 	private ArrayList<String> userNames = new ArrayList<String>();

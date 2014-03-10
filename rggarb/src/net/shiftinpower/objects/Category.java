@@ -1,10 +1,10 @@
 package net.shiftinpower.objects;
 
-abstract public class Category {
-	
+abstract public class Category { // Extended by ItemCategory and ItemSubcategory
+
 	private int id;
 	private String name;
-	
+
 	public int getId() {
 		return id;
 	}
@@ -20,7 +20,7 @@ abstract public class Category {
 	public void setName(String name) {
 		this.name = name;
 	}
-	
+
 	@Override
 	public String toString() {
 		return this.name;

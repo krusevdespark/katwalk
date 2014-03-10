@@ -108,15 +108,15 @@
             android:theme="@android:style/Theme.Dialog" >
         </activity>
         <activity
-            android:name="net.shiftinpower.activities.item.ItemProfilePublic"
+            android:name="net.shiftinpower.activities.ItemProfilePublic"
             android:label="Item" >
         </activity>
         <activity
-            android:name="net.shiftinpower.activities.item.ItemProfileMine"
+            android:name="net.shiftinpower.activities.ItemProfileMine"
             android:label="Item" >
         </activity>
         <activity
-            android:name="net.shiftinpower.activities.item.ItemProfileOtherUsers"
+            android:name="net.shiftinpower.activities.ItemProfileOtherUsers"
             android:label="Item" >
         </activity>
         <activity
@@ -179,31 +179,31 @@
             android:label="User Data Controller" >
         </activity>
         <activity
-            android:name="net.shiftinpower.activities.person.MyProfile"
+            android:name="net.shiftinpower.activities.MyProfile"
             android:label="My Profile" >
         </activity>
         <activity
-            android:name="net.shiftinpower.activities.person.PersonProfileFollowing"
+            android:name="net.shiftinpower.activities.MyProfileFollowing"
             android:label="Following"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="net.shiftinpower.activities.person.PersonProfileItems"
+            android:name="net.shiftinpower.activities.MyProfileItems"
             android:label="Items"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="net.shiftinpower.activities.person.PersonProfileFriends"
+            android:name="net.shiftinpower.activities.MyProfileFriends"
             android:label="Friends"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="net.shiftinpower.activities.person.PersonProfileComments"
+            android:name="net.shiftinpower.activities.MyProfileComments"
             android:label="Reviews"
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="net.shiftinpower.activities.person.PersonProfilePhotos"
+            android:name="net.shiftinpower.activities.MyProfilePhotos"
             android:label="Photos" >
         </activity>
         <activity

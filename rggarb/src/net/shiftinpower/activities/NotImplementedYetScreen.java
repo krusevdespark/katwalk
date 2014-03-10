@@ -8,6 +8,14 @@ import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.FrameLayout;
 
+/**
+ * This screen is intended to display an image of sunset and the words "Not implemented yet"
+ * so team members can test the app without their flow being interrupted by ugly screens or app crashes
+ * everywhere they click and a certain screen has not been implemented yet
+ * 
+ * @author Kaloyan Roussev
+ *
+ */
 public class NotImplementedYetScreen extends Activity {
 
 	private FrameLayout notImplementedYet;

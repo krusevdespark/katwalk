@@ -17,14 +17,20 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 
-// This is the second highest class in the hierarchy. It takes care of setting up the Action Bar and tabs.
+/**
+ * This is the second highest class in the hierarchy. It takes care of setting up the Action Bar and tabs.
+ * 
+ * @author Kaloyan Roussev
+ */
 // RggarbSlidingMenu is extending this class, and all activities extend RggarbSlidingMenu
+
 public class RggarbActionBar extends RggarbCore {
 
 	// This is needed because of the actionbar
 	private int mTitleRes;
 
-	// Constructor that takes in the titleRes needed for the actionbar. All classes using the action bar need to make a call to that constructor
+	// Constructor that takes in the titleRes needed for the actionbar. All classes using the action bar need to make a call
+	// to that constructor
 	public RggarbActionBar(int titleRes) {
 		mTitleRes = titleRes;
 	}
@@ -70,9 +76,9 @@ public class RggarbActionBar extends RggarbCore {
 			startActivity(feed);
 			return true;
 		} else if (itemId == R.id.abNotifications) {
-			
+
 			Intent notifications = new Intent(this, NotImplementedYetScreen.class);
-			//Intent notifications = new Intent(this, Notifications.class);
+			// Intent notifications = new Intent(this, Notifications.class);
 			startActivity(notifications);
 			return true;
 		} else if (itemId == R.id.abAddNewItem) {
@@ -117,4 +123,4 @@ public class RggarbActionBar extends RggarbCore {
 		}
 	} // End of BasePagerAdapter Handling Navigation Tabs
 
-}  // End of Class
+} // End of Class

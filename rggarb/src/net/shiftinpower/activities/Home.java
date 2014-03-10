@@ -32,6 +32,7 @@ public class Home extends RggarbSlidingMenu {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_layout_home);
 
+		// After having just logged in, the user lands on the feeds screen, separated to Items, People and Places feeds, navigated by tabs
 		ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 

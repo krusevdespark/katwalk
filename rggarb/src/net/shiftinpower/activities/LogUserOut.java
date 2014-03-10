@@ -13,6 +13,16 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.widget.Toast;
 
+/**
+ * Doing some maintenance work when logging the user out
+ *  - clear database, so when they log back in again, they will get another set of fresh data (not the only time they are getting fresh data, though)
+ *  - clear SharedPreferences file, so next user can use it
+ *  - clear the contents of the app folder on the phone storage
+ * 
+ * @author Kaloyan Roussev
+ *
+ */
+
 public class LogUserOut extends RggarbSlidingMenu implements OnUserLogOutListener {
 
 	public LogUserOut() {

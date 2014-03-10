@@ -27,6 +27,28 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 
+/**
+ * This class handles all the Image operations:
+ * 
+ * - get image from camera
+ * 
+ * - get image from gallery
+ * 
+ * - resize image if needed, maintaining its aspect ratio
+ * 
+ * - resample image if needed, shrinking its filesize down
+ * 
+ * - rotate image if needed, thus avoiding portrait images being displayed as landscapes
+ * 
+ * Example of the workflow may be seen at net.shiftinpower.activities.ProvideImageDialog.class
+ * 
+ * We are doing as much as possible to keep a good ballance between preserving image quality and keeping away from
+ * OutOfMemoryErrors but more work is needed as there are cases of OutOfMemoryErrors and also image quality is not always
+ * good enough. More time needed
+ * 
+ * @author Wizard
+ * 
+ */
 public class PhotoHandler {
 
 	private Context context;
@@ -99,11 +121,11 @@ public class PhotoHandler {
 
 	} // End of handleBigCameraPhoto
 
-	// This class is used when we are downloading a bitmap from the internet and we want to store it in a local file for
-	// later reference
-	// We createImageFile to store the file into and call galleryAddPic to make the file available
-	// ImagePath is set within the createImageFile method
-	// If we want to use the ImagePath we can call getImagePath
+	/*
+	 * This method is used when we are downloading a bitmap from the internet and we want to store it in a local file for
+	 * later reference We createImageFile to store the file into and call galleryAddPic to make the file available ImagePath
+	 * is set within the createImageFile method If we want to use the ImagePath we can call getImagePath
+	 */
 	public boolean handleIncomingPhoto(Bitmap bitmap) {
 
 		try {
@@ -112,7 +134,6 @@ public class PhotoHandler {
 			fileOutputStream.flush();
 			fileOutputStream.close();
 			galleryAddPic();
-			bitmap.recycle(); // NEW
 			return true;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -124,10 +145,11 @@ public class PhotoHandler {
 
 	} // End of handleIncomingPhoto
 
-	// This method is used when the user has picked an image from their phone gallery
-	// The intent returns in the form of data and we get the Uri from it, then using a cursor and reading through a filtered
-	// amount of data
-	// The path to the image is obtained and we make it available for ourselves by setImagePath
+	/*
+	 * This method is used when the user has picked an image from their phone gallery The intent returns in the form of data
+	 * and we get the Uri from it, then using a cursor and reading through a filtered amount of data The path to the image is
+	 * obtained and we make it available for ourselves by setImagePath
+	 */
 	public boolean handleGalleryPhoto(Intent data) {
 
 		Uri selectedImage = data.getData();
@@ -138,10 +160,7 @@ public class PhotoHandler {
 		setImagePath(cursor.getString(columnIndex));
 
 		try {
-			Bitmap resizedResampledBitmap = getBitmapAndResizeIt(imagePath); // NEW
-			Bitmap rotatedBitmap = rotateBitmap(imagePath, resizedResampledBitmap); // NEW
-			resizedResampledBitmap.recycle(); // NEW
-			setImageBitmap(rotatedBitmap);
+			setImageBitmap(rotateBitmap(imagePath, getBitmapAndResizeIt(imagePath)));
 		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
@@ -149,11 +168,9 @@ public class PhotoHandler {
 
 		try {
 			FileOutputStream fileOutputStream = new FileOutputStream(createImageFile());
-			Bitmap imageBitmap = getImageBitmap(); // NEW
-			imageBitmap.compress(Bitmap.CompressFormat.JPEG, C.ImageHandling.IMAGE_SENT_TO_SERVER_QUALITY_0_T0_100, fileOutputStream);
+			getImageBitmap().compress(Bitmap.CompressFormat.JPEG, C.ImageHandling.IMAGE_SENT_TO_SERVER_QUALITY_0_T0_100, fileOutputStream);
 			fileOutputStream.flush();
 			fileOutputStream.close();
-			imageBitmap.recycle(); // NEW
 			return true;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -203,6 +220,9 @@ public class PhotoHandler {
 	 * desired, so we are dealing with this as well
 	 */
 	public Bitmap getBitmapAndResizeIt(String pathName) {
+		Bitmap bitmapLarge;
+		Bitmap bitmapNormalized;
+		BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
 
 		int maxImageFileSize = C.ImageHandling.MAX_IMAGE_FILE_SIZE;
 		int maxImageWidth = C.ImageHandling.MAX_IMAGE_WIDTH;
@@ -210,27 +230,19 @@ public class PhotoHandler {
 		int initialResampleFactor = C.ImageHandling.INITIAL_BITMAP_RESAMPLE_SIZE;
 		int harderResampleFactor = C.ImageHandling.HARDER_BITMAP_RESAMPLE_SIZE;
 
-		Bitmap bitmapLarge;
-		Bitmap bitmapNormalized;
-		BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-		bitmapOptions.inJustDecodeBounds = true;
-		bitmapOptions.inPurgeable = true;
-
 		try {
-			bitmapLarge = BitmapFactory.decodeFile(pathName, bitmapOptions);
+			bitmapLarge = BitmapFactory.decodeFile(pathName);
 
 		} catch (OutOfMemoryError ex) {
 			ex.printStackTrace();
 
 			try {
 				bitmapOptions.inSampleSize = initialResampleFactor;
-				bitmapOptions.inJustDecodeBounds = false;
 				bitmapLarge = BitmapFactory.decodeFile(pathName, bitmapOptions);
 
 			} catch (OutOfMemoryError ex2) {
 				ex2.printStackTrace();
 				bitmapOptions.inSampleSize = harderResampleFactor;
-				bitmapOptions.inJustDecodeBounds = false;
 				bitmapLarge = BitmapFactory.decodeFile(pathName, bitmapOptions);
 			}
 
@@ -241,8 +253,8 @@ public class PhotoHandler {
 
 		}
 
-		int originalWidth = bitmapOptions.outWidth; // Example 15
-		int originalHeight = bitmapOptions.outHeight; // Example 12
+		int originalWidth = bitmapLarge.getWidth(); // Example 15
+		int originalHeight = bitmapLarge.getHeight(); // Example 12
 
 		int newWidth = originalWidth; // Example 15
 		int newHeight = originalHeight; // Example 12

@@ -13,28 +13,40 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import net.shiftinpower.core.C;
 import net.shiftinpower.utilities.*;
-import net.shiftinpower.fragments.WelcomeSlideFragment;
+import net.shiftinpower.fragments.WelcomeSlideFragmentA;
+import net.shiftinpower.fragments.WelcomeSlideFragmentB;
+import net.shiftinpower.fragments.WelcomeSlideFragmentC;
+import net.shiftinpower.fragments.WelcomeSlideFragmentD;
+import net.shiftinpower.fragments.WelcomeSlideFragmentE;
+
+/**
+ * NOTE:
+ * Ideally, all the classes extend a global class from the net.shiftinpower.core package, so global variables and classes 
+ * are initiated once and used throughout
+ * 
+ * Fonts, utility classes, shared preferences are initiated and accessed from there.
+ * 
+ * However, the case with MainActivity, Login and Signup screens is a bit special, as they do not employ the ActionBar and Sliding menu
+ * I can fix this, but I havent had the time to do so.
+ * 
+ *  @author Kaloyan Kalinov
+ */
 
 public class MainActivity extends SherlockFragmentActivity implements OnClickListener {
-
+	
 	// Set up XML View Components
 	private TextView tvWelcome;
 	private TextView tvBraggr;
@@ -44,15 +56,15 @@ public class MainActivity extends SherlockFragmentActivity implements OnClickLis
 	// Fonts
 	private Typeface font1;
 	private Typeface font2;
-
+	
 	// Variables holding data
 	private boolean isUserLoggedIn;
-
+	
 	// Shared Preferences
 	private Editor sharedPreferencesEditor;
 	private SharedPreferences sharedPreferences;
 	private static final String APP_SHARED_PREFS = C.Preferences.SHARED_PREFERENCES_FILENAME;
-
+	
 	// Custom class to display toasts
 	private ToastMaker toastMaker = new ToastMaker();
 
@@ -63,30 +75,33 @@ public class MainActivity extends SherlockFragmentActivity implements OnClickLis
 	private Timer timer;
 	private int viewPagerCurrentItem = 0;
 
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-
-		if (!StorageStatusChecker.isExternalStorageAvailable()) {
+		
+		if(!StorageStatusChecker.isExternalStorageAvailable()) {
 			toastMaker.toast(net.shiftinpower.activities.MainActivity.this, C.Errorz.DISCONNECT_STORAGE_FIRST, Toast.LENGTH_SHORT);
 			finish();
 		}
-
+		
 		super.onCreate(savedInstanceState);
-
+		
 		// This app operates in No Title, Fullscreen mode
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-
+		
 		// Deal with Shared Preferences
 		sharedPreferences = getApplicationContext().getSharedPreferences(APP_SHARED_PREFS, Context.MODE_PRIVATE);
 		isUserLoggedIn = sharedPreferences.getBoolean("userLoggedInState", false);
+		
+		// Dont allow the user to accidentally get to the Main Screen if they are logged in
 		if (isUserLoggedIn) {
 			Intent intent = new Intent(this, Home.class);
 			intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 			startActivity(intent);
 			finish();
 		}
-
+		
 		// Set the XML layout
 		setContentView(R.layout.activity_layout_activity_main);
 		tvBraggr = (TextView) findViewById(R.id.tvBraggr);
@@ -97,11 +112,10 @@ public class MainActivity extends SherlockFragmentActivity implements OnClickLis
 		bLogin.setOnClickListener(this);
 		bSignup.setOnClickListener(this);
 
-		// Instantiate a ViewPager and a PagerAdapter.
+		// Instantiate a ViewPager and a PagerAdapter for the slide show
 		timer = new Timer();
 		mPager = (ViewPager) findViewById(R.id.pager);
 		mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-		mPager.setOffscreenPageLimit(1);
 		mPager.setAdapter(mPagerAdapter);
 
 		slideshowTimer();
@@ -118,10 +132,11 @@ public class MainActivity extends SherlockFragmentActivity implements OnClickLis
 			e.printStackTrace();
 			// Nothing can be done here
 		}
-	} // End of onCreate
+	}
 
 	@Override
 	public void onBackPressed() {
+		// If the user has just logged out, make double sure they are logged out, so they dont go back inside the app by accident.
 		sharedPreferencesEditor = sharedPreferences.edit();
 		sharedPreferencesEditor.putBoolean("userLoggedInState", false);
 		sharedPreferencesEditor.putInt("currentLoggedInUserId", 0);
@@ -132,19 +147,17 @@ public class MainActivity extends SherlockFragmentActivity implements OnClickLis
 	@Override
 	public void onClick(View v) {
 		int id = v.getId();
-		if (canUserAccessTheInternet()) {
-
+		if (canUserAccessTheInternet()) { // Only let users go on to Login/Signup if they have internet connection, otherwise Toast about it
+			
 			if (id == R.id.bLogin) {
 				Intent login = new Intent(this, Login.class);
 				startActivity(login);
-				finish();
 
 			} else if (id == R.id.bSignup) {
 				Intent signup = new Intent(this, Signup.class);
 				startActivity(signup);
-				finish();
 			}
-
+			
 		} else {
 			toastMaker.toast(net.shiftinpower.activities.MainActivity.this, C.Errorz.NO_INTERNET_CONNECTION, Toast.LENGTH_SHORT);
 		}
@@ -155,16 +168,26 @@ public class MainActivity extends SherlockFragmentActivity implements OnClickLis
 			super(fragmentManager);
 		}
 
+		// TODO try refactoring this, make it use only one Fragment with different parameters passed to it
 		@Override
 		public SherlockFragment getItem(int position) {
-			return new WelcomeSlideFragment().newInstance(position);
+			if (position == 1) {
+				return new WelcomeSlideFragmentD();
+			} else if (position == 2) {
+				return new WelcomeSlideFragmentE();
+			} else if (position == 3) {
+				return new WelcomeSlideFragmentC();
+			} else if (position == 4) {
+				return new WelcomeSlideFragmentB();
+			} else {
+				return new WelcomeSlideFragmentA();
+			}
 		}
 
 		@Override
 		public int getCount() {
 			return NUM_PAGES;
 		}
-
 	}
 
 	public void slideshowTimer() {
@@ -202,5 +225,5 @@ public class MainActivity extends SherlockFragmentActivity implements OnClickLis
 			return false;
 		}
 	}
-
+	
 } // End of Class

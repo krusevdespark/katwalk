@@ -12,13 +12,21 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-
-import net.shiftinpower.activities.person.MyProfile;
+import net.shiftinpower.activities.MyProfile;
 import net.shiftinpower.koldrain.R;
 
-// This is the third highest class in the hierarchy. It takes care of the sliding menu that is accessible through pretty much
-// Every activity in the App, except for the Login/Signup screens
-// All activities for the logged in users should extend this activity
+/**
+ * This is the third highest class in the hierarchy. It takes care of the sliding menu that is accessible through pretty much
+ * Every activity in the App, except for the Login/Signup screens All activities for the logged in users should extend this
+ * activity
+ * 
+ * NOTE: The piece of code that assigns an image to the user avatar ImageView is extracted to a method and used in several
+ * places throughout the app in a newer, but unstable version of the App.
+ * 
+ * @author Kaloyan Roussev
+ * 
+ */
+
 public class RggarbSlidingMenu extends RggarbActionBar {
 
 	// XML View elements
@@ -81,22 +89,51 @@ public class RggarbSlidingMenu extends RggarbActionBar {
 			@Override
 			public void onClick(View v) {
 				Intent myProfile = new Intent(RggarbSlidingMenu.this, MyProfile.class);
-				myProfile.putExtra("currentUser", true);
 				startActivity(myProfile);
 
 			}
 		});
 
 		ivSlidingMenuUserAvatar = (ImageView) getSlidingMenu().findViewById(R.id.ivSlidingMenuUserAvatar);
+		if (!userHasRegisteredViaFacebook) {
+			if (!userAvatarPath.contentEquals(C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE) || userAvatarPath.contentEquals("") || userAvatarPath == null) {
 
-		setUserImageToImageView(ivSlidingMenuUserAvatar, userAvatarPath, userSex);
+				try {
+					ivSlidingMenuUserBitmap = BitmapFactory.decodeFile(userAvatarPath);
+					ivSlidingMenuUserAvatar.setImageBitmap(ivSlidingMenuUserBitmap);
+
+				} catch (OutOfMemoryError ex) {
+					ex.printStackTrace();
+					ivSlidingMenuUserBitmap = photoHandler.getBitmapAndResizeIt(userAvatarPath);
+					ivSlidingMenuUserAvatar.setImageBitmap(ivSlidingMenuUserBitmap);
+
+				} catch (Exception ex) {
+					ex.printStackTrace();
+
+					if (userSex.equalsIgnoreCase("male")) {
+						ivSlidingMenuUserAvatar.setImageResource(R.drawable.images_default_avatar_male);
+					} else {
+						ivSlidingMenuUserAvatar.setImageResource(R.drawable.images_default_avatar_female);
+					}
+
+				}
+
+			} else {
+				if (userSex.equalsIgnoreCase("male")) {
+					ivSlidingMenuUserAvatar.setImageResource(R.drawable.images_default_avatar_male);
+				} else {
+					ivSlidingMenuUserAvatar.setImageResource(R.drawable.images_default_avatar_female);
+				}
+			}
+		} else {
+			// new DownloadFacebookImage(this).execute(avatarPath);
+		}
 
 		ivSlidingMenuUserAvatar.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				Intent myProfile = new Intent(RggarbSlidingMenu.this, MyProfile.class);
-				myProfile.putExtra("currentUser", true);
 				startActivity(myProfile);
 
 			}

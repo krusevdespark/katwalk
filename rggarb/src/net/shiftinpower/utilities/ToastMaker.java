@@ -8,6 +8,14 @@ import android.view.Gravity;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Provides a way to use heavily cusomized toasts with one line of code
+ * 
+ * Overloaded method allows us to choose position of the Toast on the screen
+ * 
+ * @author Kaloyan Roussev
+ * 
+ */
 public class ToastMaker extends Activity {
 
 	/*
@@ -27,7 +35,7 @@ public class ToastMaker extends Activity {
 			}
 		});
 	}
-	
+
 	/*
 	 * In this overloaded method, screen position for the toast can be adjusted
 	 */

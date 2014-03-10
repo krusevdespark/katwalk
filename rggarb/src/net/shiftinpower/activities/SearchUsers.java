@@ -11,6 +11,12 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+/**
+ * This class is laid out and the activity is visible in the app but it does not do Search work yet.
+ * 
+ * @author Kaloyan Roussev
+ *
+ */
 public class SearchUsers extends RggarbSlidingMenu{
 	
 	// XML view elements

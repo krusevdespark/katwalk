@@ -2,7 +2,6 @@ package net.shiftinpower.activities;
 
 import com.actionbarsherlock.app.SherlockActivity;
 import com.actionbarsherlock.view.Window;
-
 import net.shiftinpower.asynctasks.*;
 import net.shiftinpower.interfaces.*;
 import net.shiftinpower.koldrain.R;
@@ -32,6 +31,18 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * NOTE:
+ * Ideally, all the classes extend a global class from the net.shiftinpower.core package, so global variables and classes 
+ * are initiated once and used throughout
+ * 
+ * Fonts, utility classes, shared preferences are initiated and accessed from there.
+ * 
+ * However, the case with MainActivity, Login and Signup screens is a bit special, as they do not employ the ActionBar and Sliding menu
+ * I can fix this, but I havent had the time to do so.
+ * 
+ *  @author Kaloyan Kalinov
+ */
 public class Signup extends SherlockActivity implements OnCheckWhetherAUserWithSuchEmailExistsListener, OnUserCreatedListener {
 
 	// Set up XML View Components

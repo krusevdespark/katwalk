@@ -27,9 +27,15 @@ import android.widget.TextView.OnEditorActionListener;
 import android.widget.Toast;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 import net.shiftinpower.core.*;
-import net.shiftinpower.activities.person.MyProfile;
 import net.shiftinpower.asynctasks.*;
 
+/**
+ * NOTE: The piece of code that assigns an image to the user image ImageView and does various checks is replaced by a method
+ * that I use throughout the app in a newer but unstable version of the app
+ * 
+ * @author Kaloyan Roussev
+ *
+ */
 public class Settings extends RggarbSlidingMenu implements OnUserSettingsChangedListener, OnUserDeletionListener {
 
 	// Set up XML View Components

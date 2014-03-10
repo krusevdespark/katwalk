@@ -6,6 +6,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.os.AsyncTask;
 
+/**
+ * The User can provide an avatar at Signup, MyProfile or Settings. This class uploads the image file to the server, then
+ * starts another AsyncTask (SetUserAvatar) to update the server database record
+ * 
+ * @author Kaloyan Roussev
+ * 
+ */
 public class UploadUserAvatarToServerAsync extends AsyncTask<String, Void, Boolean> {
 
 	private String userAvatarPath;
@@ -30,7 +37,8 @@ public class UploadUserAvatarToServerAsync extends AsyncTask<String, Void, Boole
 			serverResponseCode = json.getInt(C.Tagz.SUCCESS);
 
 			if (serverResponseCode == C.HttpResponses.SUCCESS) {
-				// TODO deal with this. Later on, when I learn how to set the whole app to listen for an event, I should communicate with the listener
+				// TODO deal with this. Later on, when I learn how to set the whole app to listen for an event, I should
+				// communicate with the listener
 				// in cases of success or failure
 
 				new SetUserAvatarAsync(userId, avatarFilename).execute();
@@ -39,7 +47,7 @@ public class UploadUserAvatarToServerAsync extends AsyncTask<String, Void, Boole
 
 			} else {
 				return false;
-				
+
 			}
 
 		} catch (JSONException e) {
@@ -50,5 +58,5 @@ public class UploadUserAvatarToServerAsync extends AsyncTask<String, Void, Boole
 			return false;
 		}
 	} // End of doInBackground
-	
+
 } // End of Class

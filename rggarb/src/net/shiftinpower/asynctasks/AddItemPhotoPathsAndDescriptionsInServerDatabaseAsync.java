@@ -15,6 +15,14 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 
+/**
+ * This is the last asynctask that is carried out when a user adds a new item to the database
+ * We have now uploaded the images to the server and have called this task
+ * When its over it clears the database so we can download user's items anew and be sure they have fresh content
+ * 
+ * @author Kaloyan Roussev
+ *
+ */
 public class AddItemPhotoPathsAndDescriptionsInServerDatabaseAsync extends AsyncTask<String, Void, Boolean> implements OnClearDatabaseListener {
 
 	private ArrayList<String> imageDescriptions;
