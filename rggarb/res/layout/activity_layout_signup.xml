@@ -1,0 +1,201 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/tvBraggrLogoSignupPage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/tvBraggr"
+                android:textAllCaps="true"
+                android:textColor="@color/deep_purple"
+                android:textSize="70sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvSignupTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvBraggrLogoSignupPage"
+                android:gravity="center"
+                android:text="@string/tvSignupTitle"
+                android:textAllCaps="true"
+                android:textColor="@color/green"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <com.facebook.widget.LoginButton
+                android:id="@+id/authButtonAtSignupPage"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_below="@id/tvSignupTitle"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="35sp" />
+
+            <TextView
+                android:id="@+id/tvOrLoginPage"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/authButtonAtSignupPage"
+                android:layout_marginTop="5sp"
+                android:gravity="center"
+                android:text="@string/tvOrLoginPage"
+                android:textAllCaps="true"
+                android:textColor="@color/deep_purple"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <EditText
+                android:id="@+id/etUsernameSignupPage"
+                style="@style/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tvSignupTitle"
+                android:layout_alignRight="@+id/tvSignupTitle"
+                android:layout_below="@id/tvOrLoginPage"
+                android:layout_marginBottom="5dp"
+                android:layout_marginTop="10sp"
+                android:hint="@string/ifLoginUsernameHint"
+                android:inputType="textCapWords"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp" />
+
+            <EditText
+                android:id="@+id/etUserEmailSignupPage"
+                style="@style/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/etUsernameSignupPage"
+                android:layout_alignRight="@+id/etUsernameSignupPage"
+                android:layout_below="@+id/etUsernameSignupPage"
+                android:layout_marginBottom="5dp"
+                android:hint="@string/ifLoginEmailHint"
+                android:inputType="textEmailAddress"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp" />
+
+            <EditText
+                android:id="@+id/etUserPasswordSignupPage"
+                style="@style/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/etUserEmailSignupPage"
+                android:layout_alignRight="@+id/etUserEmailSignupPage"
+                android:layout_below="@+id/etUserEmailSignupPage"
+                android:layout_marginBottom="5dp"
+                android:hint="@string/ifLoginPasswordHint"
+                android:inputType="textPassword"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp" />
+
+            <EditText
+                android:id="@+id/etUserPasswordAgainSignupPage"
+                style="@style/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/etUserPasswordSignupPage"
+                android:layout_alignRight="@+id/etUserPasswordSignupPage"
+                android:layout_below="@+id/etUserPasswordSignupPage"
+                android:hint="@string/ifLoginPasswordRepeatHint"
+                android:inputType="textPassword"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp" />
+
+            <TableRow
+                android:id="@+id/trSignup"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/etUserPasswordAgainSignupPage"
+                android:layout_below="@+id/etUserPasswordAgainSignupPage"
+                android:layout_marginTop="10dp" >
+
+                <ImageButton
+                    android:id="@+id/iUserAvatar"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="7dp"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/ivUserAvatarContentDescription"
+                    android:padding="0dp"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/images_default_avatar_male" />
+
+                <RadioGroup
+                    android:id="@+id/rgUserSexSignupPage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:background="@android:color/black"
+                    android:orientation="horizontal"
+                    android:weightSum="2" >
+
+                    <RadioButton
+                        android:id="@+id/rbSexMaleSignupPage"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/rgSexMale"
+                        android:textColor="@android:color/white" />
+
+                    <RadioButton
+                        android:id="@+id/rbSexFemaleSignupPage"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/rgSexFemale"
+                        android:textColor="@android:color/white" />
+                </RadioGroup>
+            </TableRow>
+
+            <CheckBox
+                android:id="@+id/cbUserAgreesWithTermsOfUse"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/trSignup"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:checked="false"
+                android:text="@string/cbUserAgreesWithTermsOfUse"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/bSubmitSignupPage"
+                style="@style/check_out_button_style"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_alignParentBottom="true"
+                android:layout_below="@id/cbUserAgreesWithTermsOfUse"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/bSubmitSignupPage"
+                android:textSize="26sp" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

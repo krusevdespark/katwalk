@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvDeleteAccountDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="@string/tvDeleteAccountDialogTitle"
+        android:textColor="@android:color/black" />
+
+    <EditText
+        android:id="@+id/etDeleteAccountPassword"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:hint="@string/etDeleteAccountPassword"
+        android:inputType="textPassword" />
+
+    <CheckBox
+        android:id="@+id/cbDeleteAccountDeleteItemImagesAsWell"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:checked="false"
+        android:text="@string/cbDeleteAccountDeleteItemImagesAsWell"
+        android:textColor="@android:color/black" />
+
+    <Button
+        android:id="@+id/bDeleteAccountSubmit"
+        style="@style/green_button_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="@string/bDeleteAccountSubmit"
+        android:textColor="@android:color/white"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/bDeleteAccountCancel"
+        style="@style/purple_button_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="@string/bDeleteAccountCancel"
+        android:textColor="@android:color/white"
+        android:textSize="30sp" />
+
+</LinearLayout>

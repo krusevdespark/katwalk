@@ -1,0 +1,165 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/feed_item_margin"
+    android:background="@android:color/black"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/feed_item_padding"
+    android:paddingLeft="@dimen/feed_item_padding"
+    android:paddingRight="@dimen/feed_item_padding"
+    android:paddingTop="@dimen/feed_item_padding" >
+
+    <TableRow
+        android:id="@+id/asd"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="2" >
+
+        <ImageButton
+            android:id="@+id/iFeedUserHasCommentedOnItemUserAvatar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="2dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/ivFeedUserImageDescription"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/images_default_avatar_male" />
+
+        <ImageButton
+            android:id="@+id/iFeedUserHasCommentedOnItemItemAvatar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/ivFeedItemImageDescription"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/images_default_product" />
+    </TableRow>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingLeft="10dp" >
+
+        <TextView
+            android:id="@+id/tvFeedUserHasCommentedOnItemUsername"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:singleLine="true"
+            android:text="@string/tvFeedUserHasCommentedOnItemUsername"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvFeedUserHasCommentedOnItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tvFeedUserHasCommentedOnItem"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:textStyle="italic" />
+
+        <TextView
+            android:id="@+id/tvFeedUserHasCommentedOnItemItemName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="@string/tvFeedUserHasCommentedOnItemItemName"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvFeedUserHasCommentedOnItemTimestamp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:singleLine="true"
+            android:text="@string/tvFeedUserHasCommentedOnItemTimestamp"
+            android:textColor="@color/light_grey"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tvFeedUserHasCommentedOnItemCommentContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:maxLines="12"
+            android:singleLine="false"
+            android:text="@string/tvFeedUserHasCommentedOnItemCommentContent"
+            android:textColor="@color/yellow"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvFeedUserHasCommentedOnItemViewAllComments"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginBottom="15dp"
+            android:layout_marginTop="5dp"
+            android:gravity="right"
+            android:singleLine="true"
+            android:text="@string/tvFeedUserHasCommentedOnItemViewAllComments"
+            android:textColor="@color/yellow"
+            android:textSize="12sp"
+            android:textStyle="italic" />
+    </LinearLayout>
+
+    <TableRow
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="4" >
+
+        <Button
+            android:id="@+id/bItemsFeedActionButton1"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            style="@style/feed_button_style"
+            android:text="@string/bItemsFeedActionButtonRate"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/bItemsFeedActionButton2"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            style="@style/feed_button_style"
+            android:text="@string/bItemsFeedActionButtonComment"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/bItemsFeedActionButton3"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            style="@style/feed_button_style"
+            android:text="@string/bItemsFeedActionButtonFollow"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+
+        <Button
+            android:id="@+id/bItemsFeedActionButton4"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_margin="2dp"
+            android:layout_weight="1"
+            style="@style/feed_button_style"
+            android:text="@string/bPeopleFeedActionButtonBuy"
+            android:textColor="@android:color/white"
+            android:textSize="12sp" />
+    </TableRow>
+
+</LinearLayout>

@@ -1,0 +1,134 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/feed_item_margin"
+    android:background="@android:color/black"
+    android:paddingBottom="@dimen/feed_item_padding"
+    android:paddingLeft="@dimen/feed_item_padding"
+    android:paddingRight="@dimen/feed_item_padding"
+    android:paddingTop="@dimen/feed_item_padding" >
+
+    <TableRow
+        android:id="@+id/tableRowCommentFragment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <ImageButton
+            android:id="@+id/iMyCommentsCommentedProductImage"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            android:layout_marginRight="7dp"
+            android:contentDescription="@string/iMyFriendsFriendAvatarImage"
+            android:padding="0dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/images_default_product" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/tvMyCommentsCommentedItemTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="4dp"
+                android:singleLine="true"
+                android:text="@string/tvMyCommentsCommentedItemTitle"
+                android:textColor="@color/light_grey"
+                android:textSize="12sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tvMyCommentsCommentedItemName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/tvMyCommentsCommentedItemTitle"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="4dp"
+                android:singleLine="true"
+                android:text="@string/tvMyCommentsCommentedItemName"
+                android:textColor="@android:color/white"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvMyCommentsCommentedItemDate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_below="@id/tvMyCommentsCommentedItemName"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="4dp"
+                android:singleLine="true"
+                android:text="@string/tvMyCommentsCommentedItemDate"
+                android:textColor="@color/light_grey"
+                android:textSize="12sp"
+                android:textStyle="italic" />
+
+            <TextView
+                android:id="@+id/tvMyCommentsCommentedItemContent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@id/tvMyCommentsCommentedItemDate"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="6dp"
+                android:maxLines="12"
+                android:text="@string/tvMyCommentsCommentedItemContent"
+                android:textColor="@android:color/white" >
+
+                <requestFocus />
+            </TextView>
+
+            <TextView
+                android:id="@+id/tvMyCommentsCommentedItemRating"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvMyCommentsCommentedItemContent"
+                android:layout_marginBottom="6dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="2dp"
+                android:layout_marginTop="6dp"
+                android:text="@string/tvMyCommentsCommentedItemRating"
+                android:textColor="@android:color/white"
+                android:textSize="14sp"
+                android:textStyle="bold|italic" />
+
+            <TableRow
+                android:id="@+id/tableRowMyCommentsListActionButtons"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvMyCommentsCommentedItemRating"
+                android:layout_marginTop="10dp"
+                android:weightSum="2" >
+
+                <Button
+                    android:id="@+id/bMyCommentsEditComment"
+                    style="@style/feed_button_style"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:text="@string/bMyCommentsEditComment"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/bMyCommentsDeleteComment"
+                    style="@style/feed_button_style"
+                    android:layout_width="0dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="2dp"
+                    android:layout_weight="1"
+                    android:text="@string/bMyCommentsDeleteComment"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+            </TableRow>
+        </RelativeLayout>
+    </TableRow>
+
+</RelativeLayout>

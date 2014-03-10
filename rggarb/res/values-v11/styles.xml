@@ -1,0 +1,45 @@
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="AppBaseTheme" parent="Theme.Sherlock.Light">
+
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:dropDownListViewStyle">@style/MySpinnerStyle</item>
+    </style>
+
+    <style name="MySpinnerStyle" parent="android:style/Widget.ListView.DropDown">
+        <item name="android:divider">#FFEEEEEE</item>
+        <item name="android:dividerHeight">1dp</item>
+    </style>
+
+    <style name="Theme.SherlockCustom" parent="@style/Theme.Sherlock.Light">
+        <item name="actionBarItemBackground">@drawable/actionbar_item_background</item>
+        <item name="android:icon">@android:color/transparent</item>
+        <item name="displayOptions">showCustom</item>
+        <item name="android:minWidth">0dp</item> 
+        <item name="android:actionBarTabStyle">@style/customActionBarTabStyle</item>
+        <item name="android:actionBarTabBarStyle">@style/customActionBarTabBarStyle</item>
+        <item name="android:actionBarTabTextStyle">@style/customActionBarTabTextStyle</item>
+    </style>
+
+    <style name="customActionBarTabBarStyle" parent="style/Widget.Sherlock.Light.ActionBar.TabBar">
+        <item name="android:background">@color/deep_purple</item>
+    </style>
+
+    <style name="customActionBarTabStyle" parent="style/Widget.Sherlock.Light.ActionBar.TabView">
+        <item name="android:background">@drawable/actionbar_tabs_selector</item>
+    </style>
+
+    <style name="customActionBarTabTextStyle" parent="style/Widget.Sherlock.Light.ActionBar.TabText">
+        <item name="android:textSize">12sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/green</item>
+    </style>
+
+</resources>

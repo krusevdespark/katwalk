@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvLeaveAddAnItemPageDialogTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:textSize="18sp"
+        android:text="@string/tvLeaveAddAnItemPageDialogTitle"
+        android:textColor="@android:color/black" />
+
+    <Button
+        android:id="@+id/bStayOnThisScreen"
+        style="@style/green_button_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="@string/bStayOnThisScreen"
+        android:textColor="@android:color/white"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/bLeaveThisScreen"
+        style="@style/purple_button_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="@string/bLeaveThisScreen"
+        android:textColor="@android:color/white"
+        android:textSize="30sp" />
+
+</LinearLayout>

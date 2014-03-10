@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:background="@android:color/black"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/svSearchUsers"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:id="@+id/llSearchUsers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tvSearchUsersTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/tvSearchUsersTitle"
+                android:textAllCaps="true"
+                android:textColor="@color/green"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvSearchOrSearchItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/images_flip_arrow"
+                android:gravity="right"
+                android:text="@string/tvSearchOrSearchItems"
+                android:textAllCaps="true"
+                android:textColor="@color/green"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/hrOneMyItems"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/deep_purple" />
+
+            <EditText
+                android:id="@+id/etNameSearchUsers"
+                style="@style/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:hint="@string/etNameSearchUsers"
+                android:imeOptions="actionSearch"
+                android:inputType="textPersonName"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp" />
+
+            <EditText
+                android:id="@+id/etEmailSearchUsers"
+                style="@style/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:hint="@string/etEmailSearchUsers"
+                android:imeOptions="actionSearch"
+                android:inputType="textEmailAddress"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp" />
+
+            <Spinner
+                android:id="@+id/sCountrySearchUsers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:background="@android:color/black"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp"
+                android:prompt="@string/sCountrySearchUsers" />
+
+            <Button
+                android:id="@+id/bSubmitSearchUsers"
+                style="@style/purple_button_style"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/bSubmitSearchUsers"
+                android:textSize="32sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

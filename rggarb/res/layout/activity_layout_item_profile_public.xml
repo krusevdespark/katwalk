@@ -1,0 +1,871 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/feed_item_margin"
+    android:background="@android:color/black"
+    android:paddingBottom="@dimen/feed_item_padding"
+    android:paddingLeft="@dimen/feed_item_padding"
+    android:paddingRight="@dimen/feed_item_padding"
+    android:paddingTop="@dimen/feed_item_padding" >
+
+    <ScrollView
+        android:id="@+id/svItemProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <RelativeLayout
+            android:id="@+id/rlItemProfile"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <net.shiftinpower.customviews.SquareImageView
+                android:id="@+id/iItemProfileImageSlotOne"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/iItemProfileImageDescription"
+                android:scaleType="centerCrop"
+                android:src="@drawable/images_default_product" />
+
+            <TableRow
+                android:id="@+id/trItemProfileMorePictures"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/iItemProfileImageSlotOne"
+                android:layout_marginBottom="10sp"
+                android:weightSum="4" >
+
+                <net.shiftinpower.customviews.SquareImageView
+                    android:id="@+id/iItemProfileImageSlotTwo"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/iItemProfileImageDescription"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/images_default_product"
+                    android:visibility="gone" />
+
+                <net.shiftinpower.customviews.SquareImageView
+                    android:id="@+id/iItemProfileImageSlotThree"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/iItemProfileImageDescription"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/images_default_product"
+                    android:visibility="gone" />
+
+                <net.shiftinpower.customviews.SquareImageView
+                    android:id="@+id/iItemProfileImageSlotFour"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/iItemProfileImageDescription"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/images_default_product"
+                    android:visibility="gone" />
+
+                <net.shiftinpower.customviews.SquareImageView
+                    android:id="@+id/iItemProfileImageSlotFive"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:adjustViewBounds="true"
+                    android:contentDescription="@string/iItemProfileImageDescription"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/images_default_product"
+                    android:visibility="gone" />
+            </TableRow>
+
+            <View
+                android:id="@+id/hrOneItemProfile"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_below="@id/trItemProfileMorePictures"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/deep_purple" />
+
+            <TextView
+                android:id="@+id/tvItemProfileItemName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/trItemProfileMorePictures"
+                android:layout_marginBottom="15sp"
+                android:layout_marginLeft="7sp"
+                android:layout_marginRight="7sp"
+                android:layout_marginTop="15sp"
+                android:gravity="center"
+                android:text="@string/tvItemProfileItemName"
+                android:textAllCaps="true"
+                android:textColor="@android:color/white"
+                android:textSize="45sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvItemProfileBy"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvItemProfileItemName"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:paddingLeft="5dp"
+                android:text="@string/tvItemProfileBy"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/tvItemProfileBrandName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tvItemProfileBy"
+                android:layout_gravity="center"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="@string/tvItemProfileBrandName"
+                android:textColor="@color/green_lime"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <View
+                android:id="@+id/hrTwoItemProfile"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_below="@id/tvItemProfileBrandName"
+                android:layout_marginBottom="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/deep_purple" />
+
+            <LinearLayout
+                android:id="@+id/llItemProfileItemPhotos"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@id/hrTwoItemProfile"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                android:weightSum="3" >
+
+                <TextView
+                    android:id="@+id/tvItemProfilePhotosValue"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:gravity="right|center_vertical"
+                    android:text="@string/tvItemProfilePhotosValue"
+                    android:textColor="@color/green_lime"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvItemProfilePhotosHeading"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="@string/tvItemProfilePhotosHeading"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/tvItemProfileActionCallToAddAPhoto"
+                    style="@style/feed_button_style"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/tvItemProfileActionCallToAddAPhoto"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llItemProfileItemPrice"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@id/llItemProfileItemPhotos"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                android:weightSum="3" >
+
+                <TextView
+                    android:id="@+id/tvItemProfileAveragePriceValue"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="right"
+                    android:layout_weight="1"
+                    android:gravity="right|center_vertical"
+                    android:text="@string/tvItemProfileAveragePriceValue"
+                    android:textColor="@color/green_lime"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvItemProfileAveragePriceText"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="left"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="@string/tvItemProfileAveragePriceText"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/bItemProfileGet"
+                    style="@style/feed_button_style"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/bItemProfileGet"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llItemProfileItemRating"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@id/llItemProfileItemPrice"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                android:weightSum="3" >
+
+                <TextView
+                    android:id="@+id/tvItemProfileRatingValue"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right|center_vertical"
+                    android:text="@string/tvItemProfileRatingValue"
+                    android:textColor="@color/green_lime"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvItemProfileRatingHeading"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="@string/tvItemProfileRatingHeading"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/bItemProfileRate"
+                    style="@style/feed_button_style"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/bItemProfileRate"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llItemProfileItemFollowers"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@id/llItemProfileItemRating"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                android:weightSum="3" >
+
+                <TextView
+                    android:id="@+id/tvItemProfileFollowedByValue"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right|center_vertical"
+                    android:text="@string/tvItemProfileFollowedByValue"
+                    android:textColor="@color/green_lime"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvItemProfileFollowedByHeading"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="@string/tvItemProfileFollowedByHeading"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/bItemProfileFollow"
+                    style="@style/feed_button_style"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/bItemProfileFollow"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llItemProfileItemComments"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@id/llItemProfileItemFollowers"
+                android:layout_marginBottom="8dp"
+                android:orientation="horizontal"
+                android:weightSum="3" >
+
+                <TextView
+                    android:id="@+id/tvItemProfileCommentsValue"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right|center_vertical"
+                    android:text="@string/tvItemProfileCommentsValue"
+                    android:textColor="@color/green_lime"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvItemProfileCommentsHeading"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="@string/tvItemProfileCommentsHeading"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/bItemProfileComment"
+                    style="@style/feed_button_style"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/bItemProfileComment"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlItemProfileUsersHaveThisItem"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/llItemProfileItemComments"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_border_background" >
+
+                <TextView
+                    android:id="@+id/tvItemProfileOwnedByUsersValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="right|center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="@string/tvItemProfileOwnedByUsersValue"
+                    android:textColor="@color/green_lime"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvItemProfileOwnedByUsersHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@id/tvItemProfileOwnedByUsersValue"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="@string/tvItemProfileOwnedByUsersHeading"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+                <TableRow
+                    android:id="@+id/trItemProfileOwnedByUsersImages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvItemProfileOwnedByUsersHeading"
+                    android:layout_margin="2dp"
+                    android:padding="1dp"
+                    android:weightSum="4" >
+
+                    <net.shiftinpower.customviews.SquareImageView
+                        android:id="@+id/iItemProfileUserImageSlotOne"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/iItemProfileImageDescription"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/images_default_avatar_male"
+                        android:visibility="gone" />
+
+                    <net.shiftinpower.customviews.SquareImageView
+                        android:id="@+id/iItemProfileUserImageSlotTwo"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/iItemProfileImageDescription"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/images_default_avatar_male"
+                        android:visibility="gone" />
+
+                    <net.shiftinpower.customviews.SquareImageView
+                        android:id="@+id/iItemProfileUserImageSlotThree"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/iItemProfileImageDescription"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/images_default_avatar_male"
+                        android:visibility="gone" />
+
+                    <net.shiftinpower.customviews.SquareImageView
+                        android:id="@+id/iItemProfileUserImageSlotFour"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/iItemProfileImageDescription"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/images_default_avatar_male"
+                        android:visibility="gone" />
+                </TableRow>
+
+                <TextView
+                    android:id="@+id/tvItemProfileOwnedByFriendsValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@id/trItemProfileOwnedByUsersImages"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="@string/tvItemProfileOwnedByFriendsValue"
+                    android:textColor="@color/green_lime"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvItemProfileOwnedByFriendsHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/trItemProfileOwnedByUsersImages"
+                    android:layout_toRightOf="@id/tvItemProfileOwnedByFriendsValue"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="@string/tvItemProfileOwnedByFriendsHeading"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+                <TableRow
+                    android:id="@+id/trItemProfileOwnedByFriendsImages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvItemProfileOwnedByFriendsHeading"
+                    android:layout_margin="2dp"
+                    android:padding="1dp"
+                    android:paddingBottom="2dp"
+                    android:weightSum="4" >
+
+                    <net.shiftinpower.customviews.SquareImageView
+                        android:id="@+id/iItemProfileFriendImageSlotOne"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/iItemProfileUserImageDescription"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/images_default_avatar_male"
+                        android:visibility="gone" />
+
+                    <net.shiftinpower.customviews.SquareImageView
+                        android:id="@+id/iItemProfileFriendImageSlotTwo"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/iItemProfileUserImageDescription"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/images_default_avatar_male"
+                        android:visibility="gone" />
+
+                    <net.shiftinpower.customviews.SquareImageView
+                        android:id="@+id/iItemProfileFriendImageSlotThree"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/iItemProfileUserImageDescription"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/images_default_avatar_male"
+                        android:visibility="gone" />
+
+                    <net.shiftinpower.customviews.SquareImageView
+                        android:id="@+id/iItemProfileFriendImageSlotFour"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/iItemProfileUserImageDescription"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/images_default_avatar_male"
+                        android:visibility="gone" />
+                </TableRow>
+            </RelativeLayout>
+
+            <TableRow
+                android:id="@+id/trItemProfileAddYoursSuggestAMerge"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@id/rlItemProfileUsersHaveThisItem"
+                android:layout_marginTop="10dp"
+                android:weightSum="2" >
+
+                <Button
+                    android:id="@+id/bItemProfileAddYours"
+                    style="@style/feed_button_style"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="2dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/bItemProfileAddYours"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+                <Button
+                    android:id="@+id/bItemProfileSuggestAMerge"
+                    style="@style/feed_button_style"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="2dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="@string/bItemProfileSuggestAMerge"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+            </TableRow>
+
+            <RelativeLayout
+                android:id="@+id/rlItemProfileSoldByPlacesAndUsers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/trItemProfileAddYoursSuggestAMerge"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_border_background" >
+
+                <TextView
+                    android:id="@+id/tvItemProfileOfferedAtPlacesValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="right|center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="@string/tvItemProfileOfferedAtPlacesValue"
+                    android:textColor="@color/green_lime"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvItemProfileOfferedAtPlacesHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@id/tvItemProfileOfferedAtPlacesValue"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="@string/tvItemProfileOfferedAtPlacesHeading"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+                <TableRow
+                    android:id="@+id/trItemProfileSoldByPlacesImages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvItemProfileOfferedAtPlacesHeading"
+                    android:layout_margin="2sp"
+                    android:padding="1dp"
+                    android:weightSum="4" >
+
+                    <net.shiftinpower.customviews.SquareImageView
+                        android:id="@+id/iItemProfilePlaceImageSlotOne"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/iItemProfilePlaceImageDescription"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/images_default_shop"
+                        android:visibility="gone" />
+
+                    <net.shiftinpower.customviews.SquareImageView
+                        android:id="@+id/iItemProfilePlaceImageSlotTwo"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/iItemProfilePlaceImageDescription"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/images_default_shop"
+                        android:visibility="gone" />
+
+                    <net.shiftinpower.customviews.SquareImageView
+                        android:id="@+id/iItemProfilePlaceImageSlotThree"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/iItemProfilePlaceImageDescription"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/images_default_shop"
+                        android:visibility="gone" />
+
+                    <net.shiftinpower.customviews.SquareImageView
+                        android:id="@+id/iItemProfilePlaceImageSlotFour"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/iItemProfilePlaceImageDescription"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/images_default_shop"
+                        android:visibility="gone" />
+                </TableRow>
+
+                <TextView
+                    android:id="@+id/tvItemProfileUsersSellingTheirItemsValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_below="@id/trItemProfileSoldByPlacesImages"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="@string/tvItemProfileUsersSellingTheirItemsValue"
+                    android:textColor="@color/green_lime"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvItemProfileUsersSellingTheirItemsHeader"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/trItemProfileSoldByPlacesImages"
+                    android:layout_toRightOf="@id/tvItemProfileUsersSellingTheirItemsValue"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="@string/tvItemProfileUsersSellingTheirItemsHeader"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+                <TableRow
+                    android:id="@+id/trItemProfileUsersSellingTheirItemsImages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvItemProfileUsersSellingTheirItemsHeader"
+                    android:layout_margin="2sp"
+                    android:padding="1dp"
+                    android:paddingBottom="2dp"
+                    android:weightSum="4" >
+
+                    <net.shiftinpower.customviews.SquareImageView
+                        android:id="@+id/iItemProfileUserSellingTheirItemSlotOne"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/iItemProfileUserImageDescription"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/images_default_avatar_male"
+                        android:visibility="gone" />
+
+                    <net.shiftinpower.customviews.SquareImageView
+                        android:id="@+id/iItemProfileUserSellingTheirItemSlotTwo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/iItemProfileUserImageDescription"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/images_default_avatar_male"
+                        android:visibility="gone" />
+
+                    <net.shiftinpower.customviews.SquareImageView
+                        android:id="@+id/iItemProfileUserSellingTheirItemSlotThree"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/iItemProfileUserImageDescription"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/images_default_avatar_male"
+                        android:visibility="gone" />
+
+                    <net.shiftinpower.customviews.SquareImageView
+                        android:id="@+id/iItemProfileUserSellingTheirItemSlotFour"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/iItemProfileUserImageDescription"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/images_default_avatar_male"
+                        android:visibility="gone" />
+                </TableRow>
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/bItemProfileMainCategory"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/rlItemProfileSoldByPlacesAndUsers"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/buttons_purple_selector"
+                android:gravity="center"
+                android:text="@string/bItemProfileMainCategory"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/bItemProfileMainSubcategory"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/bItemProfileMainCategory"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/buttons_purple_selector"
+                android:gravity="center"
+                android:text="@string/bItemProfileMainSubcategory"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+
+            <RelativeLayout
+                android:id="@+id/rlItemProfileSimilarItems"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bItemProfileMainSubcategory"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/shape_border_background" >
+
+                <TextView
+                    android:id="@+id/tvItemProfileSimilarItemsValue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentLeft="true"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="@string/tvItemProfileSimilarItemsValue"
+                    android:textColor="@color/green_lime"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvItemProfileSimilarItemsHeading"
+                    android:layout_width="wrap_content"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_toRightOf="@id/tvItemProfileSimilarItemsValue"
+                    android:gravity="left|center_vertical"
+                    android:paddingLeft="5dp"
+                    android:text="@string/tvItemProfileSimilarItemsHeading"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp" />
+
+                <TableRow
+                    android:id="@+id/trItemProfileSimilarItemsImages"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tvItemProfileSimilarItemsHeading"
+                    android:layout_margin="2sp"
+                    android:padding="1dp"
+                    android:paddingBottom="2dp"
+                    android:weightSum="4" >
+
+                    <net.shiftinpower.customviews.SquareImageView
+                        android:id="@+id/iItemProfileSimilarItemsSlotOne"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/iItemProfileImageDescription"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/images_default_product"
+                        android:visibility="gone" />
+
+                    <net.shiftinpower.customviews.SquareImageView
+                        android:id="@+id/iItemProfileSimilarItemsSlotTwo"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/iItemProfileImageDescription"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/images_default_product"
+                        android:visibility="gone" />
+
+                    <net.shiftinpower.customviews.SquareImageView
+                        android:id="@+id/iItemProfileSimilarItemsSlotThree"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/iItemProfileImageDescription"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/images_default_product"
+                        android:visibility="gone" />
+
+                    <net.shiftinpower.customviews.SquareImageView
+                        android:id="@+id/iItemProfileSimilarItemsSlotFour"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:adjustViewBounds="true"
+                        android:contentDescription="@string/iItemProfileImageDescription"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/images_default_product"
+                        android:visibility="gone" />
+                </TableRow>
+            </RelativeLayout>
+
+            <Button
+                android:id="@+id/tvItemProfileStatistics"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/rlItemProfileSimilarItems"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/buttons_purple_selector"
+                android:gravity="center"
+                android:text="@string/tvItemProfileStatistics"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+
+            <Button
+                android:id="@+id/tvItemProfileActivity"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_below="@id/tvItemProfileStatistics"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/buttons_purple_selector"
+                android:gravity="center"
+                android:text="@string/tvItemProfileActivity"
+                android:textColor="@android:color/white"
+                android:textSize="12sp" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

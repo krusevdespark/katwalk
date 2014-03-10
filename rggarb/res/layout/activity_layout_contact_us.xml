@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:paddingBottom="@dimen/activity_vertical_margin_smaller"
+    android:paddingLeft="@dimen/activity_horizontal_margin_smaller"
+    android:paddingRight="@dimen/activity_horizontal_margin_smaller"
+    android:paddingTop="@dimen/activity_vertical_margin_smaller" >
+
+    <TextView
+        android:id="@+id/tvContactUsTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15sp"
+        android:gravity="center"
+        android:text="@string/tvContactUsTitle"
+        android:textAllCaps="true"
+        android:textColor="@color/deep_purple"
+        android:textSize="46sp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/hrOneContactUs"
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:layout_below="@id/tvContactUsTitle"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/deep_purple" />
+
+    <TextView
+        android:id="@+id/tvContactUsSubject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/hrOneContactUs"
+        android:layout_marginBottom="8dp"
+        android:layout_marginTop="15sp"
+        android:gravity="center"
+        android:text="@string/tvContactUsSubject"
+        android:textColor="@color/deep_purple"
+        android:textSize="12sp"
+        android:textStyle="italic" />
+
+    <Spinner
+        android:id="@+id/sContactUsLineOfInquiry"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvContactUsSubject"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/black"
+        android:entries="@array/sContactUsLineOfInquiry"
+        android:prompt="@string/tvContactUsSubject" />
+
+    <EditText
+        android:id="@+id/etContactUsEnterYourMessage"
+        style="@style/edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/sContactUsLineOfInquiry"
+        android:layout_marginBottom="12dp"
+        android:layout_marginTop="12dp"
+        android:gravity="left"
+        android:hint="@string/etContactUsEnterYourMessage"
+        android:inputType="textMultiLine"
+        android:maxLines="12"
+        android:minLines="3"
+        android:textStyle="italic" >
+    </EditText>
+
+    <Button
+        android:id="@+id/bContactUsSubmit"
+        style="@style/green_button_style"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/etContactUsEnterYourMessage"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:gravity="center"
+        android:text="@string/bContactUsSubmit"
+        android:textSize="26sp" />
+
+</RelativeLayout>

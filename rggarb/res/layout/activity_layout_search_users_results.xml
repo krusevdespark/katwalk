@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:background="@android:color/black"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/svSearchUserssResults"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:id="@+id/llSearchUsersResults"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tvSearchUsersResultsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/tvSearchUsersResultsTitle"
+                android:textAllCaps="true"
+                android:textColor="@color/green"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvClearSearchFiltersSearchUsersResults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/images_red_x"
+                android:gravity="right"
+                android:text="@string/tvClearSearchFiltersSearchUsersResults"
+                android:textAllCaps="true"
+                android:textColor="@color/green"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/hrOneSearchUsersResults"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/deep_purple" />
+
+            <TextView
+                android:id="@+id/tvAppliedFiltersSearchUsersResults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:gravity="left"
+                android:text="@string/tvAppliedFiltersSearchUsersResults"
+                android:textAllCaps="true"
+                android:textColor="@color/grey"
+                android:textSize="12sp" />
+
+            <LinearLayout
+                android:id="@+id/llAppliedFiltersHolderSearchUsersResults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp" >
+
+                <TextView
+                    android:id="@+id/tvAppliedFilterPropertyOneSearchUsersResults"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginTop="15dp"
+                    android:background="@android:color/black"
+                    android:drawablePadding="5dp"
+                    android:drawableRight="@drawable/images_flip_arrow"
+                    android:textColor="@color/grey" >
+                </TextView>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/hrTwoSearchUsersResults"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/deep_purple" />
+
+            <Button
+                android:id="@+id/bModifyUsersSearch"
+                style="@style/purple_button_style"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/bModifyUsersSearch"
+                android:textSize="32sp" />
+
+            <TextView
+                android:id="@+id/tvSortBySearchUsersResults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:gravity="left"
+                android:text="@string/tvSortBySearchUsersResults"
+                android:textAllCaps="true"
+                android:textColor="@color/grey"
+                android:textSize="12sp" />
+
+            <TableRow
+                android:id="@+id/trSortBySpinnerAndCheckboxesSearchUsersResults"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="4" >
+
+                <Spinner
+                    android:id="@+id/sSortBySearchUsersResults"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginRight="2sp"
+                    android:layout_weight="2"
+                    android:background="@android:color/black"
+                    android:minHeight="40dp"
+                    android:paddingLeft="5dp"
+                    android:prompt="@string/sSortBySearchUsersResults" />
+
+                <RadioGroup
+                    android:id="@+id/rgSortUsersByAscOrDesc"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="2dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="2"
+                    android:background="@android:color/black"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal" >
+
+                    <RadioButton
+                        android:id="@+id/rbSortByAscending"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:checked="true"
+                        android:text="@string/rbSortByAscending"
+                        android:textColor="@android:color/white" />
+
+                    <RadioButton
+                        android:id="@+id/rbSortByDescending"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/rbSortByDescending"
+                        android:textColor="@android:color/white" />
+                </RadioGroup>
+            </TableRow>
+
+            <View
+                android:id="@+id/hrThreeSearchUsersResults"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/deep_purple" />
+
+            <FrameLayout
+                android:id="@+id/flSearchUsersResultsHolder"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content" >
+            </FrameLayout>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

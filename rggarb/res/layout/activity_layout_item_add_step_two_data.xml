@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:background="@android:color/black"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/svAddAnItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:id="@+id/llAddAnItem"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tvAddAnItemTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="15dp"
+                android:gravity="center"
+                android:singleLine="true"
+                android:text="@string/tvAddAnItemTitle"
+                android:textAllCaps="true"
+                android:textColor="@color/deep_purple"
+                android:textSize="24sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvAddAnItemSubTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:singleLine="false"
+                android:text="@string/tvAddAnItemSubTitle"
+                android:textColor="@color/green"
+                android:textSize="20sp"
+                android:textStyle="italic|bold" />
+
+            <TextView
+                android:id="@+id/tvAddAnItemStepTwoDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:gravity="left"
+                android:singleLine="false"
+                android:text="@string/tvAddAnItemStepTwoDescription"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:textStyle="italic" />
+
+            <EditText
+                android:id="@+id/etAddAnItemName"
+                style="@style/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:hint="@string/etAddAnItemName"
+                android:inputType="textPersonName"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/etAddAnItemBrandManufacturer"
+                style="@style/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:hint="@string/etAddAnItemBrandManufacturer"
+                android:inputType="textPersonName"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/etAddAnItemPrice"
+                style="@style/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:hint="@string/etAddAnItemPrice"
+                android:inputType="numberDecimal"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp"
+                android:textSize="14sp" />
+
+            <EditText
+                android:id="@+id/etAddAnItemComment"
+                style="@style/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:hint="@string/etAddAnItemComment"
+                android:inputType="textMultiLine"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp"
+                android:textSize="14sp" >
+            </EditText>
+
+            <Spinner
+                android:id="@+id/sAddAnItemCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:background="@android:color/black"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp"
+                android:prompt="@string/sAddAnItemCategory"
+                android:textSize="14sp" />
+
+            <Spinner
+                android:id="@+id/sAddAnItemSubcategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
+                android:background="@android:color/black"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp"
+                android:prompt="@string/sAddAnItemSubcategory"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/tvItemConditionPrompt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:gravity="left"
+                android:paddingLeft="5dp"
+                android:paddingTop="15dp"
+                android:text="@string/tvItemConditionPrompt"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:textStyle="italic" />
+
+            <RadioGroup
+                android:id="@+id/rgItemCondition"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@android:color/black"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:weightSum="2" >
+
+                <RadioButton
+                    android:id="@+id/rbItemConditionNew"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="@string/rbItemConditionNew"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white" />
+
+                <RadioButton
+                    android:id="@+id/rbItemConditionUsed"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/rbItemConditionUsed"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/tvItemBoughtFromPrompt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:gravity="left"
+                android:paddingLeft="5dp"
+                android:paddingTop="15dp"
+                android:text="@string/tvItemBoughtFromPrompt"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:textStyle="italic" />
+
+            <RadioGroup
+                android:id="@+id/rgBoughtFromAUserOrAPlace"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@android:color/black"
+                android:orientation="horizontal"
+                android:paddingLeft="5dp"
+                android:weightSum="2" >
+
+                <RadioButton
+                    android:id="@+id/rbBoughtFromUser"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/rbBoughtFromUser"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white" />
+
+                <RadioButton
+                    android:id="@+id/rbBoughtFromPlace"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="true"
+                    android:text="@string/rbBoughtFromPlace"
+                    android:textColor="@android:color/white"
+                    android:textColorHint="@android:color/white" />
+            </RadioGroup>
+
+            <EditText
+                android:id="@+id/etAddAnItemWhereWhoDidYouGetItFrom"
+                style="@style/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:hint="@string/etAddAnItemWhereDidYouGetItFrom"
+                android:inputType="textPersonName"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp"
+                android:textSize="14sp" />
+
+            <CheckBox
+                android:id="@+id/cbAddAnItemIsGift"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:checked="false"
+                android:text="@string/cbAddAnItemIsGift"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/bAddAnItemSubmit"
+                style="@style/purple_button_style"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/bAddAnItemSubmit"
+                android:textSize="32sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

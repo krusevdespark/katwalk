@@ -1,0 +1,94 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/grey_dark"
+    android:orientation="horizontal" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="2dp"
+        android:background="@drawable/shape_black_background_feed_items"
+        android:orientation="vertical"
+        android:padding="8dp" >
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <ImageButton
+                android:id="@+id/ivMessageFromUserImage"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:layout_marginLeft="2dp"
+                android:layout_marginRight="7dp"
+                android:contentDescription="@string/ivMessageFromUserImageDescription"
+                android:padding="0dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/images_default_avatar_male" />
+
+            <ImageButton
+                android:id="@+id/ivMessageFromUserSentOrReceivedIndicator"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:layout_marginLeft="2dp"
+                android:background="@android:color/black"
+                android:contentDescription="@string/ivMessageFromUserImageDescription"
+                android:padding="0dp"
+                android:scaleType="fitXY"
+                android:src="@drawable/images_arrow_green_down" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" >
+
+                <TextView
+                    android:id="@+id/tvMessageFromUserName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginTop="4dp"
+                    android:singleLine="true"
+                    android:text="@string/tvMessageFromUserName"
+                    android:textColor="@android:color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tvMessageFromUserLastMessageDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/tvMessageFromUserName"
+                    android:singleLine="true"
+                    android:text="@string/tvMessageFromUserLastMessageDate"
+                    android:textColor="@android:color/white"
+                    android:textSize="12sp"
+                    android:textStyle="italic" />
+            </RelativeLayout>
+        </TableRow>
+
+        <TextView
+            android:id="@+id/tvMessageFromUserContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="8dp"
+            android:singleLine="false"
+            android:text="@string/tvMessageFromUserContent"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:textStyle="italic" />
+
+        <View
+            android:id="@+id/hrOneInboxMessage"
+            android:layout_width="fill_parent"
+            android:layout_height="2dip"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/deep_purple" />
+    </LinearLayout>
+
+</LinearLayout>

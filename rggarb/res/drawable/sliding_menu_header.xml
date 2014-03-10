@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/black"
+    android:orientation="vertical" >
+
+    <TableRow
+        android:id="@+id/twSlidingMenuHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp">
+        <ImageView
+            android:id="@+id/ivSlidingMenuUserAvatar"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center_vertical"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/ivSlidingMenuUserAvatarContentDescription"
+            android:gravity="center_vertical"
+            android:scaleType="centerCrop"
+            android:src="@drawable/images_default_avatar_male" />
+
+        <TextView
+            android:id="@+id/tvSlidingMenuUserName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="5"
+            android:background="@android:color/black"
+            android:gravity="center_vertical"
+            android:padding="10dp"
+            android:text="@string/tvSlidingMenuUserName"
+            android:textColor="@android:color/white"
+            android:textSize="30sp" />
+    </TableRow>
+
+    <FrameLayout
+        android:id="@+id/menu_frame"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/black" />
+
+</LinearLayout>

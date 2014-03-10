@@ -1,0 +1,116 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+    <TextView
+        android:id="@+id/tvBraggrLogoLoginPage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/tvBraggr"
+        android:textAllCaps="true"
+        android:textColor="@color/deep_purple"
+        android:textSize="70sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvLoginTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tvBraggrLogoLoginPage"
+        android:layout_marginBottom="15dp"
+        android:gravity="center"
+        android:text="@string/tvLoginTitle"
+        android:textAllCaps="true"
+        android:textColor="@color/green"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <com.facebook.widget.LoginButton
+        android:id="@+id/authButton"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/tvLoginTitle"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:layout_marginTop="35sp" />
+
+    <TextView
+        android:id="@+id/tvOrLoginPage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/authButton"
+        android:layout_marginBottom="15sp"
+        android:layout_marginTop="15sp"
+        android:gravity="center"
+        android:text="@string/tvOrLoginPage"
+        android:textAllCaps="true"
+        android:textColor="@color/deep_purple"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/etUserEmailLoginPage"
+        style="@style/edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvOrLoginPage"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="5dp"
+        android:hint="@string/ifLoginEmailHint"
+        android:inputType="textEmailAddress"
+        android:minHeight="40dp"
+        android:paddingLeft="5dp" />
+
+    <EditText
+        android:id="@+id/etUserPasswordLoginPage"
+        style="@style/edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/etUserEmailLoginPage"
+        android:layout_alignRight="@+id/etUserEmailLoginPage"
+        android:layout_below="@id/etUserEmailLoginPage"
+        android:layout_marginTop="5dp"
+        android:hint="@string/ifLoginPasswordHint"
+        android:imeOptions="actionDone"
+        android:inputType="textPassword"
+        android:minHeight="40dp"
+        android:paddingLeft="5dp" />
+
+    <TextView
+        android:id="@+id/tvForgottenPasswordLoginPage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/etUserPasswordLoginPage"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="70dp"
+        android:gravity="center"
+        android:text="@string/tvForgottenPasswordLoginPage"
+        android:textColor="@color/green"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/bLoginLoginPage"
+        style="@style/check_out_button_style"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_below="@id/tvForgottenPasswordLoginPage"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="0dp"
+        android:gravity="center"
+        android:text="@string/bLoginLoginPage"
+        android:textSize="26sp" />
+
+</RelativeLayout>

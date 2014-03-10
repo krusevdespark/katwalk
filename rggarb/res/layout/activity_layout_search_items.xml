@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    android:background="@android:color/black"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/svSearchItems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scrollbars="none" >
+
+        <LinearLayout
+            android:id="@+id/llSearchItems"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tvSearchItemsTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:gravity="center"
+                android:text="@string/tvSearchItemsTitle"
+                android:textAllCaps="true"
+                android:textColor="@color/green"
+                android:textSize="26sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvSearchOrSearchUsers"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="15dp"
+                android:drawablePadding="5dp"
+                android:drawableRight="@drawable/images_flip_arrow"
+                android:gravity="right"
+                android:text="@string/tvSearchOrSearchUsers"
+                android:textAllCaps="true"
+                android:textColor="@color/green"
+                android:textSize="18sp" />
+
+            <View
+                android:id="@+id/hrOneSearchItems"
+                android:layout_width="fill_parent"
+                android:layout_height="2dip"
+                android:layout_marginBottom="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginTop="10dp"
+                android:background="@color/deep_purple" />
+
+            <EditText
+                android:id="@+id/etWhatSearch"
+                style="@style/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:hint="@string/etWhatSearch"
+                android:imeOptions="actionSearch"
+                android:inputType="textPersonName"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp" />
+
+            <Spinner
+                android:id="@+id/sCategorySearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:background="@android:color/black"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp"
+                android:prompt="@string/sCategorySearch" />
+
+            <Spinner
+                android:id="@+id/sSubcategorySearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:background="@android:color/black"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp"
+                android:prompt="@string/sSubcategorySearch" />
+
+            <EditText
+                android:id="@+id/etBrandSearch"
+                style="@style/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:hint="@string/etBrandSearch"
+                android:inputType="textPersonName"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp" />
+
+            <Spinner
+                android:id="@+id/sCountrySearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:background="@android:color/black"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp"
+                android:prompt="@string/sCountrySearch" />
+
+            <EditText
+                android:id="@+id/etCitySearch"
+                style="@style/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:hint="@string/etCitySearch"
+                android:inputType="textPersonName"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp" />
+
+            <EditText
+                android:id="@+id/etPlaceSearch"
+                style="@style/edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:hint="@string/etPlaceSearch"
+                android:inputType="textPersonName"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp" />
+
+            <TableRow
+                android:id="@+id/trPriceFromToSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:weightSum="2" >
+
+                <EditText
+                    android:id="@+id/etPriceFromSearch"
+                    style="@style/edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginRight="10sp"
+                    android:layout_weight="1"
+                    android:hint="@string/etPriceFromSearch"
+                    android:inputType="numberDecimal"
+                    android:minHeight="40dp"
+                    android:paddingLeft="5dp" />
+
+                <EditText
+                    android:id="@+id/etPriceToSearch"
+                    style="@style/edit_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="5dp"
+                    android:layout_marginLeft="10sp"
+                    android:layout_marginRight="10sp"
+                    android:layout_weight="1"
+                    android:hint="@string/etPriceToSearch"
+                    android:inputType="numberDecimal"
+                    android:minHeight="40dp"
+                    android:paddingLeft="5dp" />
+            </TableRow>
+
+            <Spinner
+                android:id="@+id/sRatingAboveSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10sp"
+                android:layout_marginRight="10sp"
+                android:background="@android:color/black"
+                android:minHeight="40dp"
+                android:paddingLeft="5dp"
+                android:prompt="@string/sRatingAboveSearch" />
+
+            <RadioGroup
+                android:id="@+id/rgItemConditionSearch"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="5dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:background="@android:color/black"
+                android:orientation="horizontal"
+                android:weightSum="2" >
+
+                <RadioButton
+                    android:id="@+id/rbNewItemSearch"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/rbNewItemSearch"
+                    android:textColor="@android:color/white" />
+
+                <RadioButton
+                    android:id="@+id/rbUsedItemSearh"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/rbUsedItemSearch"
+                    android:textColor="@android:color/white" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/bSubmitSearch"
+                style="@style/purple_button_style"
+                android:layout_width="match_parent"
+                android:layout_height="60dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="12dp"
+                android:gravity="center"
+                android:text="@string/bSubmitSearch"
+                android:textSize="32sp" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

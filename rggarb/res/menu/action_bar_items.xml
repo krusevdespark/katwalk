@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/abFeed"
+        android:icon="@drawable/icon_feed"
+        android:title="@string/abFeed"
+        android:showAsAction="always"/>
+    <item
+        android:id="@+id/abNotifications"
+        android:icon="@drawable/icon_notifications"
+        android:title="@string/abNotifications"
+        android:showAsAction="always"/>
+    <item
+        android:id="@+id/abAddNewItem"
+        android:icon="@drawable/icon_add_new_item"
+        android:title="@string/abAddNewItem"
+        android:showAsAction="always"/>
+    <item
+        android:id="@+id/abSearch"
+        android:icon="@drawable/icon_search"
+        android:title="@string/abSearch"
+        android:showAsAction="always"/>
+</menu>

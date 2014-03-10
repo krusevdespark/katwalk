@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvMessagesTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="@string/tvMessagesTitle"
+        android:textAllCaps="true"
+        android:textColor="@color/green"
+        android:textSize="26sp"
+        android:textStyle="bold" />
+
+    <View
+        android:id="@+id/hrOneMessages"
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:layout_marginBottom="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/deep_purple" />
+
+    <EditText
+        android:id="@+id/etMessagesSearch"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:drawableLeft="@drawable/images_button_search"
+        android:drawablePadding="4dp"
+        android:hint="@string/etMessagesSearch"
+        android:imeOptions="actionSearch"
+        android:inputType="text" />
+
+    <TextView
+        android:id="@+id/tvMessagesWhoCanSendMeMessagesNote"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="5dp"
+        android:paddingLeft="10dp"
+        android:paddingTop="15dp"
+        android:text="@string/tvMessagesWhoCanSendMeMessagesNote"
+        android:textColor="@android:color/white"
+        android:textSize="12sp"
+        android:textStyle="italic" >
+
+    </TextView>
+
+    <ListView
+        android:id="@+id/lvMessagesHolder"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+    <FrameLayout
+        android:id="@+id/flEmptyMessages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center" >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/tvEmptyMessages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="30dp"
+                android:layout_marginLeft="30dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginTop="30dp"
+                android:gravity="center"
+                android:text="@string/tvEmptyMessages"
+                android:textAlignment="center"
+                android:textColor="@color/green_lime"
+                android:textSize="22sp" />
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>
