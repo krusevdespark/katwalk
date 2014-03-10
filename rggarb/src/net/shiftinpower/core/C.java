@@ -9,7 +9,7 @@ package net.shiftinpower.core;
  * 
  */
 
-public final class C {
+public final class C {hfghfhfg
 
 	public static final class Preferences {
 		// Until the Landscape version of the App is developed, we enforce Portrait Mode
