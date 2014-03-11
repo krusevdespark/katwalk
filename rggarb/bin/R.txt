@@ -1178,11 +1178,7 @@ int layout item_adapterable_my_profile_item 0x7f030068
 int layout sherlock_spinner_dropdown_item 0x7f030069
 int layout sherlock_spinner_item 0x7f03006a
 int layout slidingmenumain 0x7f03006b
-int layout viewpager_slide_welcome_a 0x7f03006c
-int layout viewpager_slide_welcome_b 0x7f03006d
-int layout viewpager_slide_welcome_c 0x7f03006e
-int layout viewpager_slide_welcome_d 0x7f03006f
-int layout viewpager_slide_welcome_e 0x7f030070
+int layout viewpager_slide_welcome 0x7f03006c
 int menu action_bar_items 0x7f0c0000
 int string abAddNewItem 0x7f070048
 int string abFeed 0x7f070046

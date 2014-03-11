@@ -120,6 +120,7 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 
 		// This app operates in Full Screen, so this is what we are setting here
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
 
 		// Inflate the XML View components and Link them to the corresponding Java Objects in this class
 		tvBraggrLogoLoginPage = (TextView) findViewById(R.id.tvBraggrLogoLoginPage);

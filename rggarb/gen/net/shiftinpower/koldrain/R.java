@@ -2074,11 +2074,7 @@ containing a value of this type.
         public static final int sherlock_spinner_dropdown_item=0x7f030069;
         public static final int sherlock_spinner_item=0x7f03006a;
         public static final int slidingmenumain=0x7f03006b;
-        public static final int viewpager_slide_welcome_a=0x7f03006c;
-        public static final int viewpager_slide_welcome_b=0x7f03006d;
-        public static final int viewpager_slide_welcome_c=0x7f03006e;
-        public static final int viewpager_slide_welcome_d=0x7f03006f;
-        public static final int viewpager_slide_welcome_e=0x7f030070;
+        public static final int viewpager_slide_welcome=0x7f03006c;
     }
     public static final class menu {
         public static final int action_bar_items=0x7f0c0000;

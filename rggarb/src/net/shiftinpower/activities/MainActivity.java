@@ -101,7 +101,6 @@ public class MainActivity extends SherlockFragmentActivity implements OnClickLis
 		timer = new Timer();
 		mPager = (ViewPager) findViewById(R.id.pager);
 		mPagerAdapter = new ScreenSlidePagerAdapter(getSupportFragmentManager());
-		mPager.setOffscreenPageLimit(1);
 		mPager.setAdapter(mPagerAdapter);
 
 		slideshowTimer();

@@ -2,6 +2,7 @@ package net.shiftinpower.fragments;
 
 import net.shiftinpower.koldrain.R;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -18,38 +19,55 @@ public class WelcomeSlideFragment extends SherlockFragment {
 
 	private String TAG_ARGUMENT = "visiblePage";
 	private ImageView ivViewPagerSlide;
+	private Bitmap bitmap;
+
+	@Override
+	public void onCreate(Bundle savedInstanceState) {
+		// TODO Auto-generated method stub
+		super.onCreate(savedInstanceState);
+	}
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
-		ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.viewpager_slide_welcome_a, container, false);
+		ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.viewpager_slide_welcome, container, false);
 		ivViewPagerSlide = (ImageView) rootView.findViewById(R.id.ivViewPagerSlide);
+
+		BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+		bitmapOptions.inDither = false;
+		bitmapOptions.inPurgeable = true;
+		bitmapOptions.inInputShareable = true;
+		bitmapOptions.inTempStorage = new byte[16 * 1024];
 
 		int visiblePage = getArguments().getInt(TAG_ARGUMENT);
 		switch (visiblePage) {
 
 		case 1:
-
-			ivViewPagerSlide.setBackgroundResource(R.drawable.images_splash_d);
+			bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.images_splash_d, bitmapOptions);
+			ivViewPagerSlide.setImageBitmap(bitmap);
 			return rootView;
 		case 2:
 
-			ivViewPagerSlide.setBackgroundResource(R.drawable.images_splash_c);
+			bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.images_splash_c, bitmapOptions);
+			ivViewPagerSlide.setImageBitmap(bitmap);
 			return rootView;
 
 		case 3:
 
-			ivViewPagerSlide.setBackgroundResource(R.drawable.images_splash_a);
+			bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.images_splash_a, bitmapOptions);
+			ivViewPagerSlide.setImageBitmap(bitmap);
 			return rootView;
 
 		case 4:
 
-			ivViewPagerSlide.setBackgroundResource(R.drawable.images_splash_b);
+			bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.images_splash_b, bitmapOptions);
+			ivViewPagerSlide.setImageBitmap(bitmap);
 			return rootView;
 
 		case 0:
 
-			ivViewPagerSlide.setBackgroundResource(R.drawable.images_splash_e);
+			bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.images_splash_e, bitmapOptions);
+			ivViewPagerSlide.setImageBitmap(bitmap);
 			return rootView;
 
 		}
@@ -58,15 +76,15 @@ public class WelcomeSlideFragment extends SherlockFragment {
 
 	@Override
 	public void onDestroyView() {
-		
-		Log.d("Kylie", "Im in onDestroyView");
-		
+
+		// Prevent memory leak by releasing the bitmaps from the memory
 		Drawable drawable = ivViewPagerSlide.getDrawable();
 		if (drawable instanceof BitmapDrawable) {
 			BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
 			Bitmap bitmap = bitmapDrawable.getBitmap();
 			bitmap.recycle();
 		}
+		
 		super.onDestroyView();
 	}
 
