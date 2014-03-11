@@ -88,6 +88,9 @@ public class RggarbCore extends SlidingFragmentActivity {
 
 	// Photo Handler custom class containing several methods that deal with images
 	protected PhotoHandler photoHandler = new PhotoHandler(this);
+	
+	// Bitmap Options 
+	protected BitmapFactory.Options bitmapOptions;
 
 	protected void setUserAvatarPath(String userAvatarPath) {
 		this.userAvatarPath = userAvatarPath;
@@ -187,6 +190,13 @@ public class RggarbCore extends SlidingFragmentActivity {
         ImageLoaderConfiguration imageLoaderConfiguration = new ImageLoaderConfiguration.Builder(getApplicationContext()).build();
 		imageLoader = ImageLoader.getInstance();
 		imageLoader.init(imageLoaderConfiguration);
+		
+		// Set global bitmap preferences
+		bitmapOptions = new BitmapFactory.Options();
+		bitmapOptions.inDither = false;
+		bitmapOptions.inPurgeable = true;
+		bitmapOptions.inInputShareable = true;
+		bitmapOptions.inTempStorage = new byte[16 * 1024];
 		
 		// Get an instance of the current user
 		instanceOfTheCurrentUser = Transporter.instance().instanceOfTheCurrentUser;
