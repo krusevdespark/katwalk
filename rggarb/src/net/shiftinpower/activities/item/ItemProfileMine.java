@@ -3,9 +3,6 @@ package net.shiftinpower.activities.item;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
-
-import com.nostra13.universalimageloader.core.ImageLoader;
-
 import net.shiftinpower.activities.PlaceProfile;
 import net.shiftinpower.asynctasks.GetItemDataFromServerAsync;
 import net.shiftinpower.core.C;
@@ -16,22 +13,16 @@ import net.shiftinpower.koldrain.R;
 import net.shiftinpower.objects.Brand;
 import net.shiftinpower.objects.Image;
 import net.shiftinpower.objects.ItemCategory;
-import net.shiftinpower.objects.ItemComment;
 import net.shiftinpower.objects.ItemExtended;
-import net.shiftinpower.objects.Rating;
 import net.shiftinpower.objects.ItemSubcategory;
 import net.shiftinpower.objects.Place;
-import net.shiftinpower.objects.UserBasic;
 import net.shiftinpower.objects.ItemBasic;
 import net.shiftinpower.utilities.Transporter;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.Display;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 
 public class ItemProfileMine extends RggarbSlidingMenu implements OnGetItemDataListener {
@@ -60,13 +51,12 @@ public class ItemProfileMine extends RggarbSlidingMenu implements OnGetItemDataL
 	private LinkedHashSet<ItemSubcategory> itemSubcategories;
 	private LinkedHashSet<Place> itemPlaces;
 	private String[] imageUrls;
-	int[] necessaryImageViews;
+	private int[] necessaryImageViews;
 	private String itemCategory;
 	private String itemSubcategory;
-	String itemPlaceName;
-	int itemPlaceId;
-	
-	private ImageLoader imageLoader = ImageLoader.getInstance();
+	private String itemPlaceName;
+	private int itemPlaceId;
+	private ArrayList<SquareImageView> imageViewsWhoseBitmapsShouldBeRecycled = new ArrayList<SquareImageView>();
 
 	// Constructor needed because of the way the super class works
 	public ItemProfileMine() {
@@ -113,6 +103,13 @@ public class ItemProfileMine extends RggarbSlidingMenu implements OnGetItemDataL
 	} // End of onCreate
 
 	@Override
+	protected void onPause() {
+		super.onPause();
+		recycleViewsDrawables(imageViewsWhoseBitmapsShouldBeRecycled);
+		finish();
+	}
+
+	@Override
 	public void onGetItemDataSuccess(ItemExtended itemParameters) {
 
 		// Unpack the data
@@ -125,12 +122,13 @@ public class ItemProfileMine extends RggarbSlidingMenu implements OnGetItemDataL
 
 		// Set texts
 		tvItemProfilePrivateItemName.setText(itemBasic.getItemName());
-		if(!brand.getBrandName().contentEquals("")){
+		if (!brand.getBrandName().contentEquals("")) {
 			tvItemProfilePrivateBrandName.setText(brand.getBrandName());
 		} else {
-			tvItemProfilePrivateBrandName.setText(C.FallbackCopy.NO_BRAND); // TODO Extract these to a FallBackCopy subclass of C
+			tvItemProfilePrivateBrandName.setText(C.FallbackCopy.NO_BRAND); // TODO Extract these to a FallBackCopy subclass
+																			// of C
 		}
-				
+
 		if (C.Miscellaneous.CURRENCY_SYMBOL_BEFORE_AMOUNT) {
 			tvItemProfilePrivatePriceValue.setText(C.Miscellaneous.CURRENCY_SYMBOL + String.valueOf(itemBasic.getItemPriceAquired()));
 		} else {
@@ -154,12 +152,12 @@ public class ItemProfileMine extends RggarbSlidingMenu implements OnGetItemDataL
 			}
 
 			if (itemBasic.isItemBoughtFromPlace()) {
-				if(!itemPlaceName.contentEquals("")){
+				if (!itemPlaceName.contentEquals("")) {
 					tvItemProfilePrivateGottenFromPlaceUserName.setText(itemPlaceName);
 				} else {
 					tvItemProfilePrivateGottenFromPlaceUserName.setText(C.FallbackCopy.PLACE_HAS_NO_NAME);
 				}
-				
+
 			} else {
 				tvItemProfilePrivateGottenFromPlaceUserName.setText(C.FallbackCopy.BOUGHT_FROM_PERSON);
 			}
@@ -223,8 +221,8 @@ public class ItemProfileMine extends RggarbSlidingMenu implements OnGetItemDataL
 		}
 
 		// An item cannot be added if there is no at least one image, so we always have the first image
-		imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[0],iItemProfilePrivateImageSlotOne);
-		
+		imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[0], iItemProfilePrivateImageSlotOne);
+
 		int[] initialImageViews = { R.id.iItemProfilePrivateImageSlotTwo, R.id.iItemProfilePrivateImageSlotThree, R.id.iItemProfilePrivateImageSlotFour,
 				R.id.iItemProfilePrivateImageSlotFive };
 
@@ -232,10 +230,11 @@ public class ItemProfileMine extends RggarbSlidingMenu implements OnGetItemDataL
 			necessaryImageViews = new int[itemImagesCount - 1];
 			necessaryImageViews[x] = initialImageViews[x];
 			SquareImageView fetchableImageView = (SquareImageView) findViewById(necessaryImageViews[x]);
+			imageViewsWhoseBitmapsShouldBeRecycled.add(fetchableImageView);
 			fetchableImageView.setVisibility(View.VISIBLE);
 			imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[x + 1], fetchableImageView);
 		}
-	}
+	} // End of onGetItemDataSuccess
 
 	@Override
 	public void onGetItemDataFailure() {

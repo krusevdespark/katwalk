@@ -23,10 +23,8 @@ import net.shiftinpower.objects.ItemBasic;
 import net.shiftinpower.utilities.Transporter;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -75,6 +73,7 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 	private ArrayList<String> itemPlacesUrls;
 	private int[] necessaryImageViews;
 	private int[] necessaryUserImageViews;
+	private ArrayList<SquareImageView> imageViewsWhoseBitmapsShouldBeRecycled = new ArrayList<SquareImageView>();
 
 	// Constructor needed because of the way the super class works
 	public ItemProfilePublic() {
@@ -132,6 +131,13 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 		new GetItemDataFromServerAsync(this, this, userItem.getItemId(), currentlyLoggedInUser).execute();
 
 	} // End of onCreate
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		recycleViewsDrawables(imageViewsWhoseBitmapsShouldBeRecycled);
+		finish();
+	}
 
 	@Override
 	public void onGetItemDataSuccess(ItemExtended itemParameters) {
@@ -263,6 +269,7 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 			if (a < initialUserAvatarViewsCount) {
 				SquareImageView fetchableImageView = (SquareImageView) findViewById(initialUserAvatarViews.get(a));
 				fetchableImageView.setVisibility(View.VISIBLE);
+				imageViewsWhoseBitmapsShouldBeRecycled.add(fetchableImageView);
 				if (!itemUser.getUserAvatar().contentEquals("null")) {
 
 					imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_USERS_FOLDER_THUMBNAIL + itemUser.getUserAvatar(), fetchableImageView);
@@ -298,6 +305,7 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 			for (int b = 0, c = 0; b < initialFriendAvatarViews.size() && c < friendsAvatarsUrls.size(); c++, b++) {
 
 				SquareImageView fetchableImageView = (SquareImageView) findViewById(initialFriendAvatarViews.get(b));
+				imageViewsWhoseBitmapsShouldBeRecycled.add(fetchableImageView);
 				fetchableImageView.setVisibility(View.VISIBLE);
 				if (!friendsAvatarsUrls.get(b).contentEquals("null")) {
 
@@ -328,6 +336,7 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 		for (Place itemPlace : itemPlaces) {
 			if (c < initialPlaceAvatarViewsCount) {
 				SquareImageView fetchableImageView = (SquareImageView) findViewById(initialPlaceAvatarViews.get(c));
+				imageViewsWhoseBitmapsShouldBeRecycled.add(fetchableImageView);
 				fetchableImageView.setVisibility(View.VISIBLE);
 				if (!itemPlace.getPlaceAvatar().contentEquals("null")) {
 
@@ -381,7 +390,7 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 			}
 		});
 
-	}
+	} //End of onGetItemDataSuccess
 
 	@Override
 	public void onGetItemDataFailure() {

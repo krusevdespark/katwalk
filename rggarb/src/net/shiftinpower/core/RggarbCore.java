@@ -1,8 +1,11 @@
 package net.shiftinpower.core;
 
+import java.util.ArrayList;
+
 import net.shiftinpower.activities.MainActivity;
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.localsqlitedb.DBTools;
+import net.shiftinpower.objects.Category;
 import net.shiftinpower.objects.UserExtended;
 import net.shiftinpower.utilities.HashPassword;
 import net.shiftinpower.utilities.PhotoHandler;
@@ -17,6 +20,8 @@ import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -60,7 +65,7 @@ public class RggarbCore extends SlidingFragmentActivity {
 	protected int userActivityCount;
 	protected double userMoneySpentOnItems;
 	protected boolean userHasProvidedOwnPhoto;
-	
+
 	protected UserExtended instanceOfTheCurrentUser;
 
 	// Shared Preferences
@@ -78,7 +83,7 @@ public class RggarbCore extends SlidingFragmentActivity {
 
 	// SQLite Database Handler
 	protected DBTools dbTools;
-	
+
 	// Declare the Universal Image Loader for lazy load of images
 	public ImageLoader imageLoader;
 
@@ -88,8 +93,8 @@ public class RggarbCore extends SlidingFragmentActivity {
 
 	// Photo Handler custom class containing several methods that deal with images
 	protected PhotoHandler photoHandler = new PhotoHandler(this);
-	
-	// Bitmap Options 
+
+	// Bitmap Options
 	protected BitmapFactory.Options bitmapOptions;
 
 	protected void setUserAvatarPath(String userAvatarPath) {
@@ -184,12 +189,13 @@ public class RggarbCore extends SlidingFragmentActivity {
 		super.onCreate(savedInstanceState);
 
 		dbTools = DBTools.getInstance(this);
-		
-        // Create global configuration and initialize ImageLoader with this configuration
+
+		// Create global configuration and initialize ImageLoader with this configuration
 		// https://github.com/nostra13/Android-Universal-Image-Loader
-        ImageLoaderConfiguration imageLoaderConfiguration = new ImageLoaderConfiguration.Builder(getApplicationContext()).build();
+		ImageLoaderConfiguration imageLoaderConfiguration = new ImageLoaderConfiguration.Builder(getApplicationContext()).build();
 		imageLoader = ImageLoader.getInstance();
 		imageLoader.init(imageLoaderConfiguration);
+		// KIRCHO
 		
 		// Set global bitmap preferences
 		bitmapOptions = new BitmapFactory.Options();
@@ -197,7 +203,7 @@ public class RggarbCore extends SlidingFragmentActivity {
 		bitmapOptions.inPurgeable = true;
 		bitmapOptions.inInputShareable = true;
 		bitmapOptions.inTempStorage = new byte[16 * 1024];
-		
+
 		// Get an instance of the current user
 		instanceOfTheCurrentUser = Transporter.instance().instanceOfTheCurrentUser;
 
@@ -331,32 +337,32 @@ public class RggarbCore extends SlidingFragmentActivity {
 		}
 		return (int) l;
 	}
-	
-	protected void setUserImageToImageView(ImageView imageView, String imagePath, String sex){
+
+	protected void setUserImageToImageView(ImageView imageView, String imagePath, String sex) {
 		Bitmap imageBitmap;
-		
+
 		if (!imagePath.contentEquals(C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE) || !imagePath.contentEquals("") && imagePath != null) {
-			
+
 			try {
-				imageBitmap= BitmapFactory.decodeFile(imagePath);
+				imageBitmap = BitmapFactory.decodeFile(imagePath);
 				imageView.setImageBitmap(imageBitmap);
-				
+
 			} catch (OutOfMemoryError ex) {
 				ex.printStackTrace();
 				imageBitmap = photoHandler.getBitmapAndResizeIt(imagePath);
 				imageView.setImageBitmap(imageBitmap);
-				
+
 			} catch (Exception ex) {
 				ex.printStackTrace();
-				
+
 				if (sex.equalsIgnoreCase("male")) {
 					imageView.setImageResource(R.drawable.images_default_avatar_male);
 				} else {
 					imageView.setImageResource(R.drawable.images_default_avatar_female);
 				}
-				
+
 			}
-			
+
 		} else {
 			if (sex.equalsIgnoreCase("male")) {
 				imageView.setImageResource(R.drawable.images_default_avatar_male);
@@ -365,5 +371,28 @@ public class RggarbCore extends SlidingFragmentActivity {
 			}
 		}
 	} // End of setUserImageToImageView
+
+	public <T extends ImageView> void recycleViewsDrawables(ArrayList<T> imageViews) {
+
+		for (T t : imageViews) {
+			Drawable drawable = t.getDrawable();
+			if (drawable instanceof BitmapDrawable) {
+				BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+				Bitmap bitmap = bitmapDrawable.getBitmap();
+				bitmap.recycle();
+			}
+		}
+	}
+
+	public void recycleViewsDrawables(ImageView imageView) {
+
+		Drawable drawable = imageView.getDrawable();
+		if (drawable instanceof BitmapDrawable) {
+			BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+			Bitmap bitmap = bitmapDrawable.getBitmap();
+			bitmap.recycle();
+		}
+
+	}
 
 } // End of Class

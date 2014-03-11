@@ -213,8 +213,10 @@ public class PhotoHandler {
 		Bitmap bitmapLarge;
 		Bitmap bitmapNormalized;
 		BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-		bitmapOptions.inJustDecodeBounds = true;
+		bitmapOptions.inDither = false;
 		bitmapOptions.inPurgeable = true;
+		bitmapOptions.inInputShareable = true;
+		bitmapOptions.inTempStorage = new byte[16 * 1024];
 
 		try {
 			bitmapLarge = BitmapFactory.decodeFile(pathName, bitmapOptions);

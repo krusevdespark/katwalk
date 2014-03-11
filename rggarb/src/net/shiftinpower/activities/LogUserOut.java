@@ -23,7 +23,7 @@ public class LogUserOut extends RggarbCore implements OnUserLogOutListener {
 
 	// XML Views
 	private ImageView ivSplashScreen;
-	
+
 	// Image handling variables
 	private Bitmap bitmap;
 
@@ -38,7 +38,7 @@ public class LogUserOut extends RggarbCore implements OnUserLogOutListener {
 		setBehindContentView(R.layout.activity_layout_splash_screen);
 
 		getSupportActionBar().hide();
-		
+
 		ivSplashScreen = (ImageView) findViewById(R.id.ivSplashScreen);
 
 		bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.images_loading_screen, bitmapOptions);
@@ -47,17 +47,12 @@ public class LogUserOut extends RggarbCore implements OnUserLogOutListener {
 		// Starting an async task that will log the user out and write the value for Last Seen at the server
 		new LogUserOutAttemptAsync(this, String.valueOf(currentlyLoggedInUser)).execute();
 	} // End of onCreate
-	
+
 	@Override
 	protected void onStop() {
-				
+
 		// Prevent memory leak by releasing the bitmaps from the memory
-		Drawable drawable = ivSplashScreen.getDrawable();
-		if (drawable instanceof BitmapDrawable) {
-			BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-			Bitmap bitmap = bitmapDrawable.getBitmap();
-			bitmap.recycle();
-		}
+		recycleViewsDrawables(ivSplashScreen);
 		super.onStop();
 	}
 

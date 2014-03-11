@@ -2,20 +2,14 @@ package net.shiftinpower.activities.person;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-
 import net.shiftinpower.activities.ItemAddStepOnePhotos;
 import net.shiftinpower.adapters.MyProfileItemAdapter;
 import net.shiftinpower.core.*;
 import net.shiftinpower.interfaces.OnGetCategoriesListener;
-import net.shiftinpower.interfaces.OnGetSubcategoriesListener;
 import net.shiftinpower.interfaces.OnGetUserItemsListener;
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.localsqlitedb.*;
 import net.shiftinpower.objects.ItemCategory;
-import net.shiftinpower.objects.ItemSubcategory;
 import net.shiftinpower.objects.ItemBasic;
 import net.shiftinpower.utilities.LoadSpinnerData;
 import android.content.Intent;
@@ -24,9 +18,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
@@ -172,10 +164,10 @@ public class PersonProfileItems extends RggarbSlidingMenu implements OnGetUserIt
 						
 						MyProfileItemAdapter myItemsItemAdapter;
 						if (selectedItemId != 99) {
-							myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, userItemsObtained, selectedItemId);
+							myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, imageLoader, userItemsObtained, selectedItemId);
 
 						} else {
-							myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, userItemsObtained);
+							myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, imageLoader,  userItemsObtained);
 
 						}
 						listOfItems.setAdapter(myItemsItemAdapter);
@@ -201,14 +193,14 @@ public class PersonProfileItems extends RggarbSlidingMenu implements OnGetUserIt
 	public void onGetUserItemsSuccess(LinkedHashSet<ItemBasic> userItems) {
 		// Instantiate the adapter, feed the data to it via its constructor and set the listview to use it
 		userItemsObtained = userItems;
-		MyProfileItemAdapter myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, userItems);
+		MyProfileItemAdapter myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this,  imageLoader, userItems);
 		listOfItems.setAdapter(myItemsItemAdapter);
 		
 		etMyItemsListSearch.addTextChangedListener(new TextWatcher() {
 			
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				MyProfileItemAdapter myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, userItemsObtained, s);
+				MyProfileItemAdapter myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this,  imageLoader, userItemsObtained, s);
 				listOfItems.setAdapter(myItemsItemAdapter);
 				
 			}

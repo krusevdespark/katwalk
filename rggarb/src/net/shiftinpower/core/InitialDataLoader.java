@@ -61,7 +61,8 @@ import android.widget.Toast;
  * @author Kaloyan Roussev
  * 
  */
-public class InitialDataLoader extends RggarbCore implements OnGetCategoriesListener, OnGetSubcategoriesListener, OnDownloadUserInfoFromServerListener, OnDownloadImageListener, OnGetUserItemsListener, OnInsertUserItemsInDBListener {
+public class InitialDataLoader extends RggarbCore implements OnGetCategoriesListener, OnGetSubcategoriesListener, OnDownloadUserInfoFromServerListener,
+		OnDownloadImageListener, OnGetUserItemsListener, OnInsertUserItemsInDBListener {
 
 	// This is the AsyncTask that communicates with the server
 	private DownloadUserInfoFromServerAsync userDetailsDownloader;
@@ -112,13 +113,9 @@ public class InitialDataLoader extends RggarbCore implements OnGetCategoriesList
 	protected void onStop() {
 
 		// Prevent memory leak by releasing the bitmaps from the memory
-		Drawable drawable = ivSplashScreen.getDrawable();
-		if (drawable instanceof BitmapDrawable) {
-			BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-			Bitmap bitmap = bitmapDrawable.getBitmap();
-			bitmap.recycle();
-		}
+		recycleViewsDrawables(ivSplashScreen);
 		super.onStop();
+		
 	}
 
 	@Override
