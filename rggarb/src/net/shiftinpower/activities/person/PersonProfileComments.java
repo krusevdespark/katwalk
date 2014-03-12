@@ -16,7 +16,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class PersonProfileComments extends RggarbSlidingMenu {
+public class PersonProfileComments extends KatwalkSlidingMenu {
 
 	// XML view elements
 	private TextView tvUserNameMyReviewsList;
@@ -68,10 +68,10 @@ public class PersonProfileComments extends RggarbSlidingMenu {
 		
 		// Try setting fonts for different XML views on screen
 		try {
-			tvUserNameMyReviewsList.setTypeface(font1);
-			bEmptyMyProfileCommentsSearchItems.setTypeface(font1);
-			bEmptyMyProfileCommentsVisitItemsFeed.setTypeface(font1);
-			tvEmptyMyProfileComments.setTypeface(font2);
+			tvUserNameMyReviewsList.setTypeface(katwalk.font1);
+			bEmptyMyProfileCommentsSearchItems.setTypeface(katwalk.font1);
+			bEmptyMyProfileCommentsVisitItemsFeed.setTypeface(katwalk.font1);
+			tvEmptyMyProfileComments.setTypeface(katwalk.font2);
 		} catch (Exception e) {
 			// Nothing can be done here
 			e.printStackTrace();

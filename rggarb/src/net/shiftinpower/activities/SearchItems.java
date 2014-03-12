@@ -6,7 +6,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 import net.shiftinpower.core.C;
-import net.shiftinpower.core.RggarbSlidingMenu;
+import net.shiftinpower.core.KatwalkSlidingMenu;
 import net.shiftinpower.interfaces.OnGetCategoriesListener;
 import net.shiftinpower.interfaces.OnGetSubcategoriesListener;
 import net.shiftinpower.koldrain.R;
@@ -27,7 +27,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-public class SearchItems extends RggarbSlidingMenu implements OnGetCategoriesListener, OnGetSubcategoriesListener {
+public class SearchItems extends KatwalkSlidingMenu implements OnGetCategoriesListener, OnGetSubcategoriesListener {
 
 	// XML view elements
 	private TextView tvSearchItemsTitle;
@@ -79,9 +79,9 @@ public class SearchItems extends RggarbSlidingMenu implements OnGetCategoriesLis
 
 		// Try setting fonts for different XML views on screen
 		try {
-			tvSearchItemsTitle.setTypeface(font1);
-			tvSearchOrSearchUsers.setTypeface(font2);
-			bSubmitSearch.setTypeface(font1);
+			tvSearchItemsTitle.setTypeface(katwalk.font1);
+			tvSearchOrSearchUsers.setTypeface(katwalk.font2);
+			bSubmitSearch.setTypeface(katwalk.font1);
 		} catch (Exception e) {
 			// Nothing can be done here
 			e.printStackTrace();
@@ -98,7 +98,7 @@ public class SearchItems extends RggarbSlidingMenu implements OnGetCategoriesLis
 
 		});
 
-		new GetCategoriesFromDB(SearchItems.this, SearchItems.this, dbTools).execute();
+		new GetCategoriesFromDB(SearchItems.this, SearchItems.this, katwalk.dbTools).execute();
 		
 		sCategorySearch.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -112,7 +112,7 @@ public class SearchItems extends RggarbSlidingMenu implements OnGetCategoriesLis
 					ItemCategory itemCategory = (ItemCategory) arg0.getItemAtPosition(arg2);
 					itemCategoryID = itemCategory.getId();
 					count++;
-					new GetSubcategoriesFromDB(SearchItems.this, SearchItems.this, dbTools, (sCategorySearch.getSelectedItemPosition() + 1))
+					new GetSubcategoriesFromDB(SearchItems.this, SearchItems.this, katwalk.dbTools, (sCategorySearch.getSelectedItemPosition() + 1))
 							.execute();
 
 				}
@@ -152,13 +152,13 @@ public class SearchItems extends RggarbSlidingMenu implements OnGetCategoriesLis
 
 		// Initially we are loading subcategories for the first category in the spinner, so we are passing 1 to the
 		// constructor
-		new GetSubcategoriesFromDB(SearchItems.this, SearchItems.this, dbTools, 1).execute();
+		new GetSubcategoriesFromDB(SearchItems.this, SearchItems.this, katwalk.dbTools, 1).execute();
 
 	}
 
 	@Override
 	public void onGetCategoriesFailure(String reason) {
-		toastMaker.toast(net.shiftinpower.activities.SearchItems.this, C.Errorz.CATEGORIES_NOT_LOADED_DUE_TO_UNKOWN_ERROR, Toast.LENGTH_LONG);
+		katwalk.toastMaker.toast(net.shiftinpower.activities.SearchItems.this, C.Errorz.CATEGORIES_NOT_LOADED_DUE_TO_UNKOWN_ERROR, Toast.LENGTH_LONG);
 	}
 
 	@Override
@@ -179,7 +179,7 @@ public class SearchItems extends RggarbSlidingMenu implements OnGetCategoriesLis
 	public void onGetSubcategoriesFailure(String reason) {
 
 		// Tell the user we have a problem
-		toastMaker.toast(net.shiftinpower.activities.SearchItems.this, C.Errorz.CATEGORIES_NOT_LOADED_DUE_TO_UNKOWN_ERROR, Toast.LENGTH_LONG);
+		katwalk.toastMaker.toast(net.shiftinpower.activities.SearchItems.this, C.Errorz.CATEGORIES_NOT_LOADED_DUE_TO_UNKOWN_ERROR, Toast.LENGTH_LONG);
 
 	}
 

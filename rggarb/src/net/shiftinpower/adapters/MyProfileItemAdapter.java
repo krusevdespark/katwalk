@@ -59,45 +59,46 @@ public class MyProfileItemAdapter extends BaseAdapter {
 	}
 
 	// Default Constructor
-	public MyProfileItemAdapter(Context context, LinkedHashSet<ItemBasic> myItems) {
+	public MyProfileItemAdapter(Context context, ImageLoader imageLoader, LinkedHashSet<ItemBasic> myItems) {
 
 		this.context = context;
 		this.myItems = myItems;
+		this.imageLoader = imageLoader;
 		
-		imageLoader = ImageLoader.getInstance();
 		layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		prepareItemsList(myItems);
-		
+
 	}
 
 	// Constructor allowing items from a given category to be displayed only
-	public MyProfileItemAdapter(Context context, LinkedHashSet<ItemBasic> myItems, int selectedCategoryId) {
+	public MyProfileItemAdapter(Context context, ImageLoader imageLoader, LinkedHashSet<ItemBasic> myItems, int selectedCategoryId) {
 
 		this.context = context;
 		this.myItems = myItems;
+		this.imageLoader = imageLoader;
 		this.selectedCategoryId = selectedCategoryId;
-		
-		imageLoader = ImageLoader.getInstance();
+
 		layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		prepareItemsList(myItems, selectedCategoryId);
-		
+
 	}
 
 	// Constructor used from the search edittext, passing a part of a string, so the adapter only shows items who correspond
 	// to it
-	public MyProfileItemAdapter(Context context, LinkedHashSet<ItemBasic> myItems, CharSequence autocompleteInput) {
+	public MyProfileItemAdapter(Context context, ImageLoader imageLoader, LinkedHashSet<ItemBasic> myItems, CharSequence autocompleteInput) {
 
 		this.context = context;
 		this.myItems = myItems;
+		this.imageLoader = imageLoader;
 		this.autocompleteInput = autocompleteInput;
-		
+
 		imageLoader = ImageLoader.getInstance();
 		layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
 		prepareItemsList(myItems, autocompleteInput);
-		
+
 	}
 
 	@Override
@@ -117,7 +118,7 @@ public class MyProfileItemAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(final int position, View convertView, ViewGroup parent) {
-		
+
 		if (convertView == null) {
 			convertView = layoutInflater.inflate(R.layout.item_adapterable_my_profile_item, parent, false);
 		}
@@ -142,10 +143,10 @@ public class MyProfileItemAdapter extends BaseAdapter {
 		holder.tvMyItemsFeedItemBoughtFrom.setText(itemsBoughtFromPlaceName.get(position));
 
 		holder.iMyItemsFeedItemImage.setVisibility(View.VISIBLE);
-		//holder.iMyItemsFeedItemImage.setImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_THUMBNAIL + itemImages.get(position),
-				//R.drawable.images_default_product);
-		
-		
+		// holder.iMyItemsFeedItemImage.setImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_THUMBNAIL +
+		// itemImages.get(position),
+		// R.drawable.images_default_product);
+
 		imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_THUMBNAIL + itemImages.get(position), holder.iMyItemsFeedItemImage);
 
 		if (itemRatings.get(position) == 0) {

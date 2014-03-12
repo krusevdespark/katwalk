@@ -30,7 +30,7 @@ import net.shiftinpower.core.*;
 import net.shiftinpower.activities.person.MyProfile;
 import net.shiftinpower.asynctasks.*;
 
-public class Settings extends RggarbSlidingMenu implements OnUserSettingsChangedListener, OnUserDeletionListener {
+public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChangedListener, OnUserDeletionListener {
 
 	// Set up XML View Components
 	private TextView tvUserNameSettings;
@@ -105,10 +105,10 @@ public class Settings extends RggarbSlidingMenu implements OnUserSettingsChanged
 
 		// Set fonts
 		try {
-			tvUserNameSettings.setTypeface(font2);
-			tvSettingsTitle.setTypeface(font1);
-			bDeleteMyProfileSettingsPage.setTypeface(font1);
-			bSubmitSettingsPage.setTypeface(font1);
+			tvUserNameSettings.setTypeface(katwalk.font2);
+			tvSettingsTitle.setTypeface(katwalk.font1);
+			bDeleteMyProfileSettingsPage.setTypeface(katwalk.font1);
+			bSubmitSettingsPage.setTypeface(katwalk.font1);
 		} catch (Exception e) {
 			// Nothing can be done here
 			e.printStackTrace();
@@ -253,8 +253,8 @@ public class Settings extends RggarbSlidingMenu implements OnUserSettingsChanged
 				// Set fonts
 				try {
 
-					bDeleteAccountSubmit.setTypeface(font1);
-					bDeleteAccountCancel.setTypeface(font1);
+					bDeleteAccountSubmit.setTypeface(katwalk.font1);
+					bDeleteAccountCancel.setTypeface(katwalk.font1);
 
 				} catch (Exception e) {
 					// Nothing can be done here
@@ -289,10 +289,10 @@ public class Settings extends RggarbSlidingMenu implements OnUserSettingsChanged
 					public void onClick(View v) {
 
 						passwordForAccountDeletion = etDeleteAccountPassword.getText().toString();
-						passwordForAccountDeletionHashed = hashPassword.computeSHAHash(passwordForAccountDeletion);
+						passwordForAccountDeletionHashed = katwalk.hashPassword.computeSHAHash(passwordForAccountDeletion);
 
 						if (!passwordForAccountDeletionHashed.equals(userPassword)) {
-							toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.INCORRECT_PASSWORD, Toast.LENGTH_SHORT);
+							katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.INCORRECT_PASSWORD, Toast.LENGTH_SHORT);
 						} else {
 							passwordForAccountDeletionIsCorrect = true;
 						}
@@ -341,13 +341,13 @@ public class Settings extends RggarbSlidingMenu implements OnUserSettingsChanged
 					userNameInField = etUserNameSettings.getText().toString();
 
 					if (userNameInField.length() < (C.CharacterLimitations.USERNAME_MINIMUM_LENGTH)) {
-						toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.USER_NAME_MIN_LENGTH_PROBLEM, Toast.LENGTH_SHORT);
+						katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.USER_NAME_MIN_LENGTH_PROBLEM, Toast.LENGTH_SHORT);
 						userNameIsOK = false;
 					} else if (userName.length() > (C.CharacterLimitations.USERNAME_MAXIMUM_LENGTH)) {
-						toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.USER_NAME_MAX_LENGTH_EXCEEDED, Toast.LENGTH_SHORT);
+						katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.USER_NAME_MAX_LENGTH_EXCEEDED, Toast.LENGTH_SHORT);
 						userNameIsOK = false;
 					} else if (userName.equals("")) {
-						toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.FIELD_NOT_FILLED, Toast.LENGTH_SHORT);
+						katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.FIELD_NOT_FILLED, Toast.LENGTH_SHORT);
 						userNameIsOK = false;
 					} else {
 						userNameIsOK = true;
@@ -363,11 +363,11 @@ public class Settings extends RggarbSlidingMenu implements OnUserSettingsChanged
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
 				if (!hasFocus) {
-					userPasswordInOldPasswordField = hashPassword.computeSHAHash(etUserPasswordOldSettings.getText().toString());
+					userPasswordInOldPasswordField = katwalk.hashPassword.computeSHAHash(etUserPasswordOldSettings.getText().toString());
 
 					if (etUserPasswordOldSettings.getText().toString().length() > 0) {
 						if (!userPasswordInOldPasswordField.equals(userPassword)) {
-							toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.INCORRECT_PASSWORD, Toast.LENGTH_SHORT);
+							katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.INCORRECT_PASSWORD, Toast.LENGTH_SHORT);
 						} else {
 							oldPasswordOk = true;
 						}
@@ -386,12 +386,12 @@ public class Settings extends RggarbSlidingMenu implements OnUserSettingsChanged
 					if (userPasswordNewInField.length() > 0) {
 						if (userPasswordNewInField.length() < (C.CharacterLimitations.PASSWORD_MINIMUM_LENGTH)) {
 
-							toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.PASSWORD_MIN_LENGTH_PROBLEM, Toast.LENGTH_SHORT);
+							katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.PASSWORD_MIN_LENGTH_PROBLEM, Toast.LENGTH_SHORT);
 						} else if (userPasswordNewInField.length() > (C.CharacterLimitations.PASSWORD_MAXIMUM_LENGTH)) {
 
-							toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.PASSWORD_MAX_LENGTH_EXCEEDED, Toast.LENGTH_SHORT);
+							katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.PASSWORD_MAX_LENGTH_EXCEEDED, Toast.LENGTH_SHORT);
 						} else if (userPasswordNewInField.equals("")) {
-							toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.FIELD_NOT_FILLED, Toast.LENGTH_SHORT);
+							katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.FIELD_NOT_FILLED, Toast.LENGTH_SHORT);
 
 						} else {
 							passwordHasBeenChanged = true;
@@ -408,16 +408,16 @@ public class Settings extends RggarbSlidingMenu implements OnUserSettingsChanged
 					if (passwordHasBeenChanged) {
 						userPasswordNewAgainInField = etUserPasswordNewAgainSettings.getText().toString();
 						if (userPasswordNewAgainInField.equals("")) {
-							toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.FIELD_NOT_FILLED, Toast.LENGTH_SHORT);
+							katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.FIELD_NOT_FILLED, Toast.LENGTH_SHORT);
 						}
 
 						if (!(userPasswordNewAgainInField.equals(userPasswordNewInField))) {
-							toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.PASSWORDS_DO_NOT_MATCH, Toast.LENGTH_SHORT);
+							katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.PASSWORDS_DO_NOT_MATCH, Toast.LENGTH_SHORT);
 						} else {
 							if (oldPasswordOk) {
-								setUserPassword(hashPassword.computeSHAHash(userPasswordNewAgainInField));
+								setUserPassword(katwalk.hashPassword.computeSHAHash(userPasswordNewAgainInField));
 							} else {
-								toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.INCORRECT_PASSWORD, Toast.LENGTH_SHORT);
+								katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.INCORRECT_PASSWORD, Toast.LENGTH_SHORT);
 							}
 						}
 					}
@@ -433,7 +433,7 @@ public class Settings extends RggarbSlidingMenu implements OnUserSettingsChanged
 				userQuoteInField = etUserQuoteSettings.getText().toString();
 				if (!hasFocus) {
 					if (userQuoteInField.length() > C.CharacterLimitations.USER_QUOTE_MAXIMUM_LENGTH) {
-						toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.QUOTE_LENGTH_EXCEEDED, Toast.LENGTH_SHORT);
+						katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.QUOTE_LENGTH_EXCEEDED, Toast.LENGTH_SHORT);
 					} else {
 						setUserQuote(userQuoteInField);
 					}
@@ -479,7 +479,7 @@ public class Settings extends RggarbSlidingMenu implements OnUserSettingsChanged
 					new SaveUserSettingsOnServerAsync(Settings.this, Settings.this, String.valueOf(currentlyLoggedInUser), userShowsMoney, userShowsStats, userAcceptsMessages, userInteractsWithActivities, userName, userQuote, userSex, userPassword).execute();
 
 				} else {
-					toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.NOT_ALL_FIELDS_FILLED, Toast.LENGTH_SHORT);
+					katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.NOT_ALL_FIELDS_FILLED, Toast.LENGTH_SHORT);
 				}
 
 			}
@@ -513,7 +513,7 @@ public class Settings extends RggarbSlidingMenu implements OnUserSettingsChanged
 					userHasProvidedANewAvatar = true;
 
 					// Remind the user to save changes
-					toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Confirmationz.DONT_FORGET_TO_SAVE_SETTINGS, Toast.LENGTH_SHORT);
+					katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Confirmationz.DONT_FORGET_TO_SAVE_SETTINGS, Toast.LENGTH_SHORT);
 
 				} catch (Exception ex) {
 					ex.printStackTrace();
@@ -541,7 +541,7 @@ public class Settings extends RggarbSlidingMenu implements OnUserSettingsChanged
 
 	@Override
 	public void onUserDeletionSuccess() {
-		toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Confirmationz.ACCOUNT_DELETED, Toast.LENGTH_LONG);
+		katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Confirmationz.ACCOUNT_DELETED, Toast.LENGTH_LONG);
 		Intent logUserOut = new Intent(Settings.this, LogUserOut.class);
 		startActivity(logUserOut);
 		
@@ -552,16 +552,16 @@ public class Settings extends RggarbSlidingMenu implements OnUserSettingsChanged
 	@Override
 	public void onUserDeletionFailure(String reason) {
 		if (reason.contentEquals(C.Tagz.DB_PROBLEM) || reason.contentEquals(C.Tagz.BAD_REQUEST) || reason.contentEquals(C.Tagz.NOT_FOUND)) {
-			toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.ACCOUNT_NOT_DELETED, Toast.LENGTH_LONG);
+			katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.ACCOUNT_NOT_DELETED, Toast.LENGTH_LONG);
 		} else if (reason.contentEquals(C.Tagz.UNKNOWN_PROBLEM)) {
-			toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.CONNECTION_ERROR, Toast.LENGTH_SHORT);
+			katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.CONNECTION_ERROR, Toast.LENGTH_SHORT);
 		}
 
 	} // End of onUserDeletionFailure
 
 	@Override
 	public void onUserSettingsChangedSuccess() {
-		toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Confirmationz.SETTINGS_SAVED, Toast.LENGTH_SHORT);
+		katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Confirmationz.SETTINGS_SAVED, Toast.LENGTH_SHORT);
 
 		if (userHasProvidedANewAvatar) {
 			// Upload the user avatar to the server. After upload is finished,
@@ -577,9 +577,9 @@ public class Settings extends RggarbSlidingMenu implements OnUserSettingsChanged
 	@Override
 	public void onUserSettingsChangedFailure(String reason) {
 		if (reason.contentEquals(C.Tagz.DB_PROBLEM) || reason.contentEquals(C.Tagz.BAD_REQUEST) || reason.contentEquals(C.Tagz.NOT_FOUND)) {
-			toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.SETTINGS_NOT_SAVED, Toast.LENGTH_SHORT);
+			katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.SETTINGS_NOT_SAVED, Toast.LENGTH_SHORT);
 		} else if (reason.contentEquals(C.Tagz.UNKNOWN_PROBLEM)) {
-			toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.CONNECTION_ERROR, Toast.LENGTH_SHORT);
+			katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.CONNECTION_ERROR, Toast.LENGTH_SHORT);
 		}
 	} // End of onUserSettingsChangedFailure
 

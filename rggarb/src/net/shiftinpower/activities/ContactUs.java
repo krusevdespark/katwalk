@@ -15,11 +15,11 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import net.shiftinpower.asynctasks.ContactUsSendEmail;
 import net.shiftinpower.asynctasks.ForgottenPasswordGetUserNameAndSendEmail;
 import net.shiftinpower.core.C;
-import net.shiftinpower.core.RggarbSlidingMenu;
+import net.shiftinpower.core.KatwalkSlidingMenu;
 import net.shiftinpower.interfaces.OnContactUsSendEmailListener;
 import net.shiftinpower.koldrain.R;
 
-public class ContactUs extends RggarbSlidingMenu implements OnContactUsSendEmailListener{
+public class ContactUs extends KatwalkSlidingMenu implements OnContactUsSendEmailListener{
 	
 	// Set up XML View Components
 	private TextView tvContactUsTitle;
@@ -52,8 +52,8 @@ public class ContactUs extends RggarbSlidingMenu implements OnContactUsSendEmail
 		
 		// Set fonts
 		try {
-			tvContactUsTitle.setTypeface(font1);
-			bContactUsSubmit.setTypeface(font1);
+			tvContactUsTitle.setTypeface(katwalk.font1);
+			bContactUsSubmit.setTypeface(katwalk.font1);
 		} catch (Exception e) {
 			// Nothing can be done here
 			e.printStackTrace();
@@ -89,7 +89,7 @@ public class ContactUs extends RggarbSlidingMenu implements OnContactUsSendEmail
 					contactUsEmailContent  = etContactUsEnterYourMessage.getText().toString();
 					new ContactUsSendEmail(ContactUs.this, ContactUs.this, userEmail, contactUsEmailLineOfInquiry, contactUsEmailContent).execute();
 				} else {
-					toastMaker.toast(net.shiftinpower.activities.ContactUs.this, C.Errorz.NO_MESSAGE_ENTERED, Toast.LENGTH_SHORT);
+					katwalk.toastMaker.toast(net.shiftinpower.activities.ContactUs.this, C.Errorz.NO_MESSAGE_ENTERED, Toast.LENGTH_SHORT);
 				}
 				
 			}
@@ -99,7 +99,7 @@ public class ContactUs extends RggarbSlidingMenu implements OnContactUsSendEmail
 
 	@Override
 	public void onContactUsSendEmailSuccess() {
-		toastMaker.toast(net.shiftinpower.activities.ContactUs.this, C.Confirmationz.INQUIRY_SENT, Toast.LENGTH_SHORT);
+		katwalk.toastMaker.toast(net.shiftinpower.activities.ContactUs.this, C.Confirmationz.INQUIRY_SENT, Toast.LENGTH_SHORT);
 		Intent home = new Intent(ContactUs.this, Home.class);
 		startActivity(home);
 		finish();
@@ -107,7 +107,7 @@ public class ContactUs extends RggarbSlidingMenu implements OnContactUsSendEmail
 
 	@Override
 	public void onContactUsSendEmailFailure() {
-		toastMaker.toast(net.shiftinpower.activities.ContactUs.this, C.Errorz.MESSAGE_NOT_SENT, Toast.LENGTH_LONG);
+		katwalk.toastMaker.toast(net.shiftinpower.activities.ContactUs.this, C.Errorz.MESSAGE_NOT_SENT, Toast.LENGTH_LONG);
 		
 	}
 	

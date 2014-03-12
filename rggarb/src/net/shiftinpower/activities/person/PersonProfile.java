@@ -15,7 +15,7 @@ import net.shiftinpower.activities.NotImplementedYetScreen;
 import net.shiftinpower.activities.Settings;
 import net.shiftinpower.asynctasks.DownloadUserInfoFromServerAsync;
 import net.shiftinpower.core.C;
-import net.shiftinpower.core.RggarbSlidingMenu;
+import net.shiftinpower.core.KatwalkSlidingMenu;
 import net.shiftinpower.interfaces.OnDownloadUserInfoFromServerListener;
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.objects.UserExtended;
@@ -27,7 +27,7 @@ import net.shiftinpower.objects.UserExtended;
  * @author Kaloyan Roussev
  * 
  */
-public class PersonProfile extends RggarbSlidingMenu implements OnClickListener, OnDownloadUserInfoFromServerListener {
+public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener, OnDownloadUserInfoFromServerListener {
 
 	// set up XML View Components
 	protected TextView tvUserName;
@@ -111,13 +111,13 @@ public class PersonProfile extends RggarbSlidingMenu implements OnClickListener,
 
 		// Trying to set some fonts
 		try {
-			tvUserName.setTypeface(font2);
-			tvUserProfileItemsTab.setTypeface(font2);
-			tvUserProfileCommentsTab.setTypeface(font2);
-			tvUserProfileFollowingTab.setTypeface(font2);
-			tvUserProfileFriendsTab.setTypeface(font2);
-			tvUserProfileGalleryTab.setTypeface(font2);
-			tvUserProfileActivityTab.setTypeface(font2);
+			tvUserName.setTypeface(katwalk.font2);
+			tvUserProfileItemsTab.setTypeface(katwalk.font2);
+			tvUserProfileCommentsTab.setTypeface(katwalk.font2);
+			tvUserProfileFollowingTab.setTypeface(katwalk.font2);
+			tvUserProfileFriendsTab.setTypeface(katwalk.font2);
+			tvUserProfileGalleryTab.setTypeface(katwalk.font2);
+			tvUserProfileActivityTab.setTypeface(katwalk.font2);
 		} catch (Exception e) {
 			tvUserProfileItemsTab.setTextSize(C.Fontz.FONT_SIZE_WHEN_FONT_UNAVAILABLE);
 			tvUserProfileCommentsTab.setTextSize(C.Fontz.FONT_SIZE_WHEN_FONT_UNAVAILABLE);

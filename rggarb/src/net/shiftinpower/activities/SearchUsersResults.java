@@ -1,6 +1,6 @@
 package net.shiftinpower.activities;
 
-import net.shiftinpower.core.RggarbSlidingMenu;
+import net.shiftinpower.core.KatwalkSlidingMenu;
 import net.shiftinpower.koldrain.R;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +16,7 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
-public class SearchUsersResults extends RggarbSlidingMenu {
+public class SearchUsersResults extends KatwalkSlidingMenu {
 	
 	// XML view elements
 	private TextView tvSearchUsersResultsTitle;
@@ -56,9 +56,9 @@ public class SearchUsersResults extends RggarbSlidingMenu {
 		
 		// Try setting fonts for different XML views on screen
 		try {
-			tvSearchUsersResultsTitle.setTypeface(font1);
-			tvClearSearchFiltersSearchUsersResults.setTypeface(font2);
-			bModifyUsersSearch.setTypeface(font1);
+			tvSearchUsersResultsTitle.setTypeface(katwalk.font1);
+			tvClearSearchFiltersSearchUsersResults.setTypeface(katwalk.font2);
+			bModifyUsersSearch.setTypeface(katwalk.font1);
 		} catch (Exception e) {
 			// Nothing can be done here
 			e.printStackTrace();

@@ -23,6 +23,7 @@
         android:debuggable="true"
         android:icon="@drawable/images_ic_launcher"
         android:label="@string/app_name"
+        android:name="net.shiftinpower.core.KatwalkApplication"
         android:logo="@drawable/icon_logo"
         android:theme="@style/Theme.SherlockCustom" >
         <activity

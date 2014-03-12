@@ -1,6 +1,6 @@
 package net.shiftinpower.activities;
 
-import net.shiftinpower.core.RggarbSlidingMenu;
+import net.shiftinpower.core.KatwalkSlidingMenu;
 import net.shiftinpower.koldrain.R;
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -17,7 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
 
-public class SearchItemsResults extends RggarbSlidingMenu{
+public class SearchItemsResults extends KatwalkSlidingMenu{
 	
 	// XML view elements
 	private TextView tvSearchItemsResultsTitle;
@@ -57,9 +57,9 @@ public class SearchItemsResults extends RggarbSlidingMenu{
 		
 		// Try setting fonts for different XML views on screen
 		try {
-			tvSearchItemsResultsTitle.setTypeface(font1);
-			tvClearSearchFiltersSearchItemsResults.setTypeface(font2);
-			bModifyItemsSearch.setTypeface(font1);
+			tvSearchItemsResultsTitle.setTypeface(katwalk.font1);
+			tvClearSearchFiltersSearchItemsResults.setTypeface(katwalk.font2);
+			bModifyItemsSearch.setTypeface(katwalk.font1);
 		} catch (Exception e) {
 			// Nothing can be done here
 			e.printStackTrace();

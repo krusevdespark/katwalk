@@ -4,7 +4,7 @@ import net.shiftinpower.koldrain.R;
 import android.os.Bundle;
 import net.shiftinpower.core.*;
 
-public class UserProfile extends RggarbSlidingMenu {
+public class UserProfile extends KatwalkSlidingMenu {
 
 	public UserProfile() {
 		super(R.string.app_name);

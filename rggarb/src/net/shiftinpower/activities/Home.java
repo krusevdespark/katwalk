@@ -13,7 +13,7 @@ import net.shiftinpower.koldrain.R;
 import net.shiftinpower.core.*;
 import net.shiftinpower.fragments.*;
 
-public class Home extends RggarbSlidingMenu {
+public class Home extends KatwalkSlidingMenu {
 
 	private TextView titleTV;
 
@@ -60,7 +60,7 @@ public class Home extends RggarbSlidingMenu {
 			actionBar.getTabAt(i).setCustomView(customView);
 
 			try {
-				titleTV.setTypeface(font2);
+				titleTV.setTypeface(katwalk.font2);
 				titleTV.setText(tabsText[i]);
 				titleTV.setTextColor(getResources().getColor(R.color.green));
 			} catch (Exception e) {

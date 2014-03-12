@@ -8,6 +8,9 @@
     <string name="signup">Sign Up</string>
     <string name="tvWelcome">Brag about your latest purchase.\nSee what others got.</string>
 
+    <!-- InitialDataLoader -->
+    <string name="tvSplashScreenDescription">Splash Screen shown while loading</string>
+
     <!-- Login -->
     <string name="tvLoginTitle">Log In to Katwalk!</string>
     <string name="bLoginLoginPage">LOG IN</string>
@@ -27,8 +30,10 @@
     <string name="rgSexMale">Male</string>
     <string name="rgSexFemale">Female</string>
     <string name="bSubmitSignupPage">SIGN UP</string>
-    <string name="spCountrySpinnerPrompt">Please, select your country</string> <!-- Currently not used -->
-    <string name="spCitySpinnerPrompt">Please, select your nearest city</string> <!-- Currently not used -->
+    <string name="spCountrySpinnerPrompt">Please, select your country</string>
+ <!-- Currently not used -->
+    <string name="spCitySpinnerPrompt">Please, select your nearest city</string>
+ <!-- Currently not used -->
     <string name="ibAvatarUploadText">Upload a photo</string>
     <string name="ivUserAvatarContentDescription">User Image</string>
     <string name="bTakeAPhoto">Take A Photo</string>
@@ -301,7 +306,8 @@
     <string name="bMyItemsFeedActionButtonComment">Comment</string>
     <string name="bMyItemsFeedActionButtonDelete">Delete</string>
     <string name="bMyItemsFeedActionButtonSell">Sell</string>
-    <string name="tvFilterByCategory">Filter By Category:</string> <!-- Not sure whether this one is at My Items -->
+    <string name="tvFilterByCategory">Filter By Category:</string>
+ <!-- Not sure whether this one is at My Items -->
     <string name="tvEmptyMyProfileItems">You haven\'t added any items to your collection yet. Get your phone, see something you\'d like to brag about and add it to your collection!</string>
     <string name="bEmptyMyProfileItemsAddAnItem">Add An Item</string>
     <string name="tvEmptyMyProfileFollowings">You haven\'t followed any items yet.</string>
@@ -313,7 +319,6 @@
     <string name="tvEmptyMyProfileComments">You haven\'t commented on any items yet</string>
     <string name="bEmptyMyProfileCommentsVisitItemsFeed">Visit Items Feed</string>
     <string name="bEmptyMyProfileCommentsSearchItems">Search Items</string>
-    
 
     <!-- My Profile Friends -->
     <string name="tvMyNameUserFriendsList">My Friends [5]</string>

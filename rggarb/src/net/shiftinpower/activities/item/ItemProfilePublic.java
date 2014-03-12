@@ -6,7 +6,7 @@ import java.util.LinkedHashSet;
 import net.shiftinpower.activities.ItemAddStepOnePhotos;
 import net.shiftinpower.asynctasks.GetItemDataFromServerAsync;
 import net.shiftinpower.core.C;
-import net.shiftinpower.core.RggarbSlidingMenu;
+import net.shiftinpower.core.KatwalkSlidingMenu;
 import net.shiftinpower.customviews.SquareImageView;
 import net.shiftinpower.interfaces.OnGetItemDataListener;
 import net.shiftinpower.koldrain.R;
@@ -23,14 +23,12 @@ import net.shiftinpower.objects.ItemBasic;
 import net.shiftinpower.utilities.Transporter;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDataListener {
+public class ItemProfilePublic extends KatwalkSlidingMenu implements OnGetItemDataListener {
 
 	// Set up XML View Components
 	private TextView tvItemProfileItemName;
@@ -75,6 +73,7 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 	private ArrayList<String> itemPlacesUrls;
 	private int[] necessaryImageViews;
 	private int[] necessaryUserImageViews;
+	private ArrayList<SquareImageView> imageViewsWhoseBitmapsShouldBeRecycled = new ArrayList<SquareImageView>();
 
 	// Constructor needed because of the way the super class works
 	public ItemProfilePublic() {
@@ -109,18 +108,18 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 
 		// Set fonts
 		try {
-			tvItemProfileItemName.setTypeface(font2);
-			tvItemProfileBrandName.setTypeface(font1);
-			tvItemProfilePhotosValue.setTypeface(font2);
-			tvItemProfileAveragePriceValue.setTypeface(font2);
-			tvItemProfileRatingValue.setTypeface(font2);
-			tvItemProfileFollowedByValue.setTypeface(font2);
-			tvItemProfileOwnedByUsersValue.setTypeface(font2);
-			tvItemProfileOwnedByFriendsValue.setTypeface(font2);
-			tvItemProfileOfferedAtPlacesValue.setTypeface(font2);
-			tvItemProfileUsersSellingTheirItemsValue.setTypeface(font2);
-			tvItemProfileCommentsValue.setTypeface(font2);
-			tvItemProfileSimilarItemsValue.setTypeface(font2);
+			tvItemProfileItemName.setTypeface(katwalk.font2);
+			tvItemProfileBrandName.setTypeface(katwalk.font1);
+			tvItemProfilePhotosValue.setTypeface(katwalk.font2);
+			tvItemProfileAveragePriceValue.setTypeface(katwalk.font2);
+			tvItemProfileRatingValue.setTypeface(katwalk.font2);
+			tvItemProfileFollowedByValue.setTypeface(katwalk.font2);
+			tvItemProfileOwnedByUsersValue.setTypeface(katwalk.font2);
+			tvItemProfileOwnedByFriendsValue.setTypeface(katwalk.font2);
+			tvItemProfileOfferedAtPlacesValue.setTypeface(katwalk.font2);
+			tvItemProfileUsersSellingTheirItemsValue.setTypeface(katwalk.font2);
+			tvItemProfileCommentsValue.setTypeface(katwalk.font2);
+			tvItemProfileSimilarItemsValue.setTypeface(katwalk.font2);
 		} catch (Exception e) {
 			// Nothing can be done here
 			e.printStackTrace();
@@ -132,6 +131,13 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 		new GetItemDataFromServerAsync(this, this, userItem.getItemId(), currentlyLoggedInUser).execute();
 
 	} // End of onCreate
+	
+	@Override
+	protected void onPause() {
+		super.onPause();
+		recycleViewsDrawables(imageViewsWhoseBitmapsShouldBeRecycled);
+		finish();
+	}
 
 	@Override
 	public void onGetItemDataSuccess(ItemExtended itemParameters) {
@@ -231,7 +237,7 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 		}
 
 		// An item cannot be added if there is no at least one image, so we always have the first image
-		imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[0], iItemProfileImageSlotOne);
+		katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[0], iItemProfileImageSlotOne);
 		
 		int[] initialImageViews = { R.id.iItemProfileImageSlotTwo, R.id.iItemProfileImageSlotThree, R.id.iItemProfileImageSlotFour,
 				R.id.iItemProfileImageSlotFive };
@@ -243,7 +249,7 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 			fetchableImageView.setVisibility(View.VISIBLE);
 			if (!imageUrls[x + 1].contentEquals("null")) {
 
-				imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[x + 1], fetchableImageView);
+				katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[x + 1], fetchableImageView);
 			}
 
 		}
@@ -263,9 +269,10 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 			if (a < initialUserAvatarViewsCount) {
 				SquareImageView fetchableImageView = (SquareImageView) findViewById(initialUserAvatarViews.get(a));
 				fetchableImageView.setVisibility(View.VISIBLE);
+				imageViewsWhoseBitmapsShouldBeRecycled.add(fetchableImageView);
 				if (!itemUser.getUserAvatar().contentEquals("null")) {
 
-					imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_USERS_FOLDER_THUMBNAIL + itemUser.getUserAvatar(), fetchableImageView);
+					katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_USERS_FOLDER_THUMBNAIL + itemUser.getUserAvatar(), fetchableImageView);
 				}
 				a++;
 			}
@@ -298,10 +305,11 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 			for (int b = 0, c = 0; b < initialFriendAvatarViews.size() && c < friendsAvatarsUrls.size(); c++, b++) {
 
 				SquareImageView fetchableImageView = (SquareImageView) findViewById(initialFriendAvatarViews.get(b));
+				imageViewsWhoseBitmapsShouldBeRecycled.add(fetchableImageView);
 				fetchableImageView.setVisibility(View.VISIBLE);
 				if (!friendsAvatarsUrls.get(b).contentEquals("null")) {
 
-					imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_USERS_FOLDER_THUMBNAIL + friendsAvatarsUrls.get(b), fetchableImageView);
+					katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_USERS_FOLDER_THUMBNAIL + friendsAvatarsUrls.get(b), fetchableImageView);
 				}
 
 			}
@@ -328,10 +336,11 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 		for (Place itemPlace : itemPlaces) {
 			if (c < initialPlaceAvatarViewsCount) {
 				SquareImageView fetchableImageView = (SquareImageView) findViewById(initialPlaceAvatarViews.get(c));
+				imageViewsWhoseBitmapsShouldBeRecycled.add(fetchableImageView);
 				fetchableImageView.setVisibility(View.VISIBLE);
 				if (!itemPlace.getPlaceAvatar().contentEquals("null")) {
 
-					imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_PLACES_FOLDER_THUMBNAIL + itemPlace.getPlaceAvatar(), fetchableImageView);
+					katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_PLACES_FOLDER_THUMBNAIL + itemPlace.getPlaceAvatar(), fetchableImageView);
 				}
 
 				c++;
@@ -381,7 +390,7 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 			}
 		});
 
-	}
+	} //End of onGetItemDataSuccess
 
 	@Override
 	public void onGetItemDataFailure() {

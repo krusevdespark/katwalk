@@ -1,8 +1,11 @@
 package net.shiftinpower.core;
 
+import java.util.ArrayList;
+
 import net.shiftinpower.activities.MainActivity;
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.localsqlitedb.DBTools;
+import net.shiftinpower.objects.Category;
 import net.shiftinpower.objects.UserExtended;
 import net.shiftinpower.utilities.HashPassword;
 import net.shiftinpower.utilities.PhotoHandler;
@@ -17,6 +20,8 @@ import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
@@ -35,7 +40,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
  * currentlyLoggedInUserID will be accessible from all inheriting activities This class also holds widely used Utility Class
  * references, such as the custom made ToastMaker and also PhotoHandler
  */
-public class RggarbCore extends SlidingFragmentActivity {
+public class KatwalkCore extends SlidingFragmentActivity {
 
 	// Variables holding various data
 	protected String userStatus;
@@ -61,6 +66,8 @@ public class RggarbCore extends SlidingFragmentActivity {
 	protected double userMoneySpentOnItems;
 	protected boolean userHasProvidedOwnPhoto;
 	
+	public KatwalkApplication katwalk;
+
 	protected UserExtended instanceOfTheCurrentUser;
 
 	// Shared Preferences
@@ -70,24 +77,7 @@ public class RggarbCore extends SlidingFragmentActivity {
 	protected int currentlyLoggedInUser;
 	protected boolean userLoggedInState = false; // false by default
 
-	// Custom class to display toasts
-	protected ToastMaker toastMaker = new ToastMaker();
 
-	// This class hashes passwords
-	protected HashPassword hashPassword = new HashPassword();
-
-	// SQLite Database Handler
-	protected DBTools dbTools;
-	
-	// Declare the Universal Image Loader for lazy load of images
-	public ImageLoader imageLoader;
-
-	// Fonts
-	protected Typeface font1;
-	protected Typeface font2;
-
-	// Photo Handler custom class containing several methods that deal with images
-	protected PhotoHandler photoHandler = new PhotoHandler(this);
 
 	protected void setUserAvatarPath(String userAvatarPath) {
 		this.userAvatarPath = userAvatarPath;
@@ -180,14 +170,9 @@ public class RggarbCore extends SlidingFragmentActivity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		dbTools = DBTools.getInstance(this);
-		
-        // Create global configuration and initialize ImageLoader with this configuration
-		// https://github.com/nostra13/Android-Universal-Image-Loader
-        ImageLoaderConfiguration imageLoaderConfiguration = new ImageLoaderConfiguration.Builder(getApplicationContext()).build();
-		imageLoader = ImageLoader.getInstance();
-		imageLoader.init(imageLoaderConfiguration);
-		
+		// Get an instance of the application
+		katwalk = (KatwalkApplication) getApplication();
+
 		// Get an instance of the current user
 		instanceOfTheCurrentUser = Transporter.instance().instanceOfTheCurrentUser;
 
@@ -222,7 +207,7 @@ public class RggarbCore extends SlidingFragmentActivity {
 		userHasRegisteredViaFacebook = sharedPreferences.getBoolean("userHasRegisteredViaFacebook", false);
 
 		if (!StorageStatusChecker.isExternalStorageAvailable()) {
-			toastMaker.toast(net.shiftinpower.core.RggarbCore.this, C.Errorz.DISCONNECT_STORAGE_FIRST, Toast.LENGTH_SHORT);
+			katwalk.toastMaker.toast(net.shiftinpower.core.KatwalkCore.this, C.Errorz.DISCONNECT_STORAGE_FIRST, Toast.LENGTH_SHORT);
 			finish();
 		}
 
@@ -236,14 +221,6 @@ public class RggarbCore extends SlidingFragmentActivity {
 			finish();
 		}
 
-		// Setting up fonts
-		try {
-			font1 = Typeface.createFromAsset(getApplicationContext().getAssets(), C.Fontz.FONT_1);
-			font2 = Typeface.createFromAsset(getApplicationContext().getAssets(), C.Fontz.FONT_2);
-		} catch (Exception e) {
-			e.printStackTrace();
-			// Nothing can be done here
-		}
 
 	} // End of onCreate
 
@@ -321,32 +298,32 @@ public class RggarbCore extends SlidingFragmentActivity {
 		}
 		return (int) l;
 	}
-	
-	protected void setUserImageToImageView(ImageView imageView, String imagePath, String sex){
+
+	protected void setUserImageToImageView(ImageView imageView, String imagePath, String sex) {
 		Bitmap imageBitmap;
-		
+
 		if (!imagePath.contentEquals(C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE) || !imagePath.contentEquals("") && imagePath != null) {
-			
+
 			try {
-				imageBitmap= BitmapFactory.decodeFile(imagePath);
+				imageBitmap = BitmapFactory.decodeFile(imagePath);
 				imageView.setImageBitmap(imageBitmap);
-				
+
 			} catch (OutOfMemoryError ex) {
 				ex.printStackTrace();
-				imageBitmap = photoHandler.getBitmapAndResizeIt(imagePath);
+				imageBitmap = katwalk.photoHandler.getBitmapAndResizeIt(imagePath);
 				imageView.setImageBitmap(imageBitmap);
-				
+
 			} catch (Exception ex) {
 				ex.printStackTrace();
-				
+
 				if (sex.equalsIgnoreCase("male")) {
 					imageView.setImageResource(R.drawable.images_default_avatar_male);
 				} else {
 					imageView.setImageResource(R.drawable.images_default_avatar_female);
 				}
-				
+
 			}
-			
+
 		} else {
 			if (sex.equalsIgnoreCase("male")) {
 				imageView.setImageResource(R.drawable.images_default_avatar_male);
@@ -355,5 +332,28 @@ public class RggarbCore extends SlidingFragmentActivity {
 			}
 		}
 	} // End of setUserImageToImageView
+
+	public <T extends ImageView> void recycleViewsDrawables(ArrayList<T> imageViews) {
+
+		for (T t : imageViews) {
+			Drawable drawable = t.getDrawable();
+			if (drawable instanceof BitmapDrawable) {
+				BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+				Bitmap bitmap = bitmapDrawable.getBitmap();
+				bitmap.recycle();
+			}
+		}
+	}
+
+	public void recycleViewsDrawables(ImageView imageView) {
+
+		Drawable drawable = imageView.getDrawable();
+		if (drawable instanceof BitmapDrawable) {
+			BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+			Bitmap bitmap = bitmapDrawable.getBitmap();
+			bitmap.recycle();
+		}
+
+	}
 
 } // End of Class

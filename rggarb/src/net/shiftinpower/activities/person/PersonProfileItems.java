@@ -2,20 +2,14 @@ package net.shiftinpower.activities.person;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
-import java.util.concurrent.ExecutionException;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-
 import net.shiftinpower.activities.ItemAddStepOnePhotos;
 import net.shiftinpower.adapters.MyProfileItemAdapter;
 import net.shiftinpower.core.*;
 import net.shiftinpower.interfaces.OnGetCategoriesListener;
-import net.shiftinpower.interfaces.OnGetSubcategoriesListener;
 import net.shiftinpower.interfaces.OnGetUserItemsListener;
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.localsqlitedb.*;
 import net.shiftinpower.objects.ItemCategory;
-import net.shiftinpower.objects.ItemSubcategory;
 import net.shiftinpower.objects.ItemBasic;
 import net.shiftinpower.utilities.LoadSpinnerData;
 import android.content.Intent;
@@ -24,9 +18,7 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.Button;
 import android.widget.EditText;
@@ -36,7 +28,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class PersonProfileItems extends RggarbSlidingMenu implements OnGetUserItemsListener, OnGetCategoriesListener {
+public class PersonProfileItems extends KatwalkSlidingMenu implements OnGetUserItemsListener, OnGetCategoriesListener {
 
 	// XML view elements
 	private TextView tvMyItemsTitle;
@@ -67,7 +59,7 @@ public class PersonProfileItems extends RggarbSlidingMenu implements OnGetUserIt
 		super.onCreate(savedInstanceState);
 
 		// Obtain the userItems from Database
-		new GetUserItemsFromDB(PersonProfileItems.this, dbTools, currentlyLoggedInUser).execute();
+		new GetUserItemsFromDB(PersonProfileItems.this, katwalk.dbTools, currentlyLoggedInUser).execute();
 
 		// Set the XML layout
 		setContentView(R.layout.activity_layout_my_profile_items);
@@ -112,9 +104,9 @@ public class PersonProfileItems extends RggarbSlidingMenu implements OnGetUserIt
 
 		// Try setting fonts for different XML views on screen
 		try {
-			tvMyItemsTitle.setTypeface(font1);
-			tvEmptyMyProfileItems.setTypeface(font2);
-			bEmptyMyProfileItemsAddAnItem.setTypeface(font1);
+			tvMyItemsTitle.setTypeface(katwalk.font1);
+			tvEmptyMyProfileItems.setTypeface(katwalk.font2);
+			bEmptyMyProfileItemsAddAnItem.setTypeface(katwalk.font1);
 		} catch (Exception e) {
 			// Nothing can be done here
 			e.printStackTrace();
@@ -131,7 +123,7 @@ public class PersonProfileItems extends RggarbSlidingMenu implements OnGetUserIt
 		});
 
 		// Get the categories from the DB and load them into the spinner
-		new GetCategoriesFromDB(PersonProfileItems.this, PersonProfileItems.this, dbTools).execute();
+		new GetCategoriesFromDB(PersonProfileItems.this, PersonProfileItems.this, katwalk.dbTools).execute();
 
 	} // End of onCreate
 
@@ -172,10 +164,10 @@ public class PersonProfileItems extends RggarbSlidingMenu implements OnGetUserIt
 						
 						MyProfileItemAdapter myItemsItemAdapter;
 						if (selectedItemId != 99) {
-							myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, userItemsObtained, selectedItemId);
+							myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, katwalk.imageLoader, userItemsObtained, selectedItemId);
 
 						} else {
-							myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, userItemsObtained);
+							myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, katwalk.imageLoader,  userItemsObtained);
 
 						}
 						listOfItems.setAdapter(myItemsItemAdapter);
@@ -194,21 +186,21 @@ public class PersonProfileItems extends RggarbSlidingMenu implements OnGetUserIt
 
 	@Override
 	public void onGetCategoriesFailure(String reason) {
-		toastMaker.toast(net.shiftinpower.activities.person.PersonProfileItems.this, C.Errorz.CATEGORIES_NOT_LOADED_DUE_TO_UNKOWN_ERROR, Toast.LENGTH_LONG);
+		katwalk.toastMaker.toast(net.shiftinpower.activities.person.PersonProfileItems.this, C.Errorz.CATEGORIES_NOT_LOADED_DUE_TO_UNKOWN_ERROR, Toast.LENGTH_LONG);
 	}
 
 	@Override
 	public void onGetUserItemsSuccess(LinkedHashSet<ItemBasic> userItems) {
 		// Instantiate the adapter, feed the data to it via its constructor and set the listview to use it
 		userItemsObtained = userItems;
-		MyProfileItemAdapter myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, userItems);
+		MyProfileItemAdapter myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this,  katwalk.imageLoader, userItems);
 		listOfItems.setAdapter(myItemsItemAdapter);
 		
 		etMyItemsListSearch.addTextChangedListener(new TextWatcher() {
 			
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				MyProfileItemAdapter myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, userItemsObtained, s);
+				MyProfileItemAdapter myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this,  katwalk.imageLoader, userItemsObtained, s);
 				listOfItems.setAdapter(myItemsItemAdapter);
 				
 			}
@@ -230,7 +222,7 @@ public class PersonProfileItems extends RggarbSlidingMenu implements OnGetUserIt
 
 	@Override
 	public void onGetUserItemsFailure(String reason) {
-		toastMaker.toast(net.shiftinpower.activities.person.PersonProfileItems.this, C.Errorz.PROBLEM_LOADING_USER_ITEMS, Toast.LENGTH_LONG);
+		katwalk.toastMaker.toast(net.shiftinpower.activities.person.PersonProfileItems.this, C.Errorz.PROBLEM_LOADING_USER_ITEMS, Toast.LENGTH_LONG);
 
 	}
 

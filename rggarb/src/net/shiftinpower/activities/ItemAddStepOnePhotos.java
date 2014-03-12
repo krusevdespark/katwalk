@@ -3,7 +3,7 @@ package net.shiftinpower.activities;
 import java.util.LinkedHashSet;
 import net.shiftinpower.asynctasks.UploadItemPhotoFilesToServerAsync;
 import net.shiftinpower.core.C;
-import net.shiftinpower.core.RggarbSlidingMenu;
+import net.shiftinpower.core.KatwalkSlidingMenu;
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.objects.TemporaryImage;
 import net.shiftinpower.utilities.PhotoHandler;
@@ -30,7 +30,7 @@ import android.widget.Toast;
  * @author Kaloyan Roussev
  * 
  */
-public class ItemAddStepOnePhotos extends RggarbSlidingMenu {
+public class ItemAddStepOnePhotos extends KatwalkSlidingMenu {
 
 	// Set up XML View Components
 	private TextView tvAddAnItemStepOneTitle;
@@ -87,9 +87,9 @@ public class ItemAddStepOnePhotos extends RggarbSlidingMenu {
 
 		// Set the fonts
 		try {
-			tvAddAnItemStepOneTitle.setTypeface(font1);
-			tvAddAnItemStepOneSubTitle.setTypeface(font2);
-			bAddAnItemStepOneSubmit.setTypeface(font1);
+			tvAddAnItemStepOneTitle.setTypeface(katwalk.font1);
+			tvAddAnItemStepOneSubTitle.setTypeface(katwalk.font2);
+			bAddAnItemStepOneSubmit.setTypeface(katwalk.font1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			// Nothing can be done here
@@ -198,7 +198,7 @@ public class ItemAddStepOnePhotos extends RggarbSlidingMenu {
 				}
 
 				if (itemImages.size() == 0) {
-					toastMaker.toast(net.shiftinpower.activities.ItemAddStepOnePhotos.this, C.Errorz.ADDING_AN_ITEM_AT_LEAST_ONE_IMAGE_REQUIRED, Toast.LENGTH_LONG);
+					katwalk.toastMaker.toast(net.shiftinpower.activities.ItemAddStepOnePhotos.this, C.Errorz.ADDING_AN_ITEM_AT_LEAST_ONE_IMAGE_REQUIRED, Toast.LENGTH_LONG);
 				} else {
 					// Send the images to the database
 

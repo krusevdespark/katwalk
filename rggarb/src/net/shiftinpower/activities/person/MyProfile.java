@@ -61,8 +61,8 @@ public class MyProfile extends PersonProfile implements OnClickListener, OnChang
 
 				// Trying to set the fonts for the dialog buttons
 				try {
-					bChangeUserQuoteSubmit.setTypeface(font1);
-					bChangeUserQuoteCancel.setTypeface(font1);
+					bChangeUserQuoteSubmit.setTypeface(katwalk.font1);
+					bChangeUserQuoteCancel.setTypeface(katwalk.font1);
 				} catch (Exception e) {
 					// There is nothing I can do here
 				}
@@ -125,7 +125,7 @@ public class MyProfile extends PersonProfile implements OnClickListener, OnChang
 
 	@Override
 	public void onChangeUserQuoteSuccess() {
-		toastMaker.toast(net.shiftinpower.activities.person.MyProfile.this, C.Confirmationz.USER_QUOTE_SUCCESSFULLY_CHANGED, Toast.LENGTH_SHORT);
+		katwalk.toastMaker.toast(net.shiftinpower.activities.person.MyProfile.this, C.Confirmationz.USER_QUOTE_SUCCESSFULLY_CHANGED, Toast.LENGTH_SHORT);
 		changeUserQuoteDialog.dismiss();
 		setUserQuote(etChangeUserQuoteContent.getText().toString());
 		sharedPreferencesEditor = sharedPreferences.edit();
@@ -137,11 +137,11 @@ public class MyProfile extends PersonProfile implements OnClickListener, OnChang
 	@Override
 	public void onChangeUserQuoteFailure(String reason) {
 		if (reason.contentEquals(C.Tagz.BAD_REQUEST)) {
-			toastMaker.toast(net.shiftinpower.activities.person.MyProfile.this, C.Errorz.ITEM_NOT_ADDED_BAD_REQUEST_EXCUSE, Toast.LENGTH_LONG);
+			katwalk.toastMaker.toast(net.shiftinpower.activities.person.MyProfile.this, C.Errorz.ITEM_NOT_ADDED_BAD_REQUEST_EXCUSE, Toast.LENGTH_LONG);
 		} else if (reason.contentEquals(C.Tagz.DB_PROBLEM)) {
-			toastMaker.toast(net.shiftinpower.activities.person.MyProfile.this, C.Errorz.ITEM_NOT_ADDED_DB_PROBLEM_EXCUSE, Toast.LENGTH_LONG);
+			katwalk.toastMaker.toast(net.shiftinpower.activities.person.MyProfile.this, C.Errorz.ITEM_NOT_ADDED_DB_PROBLEM_EXCUSE, Toast.LENGTH_LONG);
 		} else if (reason.contentEquals(C.Tagz.UNKNOWN_PROBLEM)) {
-			toastMaker.toast(net.shiftinpower.activities.person.MyProfile.this, C.Errorz.ITEM_NOT_ADDED_UNKNOWN_PROBLEM_EXCUSE, Toast.LENGTH_LONG);
+			katwalk.toastMaker.toast(net.shiftinpower.activities.person.MyProfile.this, C.Errorz.ITEM_NOT_ADDED_UNKNOWN_PROBLEM_EXCUSE, Toast.LENGTH_LONG);
 		}
 		changeUserQuoteDialog.dismiss();
 	}

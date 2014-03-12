@@ -112,7 +112,7 @@ public class PhotoHandler {
 			fileOutputStream.flush();
 			fileOutputStream.close();
 			galleryAddPic();
-			bitmap.recycle(); // NEW
+			bitmap.recycle();
 			return true;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -138,9 +138,8 @@ public class PhotoHandler {
 		setImagePath(cursor.getString(columnIndex));
 
 		try {
-			Bitmap resizedResampledBitmap = getBitmapAndResizeIt(imagePath); // NEW
-			Bitmap rotatedBitmap = rotateBitmap(imagePath, resizedResampledBitmap); // NEW
-			resizedResampledBitmap.recycle(); // NEW
+			Bitmap resizedResampledBitmap = getBitmapAndResizeIt(imagePath);
+			Bitmap rotatedBitmap = rotateBitmap(imagePath, resizedResampledBitmap);
 			setImageBitmap(rotatedBitmap);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -149,11 +148,11 @@ public class PhotoHandler {
 
 		try {
 			FileOutputStream fileOutputStream = new FileOutputStream(createImageFile());
-			Bitmap imageBitmap = getImageBitmap(); // NEW
+			Bitmap imageBitmap = getImageBitmap();
 			imageBitmap.compress(Bitmap.CompressFormat.JPEG, C.ImageHandling.IMAGE_SENT_TO_SERVER_QUALITY_0_T0_100, fileOutputStream);
 			fileOutputStream.flush();
 			fileOutputStream.close();
-			imageBitmap.recycle(); // NEW
+			imageBitmap.recycle();
 			return true;
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -162,6 +161,8 @@ public class PhotoHandler {
 			e.printStackTrace();
 			return false;
 		}
+		
+		
 
 	} // End of handleGalleryPhoto
 
@@ -213,8 +214,10 @@ public class PhotoHandler {
 		Bitmap bitmapLarge;
 		Bitmap bitmapNormalized;
 		BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-		bitmapOptions.inJustDecodeBounds = true;
+		bitmapOptions.inDither = false;
 		bitmapOptions.inPurgeable = true;
+		bitmapOptions.inInputShareable = true;
+		bitmapOptions.inTempStorage = new byte[16 * 1024];
 
 		try {
 			bitmapLarge = BitmapFactory.decodeFile(pathName, bitmapOptions);
