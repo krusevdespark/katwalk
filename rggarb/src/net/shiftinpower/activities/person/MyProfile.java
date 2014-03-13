@@ -43,7 +43,11 @@ public class MyProfile extends PersonProfile implements OnClickListener, OnChang
 		bUserProfileActionButtonTwo.setOnClickListener(this);
 		tvUserProfileStatsAreVisibleNote.setOnClickListener(this);
 		iUserAvatar.setOnClickListener(this);
-
+		
+		if(personQuote==null || personQuote.contentEquals("")) {
+			tvUserQuote.setText(C.FallbackCopy.CLICK_HERE_TO_CHANGE_YOUR_QUOTE);
+		}
+		
 		// Add a click listener to user Quote and open a dialog so user can change it if they want to
 		tvUserQuote.setOnClickListener(new OnClickListener() {
 
@@ -71,7 +75,7 @@ public class MyProfile extends PersonProfile implements OnClickListener, OnChang
 
 					@Override
 					public void onClick(View v) {
-						setUserQuote(etChangeUserQuoteContent.getText().toString());
+						userQuote = etChangeUserQuoteContent.getText().toString().trim();
 						new ChangeUserQuoteAsync(MyProfile.this, MyProfile.this, String.valueOf(currentlyLoggedInUser), userQuote).execute();
 
 					}
@@ -113,7 +117,7 @@ public class MyProfile extends PersonProfile implements OnClickListener, OnChang
 		case R.id.iUserAvatar:
 			// When the user clicks their avatar they should see a dialog with options to remove it or upload a new one.
 			Intent changeAvatarDialog = new Intent(MyProfile.this, ProvideImageDialog.class);
-			changeAvatarDialog.putExtra(C.ImageHandling.INTENT_EXTRA_IMAGE_PATH_KEY, userAvatarPath);
+			changeAvatarDialog.putExtra(C.ImageHandling.INTENT_EXTRA_IMAGE_PATH_KEY, personAvatarPath);
 			startActivityForResult(changeAvatarDialog, C.ImageHandling.REQUEST_CODE_CHANGE_IMAGE);
 			break;
 
@@ -127,11 +131,11 @@ public class MyProfile extends PersonProfile implements OnClickListener, OnChang
 	public void onChangeUserQuoteSuccess() {
 		katwalk.toastMaker.toast(net.shiftinpower.activities.person.MyProfile.this, C.Confirmationz.USER_QUOTE_SUCCESSFULLY_CHANGED, Toast.LENGTH_SHORT);
 		changeUserQuoteDialog.dismiss();
-		setUserQuote(etChangeUserQuoteContent.getText().toString());
+		userQuote = etChangeUserQuoteContent.getText().toString().trim();
 		sharedPreferencesEditor = sharedPreferences.edit();
 		sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_QUOTE, userQuote);
 		sharedPreferencesEditor.commit();
-		tvUserQuote.setText(etChangeUserQuoteContent.getText().toString());
+		tvUserQuote.setText(etChangeUserQuoteContent.getText().toString().trim());
 	}
 
 	@Override
@@ -157,7 +161,9 @@ public class MyProfile extends PersonProfile implements OnClickListener, OnChang
 		super.onActivityResult(requestCode, resultCode, data);
 
 		if (resultCode != RESULT_CANCELED) {
+			
 			userAvatarPath = data.getStringExtra(C.ImageHandling.INTENT_EXTRA_IMAGE_PATH_KEY);
+			
 			if (!(userAvatarPath.contentEquals(C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE))) {
 				userHasProvidedOwnPhoto = true;
 			} else {
@@ -168,6 +174,9 @@ public class MyProfile extends PersonProfile implements OnClickListener, OnChang
 			sharedPreferencesEditor = sharedPreferences.edit();
 			sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_AVATAR_PATH, userAvatarPath);
 			sharedPreferencesEditor.commit();
+			
+			// This method should be called after every change to sharedPreferences
+			getUserDataFromSharedPreferencesAndAssignItToJavaObjects();
 
 			if (!userHasProvidedOwnPhoto) {
 				// Remove user's avatar from the server
@@ -186,7 +195,11 @@ public class MyProfile extends PersonProfile implements OnClickListener, OnChang
 			// superclass
 			// Activity restart is needed because we need to rebuild the Sliding Menu in order for it to obtain the new image
 			// in the Sliding Menu Header
-			restartActivity();
+			//restartActivity();
+			
+			Intent myProfile = new Intent(MyProfile.this, MyProfile.class);
+			myProfile.putExtra("currentUser", true);
+			startActivity(myProfile);
 		}
 
 	} // End of onActivityResult

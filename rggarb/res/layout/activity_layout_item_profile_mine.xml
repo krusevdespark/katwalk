@@ -25,7 +25,6 @@
                 android:id="@+id/iItemProfilePrivateImageSlotOne"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:adjustViewBounds="true"
                 android:contentDescription="@string/iItemProfileImageDescription"
                 android:scaleType="centerCrop"
                 android:src="@drawable/images_default_product" />
@@ -43,7 +42,6 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:adjustViewBounds="true"
                     android:contentDescription="@string/iItemProfileImageDescription"
                     android:scaleType="centerCrop"
                     android:src="@drawable/images_default_product"
@@ -54,7 +52,6 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:adjustViewBounds="true"
                     android:contentDescription="@string/iItemProfileImageDescription"
                     android:scaleType="centerCrop"
                     android:src="@drawable/images_default_product"
@@ -65,7 +62,6 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:adjustViewBounds="true"
                     android:contentDescription="@string/iItemProfileImageDescription"
                     android:scaleType="centerCrop"
                     android:src="@drawable/images_default_product"
@@ -76,7 +72,6 @@
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:adjustViewBounds="true"
                     android:contentDescription="@string/iItemProfileImageDescription"
                     android:scaleType="centerCrop"
                     android:src="@drawable/images_default_product"
@@ -217,7 +212,7 @@
                 android:gravity="center"
                 android:text="@string/tvItemProfilePrivateGottenFromPlaceUserName"
                 android:textColor="@android:color/white"
-                android:textSize="18sp" 
+                android:textSize="18sp"
                 android:visibility="gone" />
 
             <Button

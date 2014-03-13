@@ -28,7 +28,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class ItemProfilePublic extends KatwalkSlidingMenu implements OnGetItemDataListener {
+public class ItemProfilePublic extends KatwalkSlidingMenu {
 
 	// Set up XML View Components
 	private TextView tvItemProfileItemName;
@@ -55,6 +55,7 @@ public class ItemProfilePublic extends KatwalkSlidingMenu implements OnGetItemDa
 
 	// Variables holding data
 	private int itemId;
+	private ItemExtended itemExtended;
 	private ItemBasic itemBasic;
 	private Brand brand;
 	private LinkedHashSet<Image> itemImages;
@@ -125,34 +126,18 @@ public class ItemProfilePublic extends KatwalkSlidingMenu implements OnGetItemDa
 			e.printStackTrace();
 		}
 
-		// Obtain the itemId from the intent that started this activity
-		ItemBasic userItem = Transporter.instance().userItem;
-
-		new GetItemDataFromServerAsync(this, this, userItem.getItemId(), currentlyLoggedInUser).execute();
-
-	} // End of onCreate
-	
-	@Override
-	protected void onPause() {
-		super.onPause();
-		recycleViewsDrawables(imageViewsWhoseBitmapsShouldBeRecycled);
-		finish();
-	}
-
-	@Override
-	public void onGetItemDataSuccess(ItemExtended itemParameters) {
-
 		// Unpack the data
-		itemBasic = itemParameters.getItemBasic();
-		brand = itemParameters.getBrand();
-		itemImages = itemParameters.getItemImages();
-		itemCategories = itemParameters.getItemCategories();
-		itemSubcategories = itemParameters.getItemSubcategories();
-		itemUsers = itemParameters.getItemUsers();
-		itemPlaces = itemParameters.getItemPlaces();
-		itemComments = itemParameters.getItemComments();
-		itemRatings = itemParameters.getItemRatings();
-		itemFollowers = itemParameters.getItemFollowers();
+		itemExtended = Transporter.instance().itemExtended;
+		itemBasic = itemExtended.getItemBasic();
+		brand = itemExtended.getBrand();
+		itemImages = itemExtended.getItemImages();
+		itemCategories = itemExtended.getItemCategories();
+		itemSubcategories = itemExtended.getItemSubcategories();
+		itemUsers = itemExtended.getItemUsers();
+		itemPlaces = itemExtended.getItemPlaces();
+		itemComments = itemExtended.getItemComments();
+		itemRatings = itemExtended.getItemRatings();
+		itemFollowers = itemExtended.getItemFollowers();
 
 		// Calculate average price
 		// TODO int averagePrice = //
@@ -238,7 +223,7 @@ public class ItemProfilePublic extends KatwalkSlidingMenu implements OnGetItemDa
 
 		// An item cannot be added if there is no at least one image, so we always have the first image
 		katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[0], iItemProfileImageSlotOne);
-		
+
 		int[] initialImageViews = { R.id.iItemProfileImageSlotTwo, R.id.iItemProfileImageSlotThree, R.id.iItemProfileImageSlotFour,
 				R.id.iItemProfileImageSlotFive };
 
@@ -390,12 +375,13 @@ public class ItemProfilePublic extends KatwalkSlidingMenu implements OnGetItemDa
 			}
 		});
 
-	} //End of onGetItemDataSuccess
+	} // End of onCreate
 
 	@Override
-	public void onGetItemDataFailure() {
-		// TODO USE THE ITEM BASIC AND APOLOGIZE FOR THE INCONVENIENCE
-
+	protected void onPause() {
+		super.onPause();
+		katwalk.recycleViewsDrawables(imageViewsWhoseBitmapsShouldBeRecycled);
+		finish();
 	}
 
 } // End of Class

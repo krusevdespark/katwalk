@@ -3,6 +3,7 @@ package net.shiftinpower.utilities;
 import java.util.LinkedHashSet;
 
 import net.shiftinpower.objects.ItemCategory;
+import net.shiftinpower.objects.ItemExtended;
 import net.shiftinpower.objects.ItemSubcategory;
 import net.shiftinpower.objects.TemporaryImage;
 import net.shiftinpower.objects.ItemBasic;
@@ -34,8 +35,8 @@ public class Transporter {
 	public LinkedHashSet<ItemCategory> itemCategories;
 	public LinkedHashSet<ItemSubcategory> itemSubcategories;
 	public ItemBasic itemBasic;
+	public ItemExtended itemExtended;
 	public UserExtended userExtended;
-	public UserExtended instanceOfTheCurrentUser;
 	public ItemBasic userItem;
 
 } // End of Class

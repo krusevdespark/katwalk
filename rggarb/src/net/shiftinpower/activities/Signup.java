@@ -203,10 +203,10 @@ public class Signup extends SherlockActivity implements OnCheckWhetherAUserWithS
 			public void onClick(View v) {
 
 				// Obtain the contents of the fields filled by the user
-				userName = etUsernameSignupPage.getText().toString();
-				userEmail = etUserEmailSignupPage.getText().toString();
-				userPassword = etUserPasswordSignupPage.getText().toString();
-				userPasswordAgain = etUserPasswordAgainSignupPage.getText().toString();
+				userName = etUsernameSignupPage.getText().toString().trim();
+				userEmail = etUserEmailSignupPage.getText().toString().trim();
+				userPassword = etUserPasswordSignupPage.getText().toString().trim();
+				userPasswordAgain = etUserPasswordAgainSignupPage.getText().toString().trim();
 
 				// The User MUST Agree to the Terms of Use in Order to Continue
 				if (cbUserAgreesWithTermsOfUse.isChecked()) {
@@ -341,7 +341,7 @@ public class Signup extends SherlockActivity implements OnCheckWhetherAUserWithS
 			}
 
 			// Validate userPasswordAgain
-			userPasswordAgain = etUserPasswordAgainSignupPage.getText().toString();
+			userPasswordAgain = etUserPasswordAgainSignupPage.getText().toString().trim();
 
 			if (userPasswordAgain.equals("")) {
 				toastText += "User Password - " + C.Errorz.FIELD_NOT_FILLED + "\n\n";

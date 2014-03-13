@@ -85,8 +85,8 @@ public class ContactUs extends KatwalkSlidingMenu implements OnContactUsSendEmai
 			public void onClick(View v) {
 				
 				
-				if(!isEditTextEmpty(etContactUsEnterYourMessage)){
-					contactUsEmailContent  = etContactUsEnterYourMessage.getText().toString();
+				if(!katwalk.isEditTextEmpty(etContactUsEnterYourMessage)){
+					contactUsEmailContent  = etContactUsEnterYourMessage.getText().toString().trim();
 					new ContactUsSendEmail(ContactUs.this, ContactUs.this, userEmail, contactUsEmailLineOfInquiry, contactUsEmailContent).execute();
 				} else {
 					katwalk.toastMaker.toast(net.shiftinpower.activities.ContactUs.this, C.Errorz.NO_MESSAGE_ENTERED, Toast.LENGTH_SHORT);

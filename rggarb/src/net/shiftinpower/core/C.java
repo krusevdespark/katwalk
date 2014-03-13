@@ -189,6 +189,7 @@ public final class C {
 		public static final String BOUGHT_FROM_PERSON = "Person";
 		public static final String PLACE_HAS_NO_NAME = "Unnamed Place";
 		public static final String NO_BRAND = "No Brand";
+		public static final CharSequence CLICK_HERE_TO_CHANGE_YOUR_QUOTE = "Click here to change your profile quote";
 	}
 
 	public static final class HttpResponses {
@@ -471,6 +472,9 @@ public final class C {
 		public static final String FACEBOOK_LOGIN_FAILURE = "Could not enter the app via Facebook.";
 		public static final String FORGOTTEN_PASSWORD_LINK_NOT_SENT_VIA_EMAIL = "Link to reset password page has not been sent due to a problem. Contact us at "
 				+ C.Emailz.BRAGGR_OFFICIAL_ADDRESS;
+		
+		// settings
+		public static final String NOT_ALL_FIELDS_FILLED_SETTINGS = "Please fill in all the fields properly";
 
 		// user profile
 		public static final String QUOTE_LENGTH_EXCEEDED = "Quote Length Cannot BeMore Than" + C.CharacterLimitations.USER_QUOTE_MAXIMUM_LENGTH;

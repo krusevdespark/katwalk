@@ -1,44 +1,22 @@
 package net.shiftinpower.core;
 
-import java.util.ArrayList;
-
 import net.shiftinpower.activities.MainActivity;
-import net.shiftinpower.koldrain.R;
-import net.shiftinpower.localsqlitedb.DBTools;
-import net.shiftinpower.objects.Category;
-import net.shiftinpower.objects.UserExtended;
-import net.shiftinpower.utilities.HashPassword;
-import net.shiftinpower.utilities.PhotoHandler;
 import net.shiftinpower.utilities.StorageStatusChecker;
-import net.shiftinpower.utilities.ToastMaker;
-import net.shiftinpower.utilities.Transporter;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Bundle;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.Toast;
-
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
-import com.nostra13.universalimageloader.core.ImageLoader;
-import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 
 /**
  * This is the top-level class, the Central Headquarters. RggarbActionBar inherits from here, RggarbSlidingMenu inherits from
  * RggarbActionBar and all activities inherit from there on. This class is responsible for holding the user data, obtained
  * from the InitialDataLoader, stored in a SharedPreferences file and a local SQL This way variables like
- * currentlyLoggedInUserID will be accessible from all inheriting activities This class also holds widely used Utility Class
- * references, such as the custom made ToastMaker and also PhotoHandler
+ * currentlyLoggedInUserID will be accessible from all inheriting activities.
+ * 
+ * This class provides some common lifecycle functionality for all the activities that inherit from it
  */
 public class KatwalkCore extends SlidingFragmentActivity {
 
@@ -65,10 +43,8 @@ public class KatwalkCore extends SlidingFragmentActivity {
 	protected int userActivityCount;
 	protected double userMoneySpentOnItems;
 	protected boolean userHasProvidedOwnPhoto;
-	
-	public KatwalkApplication katwalk;
 
-	protected UserExtended instanceOfTheCurrentUser;
+	public KatwalkApplication katwalk;
 
 	// Shared Preferences
 	protected Editor sharedPreferencesEditor;
@@ -77,142 +53,29 @@ public class KatwalkCore extends SlidingFragmentActivity {
 	protected int currentlyLoggedInUser;
 	protected boolean userLoggedInState = false; // false by default
 
-
-
-	protected void setUserAvatarPath(String userAvatarPath) {
-		this.userAvatarPath = userAvatarPath;
-	}
-
-	protected void setUserAvatarPathOnServer(String userAvatarPathOnServer) {
-		this.userAvatarPathOnServer = userAvatarPathOnServer;
-	}
-
-	protected void setUserStatusVariable(String userStatus) {
-		this.userStatus = userStatus;
-	}
-
-	protected void setUserName(String userName) {
-		this.userName = userName;
-
-	}
-
-	protected void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
-	}
-
-	protected void setUserSex(String userSex) {
-		this.userSex = userSex;
-
-	}
-
-	protected void setUserQuote(String userQuote) {
-		this.userQuote = userQuote;
-	}
-
-	protected void setUserPoints(int userPoints) {
-		this.userPoints = userPoints;
-	}
-
-	protected void setUserPassword(String userPassword) {
-		this.userPassword = userPassword;
-
-	}
-
-	protected void setUserShowsMoney(boolean userShowsMoney) {
-		this.userShowsMoney = userShowsMoney;
-
-	}
-
-	protected void setUserShowsStats(boolean userShowsStats) {
-		this.userShowsStats = userShowsStats;
-
-	}
-
-	protected void setUserAcceptsMessages(String userAcceptsMessages) {
-		this.userAcceptsMessages = userAcceptsMessages;
-
-	}
-
-	protected void setUserInteractsWithActivities(String userInteractsWithActivities) {
-		this.userInteractsWithActivities = userInteractsWithActivities;
-
-	}
-
-	protected void setUserMoneySpentOnItems(double userMoneySpentOnItems) {
-		this.userMoneySpentOnItems = userMoneySpentOnItems;
-	}
-
-	protected void setUserItemsCount(int userItemsCount) {
-		this.userItemsCount = userItemsCount;
-	}
-
-	protected void setUserCommentsCount(int userCommentsCount) {
-		this.userCommentsCount = userCommentsCount;
-	}
-
-	protected void setUserFollowingItemsCount(int userFollowingItemsCount) {
-		this.userFollowingItemsCount = userFollowingItemsCount;
-	}
-
-	protected void setUserFriendsCount(int userFriendsCount) {
-		this.userFriendsCount = userFriendsCount;
-	}
-
-	protected void setUserGalleryPhotosCount(int userGalleryPhotosCount) {
-		this.userGalleryPhotosCount = userGalleryPhotosCount;
-	}
-
-	protected void setUserActivityCount(int userActivityCount) {
-		this.userActivityCount = userActivityCount;
-	}
-
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		// Get an instance of the application
+		// Get an instance of the application in order for this and all other activities to get acess to the global variables
+		// and utilities
 		katwalk = (KatwalkApplication) getApplication();
 
-		// Get an instance of the current user
-		instanceOfTheCurrentUser = Transporter.instance().instanceOfTheCurrentUser;
-
-		// InitialDataLoader has pulled all this data from the server and stored
-		// it in SharedPreferences for fast access. Now we are retrieving it
+		// InitialDataLoader has pulled all this data from the server and stored it in SharedPreferences for fast access. Now
+		// we are retrieving it
 		sharedPreferences = getApplicationContext().getSharedPreferences(APP_SHARED_PREFS, Context.MODE_PRIVATE);
-		currentlyLoggedInUser = sharedPreferences.getInt("currentLoggedInUserId", 0);
-		setUserName(sharedPreferences.getString(C.SharedPreferencesItems.USER_NAME, ""));
-		setUserEmail(sharedPreferences.getString(C.SharedPreferencesItems.USER_EMAIL, ""));
-		setUserPassword(sharedPreferences.getString(C.SharedPreferencesItems.USER_PASSWORD, ""));
-		setUserSex(sharedPreferences.getString(C.SharedPreferencesItems.USER_SEX, ""));
-		setUserAvatarPath(sharedPreferences.getString(C.SharedPreferencesItems.USER_AVATAR_PATH, C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE));
-		setUserQuote(sharedPreferences.getString(C.SharedPreferencesItems.USER_QUOTE, ""));
-		setUserPoints(sharedPreferences.getInt(C.SharedPreferencesItems.USER_POINTS, 0));
-		setUserShowsMoney(sharedPreferences.getBoolean(C.SharedPreferencesItems.USER_SHOWS_MONEY, true));
-		setUserShowsStats(sharedPreferences.getBoolean(C.SharedPreferencesItems.USER_SHOWS_STATS, true));
-		setUserAcceptsMessages(sharedPreferences.getString(C.SharedPreferencesItems.USER_ACCEPTS_MESSAGES, C.Miscellaneous.USER_RESTRICTION_LEVEL_NO));
-		setUserInteractsWithActivities(sharedPreferences.getString(C.SharedPreferencesItems.USER_INTERACTS_WITH_ACTIVITIES,
-				C.Miscellaneous.USER_RESTRICTION_LEVEL_NO));
-		setUserItemsCount(sharedPreferences.getInt(C.SharedPreferencesItems.USER_ITEMS_COUNT, 0));
-		setUserCommentsCount(sharedPreferences.getInt(C.SharedPreferencesItems.USER_COMMENTS_COUNT, 0));
-		setUserFollowingItemsCount(sharedPreferences.getInt(C.SharedPreferencesItems.USER_FOLLOWING_ITEMS_COUNT, 0));
-		setUserFriendsCount(sharedPreferences.getInt(C.SharedPreferencesItems.USER_FRIENDS_COUNT, 0));
-		setUserGalleryPhotosCount(sharedPreferences.getInt(C.SharedPreferencesItems.USER_GALLERY_PHOTOS_COUNT, 0));
-		setUserActivityCount(sharedPreferences.getInt(C.SharedPreferencesItems.USER_ACTIVITY_COUNT, 0));
-		long userMoneySpentOnItemsLong = sharedPreferences.getLong(C.SharedPreferencesItems.USER_MONEY_SPENT_ON_ITEMS, 0);
-		setUserMoneySpentOnItems(Double.longBitsToDouble(userMoneySpentOnItemsLong));
+
+		// This method should also be called after every change to sharedPreferences
+		getUserDataFromSharedPreferencesAndAssignItToJavaObjects();
 
 		if ((userAvatarPath != null) && (!userAvatarPath.contentEquals(C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE)) && (!userAvatarPath.contentEquals(""))) {
 			userHasProvidedOwnPhoto = true;
 		}
-		userHasRegisteredViaFacebook = sharedPreferences.getBoolean("userHasRegisteredViaFacebook", false);
 
 		if (!StorageStatusChecker.isExternalStorageAvailable()) {
 			katwalk.toastMaker.toast(net.shiftinpower.core.KatwalkCore.this, C.Errorz.DISCONNECT_STORAGE_FIRST, Toast.LENGTH_SHORT);
 			finish();
 		}
-
-		sharedPreferences = getApplicationContext().getSharedPreferences(APP_SHARED_PREFS, Context.MODE_PRIVATE);
-		userLoggedInState = sharedPreferences.getBoolean("userLoggedInState", false);
 
 		if (!userLoggedInState) {
 			Intent intent = new Intent(this, MainActivity.class);
@@ -221,7 +84,6 @@ public class KatwalkCore extends SlidingFragmentActivity {
 			finish();
 		}
 
-
 	} // End of onCreate
 
 	@Override
@@ -229,7 +91,7 @@ public class KatwalkCore extends SlidingFragmentActivity {
 
 		// If the user cant access the internet, they cant use the app so we log them out and
 		// If they try to login they will get a toast saying they need to connect to the internet beforehand
-		if (!canUserAccessTheInternet()) {
+		if (!katwalk.canUserAccessTheInternet()) {
 			sharedPreferencesEditor = sharedPreferences.edit();
 			sharedPreferencesEditor.putBoolean("userLoggedInState", false);
 			sharedPreferencesEditor.putInt("currentLoggedInUserId", 0);
@@ -262,98 +124,35 @@ public class KatwalkCore extends SlidingFragmentActivity {
 		super.onRestart();
 	}// End of onRestart Method
 
-	public Boolean canUserAccessTheInternet() {
-		final ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-		final NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
-		if (activeNetwork != null && activeNetwork.isConnected()) {
-			return true;
-		} else {
-			return false;
-		}
-	}
+	// This method should be called after every change to sharedPreferences
+	public void getUserDataFromSharedPreferencesAndAssignItToJavaObjects() {
 
-	@SuppressLint("NewApi")
-	public void restartActivity() {
-		int currentapiVersion = android.os.Build.VERSION.SDK_INT;
-		if (currentapiVersion >= 11) {
-			this.recreate();
-		} else {
-			Intent intent = getIntent();
-			finish();
-			startActivity(intent);
-		}
-	}
+		currentlyLoggedInUser = sharedPreferences.getInt("currentLoggedInUserId", 0);
+		userName = sharedPreferences.getString(C.SharedPreferencesItems.USER_NAME, "");
+		userEmail = sharedPreferences.getString(C.SharedPreferencesItems.USER_EMAIL, "");
+		userPassword = sharedPreferences.getString(C.SharedPreferencesItems.USER_PASSWORD, "");
+		userSex = sharedPreferences.getString(C.SharedPreferencesItems.USER_SEX, "");
+		userAvatarPath = sharedPreferences.getString(C.SharedPreferencesItems.USER_AVATAR_PATH, C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE);
+		userQuote = sharedPreferences.getString(C.SharedPreferencesItems.USER_QUOTE, "");
+		userPoints = sharedPreferences.getInt(C.SharedPreferencesItems.USER_POINTS, 0);
+		userShowsMoney = sharedPreferences.getBoolean(C.SharedPreferencesItems.USER_SHOWS_MONEY, true);
+		userShowsStats = sharedPreferences.getBoolean(C.SharedPreferencesItems.USER_SHOWS_STATS, true);
+		userAcceptsMessages = sharedPreferences.getString(C.SharedPreferencesItems.USER_ACCEPTS_MESSAGES, C.Miscellaneous.USER_RESTRICTION_LEVEL_NO);
+		userInteractsWithActivities = sharedPreferences.getString(C.SharedPreferencesItems.USER_INTERACTS_WITH_ACTIVITIES,
+				C.Miscellaneous.USER_RESTRICTION_LEVEL_NO);
+		userItemsCount = sharedPreferences.getInt(C.SharedPreferencesItems.USER_ITEMS_COUNT, 0);
+		userCommentsCount = sharedPreferences.getInt(C.SharedPreferencesItems.USER_COMMENTS_COUNT, 0);
+		userFollowingItemsCount = sharedPreferences.getInt(C.SharedPreferencesItems.USER_FOLLOWING_ITEMS_COUNT, 0);
+		userFriendsCount = sharedPreferences.getInt(C.SharedPreferencesItems.USER_FRIENDS_COUNT, 0);
+		userGalleryPhotosCount = sharedPreferences.getInt(C.SharedPreferencesItems.USER_GALLERY_PHOTOS_COUNT, 0);
+		userActivityCount = sharedPreferences.getInt(C.SharedPreferencesItems.USER_ACTIVITY_COUNT, 0);
+		long userMoneySpentOnItemsLong = sharedPreferences.getLong(C.SharedPreferencesItems.USER_MONEY_SPENT_ON_ITEMS, 0);
+		userMoneySpentOnItems = Double.longBitsToDouble(userMoneySpentOnItemsLong);
 
-	protected boolean isEditTextEmpty(EditText etText) {
-		if (etText.getText().toString().trim().length() > 0) {
-			return false;
-		} else {
-			return true;
-		}
-	}
+		userHasRegisteredViaFacebook = sharedPreferences.getBoolean("userHasRegisteredViaFacebook", false);
 
-	protected static int safeLongToInt(long l) {
-		if (l < Integer.MIN_VALUE || l > Integer.MAX_VALUE) {
-			throw new IllegalArgumentException(l + " cannot be cast to int without changing its value.");
-		}
-		return (int) l;
-	}
+		userLoggedInState = sharedPreferences.getBoolean("userLoggedInState", false);
 
-	protected void setUserImageToImageView(ImageView imageView, String imagePath, String sex) {
-		Bitmap imageBitmap;
-
-		if (!imagePath.contentEquals(C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE) || !imagePath.contentEquals("") && imagePath != null) {
-
-			try {
-				imageBitmap = BitmapFactory.decodeFile(imagePath);
-				imageView.setImageBitmap(imageBitmap);
-
-			} catch (OutOfMemoryError ex) {
-				ex.printStackTrace();
-				imageBitmap = katwalk.photoHandler.getBitmapAndResizeIt(imagePath);
-				imageView.setImageBitmap(imageBitmap);
-
-			} catch (Exception ex) {
-				ex.printStackTrace();
-
-				if (sex.equalsIgnoreCase("male")) {
-					imageView.setImageResource(R.drawable.images_default_avatar_male);
-				} else {
-					imageView.setImageResource(R.drawable.images_default_avatar_female);
-				}
-
-			}
-
-		} else {
-			if (sex.equalsIgnoreCase("male")) {
-				imageView.setImageResource(R.drawable.images_default_avatar_male);
-			} else {
-				imageView.setImageResource(R.drawable.images_default_avatar_female);
-			}
-		}
-	} // End of setUserImageToImageView
-
-	public <T extends ImageView> void recycleViewsDrawables(ArrayList<T> imageViews) {
-
-		for (T t : imageViews) {
-			Drawable drawable = t.getDrawable();
-			if (drawable instanceof BitmapDrawable) {
-				BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-				Bitmap bitmap = bitmapDrawable.getBitmap();
-				bitmap.recycle();
-			}
-		}
-	}
-
-	public void recycleViewsDrawables(ImageView imageView) {
-
-		Drawable drawable = imageView.getDrawable();
-		if (drawable instanceof BitmapDrawable) {
-			BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-			Bitmap bitmap = bitmapDrawable.getBitmap();
-			bitmap.recycle();
-		}
-
-	}
+	} // End of getUserDataFromSharedPreferencesAndAssignItToJavaObjects
 
 } // End of Class

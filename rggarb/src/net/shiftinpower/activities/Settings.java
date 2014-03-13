@@ -8,16 +8,20 @@ import android.app.Dialog;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioGroup;
@@ -65,7 +69,6 @@ public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChange
 	private String userNameInField;
 	private String userQuoteInField;
 	private boolean userNameIsOK = true;
-	private boolean oldPasswordOk = false;
 	private boolean passwordHasBeenChanged = false;
 	private boolean passwordForAccountDeletionIsCorrect = false;
 	private String passwordForAccountDeletionHashed;
@@ -73,6 +76,19 @@ public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChange
 	protected boolean userHasProvidedOwnPhoto = false;
 	private boolean userHasProvidedANewAvatar = false;
 	private boolean deleteUserItemImagesAsWell = false;
+	private boolean dataChanged = false;
+	private boolean passwordIsOK = true;
+
+	// Temporary variables used only on this screen
+	private String userNameSettingsScreen;
+	private String userSexSettingsScreen;
+	private String userPasswordSettingsScreen;
+	private String userAvatarPathSettingsScreen;
+	private String userQuoteSettingsScreen;
+	private boolean userShowsMoneySettingsScreen;
+	private boolean userShowsStatsSettingsScreen;
+	private String userAcceptsMessagesSettingsScreen;
+	private String userInteractsWithActivitiesSettingsScreen;
 
 	// Constructor needed because of the way the super class works
 	public Settings() {
@@ -119,8 +135,12 @@ public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChange
 
 		// Set hints for edit text views
 		etUserNameSettings.setText(userName);
+		userNameSettingsScreen = userName;
+
 		tvUserEmailSettings.setText(userEmail);
+
 		etUserQuoteSettings.setText(userQuote);
+		userQuoteSettingsScreen = userQuote;
 
 		// Set sex radio button checked
 		if (userSex.contentEquals("male") || userSex.contentEquals("Male")) {
@@ -128,6 +148,7 @@ public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChange
 		} else {
 			rgUserSexSettingsPage.check(R.id.rbSexFemaleSettingsPage);
 		}
+		userSexSettingsScreen = userSex;
 
 		// Set show status and money spent checked if they should be
 		if (userShowsMoney) {
@@ -135,11 +156,14 @@ public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChange
 		} else {
 			cbShowMoneySpentSettings.setChecked(false);
 		}
+		userShowsMoneySettingsScreen = userShowsMoney;
+
 		if (userShowsStats) {
 			cbShowStatsSettings.setChecked(true);
 		} else {
 			cbShowStatsSettings.setChecked(false);
 		}
+		userShowsStatsSettingsScreen = userShowsStats;
 
 		// Populate the spinners with options
 		ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.groups_of_users, R.drawable.simple_spinner_item);
@@ -152,6 +176,7 @@ public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChange
 		} else if (userInteractsWithActivities.equalsIgnoreCase(C.Miscellaneous.USER_RESTRICTION_LEVEL_FULL)) {
 			sWhoCanInteractWithYourActivitySettings.setSelection(2);
 		}
+		userInteractsWithActivitiesSettingsScreen = userInteractsWithActivities;
 
 		ArrayAdapter<CharSequence> adapter2 = ArrayAdapter.createFromResource(this, R.array.groups_of_users, R.drawable.simple_spinner_item);
 		adapter2.setDropDownViewResource(R.drawable.simple_spinner_dropdown_item);
@@ -163,13 +188,56 @@ public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChange
 		} else if (userAcceptsMessages.equalsIgnoreCase(C.Miscellaneous.USER_RESTRICTION_LEVEL_FULL)) {
 			sWhoCanSendYouMessagesSettings.setSelection(2);
 		}
+		userAcceptsMessagesSettingsScreen = userAcceptsMessages;
+
+		// Set checkbox listeners
+		cbShowStatsSettings.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+				Log.d("On Click is Actually Called", "YES");
+				dataChanged = true;
+
+				if (cbShowStatsSettings.isChecked()) {
+					
+					Log.d("On Click is Actually Called", "TRUE");
+					userShowsStatsSettingsScreen = true;
+				} else {
+					Log.d("On Click is Actually Called", "FALSE");
+					userShowsStatsSettingsScreen = false;
+				}
+			}
+		});
+
+		cbShowMoneySpentSettings.setOnClickListener(new OnClickListener() {
+
+			@Override
+			public void onClick(View v) {
+
+				dataChanged = true;
+
+				if (cbShowMoneySpentSettings.isChecked()) {
+					userShowsMoneySettingsScreen = true;
+				} else {
+					userShowsMoneySettingsScreen = false;
+				}
+			}
+		});
 
 		// Set spinner listeners
 		sWhoCanInteractWithYourActivitySettings.setOnItemSelectedListener(new OnItemSelectedListener() {
 
+			// This count is needed to prevent the onItemSelected method to fire off on itself when the activity is created
+			int count = 0;
+
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				setUserInteractsWithActivities((arg0.getItemAtPosition(arg2)).toString());
+				if (count > 0) {
+					userInteractsWithActivitiesSettingsScreen = (arg0.getItemAtPosition(arg2)).toString();
+
+					dataChanged = true;
+				}
+				count++;
 			}
 
 			@Override
@@ -179,9 +247,16 @@ public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChange
 
 		sWhoCanSendYouMessagesSettings.setOnItemSelectedListener(new OnItemSelectedListener() {
 
+			// This count is needed to prevent the onItemSelected method to fire off on itself when the activity is created
+			int count = 0;
+
 			@Override
 			public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				setUserAcceptsMessages((arg0.getItemAtPosition(arg2)).toString());
+				if (count > 0) {
+					userAcceptsMessagesSettingsScreen = (arg0.getItemAtPosition(arg2)).toString();
+					dataChanged = true;
+				}
+				count++;
 			}
 
 			@Override
@@ -192,34 +267,8 @@ public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChange
 		// Set avatar image
 		iUserAvatarSettings = (ImageButton) findViewById(R.id.iUserAvatarSettings);
 
-		if (userAvatarPath.contentEquals(C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE) || userAvatarPath.contentEquals("") || userAvatarPath == null) {
-			setUserAvatarPath(C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE);
-			if (userSex.equalsIgnoreCase("male")) {
-				iUserAvatarSettings.setImageResource(R.drawable.images_default_avatar_male);
-
-			} else {
-				iUserAvatarSettings.setImageResource(R.drawable.images_default_avatar_female);
-			}
-		} else {
-
-			try {
-				iUserAvatarSettings.setImageBitmap(BitmapFactory.decodeFile(userAvatarPath));
-				userHasProvidedOwnPhoto = true;
-
-			} catch (Exception ex) {
-				ex.printStackTrace();
-				userHasProvidedOwnPhoto = false;
-				setUserAvatarPath(C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE);
-
-				if (userSex.equalsIgnoreCase("male")) {
-					iUserAvatarSettings.setImageResource(R.drawable.images_default_avatar_male);
-
-				} else {
-					iUserAvatarSettings.setImageResource(R.drawable.images_default_avatar_female);
-				}
-			}
-
-		}
+		katwalk.setUserImageToImageView(iUserAvatarSettings, userAvatarPath, userSex);
+		userAvatarPathSettingsScreen = userAvatarPath;
 
 		iUserAvatarSettings.setOnClickListener(new OnClickListener() {
 
@@ -249,7 +298,7 @@ public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChange
 				cbDeleteAccountDeleteItemImagesAsWell = (CheckBox) deleteAccountDialog.findViewById(R.id.cbDeleteAccountDeleteItemImagesAsWell);
 				bDeleteAccountSubmit = (Button) deleteAccountDialog.findViewById(R.id.bDeleteAccountSubmit);
 				bDeleteAccountCancel = (Button) deleteAccountDialog.findViewById(R.id.bDeleteAccountCancel);
-				
+
 				// Set fonts
 				try {
 
@@ -260,7 +309,7 @@ public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChange
 					// Nothing can be done here
 					e.printStackTrace();
 				}
-				
+
 				bDeleteAccountCancel.setOnClickListener(new OnClickListener() {
 
 					@Override
@@ -288,7 +337,7 @@ public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChange
 					@Override
 					public void onClick(View v) {
 
-						passwordForAccountDeletion = etDeleteAccountPassword.getText().toString();
+						passwordForAccountDeletion = etDeleteAccountPassword.getText().toString().trim();
 						passwordForAccountDeletionHashed = katwalk.hashPassword.computeSHAHash(passwordForAccountDeletion);
 
 						if (!passwordForAccountDeletionHashed.equals(userPassword)) {
@@ -299,32 +348,40 @@ public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChange
 						// Execute the deletion from the DB and log user out
 						deleteAccountDialog.dismiss();
 						if (passwordForAccountDeletionIsCorrect) {
-							if(cbDeleteAccountDeleteItemImagesAsWell.isChecked()){
+							if (cbDeleteAccountDeleteItemImagesAsWell.isChecked()) {
 								deleteUserItemImagesAsWell = true;
 							}
-							new DeleteUserFromServerAsync(Settings.this, Settings.this, String.valueOf(currentlyLoggedInUser), userAvatarPath, deleteUserItemImagesAsWell).execute();
+							new DeleteUserFromServerAsync(Settings.this, Settings.this, String.valueOf(currentlyLoggedInUser), userAvatarPath,
+									deleteUserItemImagesAsWell).execute();
 						}
 
 					}
-					
+
 				});
-				
+
 				deleteAccountDialog.show();
-				
+
 			}
 		});// End ot delete user account handling
+
+		if (!userAvatarPath.contentEquals("") && !userAvatarPath.contentEquals(C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE)) {
+			userHasProvidedOwnPhoto = true;
+		}
 
 		rgUserSexSettingsPage.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+				dataChanged = true;
+
 				if (checkedId == R.id.rbSexFemaleSettingsPage) {
-					setUserSex("Female");
+					userSexSettingsScreen = "Female";
 					if (!userHasProvidedOwnPhoto) {
 						iUserAvatarSettings.setImageResource(R.drawable.images_default_avatar_female);
 					}
 				} else if (checkedId == R.id.rbSexMaleSettingsPage) {
-					setUserSex("Male");
+					userSexSettingsScreen = "Male";
 					if (!userHasProvidedOwnPhoto) {
 						iUserAvatarSettings.setImageResource(R.drawable.images_default_avatar_male);
 					}
@@ -338,7 +395,7 @@ public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChange
 			public void onFocusChange(View v, boolean hasFocus) {
 				if (!hasFocus) {
 
-					userNameInField = etUserNameSettings.getText().toString();
+					userNameInField = etUserNameSettings.getText().toString().trim();
 
 					if (userNameInField.length() < (C.CharacterLimitations.USERNAME_MINIMUM_LENGTH)) {
 						katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.USER_NAME_MIN_LENGTH_PROBLEM, Toast.LENGTH_SHORT);
@@ -351,135 +408,71 @@ public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChange
 						userNameIsOK = false;
 					} else {
 						userNameIsOK = true;
-						setUserName(userNameInField);
+						dataChanged = true;
+						userNameSettingsScreen = userNameInField;
 					}
 				}
 			}
 		}); // end of user name changed listener
-
-		etUserPasswordOldSettings.setOnFocusChangeListener(new OnFocusChangeListener() {
-			// check whether userpassword old hashed equals the password from
-			// the db before changing to the new one.
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if (!hasFocus) {
-					userPasswordInOldPasswordField = katwalk.hashPassword.computeSHAHash(etUserPasswordOldSettings.getText().toString());
-
-					if (etUserPasswordOldSettings.getText().toString().length() > 0) {
-						if (!userPasswordInOldPasswordField.equals(userPassword)) {
-							katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.INCORRECT_PASSWORD, Toast.LENGTH_SHORT);
-						} else {
-							oldPasswordOk = true;
-						}
-					}
-
-				}
-			}
-		}); // end of old password changed listener
-
-		etUserPasswordNewSettings.setOnFocusChangeListener(new OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if (!hasFocus) {
-					userPasswordNewInField = etUserPasswordNewSettings.getText().toString();
-					passwordHasBeenChanged = false;
-					if (userPasswordNewInField.length() > 0) {
-						if (userPasswordNewInField.length() < (C.CharacterLimitations.PASSWORD_MINIMUM_LENGTH)) {
-
-							katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.PASSWORD_MIN_LENGTH_PROBLEM, Toast.LENGTH_SHORT);
-						} else if (userPasswordNewInField.length() > (C.CharacterLimitations.PASSWORD_MAXIMUM_LENGTH)) {
-
-							katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.PASSWORD_MAX_LENGTH_EXCEEDED, Toast.LENGTH_SHORT);
-						} else if (userPasswordNewInField.equals("")) {
-							katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.FIELD_NOT_FILLED, Toast.LENGTH_SHORT);
-
-						} else {
-							passwordHasBeenChanged = true;
-						}
-					}
-				}
-			}
-		}); // end of new password changed listener
-
-		etUserPasswordNewAgainSettings.setOnFocusChangeListener(new OnFocusChangeListener() {
-			@Override
-			public void onFocusChange(View v, boolean hasFocus) {
-				if (!hasFocus) {
-					if (passwordHasBeenChanged) {
-						userPasswordNewAgainInField = etUserPasswordNewAgainSettings.getText().toString();
-						if (userPasswordNewAgainInField.equals("")) {
-							katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.FIELD_NOT_FILLED, Toast.LENGTH_SHORT);
-						}
-
-						if (!(userPasswordNewAgainInField.equals(userPasswordNewInField))) {
-							katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.PASSWORDS_DO_NOT_MATCH, Toast.LENGTH_SHORT);
-						} else {
-							if (oldPasswordOk) {
-								setUserPassword(katwalk.hashPassword.computeSHAHash(userPasswordNewAgainInField));
-							} else {
-								katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.INCORRECT_PASSWORD, Toast.LENGTH_SHORT);
-							}
-						}
-					}
-				}
-			}
-		}); // end of new password again changed listener
 
 		// User quote change handling
 		etUserQuoteSettings.setOnFocusChangeListener(new OnFocusChangeListener() {
 
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
-				userQuoteInField = etUserQuoteSettings.getText().toString();
+				userQuoteInField = etUserQuoteSettings.getText().toString().trim();
 				if (!hasFocus) {
 					if (userQuoteInField.length() > C.CharacterLimitations.USER_QUOTE_MAXIMUM_LENGTH) {
 						katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.QUOTE_LENGTH_EXCEEDED, Toast.LENGTH_SHORT);
 					} else {
-						setUserQuote(userQuoteInField);
+						userQuoteSettingsScreen = userQuoteInField;
+						dataChanged = true;
 					}
-					setUserQuote(userQuoteInField);
 				}
 			}
 		}); // end of user quote changed handling
-		
+
 		bSubmitSettingsPage.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				// get the user quote
-				userQuote = etUserQuoteSettings.getText().toString();
+				
+				validatePassword();
 
-				// check the values of the checkboxes
-				if (cbShowMoneySpentSettings.isChecked()) {
-					setUserShowsMoney(true); 
+				if (dataChanged == true) {
+
+					// If the user has dismissed the soft keypad with the back button, the validateNewPassword() wouldnt have
+					// been called, se we check again
+					
+
+					if (userNameIsOK && passwordIsOK) {
+
+						sharedPreferencesEditor = sharedPreferences.edit();
+						sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_NAME, userNameSettingsScreen);
+						sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_SEX, userSexSettingsScreen);
+						sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_PASSWORD, userPasswordSettingsScreen);
+						sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_AVATAR_PATH, userAvatarPathSettingsScreen);
+						sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_QUOTE, userQuoteSettingsScreen);
+						sharedPreferencesEditor.putBoolean(C.SharedPreferencesItems.USER_SHOWS_MONEY, userShowsMoneySettingsScreen);
+						sharedPreferencesEditor.putBoolean(C.SharedPreferencesItems.USER_SHOWS_STATS, userShowsStatsSettingsScreen);
+						sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_ACCEPTS_MESSAGES, userAcceptsMessagesSettingsScreen);
+						sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_INTERACTS_WITH_ACTIVITIES, userInteractsWithActivitiesSettingsScreen);
+						sharedPreferencesEditor.commit();
+
+						getUserDataFromSharedPreferencesAndAssignItToJavaObjects();
+
+						new SaveUserSettingsOnServerAsync(Settings.this, Settings.this, String.valueOf(currentlyLoggedInUser), userShowsMoneySettingsScreen,
+								userShowsStatsSettingsScreen, userAcceptsMessagesSettingsScreen, userInteractsWithActivitiesSettingsScreen,
+								userNameSettingsScreen, userQuoteSettingsScreen, userSexSettingsScreen, userPasswordSettingsScreen).execute();
+
+					} else {
+						katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.NOT_ALL_FIELDS_FILLED_SETTINGS, Toast.LENGTH_SHORT);
+					}
+
 				} else {
-					setUserShowsMoney(false);
-				}
-
-				if (cbShowStatsSettings.isChecked()) {
-					setUserShowsStats(true);
-				} else {
-					setUserShowsStats(false);
-				}
-
-				if (userNameIsOK) {
-
-					sharedPreferencesEditor = sharedPreferences.edit();
-					sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_NAME, userName);
-					sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_SEX, userSex);
-					sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_PASSWORD, userPassword);
-					sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_AVATAR_PATH, userAvatarPath);
-					sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_QUOTE, userQuote);
-					sharedPreferencesEditor.putBoolean(C.SharedPreferencesItems.USER_SHOWS_MONEY, userShowsMoney);
-					sharedPreferencesEditor.putBoolean(C.SharedPreferencesItems.USER_SHOWS_STATS, userShowsStats);
-					sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_ACCEPTS_MESSAGES, userAcceptsMessages);
-					sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_INTERACTS_WITH_ACTIVITIES, userInteractsWithActivities);
-					sharedPreferencesEditor.commit();
-
-					new SaveUserSettingsOnServerAsync(Settings.this, Settings.this, String.valueOf(currentlyLoggedInUser), userShowsMoney, userShowsStats, userAcceptsMessages, userInteractsWithActivities, userName, userQuote, userSex, userPassword).execute();
-
-				} else {
-					katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.NOT_ALL_FIELDS_FILLED, Toast.LENGTH_SHORT);
+					Intent intent = new Intent(Settings.this, MyProfile.class);
+					intent.putExtra("currentUser", true);
+					startActivity(intent);
 				}
 
 			}
@@ -488,39 +481,77 @@ public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChange
 
 	} // End of onCreate
 
+	/*
+	 * If the user accidentally presses the hardware back button, they will lose all their data that they've entered We want
+	 * to give them a chance to stay on this screen if data bas been entered, so this is what this dialog is for
+	 */
+	@Override
+	public void onBackPressed() {
+		if (dataChanged == true) {
+			Intent leaveScreenConfirmation = new Intent(Settings.this, LeaveScreenConfirmation.class);
+			startActivityForResult(leaveScreenConfirmation, C.Miscellaneous.LEAVE_SCREEN_CONFIRMATION_REQUEST_CODE);
+		} else {
+
+			super.onBackPressed();
+			finish();
+		}
+
+	} // End of onBackPressed
+
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		super.onActivityResult(requestCode, resultCode, data);
 
 		if (resultCode != RESULT_CANCELED) {
-			userAvatarPath = data.getStringExtra(C.ImageHandling.INTENT_EXTRA_IMAGE_PATH_KEY);
-			if(!(userAvatarPath.contentEquals(C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE))){
-				userHasProvidedOwnPhoto = true;
+
+			/*
+			 * If the user has clicked the Back button, we have showed them a dialog asking whether they want to leave for
+			 * sure. This is the callback if they've confirmed they want to leave
+			 */
+			if (requestCode == C.Miscellaneous.LEAVE_SCREEN_CONFIRMATION_REQUEST_CODE) {
+				if (resultCode == RESULT_OK) {
+					finish();
+				}
 			} else {
-				userHasProvidedOwnPhoto = false;
-			}
-
-			// Set sharedPreferences to the appropriate values
-			sharedPreferencesEditor = sharedPreferences.edit();
-			sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_AVATAR_PATH, userAvatarPath);
-			sharedPreferencesEditor.commit();
-
-			if (!userAvatarPath.contentEquals(C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE)) {
-				// Custom method that checks the API version and restarts the activity appropriately. It is held by the superclass
-				// Activity restart is needed because we need to rebuild the Sliding Menu in order for it to obtain the new image in the Sliding Menu Header
-				try {
-					iUserAvatarSettings.setImageBitmap(BitmapFactory.decodeFile(userAvatarPath));
-					userHasProvidedANewAvatar = true;
-
-					// Remind the user to save changes
-					katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Confirmationz.DONT_FORGET_TO_SAVE_SETTINGS, Toast.LENGTH_SHORT);
-
-				} catch (Exception ex) {
-					ex.printStackTrace();
+				userAvatarPathSettingsScreen = data.getStringExtra(C.ImageHandling.INTENT_EXTRA_IMAGE_PATH_KEY);
+				if (!(userAvatarPathSettingsScreen.contentEquals(C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE))) {
+					userHasProvidedOwnPhoto = true;
+				} else {
 					userHasProvidedOwnPhoto = false;
-					userHasProvidedANewAvatar = false;
-					setUserAvatarPath(C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE);
+				}
 
+				// Set sharedPreferences to the appropriate values
+				sharedPreferencesEditor = sharedPreferences.edit();
+				sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_AVATAR_PATH, userAvatarPathSettingsScreen);
+				sharedPreferencesEditor.commit();
+
+				if (!userAvatarPathSettingsScreen.contentEquals(C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE)) {
+					// Custom method that checks the API version and restarts the activity appropriately. It is held by the
+					// superclass
+					// Activity restart is needed because we need to rebuild the Sliding Menu in order for it to obtain the
+					// new
+					// image in the Sliding Menu Header
+					try {
+						iUserAvatarSettings.setImageBitmap(BitmapFactory.decodeFile(userAvatarPathSettingsScreen));
+						userHasProvidedANewAvatar = true;
+
+						// Remind the user to save changes
+						katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Confirmationz.DONT_FORGET_TO_SAVE_SETTINGS, Toast.LENGTH_SHORT);
+
+					} catch (Exception ex) {
+						ex.printStackTrace();
+						userHasProvidedOwnPhoto = false;
+						userHasProvidedANewAvatar = false;
+						userAvatarPathSettingsScreen = C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE;
+
+						if (userSex.equalsIgnoreCase("male")) {
+							iUserAvatarSettings.setImageResource(R.drawable.images_default_avatar_male);
+
+						} else {
+							iUserAvatarSettings.setImageResource(R.drawable.images_default_avatar_female);
+						}
+					}
+				} else {
 					if (userSex.equalsIgnoreCase("male")) {
 						iUserAvatarSettings.setImageResource(R.drawable.images_default_avatar_male);
 
@@ -528,15 +559,10 @@ public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChange
 						iUserAvatarSettings.setImageResource(R.drawable.images_default_avatar_female);
 					}
 				}
-			} else {
-				if (userSex.equalsIgnoreCase("male")) {
-					iUserAvatarSettings.setImageResource(R.drawable.images_default_avatar_male);
-
-				} else {
-					iUserAvatarSettings.setImageResource(R.drawable.images_default_avatar_female);
-				}
 			}
-		}
+
+		} // End of result != Cancelled
+
 	} // End of onActivityResult
 
 	@Override
@@ -544,7 +570,7 @@ public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChange
 		katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Confirmationz.ACCOUNT_DELETED, Toast.LENGTH_LONG);
 		Intent logUserOut = new Intent(Settings.this, LogUserOut.class);
 		startActivity(logUserOut);
-		
+
 		// TODO remove user item images as well
 
 	} // End of onUserDeletionSuccess
@@ -566,11 +592,13 @@ public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChange
 		if (userHasProvidedANewAvatar) {
 			// Upload the user avatar to the server. After upload is finished,
 			// the record in the database will be changed accordingly
-			String imageFilename = PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX, C.ImageHandling.IMAGES_FILE_EXTENSION, true);
-			new UploadUserAvatarToServerAsync(String.valueOf(currentlyLoggedInUser), userAvatarPath, imageFilename).execute();
+			String imageFilename = PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX,
+					C.ImageHandling.IMAGES_FILE_EXTENSION, true);
+			new UploadUserAvatarToServerAsync(String.valueOf(currentlyLoggedInUser), userAvatarPathSettingsScreen, imageFilename).execute();
 		}
 
 		Intent intent = new Intent(Settings.this, MyProfile.class);
+		intent.putExtra("currentUser", true);
 		startActivity(intent);
 	} // End of onUserSettingsChangedSuccess
 
@@ -582,5 +610,63 @@ public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChange
 			katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.CONNECTION_ERROR, Toast.LENGTH_SHORT);
 		}
 	} // End of onUserSettingsChangedFailure
+
+	private void validatePassword() {
+
+		passwordHasBeenChanged = false;
+		userPasswordSettingsScreen = userPassword;
+
+		userPasswordInOldPasswordField = katwalk.hashPassword.computeSHAHash(etUserPasswordOldSettings.getText().toString().trim());
+		userPasswordNewInField = etUserPasswordNewSettings.getText().toString();
+		userPasswordNewAgainInField = etUserPasswordNewAgainSettings.getText().toString();
+
+		if (etUserPasswordOldSettings.getText().toString().trim().length() > 0) {
+			if (!userPasswordInOldPasswordField.equals(userPassword)) {
+				katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.INCORRECT_PASSWORD, Toast.LENGTH_SHORT);
+				passwordIsOK = false;
+				dataChanged = true;
+			} else {
+				passwordIsOK = true;
+				dataChanged = true;
+			}
+		}
+
+		if (userPasswordNewInField.length() > 0) {
+			if(passwordIsOK){
+				if (userPasswordNewInField.length() < (C.CharacterLimitations.PASSWORD_MINIMUM_LENGTH)) {
+
+					katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.PASSWORD_MIN_LENGTH_PROBLEM, Toast.LENGTH_SHORT);
+				} else if (userPasswordNewInField.length() > (C.CharacterLimitations.PASSWORD_MAXIMUM_LENGTH)) {
+
+					katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.PASSWORD_MAX_LENGTH_EXCEEDED, Toast.LENGTH_SHORT);
+				} else if (userPasswordNewInField.equals("")) {
+					katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.FIELD_NOT_FILLED, Toast.LENGTH_SHORT);
+
+				} else {
+
+					passwordHasBeenChanged = true;
+					dataChanged = true;
+				}
+			}
+
+		}
+
+		if (passwordHasBeenChanged) {
+
+			if (userPasswordNewAgainInField.equals("")) {
+				katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.FIELD_NOT_FILLED, Toast.LENGTH_SHORT);
+			}
+
+			if (!(userPasswordNewAgainInField.equals(userPasswordNewInField))) {
+				katwalk.toastMaker.toast(net.shiftinpower.activities.Settings.this, C.Errorz.PASSWORDS_DO_NOT_MATCH, Toast.LENGTH_SHORT);
+				passwordIsOK = false;
+			} else {
+				passwordIsOK = true;
+
+				dataChanged = true;
+				userPasswordSettingsScreen = katwalk.hashPassword.computeSHAHash(userPasswordNewAgainInField);
+			}
+		}
+	} // End of validateNewPassword
 
 } // End of Class

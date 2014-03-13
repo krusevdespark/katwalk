@@ -89,7 +89,7 @@ public class KatwalkSlidingMenu extends KatwalkActionBar {
 
 		ivSlidingMenuUserAvatar = (ImageView) getSlidingMenu().findViewById(R.id.ivSlidingMenuUserAvatar);
 
-		setUserImageToImageView(ivSlidingMenuUserAvatar, userAvatarPath, userSex);
+		katwalk.setUserImageToImageView(ivSlidingMenuUserAvatar, userAvatarPath, userSex);
 
 		ivSlidingMenuUserAvatar.setOnClickListener(new OnClickListener() {
 

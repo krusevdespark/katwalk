@@ -24,8 +24,8 @@ import android.widget.Toast;
  * upload up to 5 images along with their description We are doing the images first, because uploads may take a while, so
  * while the user is entering data at the second step The app is going to do the uploading job in the background
  * 
- * Using LinkedHashSet to store the ItemImage objects because it denies the need for exist checks
- * Also, iteration order will match insertion order.
+ * Using LinkedHashSet to store the ItemImage objects because it denies the need for exist checks Also, iteration order will
+ * match insertion order.
  * 
  * @author Kaloyan Roussev
  * 
@@ -167,38 +167,39 @@ public class ItemAddStepOnePhotos extends KatwalkSlidingMenu {
 			public void onClick(View v) {
 
 				if (itemImageOne != null) {
-					if (!isEditTextEmpty(etItemImageOneDescription)) {
-						itemImageOne.setDescription(etItemImageOneDescription.getText().toString());
+					if (!katwalk.isEditTextEmpty(etItemImageOneDescription)) {
+						itemImageOne.setDescription(etItemImageOneDescription.getText().toString().trim());
 					}
 
 				}
 
 				if (itemImageTwo != null) {
-					if (!isEditTextEmpty(etItemImageTwoDescription)) {
-						itemImageTwo.setDescription(etItemImageTwoDescription.getText().toString());
+					if (!katwalk.isEditTextEmpty(etItemImageTwoDescription)) {
+						itemImageTwo.setDescription(etItemImageTwoDescription.getText().toString().trim());
 					}
 				}
 
 				if (itemImageThree != null) {
-					if (!isEditTextEmpty(etItemImageThreeDescription)) {
-						itemImageThree.setDescription(etItemImageThreeDescription.getText().toString());
+					if (!katwalk.isEditTextEmpty(etItemImageThreeDescription)) {
+						itemImageThree.setDescription(etItemImageThreeDescription.getText().toString().trim());
 					}
 				}
 
 				if (itemImageFour != null) {
-					if (!isEditTextEmpty(etItemImageFourDescription)) {
-						itemImageFour.setDescription(etItemImageFourDescription.getText().toString());
+					if (!katwalk.isEditTextEmpty(etItemImageFourDescription)) {
+						itemImageFour.setDescription(etItemImageFourDescription.getText().toString().trim());
 					}
 				}
 
 				if (itemImageFive != null) {
-					if (!isEditTextEmpty(etItemImageFiveDescription)) {
-						itemImageFive.setDescription(etItemImageFiveDescription.getText().toString());
+					if (!katwalk.isEditTextEmpty(etItemImageFiveDescription)) {
+						itemImageFive.setDescription(etItemImageFiveDescription.getText().toString().trim());
 					}
 				}
 
 				if (itemImages.size() == 0) {
-					katwalk.toastMaker.toast(net.shiftinpower.activities.ItemAddStepOnePhotos.this, C.Errorz.ADDING_AN_ITEM_AT_LEAST_ONE_IMAGE_REQUIRED, Toast.LENGTH_LONG);
+					katwalk.toastMaker.toast(net.shiftinpower.activities.ItemAddStepOnePhotos.this, C.Errorz.ADDING_AN_ITEM_AT_LEAST_ONE_IMAGE_REQUIRED,
+							Toast.LENGTH_LONG);
 				} else {
 					// Send the images to the database
 
@@ -270,7 +271,8 @@ public class ItemAddStepOnePhotos extends KatwalkSlidingMenu {
 				 * slot Or an empty itemImage object.
 				 */
 				itemImageOne.setPath(data.getStringExtra(C.ImageHandling.INTENT_EXTRA_IMAGE_PATH_KEY));
-				itemImageOne.setFilename(PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX, C.ImageHandling.IMAGES_FILE_EXTENSION, true));
+				itemImageOne.setFilename(PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX,
+						C.ImageHandling.IMAGES_FILE_EXTENSION, true));
 
 				itemImages.add(itemImageOne);
 				if (!isSet(itemImageOne)) {
@@ -298,7 +300,8 @@ public class ItemAddStepOnePhotos extends KatwalkSlidingMenu {
 			case 21:
 
 				itemImageTwo.setPath(data.getStringExtra(C.ImageHandling.INTENT_EXTRA_IMAGE_PATH_KEY));
-				itemImageTwo.setFilename(PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX, C.ImageHandling.IMAGES_FILE_EXTENSION, true));
+				itemImageTwo.setFilename(PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX,
+						C.ImageHandling.IMAGES_FILE_EXTENSION, true));
 
 				itemImages.add(itemImageTwo);
 				if (!isSet(itemImageTwo)) {
@@ -322,7 +325,8 @@ public class ItemAddStepOnePhotos extends KatwalkSlidingMenu {
 			case 22:
 
 				itemImageThree.setPath(data.getStringExtra(C.ImageHandling.INTENT_EXTRA_IMAGE_PATH_KEY));
-				itemImageThree.setFilename(PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX, C.ImageHandling.IMAGES_FILE_EXTENSION, true));
+				itemImageThree.setFilename(PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX,
+						C.ImageHandling.IMAGES_FILE_EXTENSION, true));
 
 				itemImages.add(itemImageThree);
 				if (!isSet(itemImageThree)) {
@@ -342,7 +346,8 @@ public class ItemAddStepOnePhotos extends KatwalkSlidingMenu {
 			case 23:
 
 				itemImageFour.setPath(data.getStringExtra(C.ImageHandling.INTENT_EXTRA_IMAGE_PATH_KEY));
-				itemImageFour.setFilename(PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX, C.ImageHandling.IMAGES_FILE_EXTENSION, true));
+				itemImageFour.setFilename(PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX,
+						C.ImageHandling.IMAGES_FILE_EXTENSION, true));
 
 				itemImages.add(itemImageFour);
 				if (!isSet(itemImageFour)) {
@@ -358,7 +363,8 @@ public class ItemAddStepOnePhotos extends KatwalkSlidingMenu {
 			case 24:
 
 				itemImageFive.setPath(data.getStringExtra(C.ImageHandling.INTENT_EXTRA_IMAGE_PATH_KEY));
-				itemImageFive.setFilename(PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX, C.ImageHandling.IMAGES_FILE_EXTENSION, true));
+				itemImageFive.setFilename(PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX,
+						C.ImageHandling.IMAGES_FILE_EXTENSION, true));
 
 				itemImages.add(itemImageFive);
 				if (!isSet(itemImageFive)) {
@@ -367,19 +373,21 @@ public class ItemAddStepOnePhotos extends KatwalkSlidingMenu {
 
 				break;
 
+			case C.Miscellaneous.LEAVE_SCREEN_CONFIRMATION_REQUEST_CODE:
+				// If the user has clicked the Back button, we have showed them a dialog asking whether they want to leave
+				// for sure.
+				// This is the callback if they've confirmed they want to leave
+
+				if (resultCode == RESULT_OK) {
+					finish();
+				}
+				break;
+
 			} // End of the SWITCH statement
 
 			dealWithNumberOfPhotoUploadBoxesOnScreen();
 
 		} // End of the result != cancelled check
-
-		// If the user has clicked the Back button, we have showed them a dialog asking whether they want to leave for sure.
-		// This is the callback if they've confirmed they want to leave
-		if (requestCode == C.Miscellaneous.LEAVE_SCREEN_CONFIRMATION_REQUEST_CODE) {
-			if (resultCode == RESULT_OK) {
-				finish();
-			}
-		}
 
 	} // End of onActivityResult
 

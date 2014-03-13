@@ -183,27 +183,23 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 			// startActivity(myPoints);
 			break;
 
-		case R.id.bUserProfileActionButtonTwo:
-		case R.id.tvUserProfileStatsAreVisibleNote:
-			Intent settings = new Intent(this, Settings.class);
-			startActivity(settings);
-			break;
-
 		} // End of Switch
 
 	} // End of onClick Method
 
 	public void setUserStatus(int userPoints) {
 		if (userPoints >= C.StatusPoints.STATUS_1_MIN && userPoints <= C.StatusPoints.STATUS_1_MAX) {
-			setUserStatusVariable(C.Statuses.STATUS_1);
+			personStatus = C.Statuses.STATUS_1;
 		} else if (userPoints >= C.StatusPoints.STATUS_2_MIN && userPoints <= C.StatusPoints.STATUS_2_MAX) {
-			setUserStatusVariable(C.Statuses.STATUS_2);
+			personStatus = C.Statuses.STATUS_2;
 		} else if (userPoints >= C.StatusPoints.STATUS_3_MIN && userPoints <= C.StatusPoints.STATUS_3_MAX) {
-			setUserStatusVariable(C.Statuses.STATUS_3);
+			personStatus = C.Statuses.STATUS_3;
 		} else if (userPoints >= C.StatusPoints.STATUS_4_MIN && userPoints <= C.StatusPoints.STATUS_4_MAX) {
-			setUserStatusVariable(C.Statuses.STATUS_4);
+			personStatus = C.Statuses.STATUS_4;
 		} else if (userPoints >= C.StatusPoints.STATUS_5_MIN && userPoints <= C.StatusPoints.STATUS_5_MAX) {
-			setUserStatusVariable(C.Statuses.STATUS_5);
+			personStatus = C.Statuses.STATUS_5;
+		} else {
+			personStatus = C.Statuses.STATUS_5; // TODO Later on an option for a custom status will be provided
 		}
 	} // End of setUserStatus
 
@@ -239,6 +235,26 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		personActivityCount = userExtendedData.getUserActivityCount();
 		personMoneySpentOnItems = userExtendedData.getUserMoneySpentOnItems();
 	}
+	
+	private void handleCurrentUserDetails(){
+		personName = userName;
+		personSex = userSex;
+		personEmail = userEmail;
+		personAvatarPath = userAvatarPath;
+		personQuote = userQuote;
+		personPoints = userPoints;
+		personShowsMoney = userShowsMoney;
+		personShowsStats = userShowsStats;
+		personAcceptsMessages = userAcceptsMessages;
+		personInteractsWithActivities = userInteractsWithActivities;
+		personItemsCount = userItemsCount;
+		personCommentsCount = userCommentsCount;
+		personFollowingItemsCount = userFollowingItemsCount;
+		personFriendsCount = userFriendsCount;
+		personGalleryPhotosCount = userGalleryPhotosCount;
+		personActivityCount = userActivityCount;
+		personMoneySpentOnItems = userMoneySpentOnItems;
+	}
 
 	private void setDisplayedData() {
 		// Set displayed text
@@ -259,6 +275,7 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		// Set user status
 		setUserStatus(personPoints);
 		tvUserStatus.setText(personStatus);
+		
 
 		// Set the money spent text
 		DecimalFormat decimalFormat = new DecimalFormat("#0.00");
@@ -269,7 +286,7 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		}
 
 		// Set avatar image
-		setUserImageToImageView(iUserAvatar, personAvatarPath, personSex);
+		katwalk.setUserImageToImageView(iUserAvatar, personAvatarPath, personSex);
 
 	} // End of SetDisplayData
 
@@ -279,8 +296,8 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		personId = extras.getInt("personId", currentlyLoggedInUser);
 
 		if (currentUser) {
-			userExtendedData = instanceOfTheCurrentUser;
-			handleUserDetails(userExtendedData);
+			
+			handleCurrentUserDetails();
 			personAvatarPath = sharedPreferences.getString(C.SharedPreferencesItems.USER_AVATAR_PATH, C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE);
 			setDisplayedData();
 

@@ -113,7 +113,7 @@ public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesLis
 	protected void onStop() {
 
 		// Prevent memory leak by releasing the bitmaps from the memory
-		recycleViewsDrawables(ivSplashScreen);
+		katwalk.recycleViewsDrawables(ivSplashScreen);
 		super.onStop();
 		
 	}
@@ -171,7 +171,6 @@ public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesLis
 		 * double.
 		 */
 
-		Transporter.instance().instanceOfTheCurrentUser = userDetailsAndStats;
 		double userMoneySpentOnItemsDouble = userDetailsAndStats.getUserMoneySpentOnItems();
 		long userMoneySpentOnItemsLong = Double.doubleToRawLongBits(userMoneySpentOnItemsDouble);
 

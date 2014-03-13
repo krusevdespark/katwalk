@@ -55,7 +55,7 @@ public class LogUserOut extends KatwalkCore implements OnUserLogOutListener {
 	protected void onStop() {
 
 		// Prevent memory leak by releasing the bitmaps from the memory
-		recycleViewsDrawables(ivSplashScreen);
+		katwalk.recycleViewsDrawables(ivSplashScreen);
 		super.onStop();
 	}
 

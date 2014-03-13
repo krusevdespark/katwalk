@@ -115,7 +115,7 @@ public class ItemAddStepTwoData extends KatwalkSlidingMenu implements OnAddNewIt
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
 				// TODO here the autosuggest feature will take place
-				if (etAddAnItemName.getText().toString() != null) {
+				if (etAddAnItemName.getText().toString().trim() != null) {
 					dataEntered = true;
 				}
 			}
@@ -126,7 +126,7 @@ public class ItemAddStepTwoData extends KatwalkSlidingMenu implements OnAddNewIt
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
 				// TODO here the autosuggest feature will take place
-				if (etAddAnItemBrandManufacturer.getText().toString() != null) {
+				if (etAddAnItemBrandManufacturer.getText().toString().trim() != null) {
 					dataEntered = true;
 				}
 			}
@@ -137,7 +137,7 @@ public class ItemAddStepTwoData extends KatwalkSlidingMenu implements OnAddNewIt
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
 				// TODO here the autosuggest feature will take place
-				if (etAddAnItemWhereWhoDidYouGetItFrom.getText().toString() != null) {
+				if (etAddAnItemWhereWhoDidYouGetItFrom.getText().toString().trim() != null) {
 					dataEntered = true;
 				}
 			}
@@ -234,13 +234,13 @@ public class ItemAddStepTwoData extends KatwalkSlidingMenu implements OnAddNewIt
 			@Override
 			public void onClick(View v) {
 
-				itemName = etAddAnItemName.getText().toString();
-				itemBrand = etAddAnItemBrandManufacturer.getText().toString();
+				itemName = etAddAnItemName.getText().toString().trim();
+				itemBrand = etAddAnItemBrandManufacturer.getText().toString().trim();
 
-				itemBoughtFrom = etAddAnItemWhereWhoDidYouGetItFrom.getText().toString();
+				itemBoughtFrom = etAddAnItemWhereWhoDidYouGetItFrom.getText().toString().trim();
 
-				itemPriceString = etAddAnItemPrice.getText().toString();
-				itemDescription = etAddAnItemComment.getText().toString();
+				itemPriceString = etAddAnItemPrice.getText().toString().trim();
+				itemDescription = etAddAnItemComment.getText().toString().trim();
 
 				if ((itemName.contentEquals("") || itemName == null)) {
 					katwalk.toastMaker.toast(net.shiftinpower.activities.ItemAddStepTwoData.this, C.Errorz.ADDING_AN_ITEM_SOME_FIELDS_REQUIRED, Toast.LENGTH_LONG);
@@ -315,7 +315,7 @@ public class ItemAddStepTwoData extends KatwalkSlidingMenu implements OnAddNewIt
 					// TODO Start deleting images uploaded task
 				}
 			}
-		}
+		} // End of resultCode != RESULT_CANCELED
 
 	} // End of onActivityResult
 

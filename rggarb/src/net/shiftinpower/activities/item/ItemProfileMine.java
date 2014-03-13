@@ -57,6 +57,7 @@ public class ItemProfileMine extends KatwalkSlidingMenu implements OnGetItemData
 	private String itemPlaceName;
 	private int itemPlaceId;
 	private ArrayList<SquareImageView> imageViewsWhoseBitmapsShouldBeRecycled = new ArrayList<SquareImageView>();
+	private ItemExtended itemParametersObtained;
 
 	// Constructor needed because of the way the super class works
 	public ItemProfileMine() {
@@ -105,12 +106,15 @@ public class ItemProfileMine extends KatwalkSlidingMenu implements OnGetItemData
 	@Override
 	protected void onPause() {
 		super.onPause();
-		recycleViewsDrawables(imageViewsWhoseBitmapsShouldBeRecycled);
+		katwalk.recycleViewsDrawables(imageViewsWhoseBitmapsShouldBeRecycled);
 		finish();
 	}
 
 	@Override
 	public void onGetItemDataSuccess(ItemExtended itemParameters) {
+		
+		// Create a class-wide copy of itemParameters, so we can send it to ItemProfilePublic
+		itemParametersObtained = itemParameters;
 
 		// Unpack the data
 		itemBasic = itemParameters.getItemBasic();
@@ -205,6 +209,7 @@ public class ItemProfileMine extends KatwalkSlidingMenu implements OnGetItemData
 			public void onClick(View v) {
 
 				Intent itemProfile = new Intent(ItemProfileMine.this, ItemProfilePublic.class);
+				Transporter.instance().itemExtended = itemParametersObtained;
 				startActivity(itemProfile);
 
 			}

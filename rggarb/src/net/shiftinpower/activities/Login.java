@@ -25,6 +25,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.WindowManager;
@@ -197,13 +198,13 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 			public void onFocusChange(View v, boolean hasFocus) {
 
 				// Get the user email entered in the input box
-				userEmailLoginPage = etUserEmailLoginPage.getText().toString();
+				userEmailLoginPage = etUserEmailLoginPage.getText().toString().trim();
 
 				// Check whether email entered is a valid email.
 				// Toast about it not being valid if it isnt
 				if (userEmailLoginPage.length() > 0) {
 					if (!emailVerifier.isEmailValid(userEmailLoginPage)) {
-						toastMaker.toast(net.shiftinpower.activities.Login.this, C.Errorz.ENTER_VALID_EMAIL, Toast.LENGTH_SHORT);
+						toastMaker.toast(net.shiftinpower.activities.Login.this, C.Errorz.ENTER_VALID_EMAIL, Toast.LENGTH_SHORT, Gravity.CENTER_HORIZONTAL, 0, -100);
 					}
 				}
 
@@ -242,10 +243,10 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 		} else if (id == R.id.bLoginLoginPage) {
 
 			// Get the user email entered in the input box
-			userEmailLoginPage = etUserEmailLoginPage.getText().toString();
+			userEmailLoginPage = etUserEmailLoginPage.getText().toString().trim();
 			
 			// Get the user password from the input
-			userPasswordLoginPage = etUserPasswordLoginPage.getText().toString();
+			userPasswordLoginPage = etUserPasswordLoginPage.getText().toString().trim();
 
 			if (userPasswordLoginPage == null || userEmailLoginPage == null) {
 				
@@ -294,7 +295,7 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 	 * System.out.println(response.getError().toString()); } } }); request.executeAsync(); }
 	 */
 	public void forgottenPasswordSubmitOnClick() {
-		userWithForgottenPasswordsEmailAddress = etForgottenPasswordEmail.getText().toString();
+		userWithForgottenPasswordsEmailAddress = etForgottenPasswordEmail.getText().toString().trim();
 		if (!emailVerifier.isEmailValid(userWithForgottenPasswordsEmailAddress)) {
 			toastMaker.toast(net.shiftinpower.activities.Login.this, C.Errorz.ENTER_VALID_EMAIL, Toast.LENGTH_SHORT);
 		} else {
