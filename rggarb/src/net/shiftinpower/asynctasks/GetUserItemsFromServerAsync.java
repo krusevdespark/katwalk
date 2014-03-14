@@ -39,12 +39,12 @@ public class GetUserItemsFromServerAsync extends AsyncTask<String, String, Linke
 	@Override
 	protected void onPreExecute() {
 
+		super.onPreExecute();
+
 		if (context != null) {
 			ShowLoadingMessage.loading(context, C.LoadingMessages.LOADING_USER_ITEMS);
 			loadingMessageShown = true;
 		}
-
-		super.onPreExecute();
 
 	}
 
@@ -100,14 +100,13 @@ public class GetUserItemsFromServerAsync extends AsyncTask<String, String, Linke
 					} else {
 						itemWasAGift = false;
 					}
-					
+
 					int itemRating;
-					if((String.valueOf(userItemJSONFormat.getString(C.DBColumns.ITEM_RATING))).contentEquals("null")) {
+					if ((String.valueOf(userItemJSONFormat.getString(C.DBColumns.ITEM_RATING))).contentEquals("null")) {
 						itemRating = 0;
 					} else {
 						itemRating = userItemJSONFormat.getInt(C.DBColumns.ITEM_RATING);
 					}
-
 
 					userItem.setItemBeingSold(itemBeingSold);
 					userItem.setItemBoughtFromPlace(itemBoughtFromPlace);
@@ -118,7 +117,7 @@ public class GetUserItemsFromServerAsync extends AsyncTask<String, String, Linke
 					userItem.setItemName(userItemJSONFormat.getString(C.DBColumns.ITEM_NAME));
 					userItem.setItemDescription(userItemJSONFormat.getString(C.DBColumns.ITEM_DESCRIPTION));
 					userItem.setItemRating(itemRating);
-					
+
 					userItem.setItemId(userItemJSONFormat.getInt(C.DBColumns.ITEM_ID));
 					userItem.setItemOwnerId(userItemJSONFormat.getInt(C.DBColumns.ITEM_OWNER_ID));
 					userItem.setItemPriceAquired(userItemJSONFormat.getDouble(C.DBColumns.ITEM_PRICE_AQUIRED));
@@ -160,6 +159,8 @@ public class GetUserItemsFromServerAsync extends AsyncTask<String, String, Linke
 	@Override
 	protected void onPostExecute(LinkedHashSet<ItemBasic> userItems) {
 
+		super.onPostExecute(userItems);
+
 		if ((context != null) && (loadingMessageShown)) {
 			ShowLoadingMessage.dismissDialog();
 			loadingMessageShown = false;
@@ -172,7 +173,6 @@ public class GetUserItemsFromServerAsync extends AsyncTask<String, String, Linke
 				listener.onGetUserItemsFailure(reason);
 			}
 		}
-		super.onPostExecute(userItems);
 
 	} // End of onPostExecute
 

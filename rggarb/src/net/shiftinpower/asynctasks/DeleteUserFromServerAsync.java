@@ -34,8 +34,11 @@ public class DeleteUserFromServerAsync extends AsyncTask<String, String, String>
 
 	@Override
 	protected void onPreExecute() {
-		ShowLoadingMessage.loading(context);
+
 		super.onPreExecute();
+
+		ShowLoadingMessage.loading(context);
+
 	}
 
 	private void setReason(String reason) {
@@ -56,61 +59,63 @@ public class DeleteUserFromServerAsync extends AsyncTask<String, String, String>
 			serverResponseCode = json.getInt(C.Tagz.SUCCESS);
 
 			if (serverResponseCode == C.HttpResponses.SUCCESS) {
-				
-				
+
 				List<NameValuePair> deleteUserAvatar = new ArrayList<NameValuePair>();
 				deleteUserAvatar.add(new BasicNameValuePair(C.DBColumns.IMAGE_FILENAME, userAvatarPath));
 				JSONObject json2 = jsonParser.makeHttpRequest(C.API.WEB_ADDRESS + C.API.DELETE_USER_AVATAR, "GET", deleteUserAvatar);
-				
+
 				return C.Tagz.SUCCESS;
-				
+
 			} else if (serverResponseCode == C.HttpResponses.FAILURE_BAD_REQUEST) {
-				
+
 				setReason(C.Tagz.BAD_REQUEST);
 				return null;
-				
+
 			} else if (serverResponseCode == C.HttpResponses.FAILURE_DATABASE_PROBLEM) {
-				
+
 				setReason(C.Tagz.DB_PROBLEM);
 				return null;
-				
+
 			} else if (serverResponseCode == C.HttpResponses.FAILURE_NOT_FOUND) {
-				
+
 				setReason(C.Tagz.NOT_FOUND);
 				return null;
-				
+
 			} else {
-				
+
 				setReason(C.Tagz.UNKNOWN_PROBLEM);
 				return null;
-				
+
 			}
-			
+
 		} catch (JSONException e) {
-			
+
 			e.printStackTrace();
 			setReason(C.Tagz.BAD_REQUEST);
 			return null;
-			
-		}catch (Exception e) {
-			
+
+		} catch (Exception e) {
+
 			e.printStackTrace();
 			setReason(C.Tagz.UNKNOWN_PROBLEM);
-			return null;	
-			
+			return null;
+
 		} // End of Try Catch Block
-		
+
 	} // End of doInBackground
 
 	@Override
 	protected void onPostExecute(String result) {
-		
+
+		super.onPostExecute(result);
+
 		ShowLoadingMessage.dismissDialog();
-		
-		//List<NameValuePair> deleteUserItemImages = new ArrayList<NameValuePair>();
-		//deleteUserItemImages.add(new BasicNameValuePair("user_id", userAvatarPath));
-		//JSONObject json3 = jsonParser.makeHttpRequest(Configurationz.API.WEB_ADDRESS + Configurationz.API.DELETE_USER_AVATAR, "GET", deleteUserAvatar);
-		
+
+		// List<NameValuePair> deleteUserItemImages = new ArrayList<NameValuePair>();
+		// deleteUserItemImages.add(new BasicNameValuePair("user_id", userAvatarPath));
+		// JSONObject json3 = jsonParser.makeHttpRequest(Configurationz.API.WEB_ADDRESS +
+		// Configurationz.API.DELETE_USER_AVATAR, "GET", deleteUserAvatar);
+
 		if (listener != null) {
 			if (result.contentEquals(C.Tagz.SUCCESS)) {
 				listener.onUserDeletionSuccess();
@@ -118,9 +123,7 @@ public class DeleteUserFromServerAsync extends AsyncTask<String, String, String>
 				listener.onUserDeletionFailure(reason);
 			}
 		}
-		
-		super.onPostExecute(result);
-		
+
 	} // End of onPostExecute
-	
+
 } // End of Class

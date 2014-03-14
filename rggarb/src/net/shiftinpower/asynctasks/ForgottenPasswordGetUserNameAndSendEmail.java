@@ -24,7 +24,7 @@ public class ForgottenPasswordGetUserNameAndSendEmail extends AsyncTask<String, 
 	private JSONParser jsonParser = new JSONParser();
 	private String userWithSuchForgottenPasswordUserName;
 	private String reason;
-	
+
 	public ForgottenPasswordGetUserNameAndSendEmail(Context context, OnForgottenPasswordEmailSentListener listener, String userWithForgottenPasswordsEmailAddress) {
 		this.context = context;
 		this.listener = listener;
@@ -33,14 +33,14 @@ public class ForgottenPasswordGetUserNameAndSendEmail extends AsyncTask<String, 
 
 	@Override
 	protected void onPreExecute() {
-		ShowLoadingMessage.loading(context);
 		super.onPreExecute();
+		ShowLoadingMessage.loading(context);
 	}
-	
+
 	private void setReason(String reason) {
 		this.reason = reason;
 	}
-	
+
 	@Override
 	protected String doInBackground(String... params) {
 		try {
@@ -73,18 +73,22 @@ public class ForgottenPasswordGetUserNameAndSendEmail extends AsyncTask<String, 
 		} catch (Exception e) {
 			e.printStackTrace();
 			setReason(C.Tagz.UNKNOWN_PROBLEM);
-			return null;				
+			return null;
 		}
 	} // End of doInBackground
 
 	@Override
 	protected void onPostExecute(String result) {
+		
+		super.onPostExecute(result);
+		
 		ShowLoadingMessage.dismissDialog();
 		if (listener != null) {
-			if (result!=null) {
+			if (result != null) {
 				if (result.contentEquals(C.Tagz.SUCCESS)) {
 					try {
-						new EmailSender(userWithForgottenPasswordsEmailAddress, C.Emailz.FORGOTTEN_PASSWORD_RESET_ADDRESS, C.Emailz.FORGOTTEN_PASSWORD_RESET_SUBJECT, C.Emailz.FORGOTTEN_PASSWORD_RESET_BODY(userWithSuchForgottenPasswordUserName), null).execute();
+						new EmailSender(userWithForgottenPasswordsEmailAddress, C.Emailz.FORGOTTEN_PASSWORD_RESET_ADDRESS, C.Emailz.FORGOTTEN_PASSWORD_RESET_SUBJECT, C.Emailz.FORGOTTEN_PASSWORD_RESET_BODY(userWithSuchForgottenPasswordUserName), null)
+								.execute();
 						listener.onForgottenPasswordEmailSentSuccess();
 					} catch (Exception e) {
 						e.printStackTrace();

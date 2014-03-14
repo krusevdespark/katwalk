@@ -36,6 +36,7 @@ public class KatwalkActionBar extends KatwalkCore {
 		if (C.Preferences.PORTRAIT_MODE_ENFORCED) {
 			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 		}
+		
 		setTitle(mTitleRes); // This is the title at the Actionbar, but we are not using it
 
 		// The app operates in Full Screen Mode

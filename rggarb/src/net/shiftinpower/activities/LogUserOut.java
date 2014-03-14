@@ -4,7 +4,6 @@ import java.io.File;
 import net.shiftinpower.asynctasks.LogUserOutAttemptAsync;
 import net.shiftinpower.core.C;
 import net.shiftinpower.core.KatwalkCore;
-import net.shiftinpower.core.KatwalkSlidingMenu;
 import net.shiftinpower.interfaces.OnUserLogOutListener;
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.localsqlitedb.ClearDatabase;
@@ -12,8 +11,6 @@ import net.shiftinpower.utilities.ToastMaker;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.view.WindowManager;
@@ -53,10 +50,9 @@ public class LogUserOut extends KatwalkCore implements OnUserLogOutListener {
 
 	@Override
 	protected void onStop() {
-
+		super.onStop();
 		// Prevent memory leak by releasing the bitmaps from the memory
 		katwalk.recycleViewsDrawables(ivSplashScreen);
-		super.onStop();
 	}
 
 	@Override

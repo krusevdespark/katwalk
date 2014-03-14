@@ -47,6 +47,8 @@ public class PersonProfileFriends extends KatwalkSlidingMenu {
 		
 		// Set the XML layout
 		setContentView(R.layout.activity_layout_my_profile_friends);
+		
+		// Assign java objects to XML View elements
 		tvUserNameMyFriendsList = (TextView) findViewById(R.id.tvUserNameMyFriendsList);
 		etMyFriendsListSearch = (EditText) findViewById(R.id.etMyFriendsListSearch);
 		 

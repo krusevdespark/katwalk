@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import net.shiftinpower.activities.ItemAddStepOnePhotos;
-import net.shiftinpower.asynctasks.GetItemDataFromServerAsync;
 import net.shiftinpower.core.C;
 import net.shiftinpower.core.KatwalkSlidingMenu;
 import net.shiftinpower.customviews.SquareImageView;
-import net.shiftinpower.interfaces.OnGetItemDataListener;
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.objects.Brand;
 import net.shiftinpower.objects.Image;
@@ -84,6 +82,8 @@ public class ItemProfilePublic extends KatwalkSlidingMenu {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		// Inflate the XML layout for this activity
 		setContentView(R.layout.activity_layout_item_profile_public);
 
 		// Assign and inflate an XML file as the view component for this screen

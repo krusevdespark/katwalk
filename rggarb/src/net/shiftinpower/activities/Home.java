@@ -30,6 +30,7 @@ public class Home extends KatwalkSlidingMenu {
 		// String userFBId = getIntent().getStringExtra("userFBId");
 
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_layout_home);
 
 		ActionBar actionBar = getSupportActionBar();

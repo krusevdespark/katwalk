@@ -62,6 +62,7 @@ public class MyProfileCommentAdapter extends BaseAdapter {
 		if(convertView==null) {
 			convertView = layoutInflater.inflate(R.layout.item_adapterable_my_profile_comment, parent, false);
 		}
+		// TODO Employ the ViewHolder pattern here
 
 		
 		iMyCommentsCommentedProductImage = (ImageButton) convertView.findViewById(R.id.iMyCommentsCommentedProductImage);

@@ -142,7 +142,7 @@ public class DownloadUserInfoFromServerAsync {
 
 			try {
 				List<NameValuePair> parameters = new ArrayList<NameValuePair>();
-				parameters.add(new BasicNameValuePair("user_id", userId));
+				parameters.add(new BasicNameValuePair(C.DBColumns.USER_ID, userId));
 
 				final JSONObject json = jsonParser.makeHttpRequest(C.API.WEB_ADDRESS + C.API.GET_USER_DATA, "GET", parameters);
 
@@ -219,6 +219,8 @@ public class DownloadUserInfoFromServerAsync {
 
 		@Override
 		protected void onPostExecute(UserExtended userDetailsAndStats) {
+			super.onPostExecute(userDetailsAndStats);
+			
 			if (listener != null) {
 				if (userDetailsAndStats == null) {
 

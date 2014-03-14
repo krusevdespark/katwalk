@@ -50,6 +50,9 @@ public class LogUserOutAttemptAsync extends AsyncTask<String, Void, Boolean> {
 
 	@Override
 	protected void onPostExecute(Boolean result) {
+
+		super.onPostExecute(result);
+
 		if (listener != null) {
 			if (result == true) {
 				listener.onUserLogOutSuccess();
@@ -57,7 +60,7 @@ public class LogUserOutAttemptAsync extends AsyncTask<String, Void, Boolean> {
 				listener.onUserLogOutFailure();
 			}
 		}
-		super.onPostExecute(result);
+
 	} // End of onPostExecute
 
 } // End of Class

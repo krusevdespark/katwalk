@@ -1,11 +1,11 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/FrameLayout01"
+    android:id="@+id/llMyProfileGallery"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent" >
 
     <LinearLayout
-        android:id="@+id/LinearLayout01"
+        android:id="@+id/llMyProfileGalleryInner"
         android:layout_width="fill_parent"
         android:layout_height="65dp"
         android:orientation="vertical" >

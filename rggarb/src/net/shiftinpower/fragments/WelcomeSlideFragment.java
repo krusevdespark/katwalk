@@ -77,6 +77,8 @@ public class WelcomeSlideFragment extends SherlockFragment {
 	@Override
 	public void onDestroyView() {
 
+		super.onDestroyView();
+
 		// Prevent memory leak by releasing the bitmaps from the memory
 		Drawable drawable = ivViewPagerSlide.getDrawable();
 		if (drawable instanceof BitmapDrawable) {
@@ -84,8 +86,7 @@ public class WelcomeSlideFragment extends SherlockFragment {
 			Bitmap bitmap = bitmapDrawable.getBitmap();
 			bitmap.recycle();
 		}
-		
-		super.onDestroyView();
+
 	}
 
 	public SherlockFragment newInstance(int visiblePage) {

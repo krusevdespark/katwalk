@@ -3,12 +3,10 @@ package net.shiftinpower.activities;
 import java.io.File;
 import java.io.IOException;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -23,7 +21,6 @@ import net.shiftinpower.core.C;
 import net.shiftinpower.core.KatwalkApplication;
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.utilities.PhotoHandler;
-import net.shiftinpower.utilities.ToastMaker;
 
 /* Unfortunately we cannot use most of the global variables and features here because we cannot extend the RggarbCore class
  * The RggarbCore class is using the Sherlock library because it enables older versions of Android to use the Action bar and the Sliding menu
@@ -54,8 +51,10 @@ public class ProvideImageDialog extends Activity {
 
 
 	@Override
-	public void onResume() {
-		super.onResume();
+	public void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+				
+		katwalk = (KatwalkApplication) getApplication();
 	
 		// We dont want the ugly grey title bar to interrupt our dialog design, so this line removes it
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -72,13 +71,13 @@ public class ProvideImageDialog extends Activity {
 		}
 		
 		if (!currentImageExists) {
-			setContentView(R.layout.image_upload_without_image);
+			setContentView(R.layout.dialog_image_upload_without_image);
 
 		} else {
 			// This version of the Dialog layout enables the user to
 			// delete the avatar they just uploaded, also they can view
 			// it
-			setContentView(R.layout.image_upload_with_image);
+			setContentView(R.layout.dialog_iimage_upload_with_image);
 
 			// setting the views that exist on this layout only
 			imageView = (ImageButton) findViewById(R.id.iImage);
@@ -246,11 +245,11 @@ public class ProvideImageDialog extends Activity {
 		}
 
 	} // End of onActivityResult
-
+	
 	@Override
-	protected void onPause() {
-		super.onPause();
-		katwalk.recycleViewsDrawables(imageView);
+	protected void onStop() {
+		super.onStop();
+		katwalk.recycleViewsDrawables(imageView);		
 	}	
 
 } // End of Class

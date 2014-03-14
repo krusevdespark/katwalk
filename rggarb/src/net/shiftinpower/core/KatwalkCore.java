@@ -89,6 +89,8 @@ public class KatwalkCore extends SlidingFragmentActivity {
 	@Override
 	protected void onResume() {
 
+		super.onResume();
+
 		// If the user cant access the internet, they cant use the app so we log them out and
 		// If they try to login they will get a toast saying they need to connect to the internet beforehand
 		if (!katwalk.canUserAccessTheInternet()) {
@@ -108,11 +110,14 @@ public class KatwalkCore extends SlidingFragmentActivity {
 			startActivity(intent);
 			finish();
 		}
-		super.onResume();
+
 	} // End of onResume Method
 
 	@Override
 	protected void onRestart() {
+
+		super.onRestart();
+
 		sharedPreferences = getApplicationContext().getSharedPreferences(APP_SHARED_PREFS, Context.MODE_PRIVATE);
 		userLoggedInState = sharedPreferences.getBoolean("userLoggedInState", false);
 		if (!userLoggedInState) {
@@ -121,7 +126,7 @@ public class KatwalkCore extends SlidingFragmentActivity {
 			startActivity(intent);
 			finish();
 		}
-		super.onRestart();
+
 	}// End of onRestart Method
 
 	// This method should be called after every change to sharedPreferences
@@ -138,8 +143,7 @@ public class KatwalkCore extends SlidingFragmentActivity {
 		userShowsMoney = sharedPreferences.getBoolean(C.SharedPreferencesItems.USER_SHOWS_MONEY, true);
 		userShowsStats = sharedPreferences.getBoolean(C.SharedPreferencesItems.USER_SHOWS_STATS, true);
 		userAcceptsMessages = sharedPreferences.getString(C.SharedPreferencesItems.USER_ACCEPTS_MESSAGES, C.Miscellaneous.USER_RESTRICTION_LEVEL_NO);
-		userInteractsWithActivities = sharedPreferences.getString(C.SharedPreferencesItems.USER_INTERACTS_WITH_ACTIVITIES,
-				C.Miscellaneous.USER_RESTRICTION_LEVEL_NO);
+		userInteractsWithActivities = sharedPreferences.getString(C.SharedPreferencesItems.USER_INTERACTS_WITH_ACTIVITIES, C.Miscellaneous.USER_RESTRICTION_LEVEL_NO);
 		userItemsCount = sharedPreferences.getInt(C.SharedPreferencesItems.USER_ITEMS_COUNT, 0);
 		userCommentsCount = sharedPreferences.getInt(C.SharedPreferencesItems.USER_COMMENTS_COUNT, 0);
 		userFollowingItemsCount = sharedPreferences.getInt(C.SharedPreferencesItems.USER_FOLLOWING_ITEMS_COUNT, 0);

@@ -1,5 +1,6 @@
 package net.shiftinpower.adapters;
 
+// This will not be an enum in the future, because enums consume lots of memory and are a no-no in android
 public enum FeedEventType {
 	ITEM_AVAILABLE_AT_PLACE,
 	ITEM_HAS_BEEN_COMMENTED_ON,

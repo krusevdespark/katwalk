@@ -20,7 +20,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 public class GetSubcategoriesFromServerAsync extends AsyncTask<String, String, LinkedHashSet<ItemSubcategory>> {
-	
+
 	private int serverResponseCode;
 	private OnGetSubcategoriesListener listener;
 	private Context context;
@@ -38,14 +38,17 @@ public class GetSubcategoriesFromServerAsync extends AsyncTask<String, String, L
 	private void setReason(String reason) {
 		this.reason = reason;
 	}
-	
+
 	@Override
 	protected void onPreExecute() {
+
+		super.onPreExecute();
+
 		if (context != null) {
 			ShowLoadingMessage.loading(context, C.LoadingMessages.LOADING_SUBCATEGORIES);
 			loadingMessageShown = true;
 		}
-		super.onPreExecute();
+
 	}
 
 	@Override
@@ -65,19 +68,18 @@ public class GetSubcategoriesFromServerAsync extends AsyncTask<String, String, L
 				JSONArray subcategoryNamesListJSONArray = json.getJSONArray("subcategory_names");
 				JSONArray subcategoryParentIDsListJSONArray = json.getJSONArray("subcategory_parent_ids");
 				LinkedHashSet<ItemSubcategory> itemSubcategories = new LinkedHashSet<ItemSubcategory>();
-				
-				
+
 				int subcategoriesSize = subcategoryNamesListJSONArray.length();
-				if(subcategoryNamesListJSONArray!=null){
-					for(int i = 0; i < subcategoriesSize; i++){
+				if (subcategoryNamesListJSONArray != null) {
+					for (int i = 0; i < subcategoriesSize; i++) {
 						ItemSubcategory itemSubcategory = new ItemSubcategory();
 						itemSubcategory.setId(Integer.parseInt(subcategoryIDsListJSONArray.get(i).toString()));
 						itemSubcategory.setName(subcategoryNamesListJSONArray.get(i).toString());
 						itemSubcategory.setParentID(Integer.parseInt(subcategoryParentIDsListJSONArray.get(i).toString()));
 						itemSubcategories.add(itemSubcategory);
-					}					
+					}
 				}
-				
+
 				return itemSubcategories;
 
 			} else if (serverResponseCode == C.HttpResponses.FAILURE_BAD_REQUEST) {
@@ -102,12 +104,14 @@ public class GetSubcategoriesFromServerAsync extends AsyncTask<String, String, L
 			setReason(C.Tagz.UNKNOWN_PROBLEM);
 			return null;
 		}
-		
+
 	} // End of doInBackground
 
 	@Override
 	protected void onPostExecute(LinkedHashSet<ItemSubcategory> itemSubcategories) {
-		
+
+		super.onPostExecute(itemSubcategories);
+
 		if ((context != null) && (loadingMessageShown)) {
 			ShowLoadingMessage.dismissDialog();
 			loadingMessageShown = false;
@@ -120,8 +124,7 @@ public class GetSubcategoriesFromServerAsync extends AsyncTask<String, String, L
 				listener.onGetSubcategoriesFailure(reason);
 			}
 		}
-		
-		super.onPostExecute(itemSubcategories);
+
 	}
-	
+
 } // End of Class

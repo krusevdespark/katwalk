@@ -74,8 +74,8 @@ public class Signup extends SherlockActivity implements OnCheckWhetherAUserWithS
 	private String imageFilename;
 
 	// Shared preferences
-	Editor editor;
-	SharedPreferences sharedPreferences;
+	private Editor editor;
+	private SharedPreferences sharedPreferences;
 	private static final String APP_SHARED_PREFS = C.Preferences.SHARED_PREFERENCES_FILENAME;
 	private boolean isUserLoggedIn;
 
@@ -98,7 +98,8 @@ public class Signup extends SherlockActivity implements OnCheckWhetherAUserWithS
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-
+		super.onCreate(savedInstanceState);
+		
 		// If the user has connected the storage to the PC, they will be unable to use the app.
 		// In this case it makes no sense for us to start it, so we are making them disconnect the storage first.
 		if (!StorageStatusChecker.isExternalStorageAvailable()) {
@@ -116,8 +117,6 @@ public class Signup extends SherlockActivity implements OnCheckWhetherAUserWithS
 			startActivity(intent);
 			finish();
 		}
-
-		super.onCreate(savedInstanceState);
 
 		// Assign and inflate an XML file as the view component for this screen
 		requestWindowFeature(Window.FEATURE_NO_TITLE);

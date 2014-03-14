@@ -63,6 +63,8 @@ public class PersonProfileItems extends KatwalkSlidingMenu implements OnGetUserI
 
 		// Set the XML layout
 		setContentView(R.layout.activity_layout_my_profile_items);
+		
+		// Assign java objects to XML View elements
 		tvMyItemsTitle = (TextView) findViewById(R.id.tvMyItemsTitle);
 		etMyItemsListSearch = (EditText) findViewById(R.id.etMyItemsListSearch);
 		sMyItems = (Spinner) findViewById(R.id.sMyItems);

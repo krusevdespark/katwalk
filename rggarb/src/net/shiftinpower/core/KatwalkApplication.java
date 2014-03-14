@@ -1,16 +1,13 @@
 package net.shiftinpower.core;
 
 import java.util.ArrayList;
-
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.localsqlitedb.DBTools;
 import net.shiftinpower.utilities.HashPassword;
 import net.shiftinpower.utilities.PhotoHandler;
 import net.shiftinpower.utilities.ToastMaker;
-
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
-
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -24,13 +21,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 /**
- * This is the Application class. It is the first object of the application created and it is
- * generally used to instantiate utilities that should be only instatiated once in the lifetime of the app.
+ * This is the Application class. It is the first object of the application created and it is generally used to instantiate
+ * utilities that should be only instatiated once in the lifetime of the app.
  * 
  * It holds the global variables and utilities references such as DataBase, ImageLoader, ToastMaker, PhotoHandler
  * 
  * @author Kaloyan Roussev
- *
+ * 
  */
 public class KatwalkApplication extends Application {
 
@@ -55,7 +52,7 @@ public class KatwalkApplication extends Application {
 
 	// Bitmap Options
 	public BitmapFactory.Options bitmapOptions;
-	
+
 	@Override
 	public void onCreate() {
 		super.onCreate();
@@ -68,7 +65,7 @@ public class KatwalkApplication extends Application {
 			e.printStackTrace();
 			// Nothing can be done here
 		}
-		
+
 		dbTools = DBTools.getInstance(this);
 
 		// Create global configuration and initialize ImageLoader with this configuration
@@ -76,7 +73,7 @@ public class KatwalkApplication extends Application {
 		ImageLoaderConfiguration imageLoaderConfiguration = new ImageLoaderConfiguration.Builder(this).build();
 		imageLoader = ImageLoader.getInstance();
 		imageLoader.init(imageLoaderConfiguration);
-		
+
 		// Set global bitmap preferences
 		bitmapOptions = new BitmapFactory.Options();
 		bitmapOptions.inDither = false;
@@ -84,9 +81,8 @@ public class KatwalkApplication extends Application {
 		bitmapOptions.inInputShareable = true;
 		bitmapOptions.inTempStorage = new byte[16 * 1024];
 
-
 	} // End of onCreate
-	
+
 	public Boolean canUserAccessTheInternet() {
 		final ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
 		final NetworkInfo activeNetwork = connectivityManager.getActiveNetworkInfo();
@@ -112,7 +108,8 @@ public class KatwalkApplication extends Application {
 		return (int) l;
 	}
 
-	// This method is used throughout the application, whenever the current user's image should be displayed and might have been recently changed
+	// This method is used throughout the application, whenever the current user's image should be displayed and might have
+	// been recently changed
 	public void setUserImageToImageView(ImageView imageView, String imagePath, String sex) {
 		Bitmap imageBitmap;
 
@@ -147,28 +144,41 @@ public class KatwalkApplication extends Application {
 		}
 	} // End of setUserImageToImageView
 
-	// This method gets an ArrayList of ImageViews and recycles their bitmaps, for memory management reasons. Usually called in onPause.
+	// This method gets an ArrayList of ImageViews and recycles their bitmaps, for memory management reasons. Usually called
+	// in onPause.
 	public <T extends ImageView> void recycleViewsDrawables(ArrayList<T> imageViews) {
 
 		for (T t : imageViews) {
-			Drawable drawable = t.getDrawable();
-			if (drawable instanceof BitmapDrawable) {
-				BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-				Bitmap bitmap = bitmapDrawable.getBitmap();
-				bitmap.recycle();
+			if (t != null) {
+				Drawable drawable = t.getDrawable();
+				if (drawable != null) {
+					if (drawable instanceof BitmapDrawable) {
+						BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+						Bitmap bitmap = bitmapDrawable.getBitmap();
+						if (bitmap != null && !bitmap.isRecycled()) {
+							bitmap.recycle();
+						}
+					}
+				}
 			}
+
 		}
-	}
-	
+	} // End of recycleViewsDrawables
+
 	// This method gets an ImageView and recycles its bitmap, for memory management reasons. Usually called in onPause.
 	public <T extends ImageView> void recycleViewsDrawables(T t) {
-
-		Drawable drawable = t.getDrawable();
-		if (drawable instanceof BitmapDrawable) {
-			BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-			Bitmap bitmap = bitmapDrawable.getBitmap();
-			bitmap.recycle();
+		if (t != null) {
+			Drawable drawable = t.getDrawable();
+			if (drawable != null) {
+				if (drawable instanceof BitmapDrawable) {
+					BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+					Bitmap bitmap = bitmapDrawable.getBitmap();
+					if (bitmap != null && !bitmap.isRecycled()) {
+						bitmap.recycle();
+					}
+				}
+			}
 		}
-	}
+	} // End of recycleViewsDrawables
 
 } // End of Class

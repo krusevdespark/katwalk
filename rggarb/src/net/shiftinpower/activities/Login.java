@@ -94,7 +94,8 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-
+		
+		super.onCreate(savedInstanceState);
 		// If the user has connected the storage to the PC, they will be unable to use the app.
 		// In this case it makes no sense for us to start it, so we are making them disconnect the storage first.
 		if (!StorageStatusChecker.isExternalStorageAvailable()) {
@@ -112,8 +113,6 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 			startActivity(intent);
 			finish();
 		}
-
-		super.onCreate(savedInstanceState);
 
 		// Assign and inflate an XML file as the view component for this screen
 		requestWindowFeature(Window.FEATURE_NO_TITLE);

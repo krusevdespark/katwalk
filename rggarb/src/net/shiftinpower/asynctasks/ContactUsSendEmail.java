@@ -25,13 +25,16 @@ public class ContactUsSendEmail extends AsyncTask<Void, Void, Void> {
 
 	@Override
 	protected void onPreExecute() {
-		ShowLoadingMessage.loading(context, C.LoadingMessages.SENDING_MESSAGE);
+
 		super.onPreExecute();
+
+		ShowLoadingMessage.loading(context, C.LoadingMessages.SENDING_MESSAGE);
+
 	}
 
 	@Override
 	protected Void doInBackground(Void... params) {
-		
+
 		if (listener != null) {
 			try {
 				new EmailSender(C.Emailz.BRAGGR_OFFICIAL_ADDRESS, userEmail, C.Emailz.NEW_CONTACT_US_INQUIRY + emailLineOfInquiry, emailContent, null).execute();
@@ -41,7 +44,7 @@ public class ContactUsSendEmail extends AsyncTask<Void, Void, Void> {
 				listener.onContactUsSendEmailFailure();
 			}
 		}
-		
+
 		return null;
 
 	} // End of doInBackground
@@ -49,9 +52,9 @@ public class ContactUsSendEmail extends AsyncTask<Void, Void, Void> {
 	@Override
 	protected void onPostExecute(Void result) {
 
-		ShowLoadingMessage.dismissDialog();
-
 		super.onPostExecute(null);
+
+		ShowLoadingMessage.dismissDialog();
 
 	}
 

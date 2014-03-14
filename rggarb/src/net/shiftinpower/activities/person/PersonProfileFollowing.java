@@ -52,6 +52,8 @@ public class PersonProfileFollowing extends KatwalkSlidingMenu {
 
 		// Set the XML layout
 		setContentView(R.layout.activity_layout_my_profile_following);
+		
+		// Assign java objects to XML View elements
 		tvUserNameFollowingList = (TextView) findViewById(R.id.tvUserNameFollowingList);
 		etFollowingListSearch = (EditText) findViewById(R.id.etFollowingListSearch);
 		

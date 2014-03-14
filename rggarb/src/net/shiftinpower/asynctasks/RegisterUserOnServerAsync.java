@@ -39,15 +39,18 @@ public class RegisterUserOnServerAsync extends AsyncTask<String, String, Integer
 
 	@Override
 	protected void onPreExecute() {
-		ShowLoadingMessage.loading(context, "Registering User");
+
 		super.onPreExecute();
+
+		ShowLoadingMessage.loading(context, "Registering User");
+
 	}
 
 	@Override
 	protected Integer doInBackground(String... args) {
-		
+
 		int serverResponseCode;
-		
+
 		try {
 
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -65,7 +68,7 @@ public class RegisterUserOnServerAsync extends AsyncTask<String, String, Integer
 				userIdString = json.getString(C.DBColumns.MESSAGE);
 				currentLoggedInUserId = Integer.parseInt(userIdString);
 				return currentLoggedInUserId;
-			} else {				
+			} else {
 				return null;
 			}
 		} catch (JSONException e) {
@@ -78,7 +81,10 @@ public class RegisterUserOnServerAsync extends AsyncTask<String, String, Integer
 	} // End of doInBackground
 
 	@Override
-	protected void onPostExecute(Integer result) { 
+	protected void onPostExecute(Integer result) {
+
+		super.onPostExecute(result);
+
 		ShowLoadingMessage.dismissDialog();
 		if (listener != null) {
 			if (result != null) {
@@ -87,7 +93,7 @@ public class RegisterUserOnServerAsync extends AsyncTask<String, String, Integer
 				listener.onUserNotCreated();
 			}
 		}
-		super.onPostExecute(result);
+
 	}
-	
+
 } // End of Class

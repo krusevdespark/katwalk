@@ -51,12 +51,12 @@ public class GetItemDataFromServerAsync extends AsyncTask<String, String, ItemEx
 	@Override
 	protected void onPreExecute() {
 
+		super.onPreExecute();
+
 		if (context != null) {
 			ShowLoadingMessage.loading(context, C.LoadingMessages.LOADING_ITEM_DATA);
 			loadingMessageShown = true;
 		}
-
-		super.onPreExecute();
 
 	}
 
@@ -351,6 +351,8 @@ public class GetItemDataFromServerAsync extends AsyncTask<String, String, ItemEx
 	@Override
 	protected void onPostExecute(ItemExtended itemExtended) {
 
+		super.onPostExecute(itemExtended);
+
 		if ((context != null) && (loadingMessageShown)) {
 			ShowLoadingMessage.dismissDialog();
 			loadingMessageShown = false;
@@ -363,7 +365,6 @@ public class GetItemDataFromServerAsync extends AsyncTask<String, String, ItemEx
 				listener.onGetItemDataFailure();
 			}
 		}
-		super.onPostExecute(itemExtended);
 
 	} // End of onPostExecute
 

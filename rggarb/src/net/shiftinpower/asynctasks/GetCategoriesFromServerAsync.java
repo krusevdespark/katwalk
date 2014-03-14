@@ -42,11 +42,12 @@ public class GetCategoriesFromServerAsync extends AsyncTask<String, String, Link
 	@Override
 	protected void onPreExecute() {
 
+		super.onPreExecute();
+
 		if (context != null) {
 			ShowLoadingMessage.loading(context, C.LoadingMessages.LOADING_CATEGORIES);
 			loadingMessageShown = true;
 		}
-		super.onPreExecute();
 
 	}
 
@@ -110,6 +111,8 @@ public class GetCategoriesFromServerAsync extends AsyncTask<String, String, Link
 	@Override
 	protected void onPostExecute(LinkedHashSet<ItemCategory> itemCategories) {
 
+		super.onPostExecute(itemCategories);
+
 		if ((context != null) && (loadingMessageShown)) {
 			ShowLoadingMessage.dismissDialog();
 			loadingMessageShown = false;
@@ -122,7 +125,7 @@ public class GetCategoriesFromServerAsync extends AsyncTask<String, String, Link
 				listener.onGetCategoriesFailure(reason);
 			}
 		}
-		super.onPostExecute(itemCategories);
+
 	} // End of onPostExecute
 
 } // End of Class

@@ -67,7 +67,9 @@ public class ItemProfileMine extends KatwalkSlidingMenu implements OnGetItemData
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_layout_item_profile_mine);
+		
+		// Inflate the XML layout for this activity
+		setContentView(R.layout.activity_layout_item_profile_private);
 
 		// Assign and inflate an XML file as the view component for this screen
 		iItemProfilePrivateImageSlotOne = (SquareImageView) findViewById(R.id.iItemProfilePrivateImageSlotOne);

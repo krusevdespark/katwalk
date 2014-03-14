@@ -49,6 +49,8 @@ public class PersonProfileComments extends KatwalkSlidingMenu {
 
 		// set the XML layout
 		setContentView(R.layout.activity_layout_my_profile_comments);
+		
+		// Assign java objects to XML View elements
 		tvUserNameMyReviewsList = (TextView) findViewById(R.id.tvUserNameMyCommentsList);
 		etMyReviewsListSearch = (EditText) findViewById(R.id.etMyCommentsListSearch);
 

@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llAdapterableUserNoLongerHasItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/feed_item_margin"
@@ -11,6 +12,7 @@
     android:paddingTop="@dimen/feed_item_padding" >
 
     <TableRow
+        android:id="@+id/trAdapterableUserNoLongerHasItem"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="2" >
@@ -41,6 +43,7 @@
     </TableRow>
 
     <LinearLayout
+        android:id="@+id/llAdapterableUserNoLongerHasItemInner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -99,6 +102,7 @@
     </LinearLayout>
 
     <TableRow
+        android:id="@+id/trAdapterableUserNoLongerHasItemTwo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="3" >

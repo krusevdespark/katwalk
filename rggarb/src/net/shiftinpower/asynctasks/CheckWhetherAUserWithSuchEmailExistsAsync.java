@@ -16,13 +16,13 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.os.AsyncTask;
 
-public class CheckWhetherAUserWithSuchEmailExistsAsync extends AsyncTask<String, Void, Boolean>{
+public class CheckWhetherAUserWithSuchEmailExistsAsync extends AsyncTask<String, Void, Boolean> {
 	private JSONParser jsonParser = new JSONParser();
 	private String userEmail;
 	private OnCheckWhetherAUserWithSuchEmailExistsListener listener;
 	private Context context;
 	private boolean emailHasAlreadyBeenChecked;
-	
+
 	public CheckWhetherAUserWithSuchEmailExistsAsync(Context context, String userEmail, OnCheckWhetherAUserWithSuchEmailExistsListener listener, boolean emailHasAlreadyBeenChecked) {
 		this.userEmail = userEmail;
 		this.context = context;
@@ -32,21 +32,23 @@ public class CheckWhetherAUserWithSuchEmailExistsAsync extends AsyncTask<String,
 
 	@Override
 	protected void onPreExecute() {
-		ShowLoadingMessage.loading(context, C.LoadingMessages.CHECKING_WHETHER_EMAIL_IS_TAKEN);
 		super.onPreExecute();
+
+		ShowLoadingMessage.loading(context, C.LoadingMessages.CHECKING_WHETHER_EMAIL_IS_TAKEN);
+
 	}
-	
+
 	@Override
 	protected Boolean doInBackground(String... args) {
-		
+
 		int serverResponseCode;
-		
-		if(emailHasAlreadyBeenChecked) {
-			
+
+		if (emailHasAlreadyBeenChecked) {
+
 			return true;
-			
+
 		} else {
-			
+
 			try {
 				List<NameValuePair> params = new ArrayList<NameValuePair>();
 				params.add(new BasicNameValuePair(C.DBColumns.USER_EMAIL, userEmail));
@@ -54,7 +56,8 @@ public class CheckWhetherAUserWithSuchEmailExistsAsync extends AsyncTask<String,
 				JSONObject json = jsonParser.makeHttpRequest(C.API.WEB_ADDRESS + C.API.CHECK_IF_USER_WITH_SAME_EMAIL_EXISTS, "GET", params);
 
 				serverResponseCode = json.getInt(C.Tagz.SUCCESS);
-				if (serverResponseCode == C.HttpResponses.SUCCESS) { //SUCCESS in this case means that there is NO user with such email
+				if (serverResponseCode == C.HttpResponses.SUCCESS) { // SUCCESS in this case means that there is NO user with
+																		// such email
 					return true;
 				} else if (serverResponseCode == C.HttpResponses.FAILURE_BAD_REQUEST) {
 					return false;
@@ -68,20 +71,22 @@ public class CheckWhetherAUserWithSuchEmailExistsAsync extends AsyncTask<String,
 				return false;
 			} catch (Exception e) {
 				e.printStackTrace();
-				return false;				
+				return false;
 			}
-			
+
 		}
-		
+
 	} // End of doInBackground
 
 	@Override
 	protected void onPostExecute(Boolean result) {
+		super.onPostExecute(result);
+
 		ShowLoadingMessage.dismissDialog();
-		if(listener != null) {
+		if (listener != null) {
 			listener.onCheckWhetherAUserWithSuchEmailExistsChecked(result);
 		}
-		super.onPostExecute(result);
+
 	}
 
 } // End of Class

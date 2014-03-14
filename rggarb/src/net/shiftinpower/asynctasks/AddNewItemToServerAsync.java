@@ -41,9 +41,8 @@ public class AddNewItemToServerAsync extends AsyncTask<String, String, Bundle> {
 	private String timeItemWasAddedToDB;
 	private String reason;
 
-	public AddNewItemToServerAsync(DBTools dbTools, Context context, OnAddNewItemToServerListener listener, int currentlyLoggedInUser, String itemName,
-			String itemBrand, String itemCategoryID, String itemSubcategoryID, String itemBoughtFrom, String itemPrice, ArrayList<String> imageFilenames,
-			ArrayList<String> imageDescriptions, String itemDescription, boolean itemNew, boolean itemBoughtFromPlace, boolean itemIsAGift) {
+	public AddNewItemToServerAsync(DBTools dbTools, Context context, OnAddNewItemToServerListener listener, int currentlyLoggedInUser, String itemName, String itemBrand, String itemCategoryID, String itemSubcategoryID, String itemBoughtFrom,
+			String itemPrice, ArrayList<String> imageFilenames, ArrayList<String> imageDescriptions, String itemDescription, boolean itemNew, boolean itemBoughtFromPlace, boolean itemIsAGift) {
 		this.dbTools = dbTools;
 		this.context = context;
 		this.listener = listener;
@@ -68,6 +67,7 @@ public class AddNewItemToServerAsync extends AsyncTask<String, String, Bundle> {
 
 	@Override
 	protected void onPreExecute() {
+		super.onPreExecute();
 		ShowLoadingMessage.loading(context, C.LoadingMessages.ADDING_NEW_ITEM_TO_USER_COLLECTION);
 	}
 
@@ -108,8 +108,7 @@ public class AddNewItemToServerAsync extends AsyncTask<String, String, Bundle> {
 				dataRegardingTheItemJustAdded.putInt("transactionId", transactionId);
 				dataRegardingTheItemJustAdded.putString("timeItemWasAddedToDB", timeItemWasAddedToDB);
 
-				new AddItemPhotoPathsAndDescriptionsInServerDatabaseAsync(dbTools, context, currentlyLoggedInUser, itemId, imageDescriptions, imageFilenames)
-						.execute();
+				new AddItemPhotoPathsAndDescriptionsInServerDatabaseAsync(dbTools, context, currentlyLoggedInUser, itemId, imageDescriptions, imageFilenames).execute();
 
 				return dataRegardingTheItemJustAdded;
 
@@ -149,9 +148,10 @@ public class AddNewItemToServerAsync extends AsyncTask<String, String, Bundle> {
 
 	@Override
 	protected void onPostExecute(Bundle dataRegardingTheItemJustAdded) {
+		super.onPostExecute(dataRegardingTheItemJustAdded);
 
 		ShowLoadingMessage.dismissDialog();
-		
+
 		if (listener != null) {
 			if (dataRegardingTheItemJustAdded != null) {
 
@@ -165,7 +165,6 @@ public class AddNewItemToServerAsync extends AsyncTask<String, String, Bundle> {
 
 			}
 		}
-		super.onPostExecute(dataRegardingTheItemJustAdded);
 
 	} // End of onPostExecute
 

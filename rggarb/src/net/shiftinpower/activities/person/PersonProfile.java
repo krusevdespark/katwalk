@@ -4,15 +4,12 @@ import java.text.DecimalFormat;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TableRow;
 import android.widget.TextView;
 import net.shiftinpower.activities.NotImplementedYetScreen;
-import net.shiftinpower.activities.Settings;
 import net.shiftinpower.asynctasks.DownloadUserInfoFromServerAsync;
 import net.shiftinpower.core.C;
 import net.shiftinpower.core.KatwalkSlidingMenu;
@@ -139,21 +136,22 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		// Determine whether the person whose profile we are looking at is the current user or another user
 
 	} // End of onCreate
-	
-	
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		setDisplayedData();
+		// Set avatar image
+		iUserAvatar = (SquareImageView) findViewById(R.id.iUserAvatar);
+		katwalk.setUserImageToImageView(iUserAvatar, personAvatarPath, personSex);
 	}
 
 	@Override
 	protected void onPause() {
 		super.onPause();
+		// Memory management
 		katwalk.recycleViewsDrawables(iUserAvatar);
 	}
-
+	
 	@Override
 	public void onClick(View v) {
 		int id = v.getId();
@@ -250,8 +248,8 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		personActivityCount = userExtendedData.getUserActivityCount();
 		personMoneySpentOnItems = userExtendedData.getUserMoneySpentOnItems();
 	}
-	
-	private void handleCurrentUserDetails(){
+
+	private void handleCurrentUserDetails() {
 		personName = userName;
 		personSex = userSex;
 		personEmail = userEmail;
@@ -290,7 +288,6 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		// Set user status
 		setUserStatus(personPoints);
 		tvUserStatus.setText(personStatus);
-		
 
 		// Set the money spent text
 		DecimalFormat decimalFormat = new DecimalFormat("#0.00");
@@ -311,7 +308,7 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		personId = extras.getInt("personId", currentlyLoggedInUser);
 
 		if (currentUser) {
-			
+
 			handleCurrentUserDetails();
 			personAvatarPath = sharedPreferences.getString(C.SharedPreferencesItems.USER_AVATAR_PATH, C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE);
 			setDisplayedData();

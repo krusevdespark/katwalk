@@ -21,6 +21,7 @@ public class PrivacyPolicy extends KatwalkSlidingMenu {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_layout_privacy_policy);
 		
 		tvPrivacyPolicyTitle = (TextView) findViewById(R.id.tvPrivacyPolicyTitle);

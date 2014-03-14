@@ -65,13 +65,12 @@ public class MainActivity extends SherlockFragmentActivity implements OnClickLis
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-
+		super.onCreate(savedInstanceState);
+		
 		if (!StorageStatusChecker.isExternalStorageAvailable()) {
 			toastMaker.toast(net.shiftinpower.activities.MainActivity.this, C.Errorz.DISCONNECT_STORAGE_FIRST, Toast.LENGTH_SHORT);
 			finish();
 		}
-
-		super.onCreate(savedInstanceState);
 
 		// This app operates in No Title, Fullscreen mode
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -118,9 +117,6 @@ public class MainActivity extends SherlockFragmentActivity implements OnClickLis
 			// Nothing can be done here
 		}
 	} // End of onCreate
-	
-	
-	
 
 	@Override
 	protected void onPause() {

@@ -14,7 +14,7 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.os.AsyncTask;
 
-public	class ChangeUserQuoteAsync extends AsyncTask<String, String, String> {
+public class ChangeUserQuoteAsync extends AsyncTask<String, String, String> {
 	int success;
 	private Context context;
 	private OnChangeUserQuoteListener listener;
@@ -22,22 +22,22 @@ public	class ChangeUserQuoteAsync extends AsyncTask<String, String, String> {
 	private String userQuote;
 	private JSONParser jsonParser = new JSONParser();
 	private String reason;
-	
+
 	public ChangeUserQuoteAsync(Context context, OnChangeUserQuoteListener listener, String userId, String userQuote) {
 		this.context = context;
 		this.listener = listener;
 		this.userId = userId;
 		this.userQuote = userQuote;
 	}
-	
+
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
-	
+
 	@Override
 	protected void onPreExecute() {
-		ShowLoadingMessage.loading(context);
 		super.onPreExecute();
+		ShowLoadingMessage.loading(context);
 	}
 
 	@Override
@@ -72,22 +72,23 @@ public	class ChangeUserQuoteAsync extends AsyncTask<String, String, String> {
 			return null;
 		} catch (Exception e) {
 			setReason(C.Tagz.UNKNOWN_PROBLEM);
-			return null;	
+			return null;
 		}
 	} // End of doInBackground
 
 	@Override
 	protected void onPostExecute(String result) {
+		super.onPostExecute(result);
+
 		ShowLoadingMessage.dismissDialog();
-		if(listener!=null) {
-			if(result.contentEquals(C.Tagz.SUCCESS)) {
+		if (listener != null) {
+			if (result.contentEquals(C.Tagz.SUCCESS)) {
 				listener.onChangeUserQuoteSuccess();
 			} else {
 				listener.onChangeUserQuoteFailure(reason);
 			}
 		}
-		super.onPostExecute(result);
-		
+
 	} // End of onPostExecute
-	
+
 } // End of Class
