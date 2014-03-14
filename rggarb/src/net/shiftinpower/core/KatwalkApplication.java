@@ -56,17 +56,9 @@ public class KatwalkApplication extends Application {
 	// Bitmap Options
 	public BitmapFactory.Options bitmapOptions;
 	
-	private static KatwalkApplication singleton;
-
-	public KatwalkApplication getInstance() {
-		return singleton;
-	}
-
 	@Override
 	public void onCreate() {
 		super.onCreate();
-		singleton = this;
-		
 
 		// Setting up fonts
 		try {

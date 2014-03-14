@@ -16,6 +16,7 @@ import net.shiftinpower.activities.Settings;
 import net.shiftinpower.asynctasks.DownloadUserInfoFromServerAsync;
 import net.shiftinpower.core.C;
 import net.shiftinpower.core.KatwalkSlidingMenu;
+import net.shiftinpower.customviews.SquareImageView;
 import net.shiftinpower.interfaces.OnDownloadUserInfoFromServerListener;
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.objects.UserExtended;
@@ -36,7 +37,7 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 	protected TextView tvUserStatus;
 	protected TextView tvChangeUserQuoteTitle;
 	protected TextView tvUserProfileStatsAreVisibleNote;
-	protected ImageButton iUserAvatar;
+	protected SquareImageView iUserAvatar;
 	protected TextView tvUserProfileItemsTab;
 	protected TextView tvUserProfileCommentsTab;
 	protected TextView tvUserProfileFollowingTab;
@@ -93,7 +94,7 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		tvUserName = (TextView) findViewById(R.id.tvUserName);
 		tvUserStatus = (TextView) findViewById(R.id.tvUserStatus);
 		tvMoneySpent = (TextView) findViewById(R.id.tvMoneySpent);
-		iUserAvatar = (ImageButton) findViewById(R.id.iUserAvatar);
+		iUserAvatar = (SquareImageView) findViewById(R.id.iUserAvatar);
 		tvUserQuote = (TextView) findViewById(R.id.tvUserQuote);
 		bUserProfileActionButtonOne = (Button) findViewById(R.id.bUserProfileActionButtonOne);
 		bUserProfileActionButtonTwo = (Button) findViewById(R.id.bUserProfileActionButtonTwo);
@@ -138,6 +139,20 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		// Determine whether the person whose profile we are looking at is the current user or another user
 
 	} // End of onCreate
+	
+	
+
+	@Override
+	protected void onResume() {
+		super.onResume();
+		setDisplayedData();
+	}
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		katwalk.recycleViewsDrawables(iUserAvatar);
+	}
 
 	@Override
 	public void onClick(View v) {

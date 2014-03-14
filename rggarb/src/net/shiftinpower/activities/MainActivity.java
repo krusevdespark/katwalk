@@ -118,6 +118,15 @@ public class MainActivity extends SherlockFragmentActivity implements OnClickLis
 			// Nothing can be done here
 		}
 	} // End of onCreate
+	
+	
+	
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		finish();
+	}
 
 	@Override
 	public void onBackPressed() {

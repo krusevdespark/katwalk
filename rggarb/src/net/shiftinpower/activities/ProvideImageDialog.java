@@ -20,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 import net.shiftinpower.core.C;
+import net.shiftinpower.core.KatwalkApplication;
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.utilities.PhotoHandler;
 import net.shiftinpower.utilities.ToastMaker;
@@ -48,26 +49,17 @@ public class ProvideImageDialog extends Activity {
 	protected SharedPreferences sharedPreferences;
 	protected static final String APP_SHARED_PREFS = C.Preferences.SHARED_PREFERENCES_FILENAME;
 
-	// Fonts
-	protected Typeface font1;
-	protected Typeface font2;
+	private KatwalkApplication katwalk;
 
-	// Photo Handler custom class containing several methods that deal with images
-	protected PhotoHandler photoHandler = new PhotoHandler(this);
 
-	// Custom class to display toasts
-	protected ToastMaker toastMaker = new ToastMaker();
 
 	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-
+	public void onResume() {
+		super.onResume();
+	
 		// We dont want the ugly grey title bar to interrupt our dialog design, so this line removes it
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-		// Shared Preferences
-		sharedPreferences = getApplicationContext().getSharedPreferences(APP_SHARED_PREFS, Context.MODE_PRIVATE);
-
+		
 		// Obtain the vital user Information from the starting intent
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -78,16 +70,7 @@ public class ProvideImageDialog extends Activity {
 				currentImageExists = false;
 			}
 		}
-
-		// Setting up fonts
-		try {
-			font1 = Typeface.createFromAsset(getApplicationContext().getAssets(), C.Fontz.FONT_1);
-			font2 = Typeface.createFromAsset(getApplicationContext().getAssets(), C.Fontz.FONT_2);
-		} catch (Exception e) {
-			e.printStackTrace();
-			// Nothing can be done here
-		}
-
+		
 		if (!currentImageExists) {
 			setContentView(R.layout.image_upload_without_image);
 
@@ -102,7 +85,7 @@ public class ProvideImageDialog extends Activity {
 			bDeletePhoto = (Button) findViewById(R.id.bDeleteImage);
 			// Setting font
 			try {
-				bDeletePhoto.setTypeface(font1);
+				bDeletePhoto.setTypeface(katwalk.font1);
 			} catch (Exception e) {
 			}
 			bDeletePhoto.setOnClickListener(new OnClickListener() {
@@ -125,6 +108,19 @@ public class ProvideImageDialog extends Activity {
 				}
 			});
 		}
+		
+		
+		// Display the image
+		if (currentImageExists) {
+
+			try {
+				imageView.setImageBitmap(BitmapFactory.decodeFile(imagePath));
+
+			} catch (OutOfMemoryError ex) {
+				ex.printStackTrace();
+				imageView.setImageBitmap(katwalk.photoHandler.getBitmapAndResizeIt(imagePath));
+			}
+		}
 
 		// Setting the views that exist on both dialog layouts
 		bTakeAPhoto = (Button) findViewById(R.id.bTakeAPhoto);
@@ -133,26 +129,12 @@ public class ProvideImageDialog extends Activity {
 
 		// Setting fonts
 		try {
-			bTakeAPhoto.setTypeface(font1);
-			bPickFromGallery.setTypeface(font1);
-			bCancelPhotoUpload.setTypeface(font1);
+			bTakeAPhoto.setTypeface(katwalk.font1);
+			bPickFromGallery.setTypeface(katwalk.font1);
+			bCancelPhotoUpload.setTypeface(katwalk.font1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			// Nothing can be done here
-		}
-
-		// if the user hasnt got an avatar, we are getting their gender
-		// and assigning them a default one
-
-		if (currentImageExists) {
-
-			try {
-				imageView.setImageBitmap(BitmapFactory.decodeFile(imagePath));
-
-			} catch (OutOfMemoryError ex) {
-				ex.printStackTrace();
-				imageView.setImageBitmap(photoHandler.getBitmapAndResizeIt(imagePath));
-			}
 		}
 
 		bTakeAPhoto.setOnClickListener(new OnClickListener() {
@@ -169,7 +151,7 @@ public class ProvideImageDialog extends Activity {
 					// store the taken image in
 					File imageFile = null;
 					try {
-						imageFile = photoHandler.createImageFile();
+						imageFile = katwalk.photoHandler.createImageFile();
 						imagePath = imageFile.getAbsolutePath();
 						takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imageFile));
 					} catch (IOException e) {
@@ -185,7 +167,7 @@ public class ProvideImageDialog extends Activity {
 				} else { // Notify the user that their device is unable
 							// to take photos
 
-					toastMaker.toast(net.shiftinpower.activities.ProvideImageDialog.this, C.Errorz.DEVICE_UNABLE_TO_TAKE_PHOTOS, Toast.LENGTH_LONG);
+					katwalk.toastMaker.toast(net.shiftinpower.activities.ProvideImageDialog.this, C.Errorz.DEVICE_UNABLE_TO_TAKE_PHOTOS, Toast.LENGTH_LONG);
 					currentImageExists = false;
 
 					// finish();
@@ -212,7 +194,7 @@ public class ProvideImageDialog extends Activity {
 			}
 		}); // End of Pick a Photo from Gallery button handling
 
-	} // End of onClick
+	} // End of onResume
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -223,8 +205,8 @@ public class ProvideImageDialog extends Activity {
 
 				// The Camera intent has provided the photo in the file created
 				// eariler on, we need to deal with it
-				if(!(photoHandler.handleBigCameraPhoto())) {
-					
+				if (!(katwalk.photoHandler.handleBigCameraPhoto())) {
+
 					// Something went wrong while dealing with the image
 					// Remove visible avatar on the screen
 					imagePath = C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE;
@@ -234,12 +216,12 @@ public class ProvideImageDialog extends Activity {
 					intent.putExtra(C.ImageHandling.INTENT_EXTRA_IMAGE_PATH_KEY, imagePath);
 					setResult(RESULT_OK, intent);
 					finish();
-				} 
+				}
 
 			} else if (requestCode == C.ImageHandling.REQUEST_CODE_PICK_IMAGE && resultCode == RESULT_OK && null != data) {
 
 				// obtaining the path to the new bitmap and setting the userAvatar
-				if(!(photoHandler.handleGalleryPhoto(data))) {
+				if (!(katwalk.photoHandler.handleGalleryPhoto(data))) {
 					// Something went wrong while dealing with the image
 					// Remove visible avatar on the screen
 					imagePath = C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE;
@@ -253,7 +235,7 @@ public class ProvideImageDialog extends Activity {
 
 			} // End of requestCode == PICK_IMAGE Case
 
-			imagePath = photoHandler.getImagePath();
+			imagePath = katwalk.photoHandler.getImagePath();
 			currentImageExists = true;
 
 			Intent intent = new Intent();
@@ -264,5 +246,11 @@ public class ProvideImageDialog extends Activity {
 		}
 
 	} // End of onActivityResult
+
+	@Override
+	protected void onPause() {
+		super.onPause();
+		katwalk.recycleViewsDrawables(imageView);
+	}	
 
 } // End of Class
