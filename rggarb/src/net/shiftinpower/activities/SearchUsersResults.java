@@ -16,6 +16,13 @@ import android.widget.TextView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.RadioGroup.OnCheckedChangeListener;
 
+/**
+* This class is laid out and the activity is visible in the app but it does not do Search work yet.
+*
+* @author Kaloyan Roussev
+*
+*/
+
 public class SearchUsersResults extends KatwalkSlidingMenu {
 	
 	// XML view elements

@@ -13,12 +13,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 import net.shiftinpower.asynctasks.ContactUsSendEmail;
-import net.shiftinpower.asynctasks.ForgottenPasswordGetUserNameAndSendEmail;
 import net.shiftinpower.core.C;
 import net.shiftinpower.core.KatwalkSlidingMenu;
 import net.shiftinpower.interfaces.OnContactUsSendEmailListener;
 import net.shiftinpower.koldrain.R;
 
+/**
+* Just a draft.
+* @author Kaloyan Kalinov
+*
+*/
 public class ContactUs extends KatwalkSlidingMenu implements OnContactUsSendEmailListener{
 	
 	// Set up XML View Components

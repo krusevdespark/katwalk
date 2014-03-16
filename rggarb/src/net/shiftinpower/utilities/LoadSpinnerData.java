@@ -8,6 +8,16 @@ import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+/**
+* Allows loading data into spinners using a single line
+*
+* The second method enables us to load ItemCategory and ItemSubcategory objects with overriden toString methods, that return
+* the Category name
+*
+* @author Wizard
+*
+*/
+
 public class LoadSpinnerData {
 	
 	public static void loadSpinnerData(Context context, ArrayList<String> array, Spinner spinner) {

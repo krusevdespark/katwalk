@@ -16,6 +16,15 @@ import net.shiftinpower.utilities.ShowLoadingMessage;
 import android.content.Context;
 import android.os.AsyncTask;
 
+/**
+* This asynctask is part of the InitialDataloader sequence of tasks obtaining vital information from the server It gets the
+* basic sets of data for the user items. Extended item data is obtained using the GetItemDataFromServerAsync.class for each
+* item
+*
+* @author Kaloyan Roussev
+*
+*/
+
 public class GetUserItemsFromServerAsync extends AsyncTask<String, String, LinkedHashSet<ItemBasic>> {
 
 	private int serverResponseCode;

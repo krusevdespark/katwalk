@@ -63,17 +63,15 @@
                 android:textSize="12sp"
                 android:textStyle="italic" />
 
-            <ImageButton
+            <net.shiftinpower.customviews.SquareImageView
                 android:id="@+id/iImageSlotOne"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="7dp"
-                android:adjustViewBounds="true"
                 android:contentDescription="@string/iAddAnItemAvatarImageDescription"
                 android:padding="2dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/images_default_product" >
-            </ImageButton>
+                android:src="@drawable/images_default_product" />
 
             <EditText
                 android:id="@+id/etItemImageOneDescription"
@@ -97,57 +95,49 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10sp" >
 
-                <ImageButton
+                <net.shiftinpower.customviews.SquareImageView
                     android:id="@+id/iImageSlotTwo"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginRight="7dp"
-                    android:adjustViewBounds="true"
                     android:contentDescription="@string/iAddAnItemPhotoOneImageDescription"
                     android:padding="0dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/images_default_product"
-                    android:visibility="gone" >
-                </ImageButton>
+                    android:visibility="gone" />
 
-                <ImageButton
+                <net.shiftinpower.customviews.SquareImageView
                     android:id="@+id/iImageSlotThree"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginRight="7dp"
-                    android:adjustViewBounds="true"
                     android:contentDescription="@string/iAddAnItemPhotoTwoImageDescription"
                     android:padding="0dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/images_default_product"
-                    android:visibility="gone" >
-                </ImageButton>
+                    android:visibility="gone" />
 
-                <ImageButton
+                <net.shiftinpower.customviews.SquareImageView
                     android:id="@+id/iImageSlotFour"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginRight="7dp"
-                    android:adjustViewBounds="true"
                     android:contentDescription="@string/iAddAnItemPhotoThreeImageDescription"
                     android:padding="0dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/images_default_product"
-                    android:visibility="gone" >
-                </ImageButton>
+                    android:visibility="gone" />
 
-                <ImageButton
+                <net.shiftinpower.customviews.SquareImageView
                     android:id="@+id/iImageSlotFive"
                     android:layout_width="70dp"
                     android:layout_height="70dp"
                     android:layout_marginRight="7dp"
-                    android:adjustViewBounds="true"
                     android:contentDescription="@string/iAddAnItemPhotoFourImageDescription"
                     android:padding="0dp"
                     android:scaleType="centerCrop"
                     android:src="@drawable/images_default_product"
-                    android:visibility="gone" >
-                </ImageButton>
+                    android:visibility="gone" />
             </TableRow>
 
             <EditText

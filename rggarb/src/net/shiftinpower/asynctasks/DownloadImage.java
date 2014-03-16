@@ -9,13 +9,15 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
 /**
- * 
- * We are either storing the User Avatar on our server in a folder or obtaining it from Facebook Graph API this class fetches
- * the avatar and writes it into a Bitmap that can be used later
- * 
- * @author Kaloyan Roussev
- * 
- */
+*
+* We are either storing the User Avatar on our server in a folder or obtaining it from Facebook Graph API this class fetches
+* the avatar and writes it into a Bitmap that can be used later
+*
+* This class is also used for any image download
+*
+* @author Kaloyan Roussev
+*
+*/
 public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
 
 	private Bitmap imageBitmap;

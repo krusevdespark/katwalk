@@ -5,6 +5,15 @@ import android.app.Dialog;
 import android.content.Context;
 import android.widget.TextView;
 
+/**
+* Provides custom toastlike dialogs and splash screens used for loading operations
+*
+* Splash screens could be used for advertising in the future
+*
+* @author Kaloyan Roussev
+*
+*/
+
 public class ShowLoadingMessage{
 	static TextView tvLoading;
 	

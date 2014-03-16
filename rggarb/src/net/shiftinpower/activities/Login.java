@@ -37,8 +37,26 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.TextView.OnEditorActionListener;
-
-public class Login extends SherlockActivity implements OnClickListener, OnUserLoginAttemptListener, OnForgottenPasswordEmailSentListener, OnFacebookUserRegisteredListener {
+/**
+*
+* NOTE: The Facebook log in feature is NOT implemented properly. Just drafted.
+*
+* NOTE: oauth or another way of secure usage still not implemented
+*
+* NOTE:
+*
+* Ideally, all the classes extend a global class from the net.shiftinpower.core package, so global variables and classes
+* are initiated once and used throughout
+*
+* Fonts, utility classes, shared preferences are initiated and accessed from there.
+*
+* However, the case with MainActivity, Login and Signup screens is a bit special, as they do not employ the ActionBar and Sliding menu
+* I can fix this, but I havent had the time to do so.
+*
+* @author Kaloyan Roussev
+*/
+public class Login extends SherlockActivity implements OnClickListener, OnUserLoginAttemptListener, OnForgottenPasswordEmailSentListener,
+		OnFacebookUserRegisteredListener {
 
 	// Set up XML View Components
 	private TextView tvBraggrLogoLoginPage;
@@ -94,7 +112,7 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
-		
+
 		super.onCreate(savedInstanceState);
 		// If the user has connected the storage to the PC, they will be unable to use the app.
 		// In this case it makes no sense for us to start it, so we are making them disconnect the storage first.
@@ -120,7 +138,6 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 
 		// This app operates in Full Screen, so this is what we are setting here
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		
 
 		// Inflate the XML View components and Link them to the corresponding Java Objects in this class
 		tvBraggrLogoLoginPage = (TextView) findViewById(R.id.tvBraggrLogoLoginPage);
@@ -203,7 +220,8 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 				// Toast about it not being valid if it isnt
 				if (userEmailLoginPage.length() > 0) {
 					if (!emailVerifier.isEmailValid(userEmailLoginPage)) {
-						toastMaker.toast(net.shiftinpower.activities.Login.this, C.Errorz.ENTER_VALID_EMAIL, Toast.LENGTH_SHORT, Gravity.CENTER_HORIZONTAL, 0, -100);
+						toastMaker.toast(net.shiftinpower.activities.Login.this, C.Errorz.ENTER_VALID_EMAIL, Toast.LENGTH_SHORT, Gravity.CENTER_HORIZONTAL, 0,
+								-100);
 					}
 				}
 
@@ -243,14 +261,14 @@ public class Login extends SherlockActivity implements OnClickListener, OnUserLo
 
 			// Get the user email entered in the input box
 			userEmailLoginPage = etUserEmailLoginPage.getText().toString().trim();
-			
+
 			// Get the user password from the input
 			userPasswordLoginPage = etUserPasswordLoginPage.getText().toString().trim();
 
 			if (userPasswordLoginPage == null || userEmailLoginPage == null) {
-				
+
 				toastMaker.toast(net.shiftinpower.activities.Login.this, C.Errorz.FILL_IN_LOGIN_CREDENTIALS, Toast.LENGTH_SHORT);
-				
+
 			} else {
 
 				// Hash the password so we can transfer it to the db and check it.

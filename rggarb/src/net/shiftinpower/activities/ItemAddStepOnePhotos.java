@@ -1,9 +1,11 @@
 package net.shiftinpower.activities;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import net.shiftinpower.asynctasks.UploadItemPhotoFilesToServerAsync;
 import net.shiftinpower.core.C;
 import net.shiftinpower.core.KatwalkSlidingMenu;
+import net.shiftinpower.customviews.SquareImageView;
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.objects.TemporaryImage;
 import net.shiftinpower.utilities.PhotoHandler;
@@ -11,6 +13,7 @@ import net.shiftinpower.utilities.Transporter;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -35,11 +38,11 @@ public class ItemAddStepOnePhotos extends KatwalkSlidingMenu {
 	// Set up XML View Components
 	private TextView tvAddAnItemStepOneTitle;
 	private TextView tvAddAnItemStepOneSubTitle;
-	private ImageButton iImageSlotOne;
-	private ImageButton iImageSlotTwo;
-	private ImageButton iImageSlotThree;
-	private ImageButton iImageSlotFour;
-	private ImageButton iImageSlotFive;
+	private SquareImageView iImageSlotOne;
+	private SquareImageView iImageSlotTwo;
+	private SquareImageView iImageSlotThree;
+	private SquareImageView iImageSlotFour;
+	private SquareImageView iImageSlotFive;
 	private EditText etItemImageOneDescription;
 	private EditText etItemImageTwoDescription;
 	private EditText etItemImageThreeDescription;
@@ -55,7 +58,8 @@ public class ItemAddStepOnePhotos extends KatwalkSlidingMenu {
 	private TemporaryImage itemImageThree = new TemporaryImage();
 	private TemporaryImage itemImageFour = new TemporaryImage();
 	private TemporaryImage itemImageFive = new TemporaryImage();
-
+	private ArrayList<SquareImageView> imageViewsWhoseBitmapsShouldBeRecycled = new ArrayList<SquareImageView>();
+	
 	// Intent changeImageDialog
 	private Intent changeImageDialog;
 
@@ -73,11 +77,11 @@ public class ItemAddStepOnePhotos extends KatwalkSlidingMenu {
 
 		tvAddAnItemStepOneTitle = (TextView) findViewById(R.id.tvAddAnItemStepOneTitle);
 		tvAddAnItemStepOneSubTitle = (TextView) findViewById(R.id.tvAddAnItemStepOneSubTitle);
-		iImageSlotOne = (ImageButton) findViewById(R.id.iImageSlotOne);
-		iImageSlotTwo = (ImageButton) findViewById(R.id.iImageSlotTwo);
-		iImageSlotThree = (ImageButton) findViewById(R.id.iImageSlotThree);
-		iImageSlotFour = (ImageButton) findViewById(R.id.iImageSlotFour);
-		iImageSlotFive = (ImageButton) findViewById(R.id.iImageSlotFive);
+		iImageSlotOne = (SquareImageView) findViewById(R.id.iImageSlotOne);
+		iImageSlotTwo = (SquareImageView) findViewById(R.id.iImageSlotTwo);
+		iImageSlotThree = (SquareImageView) findViewById(R.id.iImageSlotThree);
+		iImageSlotFour = (SquareImageView) findViewById(R.id.iImageSlotFour);
+		iImageSlotFive = (SquareImageView) findViewById(R.id.iImageSlotFive);
 		etItemImageOneDescription = (EditText) findViewById(R.id.etItemImageOneDescription);
 		etItemImageTwoDescription = (EditText) findViewById(R.id.etItemImageTwoDescription);
 		etItemImageThreeDescription = (EditText) findViewById(R.id.etItemImageThreeDescription);
@@ -85,6 +89,13 @@ public class ItemAddStepOnePhotos extends KatwalkSlidingMenu {
 		etItemImageFiveDescription = (EditText) findViewById(R.id.etItemImageFiveDescription);
 		bAddAnItemStepOneSubmit = (Button) findViewById(R.id.bAddAnItemStepOneSubmit);
 
+		// Register the image views for memory management 
+		imageViewsWhoseBitmapsShouldBeRecycled.add(iImageSlotOne);
+		imageViewsWhoseBitmapsShouldBeRecycled.add(iImageSlotTwo);
+		imageViewsWhoseBitmapsShouldBeRecycled.add(iImageSlotThree);
+		imageViewsWhoseBitmapsShouldBeRecycled.add(iImageSlotFour);
+		imageViewsWhoseBitmapsShouldBeRecycled.add(iImageSlotFive);
+		
 		// Set the fonts
 		try {
 			tvAddAnItemStepOneTitle.setTypeface(katwalk.font1);
@@ -219,11 +230,20 @@ public class ItemAddStepOnePhotos extends KatwalkSlidingMenu {
 					 */
 					Intent itemAddSecondStepData = new Intent(ItemAddStepOnePhotos.this, ItemAddStepTwoData.class);
 					startActivity(itemAddSecondStepData);
+					finish();
 				}
 			}
 		});
 
 	}// End of onCreate method
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		//Log.e("Kimi", "onStop");
+		//katwalk.recycleViewsDrawables(imageViewsWhoseBitmapsShouldBeRecycled);
+		//finish();
+	}
 
 	/*
 	 * If the user accidentally presses the hardware back button, they will lose all their data that they've entered We want

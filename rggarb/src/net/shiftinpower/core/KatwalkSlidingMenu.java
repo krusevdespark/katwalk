@@ -1,8 +1,6 @@
 package net.shiftinpower.core;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.ListFragment;
@@ -12,22 +10,22 @@ import android.view.View.OnClickListener;
 import android.widget.ImageView;
 import android.widget.TextView;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-
 import net.shiftinpower.activities.person.MyProfile;
 import net.shiftinpower.koldrain.R;
 
-// This is the third highest class in the hierarchy. It takes care of the sliding menu that is accessible through pretty much
-// Every activity in the App, except for the Login/Signup screens
-// All activities for the logged in users should extend this activity
+/**
+* This is the third highest class in the hierarchy. It takes care of the sliding menu that is accessible through pretty much
+* Every activity in the App, except for the Login/Signup screens All activities for the logged in users should extend this
+* activity
+*
+* @author Kaloyan Roussev
+*
+*/
 public class KatwalkSlidingMenu extends KatwalkActionBar {
 
 	// XML View elements
 	private TextView tvSlidingMenuUserName;
 	private ImageView ivSlidingMenuUserAvatar;
-
-	// This class holds the Sliding Menu which holds the Sliding Menu Header. In it, there is a User Image, so we need this
-	// bitmap
-	private Bitmap ivSlidingMenuUserBitmap;
 
 	// Sliding Menu
 	private SlidingMenu slidingMenu;
@@ -49,7 +47,6 @@ public class KatwalkSlidingMenu extends KatwalkActionBar {
 		getSupportFragmentManager().beginTransaction().replace(R.id.menu_frame, new KatwalkSlidingMenuListFragment()).commit();
 
 		// Set up the sliding menu
-		setBehindContentView(R.drawable.sliding_menu_header);
 		FragmentTransaction fragmentTransaction = this.getSupportFragmentManager().beginTransaction();
 		listFragment = new KatwalkSlidingMenuListFragment();
 		fragmentTransaction.replace(R.id.menu_frame, listFragment);

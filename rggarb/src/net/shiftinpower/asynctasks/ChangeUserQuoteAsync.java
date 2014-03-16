@@ -14,6 +14,12 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.os.AsyncTask;
 
+/**
+ * The user can change their quote from MyProfile
+ * 
+ * @author Kaloyan Roussev
+ */
+
 public class ChangeUserQuoteAsync extends AsyncTask<String, String, String> {
 	int success;
 	private Context context;

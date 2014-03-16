@@ -13,25 +13,37 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
-import android.graphics.Bitmap;
 import android.graphics.Typeface;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import net.shiftinpower.core.C;
 import net.shiftinpower.utilities.*;
 import net.shiftinpower.fragments.WelcomeSlideFragment;
+
+/**
+ * 
+ * This is the first screen users see when they open the app (or if they had just logged out)
+ * It contains app name and moto, a slideshow (viewpager) and the Login/Signup buttons
+ * 
+* NOTE:
+* Ideally, all the classes extend a global class from the net.shiftinpower.core package, so global variables and classes
+* are initiated once and used throughout
+*
+* Fonts, utility classes, shared preferences are initiated and accessed from there.
+*
+* However, the case with MainActivity, Login and Signup screens is a bit special, as they do not employ the ActionBar and Sliding menu
+* I can fix this, but I havent had the time to do so.
+*
+* @author Kaloyan Roussev
+*/
 
 public class MainActivity extends SherlockFragmentActivity implements OnClickListener {
 

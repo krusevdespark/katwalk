@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.TableRow;
 import android.widget.TextView;
 import net.shiftinpower.activities.NotImplementedYetScreen;
-import net.shiftinpower.asynctasks.DownloadUserInfoFromServerAsync;
+import net.shiftinpower.asynctasks.GetUserDataFromServerAsync;
 import net.shiftinpower.core.C;
 import net.shiftinpower.core.KatwalkSlidingMenu;
 import net.shiftinpower.customviews.SquareImageView;
@@ -20,7 +20,7 @@ import net.shiftinpower.objects.UserExtended;
 
 /**
  * 
- * This is the tempale for a Person's Profile that holds what is common between MyProfile Screen and User Profile Screen
+ * This is the tempale for a Person's Profile that holds the commonalities between MyProfile Screen and User Profile Screen
  * 
  * @author Kaloyan Roussev
  * 
@@ -314,7 +314,8 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 			setDisplayedData();
 
 		} else {
-			new DownloadUserInfoFromServerAsync(String.valueOf(personId), PersonProfile.this);
+			new GetUserDataFromServerAsync(String.valueOf(personId), PersonProfile.this, PersonProfile.this).execute();
+			// TODO
 		}
 	}
 

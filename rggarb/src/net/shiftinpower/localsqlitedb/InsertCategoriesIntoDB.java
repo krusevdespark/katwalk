@@ -8,6 +8,14 @@ import android.content.ContentValues;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 
+/**
+* After having obtained a fresh set of Categories from the Server Database, now we have it at hand locally for immediate
+* access
+*
+* @author Kaloyan Roussev
+*
+*/
+
 public class InsertCategoriesIntoDB extends AsyncTask<Void, Void, Void> {
 
 	private LinkedHashSet<ItemCategory> itemCategories;

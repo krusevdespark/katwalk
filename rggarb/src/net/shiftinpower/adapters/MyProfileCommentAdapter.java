@@ -11,7 +11,12 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
+/**
+* Just a draft
+*
+* @author Kaloyan Roussev
+*
+*/
 public class MyProfileCommentAdapter extends BaseAdapter {
 
 	private ArrayList<String> itemNames =  new ArrayList<String>();

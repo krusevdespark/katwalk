@@ -32,6 +32,19 @@ import android.widget.RadioGroup.OnCheckedChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+* NOTE:
+* Ideally, all the classes extend a global class from the net.shiftinpower.core package, so global variables and classes
+* are initiated once and used throughout
+*
+* Fonts, utility classes, shared preferences are initiated and accessed from there.
+*
+* However, the case with MainActivity, Login and Signup screens is a bit special, as they do not employ the ActionBar and Sliding menu
+* I can fix this, but I havent had the time to do so.
+*
+* @author Kaloyan Kalinov
+*/
+
 public class Signup extends SherlockActivity implements OnCheckWhetherAUserWithSuchEmailExistsListener, OnUserCreatedListener {
 
 	// Set up XML View Components
@@ -47,10 +60,10 @@ public class Signup extends SherlockActivity implements OnCheckWhetherAUserWithS
 	private CheckBox cbUserAgreesWithTermsOfUse;
 	private Button bSubmitSignupPage;
 
-	// Fonts
+/*	// Fonts
 	private Typeface font1;
 	private Typeface font2;
-
+*/
 	// Variables holding Data
 	private String userSex = "male";
 	private String userName;
@@ -78,7 +91,7 @@ public class Signup extends SherlockActivity implements OnCheckWhetherAUserWithS
 	private SharedPreferences sharedPreferences;
 	private static final String APP_SHARED_PREFS = C.Preferences.SHARED_PREFERENCES_FILENAME;
 	private boolean isUserLoggedIn;
-
+/*
 	// Custom class to display toasts
 	private ToastMaker toastMaker = new ToastMaker();
 
@@ -89,7 +102,9 @@ public class Signup extends SherlockActivity implements OnCheckWhetherAUserWithS
 	private EmailVerifier emailVerifier = new EmailVerifier();
 
 	// This class hashes passwords
-	private HashPassword hashPassword = new HashPassword();
+	private HashPassword hashPassword = new HashPassword();*/
+	
+	private KatwalkApplication katwalk;
 
 	// Setters
 	public void setUserAvatarPath(String userAvatarPath) {
@@ -99,11 +114,11 @@ public class Signup extends SherlockActivity implements OnCheckWhetherAUserWithS
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		// If the user has connected the storage to the PC, they will be unable to use the app.
 		// In this case it makes no sense for us to start it, so we are making them disconnect the storage first.
 		if (!StorageStatusChecker.isExternalStorageAvailable()) {
-			toastMaker.toast(net.shiftinpower.activities.Signup.this, C.Errorz.DISCONNECT_STORAGE_FIRST, Toast.LENGTH_SHORT);
+			katwalk.toastMaker.toast(net.shiftinpower.activities.Signup.this, C.Errorz.DISCONNECT_STORAGE_FIRST, Toast.LENGTH_SHORT);
 			finish();
 		}
 
@@ -147,12 +162,10 @@ public class Signup extends SherlockActivity implements OnCheckWhetherAUserWithS
 
 		// Setting the fonts
 		try {
-			font1 = Typeface.createFromAsset(getApplicationContext().getAssets(), C.Fontz.FONT_1);
-			font2 = Typeface.createFromAsset(getApplicationContext().getAssets(), C.Fontz.FONT_2);
-			tvBraggrLogoSignupPage.setTypeface(font1);
-			tvSignupTitle.setTypeface(font2);
-			tvOrLoginPage.setTypeface(font2);
-			bSubmitSignupPage.setTypeface(font1);
+			tvBraggrLogoSignupPage.setTypeface(katwalk.font1);
+			tvSignupTitle.setTypeface(katwalk.font2);
+			tvOrLoginPage.setTypeface(katwalk.font2);
+			bSubmitSignupPage.setTypeface(katwalk.font1);
 		} catch (Exception e) {
 			// I cant do anything here
 			e.printStackTrace();
@@ -160,7 +173,7 @@ public class Signup extends SherlockActivity implements OnCheckWhetherAUserWithS
 
 		// Set the avatar image
 		if (avatarAlreadyProvided) {
-			iUserAvatar.setImageBitmap(photoHandler.getBitmapAndResizeIt(userAvatarPath));
+			iUserAvatar.setImageBitmap(katwalk.photoHandler.getBitmapAndResizeIt(userAvatarPath));
 		}
 
 		iUserAvatar.setOnClickListener(new OnClickListener() {
@@ -211,10 +224,10 @@ public class Signup extends SherlockActivity implements OnCheckWhetherAUserWithS
 				if (cbUserAgreesWithTermsOfUse.isChecked()) {
 
 					if (userEmail.equals("")) {
-						toastMaker.toast(net.shiftinpower.activities.Signup.this, "Email: " + C.Errorz.FIELD_NOT_FILLED + toastText, Toast.LENGTH_LONG);
+						katwalk.toastMaker.toast(net.shiftinpower.activities.Signup.this, "Email: " + C.Errorz.FIELD_NOT_FILLED + toastText, Toast.LENGTH_LONG);
 
-					} else if (!emailVerifier.isEmailValid(userEmail)) {
-						toastMaker.toast(net.shiftinpower.activities.Signup.this, "Email: " + C.Errorz.EMAIL_NOT_VALID + toastText, Toast.LENGTH_LONG);
+					} else if (!katwalk.emailVerifier.isEmailValid(userEmail)) {
+						katwalk.toastMaker.toast(net.shiftinpower.activities.Signup.this, "Email: " + C.Errorz.EMAIL_NOT_VALID + toastText, Toast.LENGTH_LONG);
 
 					} else {
 
@@ -235,7 +248,7 @@ public class Signup extends SherlockActivity implements OnCheckWhetherAUserWithS
 
 					}
 				} else {
-					toastMaker.toast(net.shiftinpower.activities.Signup.this, C.Errorz.NEED_TO_AGREE_TO_TERMS_OF_USE + toastText, Toast.LENGTH_SHORT);
+					katwalk.toastMaker.toast(net.shiftinpower.activities.Signup.this, C.Errorz.NEED_TO_AGREE_TO_TERMS_OF_USE + toastText, Toast.LENGTH_SHORT);
 
 				}
 
@@ -358,7 +371,7 @@ public class Signup extends SherlockActivity implements OnCheckWhetherAUserWithS
 			}
 
 			// Hash the password before inserting it into the DB
-			userPasswordHashed = hashPassword.computeSHAHash(userPassword);
+			userPasswordHashed = katwalk.hashPassword.computeSHAHash(userPassword);
 
 			// Make sure the user selects their gender.
 			// We do not want to assume they are male.
@@ -381,7 +394,7 @@ public class Signup extends SherlockActivity implements OnCheckWhetherAUserWithS
 				new RegisterUserOnServerAsync(this, this, userName, userPasswordHashed, userEmail, userSex, userAvatarPath).execute();
 
 			} else {
-				toastMaker.toast(net.shiftinpower.activities.Signup.this, C.Errorz.NOT_ALL_FIELDS_FILLED + toastText, Toast.LENGTH_LONG);
+				katwalk.toastMaker.toast(net.shiftinpower.activities.Signup.this, C.Errorz.NOT_ALL_FIELDS_FILLED + toastText, Toast.LENGTH_LONG);
 
 			}
 
@@ -390,7 +403,7 @@ public class Signup extends SherlockActivity implements OnCheckWhetherAUserWithS
 
 		} else {
 			toastText += C.Errorz.EMAIL_TAKEN + "\n\n";
-			toastMaker.toast(net.shiftinpower.activities.Signup.this, C.Errorz.NOT_ALL_FIELDS_FILLED + toastText, Toast.LENGTH_LONG);
+			katwalk.toastMaker.toast(net.shiftinpower.activities.Signup.this, C.Errorz.NOT_ALL_FIELDS_FILLED + toastText, Toast.LENGTH_LONG);
 			toastText = "";
 
 		}
@@ -434,7 +447,7 @@ public class Signup extends SherlockActivity implements OnCheckWhetherAUserWithS
 	@Override
 	public void onUserNotCreated() {
 
-		toastMaker.toast(net.shiftinpower.activities.Signup.this, C.Errorz.USER_ACCOUNT_NOT_CREATED, Toast.LENGTH_SHORT);
+		katwalk.toastMaker.toast(net.shiftinpower.activities.Signup.this, C.Errorz.USER_ACCOUNT_NOT_CREATED, Toast.LENGTH_SHORT);
 
 	}
 

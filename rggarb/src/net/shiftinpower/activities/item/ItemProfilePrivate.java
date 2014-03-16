@@ -25,7 +25,20 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class ItemProfileMine extends KatwalkSlidingMenu implements OnGetItemDataListener {
+/**
+* NOTE: This class, the ItemProfilePublic and the ItemProfileOtherUsers will be grouped in another package and will extend a
+* superclass that is going to contain the code they share so code duplication is avoided.
+*
+* An item has a personal profile, that displays data only for my particular item of a given kind.
+* Example: my personal Samsung Galaxy S2 with its white color, 16GB of storage, the pictures I've taken for it etc
+*
+* An item also has a public profile - aggregated information, stats and images from all users that possess a Galaxy S2
+*
+* @author Kaloyan Roussev
+*
+*/
+
+public class ItemProfilePrivate extends KatwalkSlidingMenu implements OnGetItemDataListener {
 
 	// Set up XML View Components
 	private SquareImageView iItemProfilePrivateImageSlotOne;
@@ -60,7 +73,7 @@ public class ItemProfileMine extends KatwalkSlidingMenu implements OnGetItemData
 	private ItemExtended itemParametersObtained;
 
 	// Constructor needed because of the way the super class works
-	public ItemProfileMine() {
+	public ItemProfilePrivate() {
 		super(R.string.app_name);
 	}
 
@@ -175,7 +188,7 @@ public class ItemProfileMine extends KatwalkSlidingMenu implements OnGetItemData
 
 				@Override
 				public void onClick(View v) {
-					Intent goToPlaceProfile = new Intent(ItemProfileMine.this, PlaceProfile.class);
+					Intent goToPlaceProfile = new Intent(ItemProfilePrivate.this, PlaceProfile.class);
 					goToPlaceProfile.putExtra("placeId", itemPlaceId);
 					// startActivity(goToPlaceProfile); // TODO uncomment this later when PlaceProfile is ready
 				}
@@ -210,7 +223,7 @@ public class ItemProfileMine extends KatwalkSlidingMenu implements OnGetItemData
 			@Override
 			public void onClick(View v) {
 
-				Intent itemProfile = new Intent(ItemProfileMine.this, ItemProfilePublic.class);
+				Intent itemProfile = new Intent(ItemProfilePrivate.this, ItemProfilePublic.class);
 				Transporter.instance().itemExtended = itemParametersObtained;
 				startActivity(itemProfile);
 

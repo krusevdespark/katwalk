@@ -14,6 +14,14 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.os.AsyncTask;
 
+/**
+* This will probably become obsolete and the regular user registration asynctask class will be used instead with a couple of
+* tweaks
+*
+* @author Kaloyan Roussev
+*
+*/
+
 public class RegisterFacebookUserOnServerAsync extends AsyncTask<String, String, Integer> {
 
 	private Context context;

@@ -22,12 +22,24 @@ import net.shiftinpower.core.KatwalkApplication;
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.utilities.PhotoHandler;
 
-/* Unfortunately we cannot use most of the global variables and features here because we cannot extend the RggarbCore class
- * The RggarbCore class is using the Sherlock library because it enables older versions of Android to use the Action bar and the Sliding menu
- * The Sherlock Library does not allow an activity to use Theme.Dialog, but only Theme.Sherlock.xx themes, which do not include a Dialog theme for quite some time now
- * So we have to instantiate some variables and utility classes all over again, and when starting this activity, we are including some data along with the intent.
- * To work with this class you need to pass extra data to the intent - currentImageExists (so this class knows to display it) and imagePath (where to get it from)
- */
+/**
+*
+* This is an activity that looks like a dialog It is used throughout the app when a user wants to view/change/delete an
+* image
+*
+* Unfortunately we cannot use most of the global variables and features here because we cannot extend the RggarbCore class
+* The RggarbCore class is using the Sherlock library because it enables older versions of Android to use the Action bar and
+* the Sliding menu The Sherlock Library does not allow an activity to use Theme.Dialog, but only Theme.Sherlock.xx themes,
+* which do not include a Dialog theme for quite some time now So we have to instantiate some variables and utility classes
+* all over again, and when starting this activity, we are including some data along with the intent. To work with this class
+* you need to pass extra data to the intent - currentImageExists (so this class knows to display it) and imagePath (where to
+* get it from)
+*
+* NOTE: When I have time, I will make use of the global variables so we dont have to instantiate fonts, utility classes and
+* shared prefs here
+*
+* @author Kaloyan Roussev
+*/
 public class ProvideImageDialog extends Activity {
 
 	// Set up XML View Components
@@ -47,8 +59,6 @@ public class ProvideImageDialog extends Activity {
 	protected static final String APP_SHARED_PREFS = C.Preferences.SHARED_PREFERENCES_FILENAME;
 
 	private KatwalkApplication katwalk;
-
-
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -251,5 +261,11 @@ public class ProvideImageDialog extends Activity {
 		super.onStop();
 		katwalk.recycleViewsDrawables(imageView);		
 	}	
+	
+/*	@Override
+	public void onTrimMemory(int level) {
+		// TODO Auto-generated method stub
+		super.onTrimMemory(level);
+	}*/
 
 } // End of Class

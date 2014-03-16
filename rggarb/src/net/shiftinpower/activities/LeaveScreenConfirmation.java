@@ -11,6 +11,12 @@ import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
+/**
+ * This activity mimicks a dialog. It is shown onBackPressed at Activities where the user has entered some info that
+ * they might want to be saved if they accidently hit the back key
+ * @author Kaloyan Roussev
+ *
+ */
 public class LeaveScreenConfirmation extends Activity {
 	
 	// XML View components

@@ -26,6 +26,19 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
+/**
+* NOTE: This class, the ItemProfilePrivate and the ItemProfileOtherUsers will be grouped in another package and will extend a
+* superclass that is going to contain the code they share so code duplication is avoided.
+*
+* An item has a personal profile, that displays data only for my particular item of a given kind.
+* Example: my personal Samsung Galaxy S2 with its white color, 16GB of storage, the pictures I've taken for it etc
+*
+* An item also has a public profile - aggregated information, stats and images from all users that possess a Galaxy S2
+*
+* @author Kaloyan Roussev
+*
+*/
+
 public class ItemProfilePublic extends KatwalkSlidingMenu {
 
 	// Set up XML View Components

@@ -3,7 +3,12 @@ package net.shiftinpower.adapters;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-
+/**
+* Just a draft
+*
+* @author Kaloyan Roussev
+*
+*/
 public class FeedPlacesAdapter extends BaseAdapter{
 
 	@Override

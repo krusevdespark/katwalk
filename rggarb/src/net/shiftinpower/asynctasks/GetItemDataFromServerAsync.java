@@ -24,7 +24,14 @@ import net.shiftinpower.utilities.JSONParser;
 import net.shiftinpower.utilities.ShowLoadingMessage;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
+
+/**
+* This class gets an item basic and extended set of data so we can display its public profile
+* including users and friends that have the item along with their basic info, places that sell the item and so on
+*
+* @author Kaloyan Roussev
+*
+*/
 
 public class GetItemDataFromServerAsync extends AsyncTask<String, String, ItemExtended> {
 

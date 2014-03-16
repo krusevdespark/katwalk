@@ -1,6 +1,6 @@
 package net.shiftinpower.objects;
 
-abstract public class Category {
+abstract public class Category { // Extended by ItemCategory and ItemSubcategory
 	
 	private int id;
 	private String name;

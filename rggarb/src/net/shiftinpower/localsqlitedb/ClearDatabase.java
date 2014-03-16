@@ -5,6 +5,13 @@ import net.shiftinpower.interfaces.OnClearDatabaseListener;
 import android.content.Context;
 import android.os.AsyncTask;
 
+/**
+* At certain occasions we are clearing the Local SQLite DB so we can fill it with fresh data without problems
+*
+* @author Kaloyan Roussev
+*
+*/
+
 public class ClearDatabase extends AsyncTask<Void, Void, Boolean> {
 
 	private DBTools dbTools;

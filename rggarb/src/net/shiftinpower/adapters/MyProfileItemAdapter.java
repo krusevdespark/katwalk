@@ -7,7 +7,7 @@ import java.util.Locale;
 
 import com.nostra13.universalimageloader.core.ImageLoader;
 
-import net.shiftinpower.activities.item.ItemProfileMine;
+import net.shiftinpower.activities.item.ItemProfilePrivate;
 import net.shiftinpower.activities.item.ItemProfilePublic;
 import net.shiftinpower.core.C;
 import net.shiftinpower.customviews.SquareImageView;
@@ -23,7 +23,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-
+/**
+* This adapter supports autocomplete and uses the UniversalImageLoader library for lazy load of images (might go back to shutterburg or picasso for their speed)
+*
+* @author Kaloyan Roussev
+*
+*/
 public class MyProfileItemAdapter extends BaseAdapter {
 
 	private ArrayList<String> itemNames = new ArrayList<String>();
@@ -175,7 +180,7 @@ public class MyProfileItemAdapter extends BaseAdapter {
 
 				Transporter.instance().userItem = selectedItem;
 
-				Intent itemProfile = new Intent(context, ItemProfileMine.class);
+				Intent itemProfile = new Intent(context, ItemProfilePrivate.class);
 				context.startActivity(itemProfile);
 			}
 		});

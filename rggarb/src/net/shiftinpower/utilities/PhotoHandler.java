@@ -27,6 +27,28 @@ import android.os.Build;
 import android.os.Environment;
 import android.provider.MediaStore;
 
+/**
+ * This class handles all the Image operations:
+ * 
+ * - get image from camera
+ * 
+ * - get image from gallery
+ * 
+ * - resize image if needed, maintaining its aspect ratio
+ * 
+ * - resample image if needed, shrinking its filesize down
+ * 
+ * - rotate image if needed, thus avoiding portrait images being displayed as landscapes
+ * 
+ * Example of the workflow may be seen at net.shiftinpower.activities.ProvideImageDialog.class
+ * 
+ * We are doing as much as possible to keep a good ballance between preserving image quality and keeping away from
+ * OutOfMemoryErrors
+ * 
+ * @author Kaloyan Roussev
+ * 
+ */
+
 public class PhotoHandler {
 
 	private Context context;
@@ -99,11 +121,11 @@ public class PhotoHandler {
 
 	} // End of handleBigCameraPhoto
 
-	// This class is used when we are downloading a bitmap from the internet and we want to store it in a local file for
-	// later reference
-	// We createImageFile to store the file into and call galleryAddPic to make the file available
-	// ImagePath is set within the createImageFile method
-	// If we want to use the ImagePath we can call getImagePath
+	/*
+	 * This method is used when we are downloading a bitmap from the internet and we want to store it in a local file for
+	 * later reference We createImageFile to store the file into and call galleryAddPic to make the file available ImagePath
+	 * is set within the createImageFile method If we want to use the ImagePath we can call getImagePath
+	 */
 	public boolean handleIncomingPhoto(Bitmap bitmap) {
 
 		try {
@@ -124,10 +146,11 @@ public class PhotoHandler {
 
 	} // End of handleIncomingPhoto
 
-	// This method is used when the user has picked an image from their phone gallery
-	// The intent returns in the form of data and we get the Uri from it, then using a cursor and reading through a filtered
-	// amount of data
-	// The path to the image is obtained and we make it available for ourselves by setImagePath
+	/*
+	 * This method is used when the user has picked an image from their phone gallery The intent returns in the form of data
+	 * and we get the Uri from it, then using a cursor and reading through a filtered amount of data The path to the image is
+	 * obtained and we make it available for ourselves by setImagePath
+	 */
 	public boolean handleGalleryPhoto(Intent data) {
 
 		Uri selectedImage = data.getData();
@@ -161,8 +184,6 @@ public class PhotoHandler {
 			e.printStackTrace();
 			return false;
 		}
-		
-		
 
 	} // End of handleGalleryPhoto
 
@@ -343,7 +364,7 @@ public class PhotoHandler {
 		int orientation = 1;
 
 		try {
-			/**
+			/*
 			 * if you are targeting only api level >= 5 ExifInterface exif = new ExifInterface(src); orientation =
 			 * exif.getAttributeInt(ExifInterface.TAG_ORIENTATION, 1);
 			 */

@@ -14,6 +14,14 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.os.AsyncTask;
 
+/**
+* When deleting a user, we would also like to delete their images from the images folder on the server, along with their
+* products and the products images. However I havent gotten to that yet.
+*
+* @author Kaloyan Roussev
+*
+*/
+
 public class DeleteUserFromServerAsync extends AsyncTask<String, String, String> {
 	int success;
 	private Context context;

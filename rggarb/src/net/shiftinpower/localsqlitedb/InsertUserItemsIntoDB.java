@@ -7,6 +7,14 @@ import net.shiftinpower.objects.ItemBasic;
 import android.content.ContentValues;
 import android.os.AsyncTask;
 
+/**
+* After having obtained a fresh set of UserItems from the Server Database, now we have it at hand locally for immediate
+* access
+*
+* @author Kaloyan Roussev
+*
+*/
+
 public class InsertUserItemsIntoDB extends AsyncTask<String, Void, Boolean> {
 
 	private LinkedHashSet<ItemBasic> userItems;

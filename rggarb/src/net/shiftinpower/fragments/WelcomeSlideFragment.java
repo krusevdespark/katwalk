@@ -15,6 +15,13 @@ import android.widget.LinearLayout;
 
 import com.actionbarsherlock.app.SherlockFragment;
 
+/**
+* This is used by the ViewPager at MainActivity
+*
+* @author Kaloyan Roussev
+*
+*/
+
 public class WelcomeSlideFragment extends SherlockFragment {
 
 	private String TAG_ARGUMENT = "visiblePage";

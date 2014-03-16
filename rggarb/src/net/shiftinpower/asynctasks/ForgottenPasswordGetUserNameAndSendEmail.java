@@ -15,6 +15,13 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.os.AsyncTask;
 
+/**
+* We would like to call the user by name when we are sending them a Reset Password email
+*
+* @author Kaloyan Roussev
+*
+*/
+
 public class ForgottenPasswordGetUserNameAndSendEmail extends AsyncTask<String, String, String> {
 
 	private int serverResponseCode;

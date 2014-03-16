@@ -16,6 +16,14 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.os.AsyncTask;
 
+/**
+* This is used in the user registration process. Basically we want to know whether the email the user is providing has
+* already been taken by another user in the server database, we want emails to be unique
+*
+* @author Kaloyan Roussev
+*
+*/
+
 public class CheckWhetherAUserWithSuchEmailExistsAsync extends AsyncTask<String, Void, Boolean> {
 	private JSONParser jsonParser = new JSONParser();
 	private String userEmail;

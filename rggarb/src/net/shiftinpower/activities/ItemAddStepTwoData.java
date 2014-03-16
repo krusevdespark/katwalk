@@ -31,7 +31,14 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
+/**
+* While the images from step one are being uploaded asynchronously, the user is going to enter the data
+* regarding the item - name, brand, category, where they got it from, how much did it cost etc.
+*
+* Autocomplete feature will be implemented in the future, so creating different products due to different spellings is avoided as much as possible
+* @author Kaloyan Roussev
+*
+*/
 public class ItemAddStepTwoData extends KatwalkSlidingMenu implements OnAddNewItemToServerListener, OnGetCategoriesListener, OnGetSubcategoriesListener {
 
 	// Set up XML View Components
@@ -52,11 +59,11 @@ public class ItemAddStepTwoData extends KatwalkSlidingMenu implements OnAddNewIt
 	// Data holding variables
 	private ArrayList<String> imageFilenames = new ArrayList<String>();
 	private ArrayList<String> imageDescriptions = new ArrayList<String>();
-	private boolean dataEntered = false;
 	private String itemName;
 	private String itemBrand;
 	private String itemBoughtFrom;
 	private String itemPriceString;
+	
 	// If the user doesnt touch anything category related, we need to ensure we arent sending an empty value or a 0 value for
 	// itemCategoryID
 	private int itemCategoryID = 1;
@@ -113,10 +120,7 @@ public class ItemAddStepTwoData extends KatwalkSlidingMenu implements OnAddNewIt
 
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
-				// TODO here the autosuggest feature will take place
-				if (etAddAnItemName.getText().toString().trim() != null) {
-					dataEntered = true;
-				}
+				// TODO change this to a textwatcher for the autocomplete feature
 			}
 		});
 
@@ -124,10 +128,8 @@ public class ItemAddStepTwoData extends KatwalkSlidingMenu implements OnAddNewIt
 
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
-				// TODO here the autosuggest feature will take place
-				if (etAddAnItemBrandManufacturer.getText().toString().trim() != null) {
-					dataEntered = true;
-				}
+				// TODO change this to a textwatcher for the autocomplete feature
+
 			}
 		});
 
@@ -135,10 +137,8 @@ public class ItemAddStepTwoData extends KatwalkSlidingMenu implements OnAddNewIt
 
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
-				// TODO here the autosuggest feature will take place
-				if (etAddAnItemWhereWhoDidYouGetItFrom.getText().toString().trim() != null) {
-					dataEntered = true;
-				}
+				// TODO change this to a textwatcher for the autocomplete feature
+
 			}
 		});
 
@@ -198,9 +198,9 @@ public class ItemAddStepTwoData extends KatwalkSlidingMenu implements OnAddNewIt
 				if (count > 0) {
 					ItemCategory itemCategory = (ItemCategory) arg0.getItemAtPosition(arg2);
 					itemCategoryID = itemCategory.getId();
-					
-					new GetSubcategoriesFromDB(ItemAddStepTwoData.this, ItemAddStepTwoData.this, katwalk.dbTools, (sAddAnItemCategory.getSelectedItemPosition() + 1))
-							.execute();
+
+					new GetSubcategoriesFromDB(ItemAddStepTwoData.this, ItemAddStepTwoData.this, katwalk.dbTools,
+							(sAddAnItemCategory.getSelectedItemPosition() + 1)).execute();
 
 				}
 				count++;
@@ -242,12 +242,13 @@ public class ItemAddStepTwoData extends KatwalkSlidingMenu implements OnAddNewIt
 				itemDescription = etAddAnItemComment.getText().toString().trim();
 
 				if ((itemName.contentEquals("") || itemName == null)) {
-					katwalk.toastMaker.toast(net.shiftinpower.activities.ItemAddStepTwoData.this, C.Errorz.ADDING_AN_ITEM_SOME_FIELDS_REQUIRED, Toast.LENGTH_LONG);
+					katwalk.toastMaker.toast(net.shiftinpower.activities.ItemAddStepTwoData.this, C.Errorz.ADDING_AN_ITEM_SOME_FIELDS_REQUIRED,
+							Toast.LENGTH_LONG);
 
 				} else {
-					new AddNewItemToServerAsync(katwalk.dbTools, ItemAddStepTwoData.this, ItemAddStepTwoData.this, currentlyLoggedInUser, itemName, itemBrand, String
-							.valueOf(itemCategoryID), String.valueOf(itemSubcategoryID), itemBoughtFrom, itemPriceString, imageFilenames, imageDescriptions,
-							itemDescription, itemNew, itemBoughtFromPlace, itemIsAGift).execute();
+					new AddNewItemToServerAsync(katwalk.dbTools, ItemAddStepTwoData.this, ItemAddStepTwoData.this, currentlyLoggedInUser, itemName, itemBrand,
+							String.valueOf(itemCategoryID), String.valueOf(itemSubcategoryID), itemBoughtFrom, itemPriceString, imageFilenames,
+							imageDescriptions, itemDescription, itemNew, itemBoughtFromPlace, itemIsAGift).execute();
 				}
 			}
 		}); // End of Submit button click handling
@@ -260,12 +261,9 @@ public class ItemAddStepTwoData extends KatwalkSlidingMenu implements OnAddNewIt
 	 */
 	@Override
 	public void onBackPressed() {
-		if (dataEntered == true) {
-			Intent leaveScreenConfirmation = new Intent(ItemAddStepTwoData.this, LeaveScreenConfirmation.class);
-			startActivityForResult(leaveScreenConfirmation, C.Miscellaneous.LEAVE_SCREEN_CONFIRMATION_REQUEST_CODE);
-		} else {
-			super.onBackPressed();
-		}
+
+		Intent leaveScreenConfirmation = new Intent(ItemAddStepTwoData.this, LeaveScreenConfirmation.class);
+		startActivityForResult(leaveScreenConfirmation, C.Miscellaneous.LEAVE_SCREEN_CONFIRMATION_REQUEST_CODE);
 
 	} // End of onBackPressed
 

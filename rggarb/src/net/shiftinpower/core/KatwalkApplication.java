@@ -3,6 +3,7 @@ package net.shiftinpower.core;
 import java.util.ArrayList;
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.localsqlitedb.DBTools;
+import net.shiftinpower.utilities.EmailVerifier;
 import net.shiftinpower.utilities.HashPassword;
 import net.shiftinpower.utilities.PhotoHandler;
 import net.shiftinpower.utilities.ToastMaker;
@@ -42,6 +43,9 @@ public class KatwalkApplication extends Application {
 
 	// Declare the Universal Image Loader for lazy load of images
 	public ImageLoader imageLoader;
+	
+	// Verifies the validity of the Email format entered by the user
+	public EmailVerifier emailVerifier = new EmailVerifier();
 
 	// Fonts
 	public Typeface font1;

@@ -13,9 +13,18 @@ import net.shiftinpower.koldrain.R;
 import net.shiftinpower.core.*;
 import net.shiftinpower.fragments.*;
 
+/**
+ *  This is the screen users land on after login/signup
+ *  It manages three tabs for the three activity feeds - People, Places, Items
+ *  
+ *  These are not implemented yet
+ *  
+ * @author Kaloyan Roussev
+ *
+ */
 public class Home extends KatwalkSlidingMenu {
 
-	private TextView titleTV;
+	private TextView tvTabTitleHomeScreen;
 
 	// Constructor needed because of the ActionBar
 	public Home() {
@@ -33,7 +42,7 @@ public class Home extends KatwalkSlidingMenu {
 		
 		setContentView(R.layout.activity_layout_home);
 
-		ActionBar actionBar = getSupportActionBar();
+		// Set tabs
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);
 
 		ActionBar.Tab itemsFeedTab = actionBar.newTab();
@@ -57,13 +66,13 @@ public class Home extends KatwalkSlidingMenu {
 		for (int i = 0; i < tabCount; i++) {
 			LayoutInflater inflater = LayoutInflater.from(this);
 			View customView = inflater.inflate(R.drawable.actionbar_tab_title, null);
-			titleTV = (TextView) customView.findViewById(R.id.action_custom_title);
+			tvTabTitleHomeScreen = (TextView) customView.findViewById(R.id.action_custom_title);
 			actionBar.getTabAt(i).setCustomView(customView);
 
 			try {
-				titleTV.setTypeface(katwalk.font2);
-				titleTV.setText(tabsText[i]);
-				titleTV.setTextColor(getResources().getColor(R.color.green));
+				tvTabTitleHomeScreen.setTypeface(katwalk.font2);
+				tvTabTitleHomeScreen.setText(tabsText[i]);
+				tvTabTitleHomeScreen.setTextColor(getResources().getColor(R.color.green));
 			} catch (Exception e) {
 				// Nothing can be done in this case
 				e.printStackTrace();

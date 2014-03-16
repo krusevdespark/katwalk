@@ -3,6 +3,7 @@ package net.shiftinpower.core;
 import java.util.LinkedHashSet;
 
 import com.actionbarsherlock.view.Window;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 
 import net.shiftinpower.activities.Home;
 import net.shiftinpower.activities.LogUserOut;
@@ -25,7 +26,7 @@ import net.shiftinpower.objects.ItemBasic;
 import net.shiftinpower.utilities.PhotoHandler;
 import net.shiftinpower.utilities.ToastMaker;
 import net.shiftinpower.utilities.Transporter;
-import net.shiftinpower.asynctasks.DownloadUserInfoFromServerAsync;
+import net.shiftinpower.asynctasks.GetUserDataFromServerAsync;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -65,7 +66,7 @@ public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesLis
 		OnDownloadImageListener, OnGetUserItemsListener, OnInsertUserItemsInDBListener {
 
 	// This is the AsyncTask that communicates with the server
-	private DownloadUserInfoFromServerAsync userDetailsDownloader;
+	private GetUserDataFromServerAsync userDetailsDownloader;
 
 	protected int currentlyLoggedInUser;
 	private boolean userHasRegisteredViaFacebook;
@@ -90,6 +91,7 @@ public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesLis
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		// We are showing the user a nice loading splash screen while doing work in the background
+		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
 		setContentView(R.layout.activity_layout_splash_screen);
 		setBehindContentView(R.layout.activity_layout_splash_screen);
 
@@ -147,8 +149,7 @@ public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesLis
 		new InsertSubcategoriesIntoDB(katwalk.dbTools, itemSubcategories).execute();
 
 		// Next step is downloading the user data from the server
-		userDetailsDownloader = new DownloadUserInfoFromServerAsync(String.valueOf(currentlyLoggedInUser), InitialDataLoader.this);
-		userDetailsDownloader.downloadUserDetailsAndStats();
+		new GetUserDataFromServerAsync(String.valueOf(currentlyLoggedInUser), InitialDataLoader.this, InitialDataLoader.this).execute();
 	}
 
 	@Override
@@ -158,8 +159,8 @@ public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesLis
 		}
 		// Even if we havent gotten the categories from the database, we still need to load the user details so we go on down
 		// the chain.
-		userDetailsDownloader = new DownloadUserInfoFromServerAsync(String.valueOf(currentlyLoggedInUser), InitialDataLoader.this);
-		userDetailsDownloader.downloadUserDetailsAndStats();
+		new GetUserDataFromServerAsync(String.valueOf(currentlyLoggedInUser), InitialDataLoader.this, InitialDataLoader.this).execute();
+		
 	}
 
 	@Override
@@ -175,7 +176,6 @@ public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesLis
 		long userMoneySpentOnItemsLong = Double.doubleToRawLongBits(userMoneySpentOnItemsDouble);
 
 		// Put everything in shared preferences
-		sharedPreferencesEditor = sharedPreferences.edit();
 		sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_NAME, userDetailsAndStats.getUserName());
 		sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_EMAIL, userDetailsAndStats.getUserEmail());
 		sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_SEX, userDetailsAndStats.getUserSex());
@@ -212,7 +212,6 @@ public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesLis
 			String temporaryUserAvatarPath = extras.getString("temporaryUserAvatarPath");
 			if (userHasJustRegistered) {
 				// Set the avatar image path to be the one provided at signup
-				sharedPreferencesEditor = sharedPreferences.edit();
 				sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_AVATAR_PATH, temporaryUserAvatarPath);
 				sharedPreferencesEditor.commit();
 
@@ -232,7 +231,7 @@ public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesLis
 			 * onDownloadUserAvatarSuccess or onDownloadUserAvatarFailure
 			 */
 			if (!(userDetailsAndStats.getUserAvatarPath().contentEquals(C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE))) {
-				new DownloadImage(this, C.API.WEB_ADDRESS + C.API.IMAGES_USERS_FOLDER_THUMBNAIL + userDetailsAndStats.getUserAvatarPath()).execute();
+				new DownloadImage(this, C.API.WEB_ADDRESS + C.API.IMAGES_USERS_FOLDER_BIG+ userDetailsAndStats.getUserAvatarPath()).execute();
 			} else {
 				// Get user's Items only if the user has any
 				if (userDetailsAndStats.getUserItemsCount() > 0) {
@@ -263,11 +262,9 @@ public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesLis
 		 * After retrieving the image from the Server, we are writing it into a file Then we are getting the path to the file
 		 * and we are putting it into the Shared Preferences File so we can access it later
 		 */
-		PhotoHandler photoHandler = new PhotoHandler(this);
-		photoHandler.handleIncomingPhoto(userAvatarBitmap);
-		String userAvatarPath = photoHandler.getImagePath();
+		katwalk.photoHandler.handleIncomingPhoto(userAvatarBitmap);
+		String userAvatarPath = katwalk.photoHandler.getImagePath();
 
-		sharedPreferencesEditor = sharedPreferences.edit();
 		sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_AVATAR_PATH, userAvatarPath);
 		sharedPreferencesEditor.commit();
 
@@ -285,7 +282,6 @@ public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesLis
 	public void onDownloadImageFailure() {
 
 		// And now the user can go to the Home Screen, sadly no avatar.
-		sharedPreferencesEditor = sharedPreferences.edit();
 		sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_AVATAR_PATH, C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE);
 		sharedPreferencesEditor.commit();
 

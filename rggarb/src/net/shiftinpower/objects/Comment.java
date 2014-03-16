@@ -1,6 +1,6 @@
 package net.shiftinpower.objects;
 
-public class Comment {
+public class Comment { // Extended by ItemComment, PhotoComment and EventComment
 
 	private int commentId;
 	private String commentContent;

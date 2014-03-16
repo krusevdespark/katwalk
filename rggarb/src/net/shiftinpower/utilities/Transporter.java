@@ -10,11 +10,12 @@ import net.shiftinpower.objects.ItemBasic;
 import net.shiftinpower.objects.UserExtended;
 
 /**
- * Android provides a system to pass objects between activities that is not at all flexible and requires a lot of typing We
- * are going to circumvent that by using a simple custom Transporter singleton class
- * 
- * @author Kaloyan Roussev
- */
+* Android provides a system to pass objects between activities that is not at all flexible and requires a lot of typing We
+* are going to circumvent that by using a simple custom Transporter singleton class
+*
+*
+* @author Kaloyan Roussev
+*/
 public class Transporter {
 	
 	public Transporter() {

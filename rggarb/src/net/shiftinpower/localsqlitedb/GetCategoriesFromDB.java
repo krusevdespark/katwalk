@@ -10,6 +10,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.AsyncTask;
 
+/**
+* After having obtained a fresh set of Categories from the Server Database, now we have it at hand locally for immediate
+* access
+*
+* @author Kaloyan Roussev
+*
+*/
+
 public class GetCategoriesFromDB extends AsyncTask<Void, Void, LinkedHashSet<ItemCategory>> {
 
 	private DBTools dbTools;
