@@ -506,6 +506,7 @@ public final class C {
 
 		// misc
 		public static final String IMAGE_TOO_LARGE = "Image is too large, the system cannot handle it";
+		public static final String APP_CRASHED = "Oops. Restarting the app...";
 
 	} // End of Errorz
 

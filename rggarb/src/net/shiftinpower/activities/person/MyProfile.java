@@ -110,7 +110,7 @@ public class MyProfile extends PersonProfile implements OnClickListener, OnChang
 		}); // End of Change Quote Button OnClick Handling
 
 	} // End of onCreate Method
-
+	
 	@Override
 	public void onClick(View v) {
 		int id = v.getId();

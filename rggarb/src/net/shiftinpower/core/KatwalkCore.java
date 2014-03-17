@@ -1,18 +1,23 @@
 package net.shiftinpower.core;
 
+import net.shiftinpower.activities.LogUserOut;
+import net.shiftinpower.localsqlitedb.SQLQueries;
+import net.shiftinpower.utilities.ShowLoadingMessage;
 import net.shiftinpower.utilities.StorageStatusChecker;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;
 
 /**
- * This is the top-level class, the Central Headquarters. KatwalkActionBar inherits from here, KatwalkSlidingMenu inherits from
- * KatwalkActionBar and all activities inherit from there on. This class is responsible for holding the user data, obtained
- * from the InitialDataLoader, stored in a SharedPreferences file and a local SQL This way variables like
+ * This is the top-level class, the Central Headquarters. KatwalkActionBar inherits from here, KatwalkSlidingMenu inherits
+ * from KatwalkActionBar and all activities inherit from there on. This class is responsible for holding the user data,
+ * obtained from the InitialDataLoader, stored in a SharedPreferences file and a local SQL This way variables like
  * currentlyLoggedInUserID will be accessible from all inheriting activities.
  * 
  * This class provides some common lifecycle functionality for all the activities that inherit from it
@@ -61,6 +66,38 @@ public class KatwalkCore extends SlidingFragmentActivity {
 		// Get an instance of the application in order for this and all other activities to get acess to the global variables
 		// and utilities
 		katwalk = (KatwalkApplication) getApplication();
+
+		/*
+		 * Usually when the app crashes there are DB problems when we try to write stuff to the db that is already there /*
+		 * so here we will clear the database by logging the user out and starting everything anew. I could also make it just
+		 * clear the database, but at a later stage in the development process
+		 */
+		Thread.setDefaultUncaughtExceptionHandler(new Thread.UncaughtExceptionHandler() {
+
+			@Override
+			public void uncaughtException(Thread thread, Throwable ex) {
+				ex.printStackTrace();
+
+				ShowLoadingMessage.loading(KatwalkCore.this, C.Errorz.APP_CRASHED);
+				
+				// Clear the database
+				katwalk.dbTools.database.execSQL(SQLQueries.tableCategoriesDrop);
+				katwalk.dbTools.database.execSQL(SQLQueries.tableSubcategoriesDrop);
+				katwalk.dbTools.database.execSQL(SQLQueries.tableItemsDrop);
+
+				deleteDatabase(C.Preferences.LOCAL_SQLITE_DATABASE_NAME);
+				katwalk.dbTools.closeDB();
+
+				ShowLoadingMessage.dismissDialog();
+				
+				// Start everything anew like nothing happened
+				Intent startAnew = new Intent(KatwalkCore.this, InitialDataLoader.class);
+				startActivity(startAnew);
+
+				// Its important to kill the VM here in order not to allow the app to go into afterlife stage (black screen)
+				System.exit(0);
+			}
+		});
 
 		// The app operates in Full Screen Mode
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -113,8 +150,7 @@ public class KatwalkCore extends SlidingFragmentActivity {
 		userShowsMoney = sharedPreferences.getBoolean(C.SharedPreferencesItems.USER_SHOWS_MONEY, true);
 		userShowsStats = sharedPreferences.getBoolean(C.SharedPreferencesItems.USER_SHOWS_STATS, true);
 		userAcceptsMessages = sharedPreferences.getString(C.SharedPreferencesItems.USER_ACCEPTS_MESSAGES, C.Miscellaneous.USER_RESTRICTION_LEVEL_NO);
-		userInteractsWithActivities = sharedPreferences.getString(C.SharedPreferencesItems.USER_INTERACTS_WITH_ACTIVITIES,
-				C.Miscellaneous.USER_RESTRICTION_LEVEL_NO);
+		userInteractsWithActivities = sharedPreferences.getString(C.SharedPreferencesItems.USER_INTERACTS_WITH_ACTIVITIES, C.Miscellaneous.USER_RESTRICTION_LEVEL_NO);
 		userItemsCount = sharedPreferences.getInt(C.SharedPreferencesItems.USER_ITEMS_COUNT, 0);
 		userCommentsCount = sharedPreferences.getInt(C.SharedPreferencesItems.USER_COMMENTS_COUNT, 0);
 		userFollowingItemsCount = sharedPreferences.getInt(C.SharedPreferencesItems.USER_FOLLOWING_ITEMS_COUNT, 0);
