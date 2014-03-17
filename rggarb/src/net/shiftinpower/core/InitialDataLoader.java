@@ -3,6 +3,10 @@ package net.shiftinpower.core;
 import java.util.LinkedHashSet;
 
 import com.actionbarsherlock.view.Window;
+<<<<<<< HEAD
+=======
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
+>>>>>>> GoWild
 
 import net.shiftinpower.activities.Home;
 import net.shiftinpower.activities.LogUserOut;
@@ -25,7 +29,7 @@ import net.shiftinpower.objects.ItemBasic;
 import net.shiftinpower.utilities.PhotoHandler;
 import net.shiftinpower.utilities.ToastMaker;
 import net.shiftinpower.utilities.Transporter;
-import net.shiftinpower.asynctasks.DownloadUserInfoFromServerAsync;
+import net.shiftinpower.asynctasks.GetUserDataFromServerAsync;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -61,11 +65,15 @@ import android.widget.Toast;
  * @author Kaloyan Roussev
  * 
  */
+<<<<<<< HEAD
 public class InitialDataLoader extends RggarbCore implements OnGetCategoriesListener, OnGetSubcategoriesListener, OnDownloadUserInfoFromServerListener,
+=======
+public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesListener, OnGetSubcategoriesListener, OnDownloadUserInfoFromServerListener,
+>>>>>>> GoWild
 		OnDownloadImageListener, OnGetUserItemsListener, OnInsertUserItemsInDBListener {
 
 	// This is the AsyncTask that communicates with the server
-	private DownloadUserInfoFromServerAsync userDetailsDownloader;
+	private GetUserDataFromServerAsync userDetailsDownloader;
 
 	protected int currentlyLoggedInUser;
 	private boolean userHasRegisteredViaFacebook;
@@ -82,7 +90,7 @@ public class InitialDataLoader extends RggarbCore implements OnGetCategoriesList
 		 * problems, we do not close the database after every DB operation, but We are only closing it when the user logs
 		 * out.
 		 */
-		dbTools.openDB();
+		katwalk.dbTools.openDB();
 
 		getSupportActionBar().hide();
 
@@ -90,12 +98,17 @@ public class InitialDataLoader extends RggarbCore implements OnGetCategoriesList
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		// We are showing the user a nice loading splash screen while doing work in the background
+		getSlidingMenu().setTouchModeAbove(SlidingMenu.TOUCHMODE_NONE);
 		setContentView(R.layout.activity_layout_splash_screen);
 		setBehindContentView(R.layout.activity_layout_splash_screen);
 
 		ivSplashScreen = (ImageView) findViewById(R.id.ivSplashScreen);
 
+<<<<<<< HEAD
 		bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.images_loading_screen, bitmapOptions);
+=======
+		bitmap = BitmapFactory.decodeResource(getResources(), R.drawable.images_loading_screen, katwalk.bitmapOptions);
+>>>>>>> GoWild
 		ivSplashScreen.setImageBitmap(bitmap);
 
 		// Get the User ID so we can pull the data from the server. Also we need to know whether they facebook registered or
@@ -113,7 +126,11 @@ public class InitialDataLoader extends RggarbCore implements OnGetCategoriesList
 	protected void onStop() {
 
 		// Prevent memory leak by releasing the bitmaps from the memory
+<<<<<<< HEAD
 		recycleViewsDrawables(ivSplashScreen);
+=======
+		katwalk.recycleViewsDrawables(ivSplashScreen);
+>>>>>>> GoWild
 		super.onStop();
 		
 	}
@@ -123,7 +140,7 @@ public class InitialDataLoader extends RggarbCore implements OnGetCategoriesList
 
 		// We have just downloaded the categories from the database, and now we are inserting them into the local SQLite DB
 		// for quicker access
-		new InsertCategoriesIntoDB(dbTools, itemCategories).execute();
+		new InsertCategoriesIntoDB(katwalk.dbTools, itemCategories).execute();
 
 		// and now we have to fetch the subcategories. after this is executed we go to either
 		// onGetSubcategoriesFromServerSuccess or onGetSubcategoriesFromServerFailure
@@ -135,7 +152,7 @@ public class InitialDataLoader extends RggarbCore implements OnGetCategoriesList
 	public void onGetCategoriesFailure(String reason) {
 
 		if (reason != null) {
-			toastMaker.toast(net.shiftinpower.core.InitialDataLoader.this, C.Errorz.CATEGORIES_NOT_LOADED_DUE_TO_UNKOWN_ERROR, Toast.LENGTH_SHORT);
+			katwalk.toastMaker.toast(net.shiftinpower.core.InitialDataLoader.this, C.Errorz.CATEGORIES_NOT_LOADED_DUE_TO_UNKOWN_ERROR, Toast.LENGTH_SHORT);
 		}
 		new GetSubcategoriesFromServerAsync(this, this).execute();
 
@@ -144,22 +161,21 @@ public class InitialDataLoader extends RggarbCore implements OnGetCategoriesList
 	@Override
 	public void onGetSubcategoriesSuccess(LinkedHashSet<ItemSubcategory> itemSubcategories) {
 
-		new InsertSubcategoriesIntoDB(dbTools, itemSubcategories).execute();
+		new InsertSubcategoriesIntoDB(katwalk.dbTools, itemSubcategories).execute();
 
 		// Next step is downloading the user data from the server
-		userDetailsDownloader = new DownloadUserInfoFromServerAsync(String.valueOf(currentlyLoggedInUser), InitialDataLoader.this);
-		userDetailsDownloader.downloadUserDetailsAndStats();
+		new GetUserDataFromServerAsync(String.valueOf(currentlyLoggedInUser), InitialDataLoader.this, InitialDataLoader.this).execute();
 	}
 
 	@Override
 	public void onGetSubcategoriesFailure(String reason) {
 		if (reason != null) {
-			toastMaker.toast(net.shiftinpower.core.InitialDataLoader.this, C.Errorz.CATEGORIES_NOT_LOADED_DUE_TO_UNKOWN_ERROR, Toast.LENGTH_SHORT);
+			katwalk.toastMaker.toast(net.shiftinpower.core.InitialDataLoader.this, C.Errorz.CATEGORIES_NOT_LOADED_DUE_TO_UNKOWN_ERROR, Toast.LENGTH_SHORT);
 		}
 		// Even if we havent gotten the categories from the database, we still need to load the user details so we go on down
 		// the chain.
-		userDetailsDownloader = new DownloadUserInfoFromServerAsync(String.valueOf(currentlyLoggedInUser), InitialDataLoader.this);
-		userDetailsDownloader.downloadUserDetailsAndStats();
+		new GetUserDataFromServerAsync(String.valueOf(currentlyLoggedInUser), InitialDataLoader.this, InitialDataLoader.this).execute();
+		
 	}
 
 	@Override
@@ -171,12 +187,14 @@ public class InitialDataLoader extends RggarbCore implements OnGetCategoriesList
 		 * double.
 		 */
 
+<<<<<<< HEAD
 		Transporter.instance().instanceOfTheCurrentUser = userDetailsAndStats;
+=======
+>>>>>>> GoWild
 		double userMoneySpentOnItemsDouble = userDetailsAndStats.getUserMoneySpentOnItems();
 		long userMoneySpentOnItemsLong = Double.doubleToRawLongBits(userMoneySpentOnItemsDouble);
 
 		// Put everything in shared preferences
-		sharedPreferencesEditor = sharedPreferences.edit();
 		sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_NAME, userDetailsAndStats.getUserName());
 		sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_EMAIL, userDetailsAndStats.getUserEmail());
 		sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_SEX, userDetailsAndStats.getUserSex());
@@ -213,7 +231,6 @@ public class InitialDataLoader extends RggarbCore implements OnGetCategoriesList
 			String temporaryUserAvatarPath = extras.getString("temporaryUserAvatarPath");
 			if (userHasJustRegistered) {
 				// Set the avatar image path to be the one provided at signup
-				sharedPreferencesEditor = sharedPreferences.edit();
 				sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_AVATAR_PATH, temporaryUserAvatarPath);
 				sharedPreferencesEditor.commit();
 
@@ -233,7 +250,7 @@ public class InitialDataLoader extends RggarbCore implements OnGetCategoriesList
 			 * onDownloadUserAvatarSuccess or onDownloadUserAvatarFailure
 			 */
 			if (!(userDetailsAndStats.getUserAvatarPath().contentEquals(C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE))) {
-				new DownloadImage(this, C.API.WEB_ADDRESS + C.API.IMAGES_USERS_FOLDER_THUMBNAIL + userDetailsAndStats.getUserAvatarPath()).execute();
+				new DownloadImage(this, C.API.WEB_ADDRESS + C.API.IMAGES_USERS_FOLDER_BIG+ userDetailsAndStats.getUserAvatarPath()).execute();
 			} else {
 				// Get user's Items only if the user has any
 				if (userDetailsAndStats.getUserItemsCount() > 0) {
@@ -251,7 +268,7 @@ public class InitialDataLoader extends RggarbCore implements OnGetCategoriesList
 
 	@Override
 	public void onDownloadUserInfoFromServerFailure(String reason) {
-		toastMaker.toast(this, C.Errorz.PROBLEM_LOADING_USER_DATA, Toast.LENGTH_SHORT);
+		katwalk.toastMaker.toast(this, C.Errorz.PROBLEM_LOADING_USER_DATA, Toast.LENGTH_SHORT);
 		Intent logUserOut = new Intent(this, LogUserOut.class);
 		startActivity(logUserOut);
 		finish();
@@ -264,11 +281,9 @@ public class InitialDataLoader extends RggarbCore implements OnGetCategoriesList
 		 * After retrieving the image from the Server, we are writing it into a file Then we are getting the path to the file
 		 * and we are putting it into the Shared Preferences File so we can access it later
 		 */
-		PhotoHandler photoHandler = new PhotoHandler(this);
-		photoHandler.handleIncomingPhoto(userAvatarBitmap);
-		String userAvatarPath = photoHandler.getImagePath();
+		katwalk.photoHandler.handleIncomingPhoto(userAvatarBitmap);
+		String userAvatarPath = katwalk.photoHandler.getImagePath();
 
-		sharedPreferencesEditor = sharedPreferences.edit();
 		sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_AVATAR_PATH, userAvatarPath);
 		sharedPreferencesEditor.commit();
 
@@ -286,11 +301,10 @@ public class InitialDataLoader extends RggarbCore implements OnGetCategoriesList
 	public void onDownloadImageFailure() {
 
 		// And now the user can go to the Home Screen, sadly no avatar.
-		sharedPreferencesEditor = sharedPreferences.edit();
 		sharedPreferencesEditor.putString(C.SharedPreferencesItems.USER_AVATAR_PATH, C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE);
 		sharedPreferencesEditor.commit();
 
-		toastMaker.toast(this, C.Errorz.PROBLEM_LOADING_USER_AVATAR, Toast.LENGTH_SHORT);
+		katwalk.toastMaker.toast(this, C.Errorz.PROBLEM_LOADING_USER_AVATAR, Toast.LENGTH_SHORT);
 
 		// Get user's Items only if the user has any
 		if (sharedPreferences.getInt(C.SharedPreferencesItems.USER_ITEMS_COUNT, 0) > 0) {
@@ -305,14 +319,14 @@ public class InitialDataLoader extends RggarbCore implements OnGetCategoriesList
 	@Override
 	public void onGetUserItemsSuccess(LinkedHashSet<ItemBasic> userItems) {
 
-		new InsertUserItemsIntoDB(InitialDataLoader.this, dbTools, userItems).execute();
+		new InsertUserItemsIntoDB(InitialDataLoader.this, katwalk.dbTools, userItems).execute();
 
 	}
 
 	@Override
 	public void onGetUserItemsFailure(String reason) {
 
-		toastMaker.toast(this, C.Errorz.PROBLEM_LOADING_USER_ITEMS, Toast.LENGTH_SHORT);
+		katwalk.toastMaker.toast(this, C.Errorz.PROBLEM_LOADING_USER_ITEMS, Toast.LENGTH_SHORT);
 
 		Intent home = new Intent(this, Home.class);
 		startActivity(home);
@@ -328,7 +342,7 @@ public class InitialDataLoader extends RggarbCore implements OnGetCategoriesList
 
 	@Override
 	public void onInsertUserItemsInDBFailure() {
-		toastMaker.toast(this, C.Errorz.PROBLEM_LOADING_USER_ITEMS, Toast.LENGTH_SHORT);
+		katwalk.toastMaker.toast(this, C.Errorz.PROBLEM_LOADING_USER_ITEMS, Toast.LENGTH_SHORT);
 		// And now the user can go to the Home Screen
 		Intent home = new Intent(this, Home.class);
 		startActivity(home);

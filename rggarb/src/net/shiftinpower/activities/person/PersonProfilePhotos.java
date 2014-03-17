@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-public class PersonProfilePhotos extends RggarbSlidingMenu {
+public class PersonProfilePhotos extends KatwalkSlidingMenu {
 	
 	FrameLayout flMyProfileItemsHolder; 
 	
@@ -27,7 +27,7 @@ public class PersonProfilePhotos extends RggarbSlidingMenu {
 		tvMyImageGalleryTitle = (TextView) findViewById(R.id.tvMyImageGalleryTitle);
 		
 		try {
-			tvMyImageGalleryTitle.setTypeface(font1);
+			tvMyImageGalleryTitle.setTypeface(katwalk.font1);
 		} catch (Exception e) {
 			// Nothing can be done here
 			e.printStackTrace();

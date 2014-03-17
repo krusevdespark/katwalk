@@ -9,15 +9,17 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 
 /**
- * 
- * We are either storing the User Avatar on our server in a folder or obtaining it from Facebook Graph API
- * this class fetches the avatar and writes it into a Bitmap that can be used later
- * 
- * @author Kaloyan Roussev 
- *
- */
+*
+* We are either storing the User Avatar on our server in a folder or obtaining it from Facebook Graph API this class fetches
+* the avatar and writes it into a Bitmap that can be used later
+*
+* This class is also used for any image download
+*
+* @author Kaloyan Roussev
+*
+*/
 public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
-	
+
 	private Bitmap imageBitmap;
 	private String imageUrl;
 	private OnDownloadImageListener listener;
@@ -31,11 +33,12 @@ public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
 	protected Bitmap doInBackground(String... urls) {
 
 		try {
-			
+
 			InputStream in = new java.net.URL(imageUrl).openStream();
 
 			// ideally, we havent uploaded a huge image to the server, but anything happens
-			// so if we fetch it and it turns out huge, we will try to resample it and if it is still big we will resample it harder.
+			// so if we fetch it and it turns out huge, we will try to resample it and if it is still big we will resample it
+			// harder.
 			try {
 				imageBitmap = BitmapFactory.decodeStream(in);
 			} catch (OutOfMemoryError ex) {
@@ -57,6 +60,7 @@ public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
 	} // End of doInBackground
 
 	protected void onPostExecute(Bitmap result) {
+		super.onPostExecute(result);
 
 		if (listener != null) {
 			if (result != null) {
@@ -65,6 +69,6 @@ public class DownloadImage extends AsyncTask<String, Void, Bitmap> {
 				listener.onDownloadImageFailure();
 			}
 		}
-	}
-	
+	} // End of onPostExecute
+
 } // End of Class

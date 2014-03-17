@@ -15,7 +15,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 public class SaveUserSettingsOnServerAsync extends AsyncTask<String, String, String> {
-	
+
 	int serverResponseCode;
 	private Context context;
 	private OnUserSettingsChangedListener listener;
@@ -32,7 +32,8 @@ public class SaveUserSettingsOnServerAsync extends AsyncTask<String, String, Str
 
 	private String reason;
 
-	public SaveUserSettingsOnServerAsync(Context context, OnUserSettingsChangedListener listener, String userId, boolean userShowsMoney, boolean userShowsStats, String userAcceptsMessages, String userInteractsWithActivities, String userName, String userQuote, String userSex, String userPassword) {
+	public SaveUserSettingsOnServerAsync(Context context, OnUserSettingsChangedListener listener, String userId, boolean userShowsMoney, boolean userShowsStats, String userAcceptsMessages, String userInteractsWithActivities, String userName,
+			String userQuote, String userSex, String userPassword) {
 		this.context = context;
 		this.listener = listener;
 		this.userId = userId;
@@ -52,8 +53,11 @@ public class SaveUserSettingsOnServerAsync extends AsyncTask<String, String, Str
 
 	@Override
 	protected void onPreExecute() {
-		ShowLoadingMessage.loading(context);
+
 		super.onPreExecute();
+
+		ShowLoadingMessage.loading(context);
+
 	}
 
 	@Override
@@ -76,7 +80,8 @@ public class SaveUserSettingsOnServerAsync extends AsyncTask<String, String, Str
 
 			success = json.getInt(C.Tagz.SUCCESS);
 
-			// TODO this block of code repeats throughout the asynctask classes. extract it to a class that these classes should inherit from
+			// TODO this block of code repeats throughout the asynctask classes. extract it to a class that these classes
+			// should inherit from
 			if (success == C.HttpResponses.SUCCESS) {
 				return C.Tagz.SUCCESS;
 			} else if (success == C.HttpResponses.FAILURE_BAD_REQUEST) {
@@ -105,7 +110,9 @@ public class SaveUserSettingsOnServerAsync extends AsyncTask<String, String, Str
 
 	@Override
 	protected void onPostExecute(String result) {
-		
+
+		super.onPostExecute(result);
+
 		ShowLoadingMessage.dismissDialog();
 		if (listener != null) {
 			if (result.contentEquals(C.Tagz.SUCCESS)) {
@@ -114,7 +121,7 @@ public class SaveUserSettingsOnServerAsync extends AsyncTask<String, String, Str
 				listener.onUserSettingsChangedFailure(reason);
 			}
 		}
-		super.onPostExecute(result);
+
 	} // End of onPostExecute
 
 } // End of Class

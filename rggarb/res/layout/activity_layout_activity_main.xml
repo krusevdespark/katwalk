@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rlActivityMain"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity" >
@@ -10,6 +11,7 @@
         android:layout_height="match_parent" />
 
     <LinearLayout
+        android:id="@+id/llActivityMain"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/black"
@@ -20,8 +22,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@android:color/black"
             android:layout_marginTop="20dp"
+            android:background="@android:color/black"
             android:gravity="center"
             android:text="@string/tvBraggr"
             android:textAllCaps="true"
@@ -35,8 +37,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:background="@android:color/black"
             android:layout_marginBottom="15dp"
+            android:background="@android:color/black"
             android:gravity="center"
             android:lines="2"
             android:singleLine="false"
@@ -49,13 +51,14 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/llActivityMainTwo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:orientation="vertical" >
 
         <LinearLayout
-            android:id="@+id/innerRelativeLayout"
+            android:id="@+id/llInnerRelativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"

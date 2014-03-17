@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:layout_margin="10dp"
     android:background="@android:color/black"
+    android:id="@+id/llSearchUsersResults"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:orientation="vertical" >
@@ -14,7 +15,7 @@
         android:layout_height="wrap_content" >
 
         <LinearLayout
-            android:id="@+id/llSearchUsersResults"
+            android:id="@+id/llSearchUsersResultsInner"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical" >

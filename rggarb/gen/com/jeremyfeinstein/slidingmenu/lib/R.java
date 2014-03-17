@@ -325,7 +325,11 @@ public final class R {
 		public static final int showCustom = 0x7f04000a;
 		public static final int showHome = 0x7f040007;
 		public static final int showTitle = 0x7f040009;
+<<<<<<< HEAD
 		public static final int slidingmenumain = 0x7f040279;
+=======
+		public static final int slidingmenumain = 0x7f040308;
+>>>>>>> GoWild
 		public static final int tabMode = 0x7f040005;
 		public static final int useLogo = 0x7f040006;
 		public static final int wrap_content = 0x7f040003;

@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llAdapterableUserJustSignedUp"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/feed_item_margin"
@@ -11,6 +12,7 @@
     android:paddingTop="@dimen/feed_item_padding" >
 
     <TableRow
+        android:id="@+id/trAdapterableUserJustSignedUp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -25,6 +27,7 @@
             android:src="@drawable/images_default_avatar_male" />
 
         <RelativeLayout
+            android:id="@+id/rlAdapterableUserJustSignedUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
@@ -69,6 +72,7 @@
                 android:textStyle="italic" />
 
             <TableRow
+                android:id="@+id/trAdapterableUserJustSignedUpTwo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvFeedUserJustSignedUpTimestamp"

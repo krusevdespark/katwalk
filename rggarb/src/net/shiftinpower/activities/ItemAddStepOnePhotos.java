@@ -1,9 +1,11 @@
 package net.shiftinpower.activities;
 
+import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import net.shiftinpower.asynctasks.UploadItemPhotoFilesToServerAsync;
 import net.shiftinpower.core.C;
-import net.shiftinpower.core.RggarbSlidingMenu;
+import net.shiftinpower.core.KatwalkSlidingMenu;
+import net.shiftinpower.customviews.SquareImageView;
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.objects.TemporaryImage;
 import net.shiftinpower.utilities.PhotoHandler;
@@ -11,6 +13,7 @@ import net.shiftinpower.utilities.Transporter;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -24,22 +27,22 @@ import android.widget.Toast;
  * upload up to 5 images along with their description We are doing the images first, because uploads may take a while, so
  * while the user is entering data at the second step The app is going to do the uploading job in the background
  * 
- * Using LinkedHashSet to store the ItemImage objects because it denies the need for exist checks
- * Also, iteration order will match insertion order.
+ * Using LinkedHashSet to store the ItemImage objects because it denies the need for exist checks Also, iteration order will
+ * match insertion order.
  * 
  * @author Kaloyan Roussev
  * 
  */
-public class ItemAddStepOnePhotos extends RggarbSlidingMenu {
+public class ItemAddStepOnePhotos extends KatwalkSlidingMenu {
 
 	// Set up XML View Components
 	private TextView tvAddAnItemStepOneTitle;
 	private TextView tvAddAnItemStepOneSubTitle;
-	private ImageButton iImageSlotOne;
-	private ImageButton iImageSlotTwo;
-	private ImageButton iImageSlotThree;
-	private ImageButton iImageSlotFour;
-	private ImageButton iImageSlotFive;
+	private SquareImageView iImageSlotOne;
+	private SquareImageView iImageSlotTwo;
+	private SquareImageView iImageSlotThree;
+	private SquareImageView iImageSlotFour;
+	private SquareImageView iImageSlotFive;
 	private EditText etItemImageOneDescription;
 	private EditText etItemImageTwoDescription;
 	private EditText etItemImageThreeDescription;
@@ -55,7 +58,8 @@ public class ItemAddStepOnePhotos extends RggarbSlidingMenu {
 	private TemporaryImage itemImageThree = new TemporaryImage();
 	private TemporaryImage itemImageFour = new TemporaryImage();
 	private TemporaryImage itemImageFive = new TemporaryImage();
-
+	private ArrayList<SquareImageView> imageViewsWhoseBitmapsShouldBeRecycled = new ArrayList<SquareImageView>();
+	
 	// Intent changeImageDialog
 	private Intent changeImageDialog;
 
@@ -73,11 +77,11 @@ public class ItemAddStepOnePhotos extends RggarbSlidingMenu {
 
 		tvAddAnItemStepOneTitle = (TextView) findViewById(R.id.tvAddAnItemStepOneTitle);
 		tvAddAnItemStepOneSubTitle = (TextView) findViewById(R.id.tvAddAnItemStepOneSubTitle);
-		iImageSlotOne = (ImageButton) findViewById(R.id.iImageSlotOne);
-		iImageSlotTwo = (ImageButton) findViewById(R.id.iImageSlotTwo);
-		iImageSlotThree = (ImageButton) findViewById(R.id.iImageSlotThree);
-		iImageSlotFour = (ImageButton) findViewById(R.id.iImageSlotFour);
-		iImageSlotFive = (ImageButton) findViewById(R.id.iImageSlotFive);
+		iImageSlotOne = (SquareImageView) findViewById(R.id.iImageSlotOne);
+		iImageSlotTwo = (SquareImageView) findViewById(R.id.iImageSlotTwo);
+		iImageSlotThree = (SquareImageView) findViewById(R.id.iImageSlotThree);
+		iImageSlotFour = (SquareImageView) findViewById(R.id.iImageSlotFour);
+		iImageSlotFive = (SquareImageView) findViewById(R.id.iImageSlotFive);
 		etItemImageOneDescription = (EditText) findViewById(R.id.etItemImageOneDescription);
 		etItemImageTwoDescription = (EditText) findViewById(R.id.etItemImageTwoDescription);
 		etItemImageThreeDescription = (EditText) findViewById(R.id.etItemImageThreeDescription);
@@ -85,11 +89,18 @@ public class ItemAddStepOnePhotos extends RggarbSlidingMenu {
 		etItemImageFiveDescription = (EditText) findViewById(R.id.etItemImageFiveDescription);
 		bAddAnItemStepOneSubmit = (Button) findViewById(R.id.bAddAnItemStepOneSubmit);
 
+		// Register the image views for memory management 
+		imageViewsWhoseBitmapsShouldBeRecycled.add(iImageSlotOne);
+		imageViewsWhoseBitmapsShouldBeRecycled.add(iImageSlotTwo);
+		imageViewsWhoseBitmapsShouldBeRecycled.add(iImageSlotThree);
+		imageViewsWhoseBitmapsShouldBeRecycled.add(iImageSlotFour);
+		imageViewsWhoseBitmapsShouldBeRecycled.add(iImageSlotFive);
+		
 		// Set the fonts
 		try {
-			tvAddAnItemStepOneTitle.setTypeface(font1);
-			tvAddAnItemStepOneSubTitle.setTypeface(font2);
-			bAddAnItemStepOneSubmit.setTypeface(font1);
+			tvAddAnItemStepOneTitle.setTypeface(katwalk.font1);
+			tvAddAnItemStepOneSubTitle.setTypeface(katwalk.font2);
+			bAddAnItemStepOneSubmit.setTypeface(katwalk.font1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			// Nothing can be done here
@@ -167,38 +178,39 @@ public class ItemAddStepOnePhotos extends RggarbSlidingMenu {
 			public void onClick(View v) {
 
 				if (itemImageOne != null) {
-					if (!isEditTextEmpty(etItemImageOneDescription)) {
-						itemImageOne.setDescription(etItemImageOneDescription.getText().toString());
+					if (!katwalk.isEditTextEmpty(etItemImageOneDescription)) {
+						itemImageOne.setDescription(etItemImageOneDescription.getText().toString().trim());
 					}
 
 				}
 
 				if (itemImageTwo != null) {
-					if (!isEditTextEmpty(etItemImageTwoDescription)) {
-						itemImageTwo.setDescription(etItemImageTwoDescription.getText().toString());
+					if (!katwalk.isEditTextEmpty(etItemImageTwoDescription)) {
+						itemImageTwo.setDescription(etItemImageTwoDescription.getText().toString().trim());
 					}
 				}
 
 				if (itemImageThree != null) {
-					if (!isEditTextEmpty(etItemImageThreeDescription)) {
-						itemImageThree.setDescription(etItemImageThreeDescription.getText().toString());
+					if (!katwalk.isEditTextEmpty(etItemImageThreeDescription)) {
+						itemImageThree.setDescription(etItemImageThreeDescription.getText().toString().trim());
 					}
 				}
 
 				if (itemImageFour != null) {
-					if (!isEditTextEmpty(etItemImageFourDescription)) {
-						itemImageFour.setDescription(etItemImageFourDescription.getText().toString());
+					if (!katwalk.isEditTextEmpty(etItemImageFourDescription)) {
+						itemImageFour.setDescription(etItemImageFourDescription.getText().toString().trim());
 					}
 				}
 
 				if (itemImageFive != null) {
-					if (!isEditTextEmpty(etItemImageFiveDescription)) {
-						itemImageFive.setDescription(etItemImageFiveDescription.getText().toString());
+					if (!katwalk.isEditTextEmpty(etItemImageFiveDescription)) {
+						itemImageFive.setDescription(etItemImageFiveDescription.getText().toString().trim());
 					}
 				}
 
 				if (itemImages.size() == 0) {
-					toastMaker.toast(net.shiftinpower.activities.ItemAddStepOnePhotos.this, C.Errorz.ADDING_AN_ITEM_AT_LEAST_ONE_IMAGE_REQUIRED, Toast.LENGTH_LONG);
+					katwalk.toastMaker.toast(net.shiftinpower.activities.ItemAddStepOnePhotos.this, C.Errorz.ADDING_AN_ITEM_AT_LEAST_ONE_IMAGE_REQUIRED,
+							Toast.LENGTH_LONG);
 				} else {
 					// Send the images to the database
 
@@ -218,11 +230,20 @@ public class ItemAddStepOnePhotos extends RggarbSlidingMenu {
 					 */
 					Intent itemAddSecondStepData = new Intent(ItemAddStepOnePhotos.this, ItemAddStepTwoData.class);
 					startActivity(itemAddSecondStepData);
+					finish();
 				}
 			}
 		});
 
 	}// End of onCreate method
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		//Log.e("Kimi", "onStop");
+		//katwalk.recycleViewsDrawables(imageViewsWhoseBitmapsShouldBeRecycled);
+		//finish();
+	}
 
 	/*
 	 * If the user accidentally presses the hardware back button, they will lose all their data that they've entered We want
@@ -270,7 +291,8 @@ public class ItemAddStepOnePhotos extends RggarbSlidingMenu {
 				 * slot Or an empty itemImage object.
 				 */
 				itemImageOne.setPath(data.getStringExtra(C.ImageHandling.INTENT_EXTRA_IMAGE_PATH_KEY));
-				itemImageOne.setFilename(PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX, C.ImageHandling.IMAGES_FILE_EXTENSION, true));
+				itemImageOne.setFilename(PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX,
+						C.ImageHandling.IMAGES_FILE_EXTENSION, true));
 
 				itemImages.add(itemImageOne);
 				if (!isSet(itemImageOne)) {
@@ -298,7 +320,8 @@ public class ItemAddStepOnePhotos extends RggarbSlidingMenu {
 			case 21:
 
 				itemImageTwo.setPath(data.getStringExtra(C.ImageHandling.INTENT_EXTRA_IMAGE_PATH_KEY));
-				itemImageTwo.setFilename(PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX, C.ImageHandling.IMAGES_FILE_EXTENSION, true));
+				itemImageTwo.setFilename(PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX,
+						C.ImageHandling.IMAGES_FILE_EXTENSION, true));
 
 				itemImages.add(itemImageTwo);
 				if (!isSet(itemImageTwo)) {
@@ -322,7 +345,8 @@ public class ItemAddStepOnePhotos extends RggarbSlidingMenu {
 			case 22:
 
 				itemImageThree.setPath(data.getStringExtra(C.ImageHandling.INTENT_EXTRA_IMAGE_PATH_KEY));
-				itemImageThree.setFilename(PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX, C.ImageHandling.IMAGES_FILE_EXTENSION, true));
+				itemImageThree.setFilename(PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX,
+						C.ImageHandling.IMAGES_FILE_EXTENSION, true));
 
 				itemImages.add(itemImageThree);
 				if (!isSet(itemImageThree)) {
@@ -342,7 +366,8 @@ public class ItemAddStepOnePhotos extends RggarbSlidingMenu {
 			case 23:
 
 				itemImageFour.setPath(data.getStringExtra(C.ImageHandling.INTENT_EXTRA_IMAGE_PATH_KEY));
-				itemImageFour.setFilename(PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX, C.ImageHandling.IMAGES_FILE_EXTENSION, true));
+				itemImageFour.setFilename(PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX,
+						C.ImageHandling.IMAGES_FILE_EXTENSION, true));
 
 				itemImages.add(itemImageFour);
 				if (!isSet(itemImageFour)) {
@@ -358,7 +383,8 @@ public class ItemAddStepOnePhotos extends RggarbSlidingMenu {
 			case 24:
 
 				itemImageFive.setPath(data.getStringExtra(C.ImageHandling.INTENT_EXTRA_IMAGE_PATH_KEY));
-				itemImageFive.setFilename(PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX, C.ImageHandling.IMAGES_FILE_EXTENSION, true));
+				itemImageFive.setFilename(PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX,
+						C.ImageHandling.IMAGES_FILE_EXTENSION, true));
 
 				itemImages.add(itemImageFive);
 				if (!isSet(itemImageFive)) {
@@ -367,19 +393,21 @@ public class ItemAddStepOnePhotos extends RggarbSlidingMenu {
 
 				break;
 
+			case C.Miscellaneous.LEAVE_SCREEN_CONFIRMATION_REQUEST_CODE:
+				// If the user has clicked the Back button, we have showed them a dialog asking whether they want to leave
+				// for sure.
+				// This is the callback if they've confirmed they want to leave
+
+				if (resultCode == RESULT_OK) {
+					finish();
+				}
+				break;
+
 			} // End of the SWITCH statement
 
 			dealWithNumberOfPhotoUploadBoxesOnScreen();
 
 		} // End of the result != cancelled check
-
-		// If the user has clicked the Back button, we have showed them a dialog asking whether they want to leave for sure.
-		// This is the callback if they've confirmed they want to leave
-		if (requestCode == C.Miscellaneous.LEAVE_SCREEN_CONFIRMATION_REQUEST_CODE) {
-			if (resultCode == RESULT_OK) {
-				finish();
-			}
-		}
 
 	} // End of onActivityResult
 

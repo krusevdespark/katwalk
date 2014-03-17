@@ -8,26 +8,25 @@ import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TableRow;
 import android.widget.TextView;
 import net.shiftinpower.activities.NotImplementedYetScreen;
-import net.shiftinpower.activities.Settings;
-import net.shiftinpower.asynctasks.DownloadUserInfoFromServerAsync;
+import net.shiftinpower.asynctasks.GetUserDataFromServerAsync;
 import net.shiftinpower.core.C;
-import net.shiftinpower.core.RggarbSlidingMenu;
+import net.shiftinpower.core.KatwalkSlidingMenu;
+import net.shiftinpower.customviews.SquareImageView;
 import net.shiftinpower.interfaces.OnDownloadUserInfoFromServerListener;
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.objects.UserExtended;
 
 /**
  * 
- * This is the tempale for a Person's Profile that holds what is common between MyProfile Screen and User Profile Screen
+ * This is the tempale for a Person's Profile that holds the commonalities between MyProfile Screen and User Profile Screen
  * 
  * @author Kaloyan Roussev
  * 
  */
-public class PersonProfile extends RggarbSlidingMenu implements OnClickListener, OnDownloadUserInfoFromServerListener {
+public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener, OnDownloadUserInfoFromServerListener {
 
 	// set up XML View Components
 	protected TextView tvUserName;
@@ -36,7 +35,7 @@ public class PersonProfile extends RggarbSlidingMenu implements OnClickListener,
 	protected TextView tvUserStatus;
 	protected TextView tvChangeUserQuoteTitle;
 	protected TextView tvUserProfileStatsAreVisibleNote;
-	protected ImageButton iUserAvatar;
+	protected SquareImageView iUserAvatar;
 	protected TextView tvUserProfileItemsTab;
 	protected TextView tvUserProfileCommentsTab;
 	protected TextView tvUserProfileFollowingTab;
@@ -71,7 +70,7 @@ public class PersonProfile extends RggarbSlidingMenu implements OnClickListener,
 	protected int personGalleryPhotosCount;
 	protected int personActivityCount;
 	protected double personMoneySpentOnItems;
-	protected boolean personHasProvidedOwnPhoto;
+	protected boolean personHasProvidedOwnPhoto;;
 
 	// Image handling variables
 	protected Bitmap personAvatarBitmap;
@@ -93,7 +92,7 @@ public class PersonProfile extends RggarbSlidingMenu implements OnClickListener,
 		tvUserName = (TextView) findViewById(R.id.tvUserName);
 		tvUserStatus = (TextView) findViewById(R.id.tvUserStatus);
 		tvMoneySpent = (TextView) findViewById(R.id.tvMoneySpent);
-		iUserAvatar = (ImageButton) findViewById(R.id.iUserAvatar);
+		iUserAvatar = (SquareImageView) findViewById(R.id.iUserAvatar);
 		tvUserQuote = (TextView) findViewById(R.id.tvUserQuote);
 		bUserProfileActionButtonOne = (Button) findViewById(R.id.bUserProfileActionButtonOne);
 		bUserProfileActionButtonTwo = (Button) findViewById(R.id.bUserProfileActionButtonTwo);
@@ -111,13 +110,13 @@ public class PersonProfile extends RggarbSlidingMenu implements OnClickListener,
 
 		// Trying to set some fonts
 		try {
-			tvUserName.setTypeface(font2);
-			tvUserProfileItemsTab.setTypeface(font2);
-			tvUserProfileCommentsTab.setTypeface(font2);
-			tvUserProfileFollowingTab.setTypeface(font2);
-			tvUserProfileFriendsTab.setTypeface(font2);
-			tvUserProfileGalleryTab.setTypeface(font2);
-			tvUserProfileActivityTab.setTypeface(font2);
+			tvUserName.setTypeface(katwalk.font2);
+			tvUserProfileItemsTab.setTypeface(katwalk.font2);
+			tvUserProfileCommentsTab.setTypeface(katwalk.font2);
+			tvUserProfileFollowingTab.setTypeface(katwalk.font2);
+			tvUserProfileFriendsTab.setTypeface(katwalk.font2);
+			tvUserProfileGalleryTab.setTypeface(katwalk.font2);
+			tvUserProfileActivityTab.setTypeface(katwalk.font2);
 		} catch (Exception e) {
 			tvUserProfileItemsTab.setTextSize(C.Fontz.FONT_SIZE_WHEN_FONT_UNAVAILABLE);
 			tvUserProfileCommentsTab.setTextSize(C.Fontz.FONT_SIZE_WHEN_FONT_UNAVAILABLE);
@@ -135,9 +134,13 @@ public class PersonProfile extends RggarbSlidingMenu implements OnClickListener,
 		tvUserProfileGalleryTab.setOnClickListener(this);
 		tvUserProfileActivityTab.setOnClickListener(this);
 
-		// Determine whether the person whose profile we are looking at is the current user or another user
-
 	} // End of onCreate
+
+	@Override
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(arg0, arg1, arg2);
+	}
 
 	@Override
 	public void onClick(View v) {
@@ -183,27 +186,23 @@ public class PersonProfile extends RggarbSlidingMenu implements OnClickListener,
 			// startActivity(myPoints);
 			break;
 
-		case R.id.bUserProfileActionButtonTwo:
-		case R.id.tvUserProfileStatsAreVisibleNote:
-			Intent settings = new Intent(this, Settings.class);
-			startActivity(settings);
-			break;
-
 		} // End of Switch
 
 	} // End of onClick Method
 
 	public void setUserStatus(int userPoints) {
 		if (userPoints >= C.StatusPoints.STATUS_1_MIN && userPoints <= C.StatusPoints.STATUS_1_MAX) {
-			setUserStatusVariable(C.Statuses.STATUS_1);
+			personStatus = C.Statuses.STATUS_1;
 		} else if (userPoints >= C.StatusPoints.STATUS_2_MIN && userPoints <= C.StatusPoints.STATUS_2_MAX) {
-			setUserStatusVariable(C.Statuses.STATUS_2);
+			personStatus = C.Statuses.STATUS_2;
 		} else if (userPoints >= C.StatusPoints.STATUS_3_MIN && userPoints <= C.StatusPoints.STATUS_3_MAX) {
-			setUserStatusVariable(C.Statuses.STATUS_3);
+			personStatus = C.Statuses.STATUS_3;
 		} else if (userPoints >= C.StatusPoints.STATUS_4_MIN && userPoints <= C.StatusPoints.STATUS_4_MAX) {
-			setUserStatusVariable(C.Statuses.STATUS_4);
+			personStatus = C.Statuses.STATUS_4;
 		} else if (userPoints >= C.StatusPoints.STATUS_5_MIN && userPoints <= C.StatusPoints.STATUS_5_MAX) {
-			setUserStatusVariable(C.Statuses.STATUS_5);
+			personStatus = C.Statuses.STATUS_5;
+		} else {
+			personStatus = C.Statuses.STATUS_5; // TODO Later on an option for a custom status will be provided
 		}
 	} // End of setUserStatus
 
@@ -240,6 +239,26 @@ public class PersonProfile extends RggarbSlidingMenu implements OnClickListener,
 		personMoneySpentOnItems = userExtendedData.getUserMoneySpentOnItems();
 	}
 
+	private void handleCurrentUserDetails() {
+		personName = userName;
+		personSex = userSex;
+		personEmail = userEmail;
+		personAvatarPath = userAvatarPath;
+		personQuote = userQuote;
+		personPoints = userPoints;
+		personShowsMoney = userShowsMoney;
+		personShowsStats = userShowsStats;
+		personAcceptsMessages = userAcceptsMessages;
+		personInteractsWithActivities = userInteractsWithActivities;
+		personItemsCount = userItemsCount;
+		personCommentsCount = userCommentsCount;
+		personFollowingItemsCount = userFollowingItemsCount;
+		personFriendsCount = userFriendsCount;
+		personGalleryPhotosCount = userGalleryPhotosCount;
+		personActivityCount = userActivityCount;
+		personMoneySpentOnItems = userMoneySpentOnItems;
+	}
+
 	private void setDisplayedData() {
 		// Set displayed text
 		bUserProfileActionButtonOne.setText(String.valueOf(personPoints) + " points");
@@ -269,7 +288,7 @@ public class PersonProfile extends RggarbSlidingMenu implements OnClickListener,
 		}
 
 		// Set avatar image
-		setUserImageToImageView(iUserAvatar, personAvatarPath, personSex);
+		katwalk.setUserImageToImageView(iUserAvatar, personAvatarPath, personSex);
 
 	} // End of SetDisplayData
 
@@ -279,13 +298,14 @@ public class PersonProfile extends RggarbSlidingMenu implements OnClickListener,
 		personId = extras.getInt("personId", currentlyLoggedInUser);
 
 		if (currentUser) {
-			userExtendedData = instanceOfTheCurrentUser;
-			handleUserDetails(userExtendedData);
+
+			handleCurrentUserDetails();
 			personAvatarPath = sharedPreferences.getString(C.SharedPreferencesItems.USER_AVATAR_PATH, C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE);
 			setDisplayedData();
 
 		} else {
-			new DownloadUserInfoFromServerAsync(String.valueOf(personId), PersonProfile.this);
+			new GetUserDataFromServerAsync(String.valueOf(personId), PersonProfile.this, PersonProfile.this).execute();
+			// TODO
 		}
 	}
 

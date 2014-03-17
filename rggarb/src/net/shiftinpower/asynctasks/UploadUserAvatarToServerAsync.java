@@ -6,6 +6,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import android.os.AsyncTask;
 
+/**
+* The User can provide an avatar at Signup, MyProfile or Settings. This class uploads the image file to the server, then
+* starts another AsyncTask (SetUserAvatar) to update the server database record
+*
+* @author Kaloyan Roussev
+*
+*/
+
 public class UploadUserAvatarToServerAsync extends AsyncTask<String, Void, Boolean> {
 
 	private String userAvatarPath;

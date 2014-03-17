@@ -3,17 +3,19 @@ package net.shiftinpower.utilities;
 import java.util.LinkedHashSet;
 
 import net.shiftinpower.objects.ItemCategory;
+import net.shiftinpower.objects.ItemExtended;
 import net.shiftinpower.objects.ItemSubcategory;
 import net.shiftinpower.objects.TemporaryImage;
 import net.shiftinpower.objects.ItemBasic;
 import net.shiftinpower.objects.UserExtended;
 
 /**
- * Android provides a system to pass objects between activities that is not at all flexible and requires a lot of typing We
- * are going to circumvent that by using a simple custom Transporter singleton class
- * 
- * @author Kaloyan Roussev
- */
+* Android provides a system to pass objects between activities that is not at all flexible and requires a lot of typing We
+* are going to circumvent that by using a simple custom Transporter singleton class
+*
+*
+* @author Kaloyan Roussev
+*/
 public class Transporter {
 	
 	public Transporter() {
@@ -34,8 +36,8 @@ public class Transporter {
 	public LinkedHashSet<ItemCategory> itemCategories;
 	public LinkedHashSet<ItemSubcategory> itemSubcategories;
 	public ItemBasic itemBasic;
+	public ItemExtended itemExtended;
 	public UserExtended userExtended;
-	public UserExtended instanceOfTheCurrentUser;
 	public ItemBasic userItem;
 
 } // End of Class

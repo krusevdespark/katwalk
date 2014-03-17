@@ -1,16 +1,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llAdapterableItemHasBeenFollowed"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/feed_item_margin"
     android:background="@android:color/black"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/feed_item_padding"
     android:paddingLeft="@dimen/feed_item_padding"
     android:paddingRight="@dimen/feed_item_padding"
-    android:paddingTop="@dimen/feed_item_padding"
-    android:orientation="vertical" >
+    android:paddingTop="@dimen/feed_item_padding" >
 
     <TableRow
+        android:id="@+id/trAdapterableItemHasBeenFollowed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="2" >
@@ -41,6 +43,7 @@
     </TableRow>
 
     <LinearLayout
+        android:id="@+id/llAdapterableItemHasBeenFollowedInner"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
@@ -87,50 +90,51 @@
     </LinearLayout>
 
     <TableRow
+        android:id="@+id/trAdapterableItemHasBeenFollowedTwo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:weightSum="4" >
 
         <Button
             android:id="@+id/bItemsFeedActionButton1"
+            style="@style/feed_button_style"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_margin="2dp"
             android:layout_weight="1"
-            style="@style/feed_button_style"
             android:text="@string/bItemsFeedActionButtonRate"
             android:textColor="@android:color/white"
             android:textSize="12sp" />
 
         <Button
             android:id="@+id/bItemsFeedActionButton2"
+            style="@style/feed_button_style"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_margin="2dp"
             android:layout_weight="1"
-            style="@style/feed_button_style"
             android:text="@string/bItemsFeedActionButtonComment"
             android:textColor="@android:color/white"
             android:textSize="12sp" />
 
         <Button
             android:id="@+id/bItemsFeedActionButton3"
+            style="@style/feed_button_style"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_margin="2dp"
             android:layout_weight="1"
-            style="@style/feed_button_style"
             android:text="@string/bItemsFeedActionButtonFollow"
             android:textColor="@android:color/white"
             android:textSize="12sp" />
 
         <Button
             android:id="@+id/bItemsFeedActionButton4"
+            style="@style/feed_button_style"
             android:layout_width="0dp"
             android:layout_height="30dp"
             android:layout_margin="2dp"
             android:layout_weight="1"
-            style="@style/feed_button_style"
             android:text="@string/bPeopleFeedActionButtonBuy"
             android:textColor="@android:color/white"
             android:textSize="12sp" />

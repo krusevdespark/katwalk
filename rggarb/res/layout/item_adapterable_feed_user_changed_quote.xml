@@ -1,5 +1,6 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llAdapterableUserChangedQuote"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/feed_item_margin"
@@ -11,6 +12,7 @@
     android:paddingTop="@dimen/feed_item_padding" >
 
     <TableRow
+        android:id="@+id/trAdapterableUserChangedQuote"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -19,13 +21,14 @@
             android:layout_width="70dp"
             android:layout_height="70dp"
             android:layout_marginRight="7dp"
+            android:adjustViewBounds="true"
             android:contentDescription="@string/ivFeedUserImageDescription"
             android:padding="0dp"
             android:scaleType="centerCrop"
-            android:adjustViewBounds="true"
             android:src="@drawable/images_default_avatar_male" />
 
         <RelativeLayout
+            android:id="@+id/rlAdapterableUserChangedQuote"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
@@ -50,8 +53,8 @@
                 android:layout_below="@id/tvFeedUserChangedQuoteUserName"
                 android:layout_marginRight="2dp"
                 android:layout_marginTop="4dp"
-                android:singleLine="false"
                 android:gravity="right"
+                android:singleLine="false"
                 android:text="@string/tvFeedUserChangedQuote"
                 android:textColor="@android:color/white"
                 android:textSize="14sp" />
@@ -71,6 +74,7 @@
                 android:textStyle="italic" />
 
             <TableRow
+                android:id="@+id/trAdapterableUserChangedQuoteTwo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/tvFeedUserChangedQuoteTimestamp"

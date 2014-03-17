@@ -19,6 +19,12 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.os.AsyncTask;
 
+/**
+* This asynctask is part of the InitialDataloader sequence of tasks obtaining vital information from the server
+* @author Kaloyan Roussev
+*
+*/
+
 public class GetCategoriesFromServerAsync extends AsyncTask<String, String, LinkedHashSet<ItemCategory>> {
 
 	private int serverResponseCode;
@@ -42,11 +48,12 @@ public class GetCategoriesFromServerAsync extends AsyncTask<String, String, Link
 	@Override
 	protected void onPreExecute() {
 
+		super.onPreExecute();
+
 		if (context != null) {
 			ShowLoadingMessage.loading(context, C.LoadingMessages.LOADING_CATEGORIES);
 			loadingMessageShown = true;
 		}
-		super.onPreExecute();
 
 	}
 
@@ -110,6 +117,8 @@ public class GetCategoriesFromServerAsync extends AsyncTask<String, String, Link
 	@Override
 	protected void onPostExecute(LinkedHashSet<ItemCategory> itemCategories) {
 
+		super.onPostExecute(itemCategories);
+
 		if ((context != null) && (loadingMessageShown)) {
 			ShowLoadingMessage.dismissDialog();
 			loadingMessageShown = false;
@@ -122,7 +131,7 @@ public class GetCategoriesFromServerAsync extends AsyncTask<String, String, Link
 				listener.onGetCategoriesFailure(reason);
 			}
 		}
-		super.onPostExecute(itemCategories);
+
 	} // End of onPostExecute
 
 } // End of Class

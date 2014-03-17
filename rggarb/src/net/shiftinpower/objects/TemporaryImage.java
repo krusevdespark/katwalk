@@ -2,6 +2,7 @@ package net.shiftinpower.objects;
 
 import net.shiftinpower.core.C;
 
+//Used for opeartional purposes, at the moment at the AddItemStepOnePhotos class
 public class TemporaryImage {
 
 	private String path = C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE;

@@ -57,6 +57,8 @@ public class MyProfileFriendAdapter extends BaseAdapter {
 			convertView = layoutInflater.inflate(R.layout.item_adapterable_my_profile_friend, parent, false);
 		}
 		
+		// TODO employ the viewholder pattern here
+		
 		iMyFriendsFriendAvatarImage = (ImageButton) convertView.findViewById(R.id.iMyFriendsFriendAvatarImage);
 		tvMyFriendsListFriendName = (TextView) convertView.findViewById(R.id.tvMyFriendsListFriendName);
 

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/svDialogImageUploadWithImage"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:id="@+id/llDialogImageUploadWithImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@android:color/white"
+        android:orientation="vertical" >
+
+        <ImageButton
+            android:id="@+id/iImage"
+            android:layout_width="220dp"
+            android:layout_height="220dp"
+            android:layout_margin="5dp"
+            android:adjustViewBounds="true"
+            android:contentDescription="@string/ivUserAvatarDescription"
+            android:padding="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/images_default_avatar_male" />
+
+        <Button
+            android:id="@+id/bTakeAPhoto"
+            style="@style/green_button_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/bTakeAPhoto"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/bSelectPhotoFromFile"
+            style="@style/green_button_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/bSelectPhotoFromFile"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/bDeleteImage"
+            style="@style/green_button_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/bDeleteImage"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
+
+        <Button
+            android:id="@+id/bCancelImageUpload"
+            style="@style/purple_button_style"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:text="@string/bCancelImageUpload"
+            android:textColor="@android:color/white"
+            android:textSize="22sp" />
+    </LinearLayout>
+
+</ScrollView>

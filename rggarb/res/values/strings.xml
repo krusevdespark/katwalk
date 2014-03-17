@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
@@ -525,4 +526,533 @@
     <string name="etContactUsEnterYourMessage">Enter your message here</string>
     <string name="bContactUsSubmit">Submit</string>
 
+=======
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Main Activity -->
+    <string name="app_name">Katwalk</string>
+    <string name="action_settings">Settings</string>
+    <string name="login">Log In</string>
+    <string name="signup">Sign Up</string>
+    <string name="tvWelcome">Brag about your latest purchase.\nSee what others got.</string>
+
+    <!-- InitialDataLoader -->
+    <string name="tvSplashScreenDescription">Splash Screen shown while loading</string>
+
+    <!-- Login -->
+    <string name="tvLoginTitle">Log In to Katwalk!</string>
+    <string name="bLoginLoginPage">LOG IN</string>
+    <string name="ifLoginUsernameHint">First and Last Name</string>
+    <string name="ifLoginEmailHint">Email Address</string>
+    <string name="ifLoginPasswordHint">Password</string>
+    <string name="ifLoginPasswordRepeatHint">Repeat Password</string>
+    <string name="tvOrLoginPage">Or</string>
+    <string name="tvForgottenPasswordLoginPage">Forgotten Password</string>
+    <string name="etForgottenPasswordEmailHint">Enter Your Email</string>
+    <string name="bCancelForgottenPasswordDialog">Cancel</string>
+    <string name="bSubmitForgottenPasswordDialog">Submit</string>
+
+    <!-- Signup -->
+    <string name="tvSignupTitle">Sign Up To Katwalk!</string>
+    <string name="tvBraggr">Katwalk</string>
+    <string name="rgSexMale">Male</string>
+    <string name="rgSexFemale">Female</string>
+    <string name="bSubmitSignupPage">SIGN UP</string>
+    <string name="spCountrySpinnerPrompt">Please, select your country</string>
+ <!-- Currently not used -->
+    <string name="spCitySpinnerPrompt">Please, select your nearest city</string>
+ <!-- Currently not used -->
+    <string name="ibAvatarUploadText">Upload a photo</string>
+    <string name="ivUserAvatarContentDescription">User Image</string>
+    <string name="bTakeAPhoto">Take A Photo</string>
+    <string name="bSelectPhotoFromFile">Select From Files</string>
+    <string name="bCancelImageUpload">Cancel</string>
+    <string name="bDeleteImage">Delete Image</string>
+    <string name="cbUserAgreesWithTermsOfUse">I agree with the Terms of Use</string>
+
+    <!-- Action Bar -->
+    <string name="abSearch">Search</string>
+    <string name="abSettings">Settings</string>
+    <string name="abFeed">Feed</string>
+    <string name="abNotifications">Notifications</string>
+    <string name="abAddNewItem">Add New Item</string>
+    <string name="contentDescriptionHomeIcon">Home</string>
+
+    <!-- Feed -->
+    <string name="ivFeedItemImageDescription">Items Feed Item Icon</string>
+    <string name="tvItemsFeedItemNameDefault">Product Name Here</string>
+    <string name="tvItemsFeedItemActionDefault">now available at</string>
+    <string name="tvItemsFeedItemActorDefault">Default Place</string>
+    <string name="tvItemsFeedItemTimeStampDefault">2 minutes ago</string>
+    <string name="bItemsFeedActionButtonRate">Rate</string>
+    <string name="bItemsFeedActionButtonComment">Comment</string>
+    <string name="bItemsFeedActionButtonFollow">Follow</string>
+    <string name="bItemsFeedActionButtonEnvy">Envy</string>
+    <string name="bItemsFeedActionButtonSell">Sell</string>
+    <string name="bPeopleFeedActionButtonAddFriend">Add Friend</string>
+    <string name="bPeopleFeedActionButtonMessage">Message</string>
+    <string name="bPeopleFeedActionButtonBuy">Buy</string>
+
+    <!-- Feed actions -->
+    <!-- Item is available at Place -->
+    <string name="tvItemIsAvailableAtPlace"> is available at </string>
+
+    <!-- Item has been rated by -->
+    <string name="tvItemHasBeenRatedBy"> has been rated by </string>
+    <string name="tvItemsFeedItemHasBeenRatedByUserName"></string>
+    <string name="tvItemsFeedItemHasBeenRatedByRatingValue">His Rating: </string>
+    <string name="tvItemsFeedItemHasBeenRatedByRatingGlobalValue">Global Rating: </string>
+    <string name="ivFeedUserImageDescription">Image of the user</string>
+
+    <!-- Item has been commented by -->
+    <string name="tvItemHasBeenCommentedBy">has been commented by</string>
+    <string name="tvItemsFeedItemHasBeenCommentedByUserName"></string>
+    <string name="tvItemsFeedItemHasBeenCommentedByCommentContent">His comment: to make the ImageView resize itself to fit the rescaled image. For example, if you have a rectangular image in what would normally be a square ImageView, adjustViewBounds=true will make it resize the ImageView to be rectangular as well. This then affects how other Views are laid out around the ImageView.</string>
+    <string name="tvItemsFeedItemHasBeenCommentedByViewAllComments">View all comments</string>
+    <string name="iFeedItemHasBeenCommentedByUserImageDescription">Image of the user that commented the item</string>
+    <string name="tvItemsFeedItemHasBeenCommentedByTimeStamp">2 minutes ago</string>
+    <string name="tvItemHasBeenCommentedBy">has been commented by</string>
+
+    <!-- Item is now among the items of user -->
+    <string name="tvItemIsNowAmongTheItemsOf"> is now among the items of </string>
+    <string name="tvItemIsNowAmongTheItemsOfUserName"></string>
+    <string name="tvItemsFeedItemIsNowAmongTheItemsOfTimeStamp">2 minutes ago</string>
+
+    <!-- Item is being sold by user -->
+    <string name="tvItemIsBeingSoldBy"> is being sold by </string>
+    <string name="tvItemsFeedItemIsNowBeingSoldByTimeStamp">2 minutes ago</string>
+    <string name="tvItemsFeedItemIsNowBeingSoldByForAmount">Price $230</string>
+    <string name="tvItemsFeedItemIsNowBeingSoldByAtCityCountry">in Sofia, Bulgaria</string>
+
+    <!-- Item is now being offered at -->
+    <string name="tvItemIsBeingOfferedAt"> is now offered at </string>
+    <string name="tvItemFeedItemIsNowBeingOfferedAtItemName">Samsung Galaxy</string>
+    <string name="tvItemFeedItemIsNowBeingOfferedAtPlaceName">The Grand Mall</string>
+    <string name="tvItemsFeedItemIsNowBeingOfferedAtTimeStamp">2 minutes ago</string>
+    <string name="tvItemsFeedItemIsNowBeingOfferedAtForAmount">Price $230</string>
+    <string name="tvItemsFeedItemIsNowBeingOfferedAtAtCityCountry">in Sofia, Bulgaria</string>
+    <string name="ivFeedPlaceImageDescription">Image of a place where an item is being sold</string>
+
+    <!-- Item is being followed by -->
+    <string name="tvItemHasNowBeenFollowedBy"> has now been followed by </string>
+    <string name="tvItemIsNowBeingFollowedByUserName"></string>
+    <string name="tvItemsFeedItemIsNowBeingFollowedByTimeStamp">2 minutes ago</string>
+
+    <!-- User has just registered -->
+    <string name="tvFeedUserJustSignedUp"> has just signed up to Katwalk </string>
+    <string name="tvFeedUserJustSignedUpTimestamp">2 minutes ago</string>
+    <string name="tvFeedUserJustSignedUpUserName">Jake Washington</string>
+    <string name="bFeedUserHasJustSignedUpViewProfile">View Profile</string>
+    <string name="bFeedUserHasJustSignedUpMessage">Message</string>
+
+    <!-- User changed quote -->
+    <string name="bFeedUserChangedQuoteMessage">Message</string>
+    <string name="bFeedUserChangedQuoteViewProfile">View Profile</string>
+    <string name="tvFeedUserChangedQuoteTimestamp">2 minutes ago</string>
+    <string name="tvFeedUserChangedQuote">To be second means to be the first among the losers</string>
+    <string name="tvFeedUserChangedQuoteUserName">Jake Washington</string>
+
+    <!-- User just got an item -->
+    <string name="tvFeedUserJustGotItem"> has just gotten a </string>
+    <string name="tvFeedUserJustGotItemUserName"></string>
+    <string name="tvFeedUserJustGotItemItemName">Samsung Galaxy</string>
+    <string name="tvFeedUserJustGotItemTimestamp">2 minutes ago</string>
+
+    <!-- User is now frends with -->
+    <string name="tvFeedUserIsNowFriendsWith"> is now friends with </string>
+    <string name="tvFeedUserIsNowFriendsWithFriendOneUsername">Jake Washington</string>
+    <string name="tvFeedUserIsNowFriendsWithFriendTwoUsername">George Chaplin</string>
+    <string name="tvItemsFeedItemIsNowAmongTheItemsOfTimeStamp">2 minutes ago</string>
+    <string name="bFeedUsersViewProfileOfFriendOne">View Profile</string>
+    <string name="bFeedUsersViewProfileOfFriendTwo">View Profile</string>
+
+    <!-- User has rated an item -->
+    <string name="tvUserRatedXYstars"> rated </string>
+    <string name="tvFeedUserHasRatedItemUsername">User Userski</string>
+    <string name="tvFeedUserHasRatedItemItemname">Samsung Galaxy</string>
+    <string name="tvFeedUserHasRatedItemTimeStamp">2 minutes ago</string>
+    <string name="tvFeedUserHasRatedItemRatingValue">His rating: 8/10</string>
+    <string name="tvFeedUserHasRatedItemRatingGlobalValue">Global rating: 10/10</string>
+
+    <!-- User commented on -->
+    <string name="tvFeedUserHasCommentedOnItem">commented on</string>
+    <string name="tvFeedUserHasCommentedOnItemUsername">User Userski</string>
+    <string name="tvFeedUserHasCommentedOnItemItemName">Samsung Galaxy</string>
+    <string name="tvFeedUserHasCommentedOnItemTimestamp">2 minutes ago</string>
+    <string name="tvFeedUserHasCommentedOnItemCommentContent">His comment: Is is nice and the battery is lasting days, believe it or not I dont care. Go Kimi Raikkonen</string>
+    <string name="tvFeedUserHasCommentedOnItemViewAllComments">View all comments</string>
+
+    <!-- User no longer has -->
+    <string name="tvFeedUserNoLongerHas">no longer has</string>
+    <string name="tvFeedUserNoLongerHasUsername">User Userski</string>
+    <string name="tvFeedUserNoLongerHasItemName">Samsung Galaxy</string>
+    <string name="tvFeedUserNoLongerHasTimestamp">2 minutes ago</string>
+    <string name="tvFeedUserNoLongerHasReason">because he lost it :(</string>
+
+    <!-- User sells his -->
+    <string name="tvFeedUserSellsTheir"> sells his </string>
+    <string name="tvFeedUserSellsTheirUsername">User Userski</string>
+    <string name="tvFeedUserSellsTheirItemName">Samsung Galaxy</string>
+    <string name="tvFeedUserSellsTheirTimestamp">2 minutes ago</string>
+    <string name="tvFeedUserSellsTheirPrice">For $340</string>
+    <string name="tvFeedUserSellsTheirAtCityCountry">at Sofia, Bulgaria</string>
+    <string name="bFeedUserSellsTheirViewItem">View Item</string>
+    <string name="bFeedUserSellsTheirMessage">Message</string>
+    <string name="bFeedUserSellsTheirBuy">Buy</string>
+
+    <!-- Unused for now, need to think about this -->
+    <string name="tvUserEnviesXForY"> envies this purchase </string>
+
+    <!-- User follows this -->
+    <string name="tvFeedUserFollows"> is now following </string>
+    <string name="tvFeedUserFollowsUsername">User Userski</string>
+    <string name="tvFeedUserFollowsItemName">Samsung Galaxy</string>
+    <string name="tvFeedUserFollowsTimestamp">2 minutes ago</string>
+
+    <!-- User has just gained a status of -->
+    <string name="tvFeedUserGainedStatus"> has just gained a status of </string>
+    <string name="tvFeedUserGainedStatusUsername">User Userski</string>
+    <string name="tvFeedUserGainedStatusStatusName">Bigshot</string>
+    <string name="tvFeedUserGainedStatusDescription">You can not stop until there are no more money to spend, do you? And all those nice things in your collection are a proof for that ;)</string>
+    <string name="tvFeedUserGainedStatusTimestamp">2 minutes ago</string>
+
+    <!-- User is giving their item for free -->
+    <string name="tvFeedUserIsGivingXAwayForFree"> is now giving this away for free. Who wants it?</string>
+    <string name="tvFeedUserIsGivingXAwayForFreeUsername">User Userski</string>
+    <string name="tvFeedUserIsGivingXAwayForFreeItemName">Samsung Galaxy</string>
+    <string name="tvFeedUserIsGivingXAwayForFreeTimestamp">2 minutes ago</string>
+    <string name="tvFeedUserIsGivingXAwayForFreeAtCityCountry">at Sofia, Bulgaria</string>
+    <string name="bFeedUserIsGivingXAwayForFreeIWantIt">I Want It</string>
+
+    <!-- Place is now open -->
+    <string name="tvFeedPlaceIsNowOpenAtX">is now open for customers</string>
+    <string name="tvFeedPlaceIsNowOpenAtXPlaceName">The Grand Mall</string>
+    <string name="tvFeedPlaceIsNowOpenAtXAtCityCountry">in Sofia, Bulgaria</string>
+    <string name="tvFeedPlaceIsNowOpenAtXRandomItemName">Samsung Galaxy</string>
+    <string name="tvFeedPlaceIsNowOpenAtXRandomItemBeingOffered">is one of the items offered there</string>
+
+    <!-- User Profile -->
+    <string name="bAnotherUserProfileMessage">Message</string>
+    <string name="bAnotherUserProfileAddFriend">Add Friend</string>
+
+    <!-- My Profile -->
+    <string name="ivUserAvatarDescription">User Avatar Image</string>
+    <string name="tvUserNameDefault">User Name</string>
+    <string name="tvUserDefaultStatus">Default Status</string>
+    <string name="tvMoneySpentDefault">$0 Spent on items</string>
+    <string name="tvUserQuoteDefault">Click here to edit your profile quote</string>
+    <string name="bUserProfileActionButtonOne">0 points</string>
+    <string name="bUserProfileActionButtonTwo">Settings</string>
+    <string name="tvUserProfileFollowingTab">[0] Following </string>
+    <string name="tvUserProfileCommentsTab">[0] Comments</string>
+    <string name="tvUserProfileItemsTab">[0] Items</string>
+    <string name="tvUserProfileFriendsTab">[0] Friends</string>
+    <string name="tvUserProfileGalleryTab">[0] Gallery</string>
+    <string name="tvUserProfileActivityTab">[0] Activity</string>
+    <string name="tvChangeUserQuoteTitle">Change your profile quote. Max 70 characters allowed.</string>
+    <string name="etChangeUserQuoteContent">Type Quote Here</string>
+    <string name="bChangeUserQuoteSubmit">Submit</string>
+    <string name="bChangeUserQuoteCancel">Cancel</string>
+
+    <!-- Messages -->
+    <string name="tvMessagesTitle">Messages</string>
+    <string name="etMessagesSearch">Search Messages</string>
+    <string name="tvEmptyMessages">You haven\'t sent or received messages yet.</string>
+    <string name="tvMessagesWhoCanSendMeMessagesNote">Who can send me messages?</string>
+
+    <!-- Message Item -->
+    <string name="ivMessageFromUserImageDescription">Image of User That Has Sent the Message</string>
+    <string name="tvMessageFromUserName">Nigel Mansell</string>
+    <string name="tvMessageFromUserLastMessageDate">19:22 23.01.2014</string>
+    <string name="tvMessageFromUserContent">Hey man I saw you got a black Fender Stratocaster. Could you tell me where you got it from? I\'ve been busting my ass to find one of these, no success</string>
+    <string name="bMessageFromUserView">View</string>
+    <string name="bMessageFromUserReply">Reply</string>
+
+    <!-- Loading -->
+    <string name="tvLoading">Loading&#8230;</string>
+
+    <!-- Settings -->
+    <string name="bSaveChangesSettings">Save Changes</string>
+    <string name="tvUserNameSettings"></string>
+    <string name="tvSettingsTitle">Settings</string>
+    <string name="etUserNameSettings">First Name and Last Name</string>
+    <string name="tvUserEmailSettings">Email Address</string>
+    <string name="etUserPasswordOldSettings">Old Password</string>
+    <string name="etUserPasswordNewSettings">New Password</string>
+    <string name="etUserPasswordNewAgainSettings">New Password Again</string>
+    <string name="tvChangePasswordSettings">Change Password</string>
+    <string name="ivUserAvatarContentDescriptionSettings">User Image</string>
+    <string name="cbShowMoneySpentSettings">Show &#34;Money spent on items&#34; on your profile&#63;</string>
+    <string name="cbShowStatsSettings">Show items and activity stats on your profile&#63;</string>
+    <string name="tvWhoCanSendYouMessagesSettings">Who can send you messages&#63;</string>
+
+    <string-array name="groups_of_users">
+        <item>Anyone</item>
+        <item>Friends</item>
+        <item>Noone</item>
+    </string-array>
+
+    <string name="sWhoCanSendYouMessagesSettings">Make a choice</string>
+    <string name="tvWhoCanInteractWithYourActivitySettings">Who can interact with your activity&#63;</string>
+    <string name="sWhoCanInteractWithYourActivitySettings">Make a choice</string>
+    <string name="bDeleteMyProfileSettingsPage">Delete My Profile</string>
+    <string name="tvDeleteAccountDialogTitle">Are You Sure you want to delete your account? This action is irreversible! If you are sure you want to do this, please type in your password first.</string>
+    <string name="cbDeleteAccountDeleteItemImagesAsWell">Also, delete the item images I\'ve uploaded from those items\' public profiles.</string>
+    <string name="bDeleteAccountCancel">Cancel</string>
+    <string name="bDeleteAccountSubmit">Delete My Account</string>
+    <string name="etDeleteAccountPassword">Type your password</string>
+
+    <!-- My Profile Items -->
+    <string name="bUserItemsFeedActionButtonGet">Get</string>
+    <string name="bUserItemsFeedActionButtonFollow">Follow</string>
+    <string name="bUserItemsFeedActionButtonComment">Comment</string>
+    <string name="bUserItemsFeedActionButtonRate">Rate</string>
+    <string name="tvUserItemsFeedItemName">Samsung Galaxy S4</string>
+    <string name="tvUserItemsFeedItemPrice">&#36;140</string>
+    <string name="tvUserItemsFeedItemRatingAndComments">8.2/10 (214)</string>
+    <string name="tvUserItemsFeedItemBrandName">Samsung</string>
+    <string name="tvUserItemsFeedItemBoughtFrom"><u>The Big Mall on Fifth Avenue</u></string>
+    <string name="tvUserItemsFeedItemBoughtFromLabel">bought from</string>
+    <string name="iUserItemsFeedItemImageDescription">Image of a user item</string>
+    <string name="tvUserNameUserItemsList">User Userski\&#39;s Items</string>
+    <string name="etUserItemsListSearchHint">Search Items</string>
+    <string name="ibUserItemsListSearchContentDescription">Search Button</string>
+    <string name="tvMyItemsTitle">My Items [14]</string>
+    <string name="tvMyItemsFilter">Filter</string>
+    <string name="etMyItemsListSearchHint">Search Items</string>
+    <string name="ibMyItemsListSearchContentDescription">Image of a magnifying glass</string>
+    <string name="sMyItems">Filter by Category</string>
+    <string name="bMyItemsFilterByCategoryShowAllCategories">Show All</string>
+    <string name="iMyItemsFeedItemImageDescription">Image of a user item</string>
+    <string name="tvMyItemsFeedItemName">Samsung Galaxy S4</string>
+    <string name="tvMyItemsFeedItemPrice">&#36;140</string>
+    <string name="tvMyItemsFeedItemRatingAndComments">8.2/10 (214)</string>
+    <string name="tvMyItemsFeedItemBrandName">Samsung</string>
+    <string name="tvMyItemsFeedItemBoughtFromLabel">bought from</string>
+    <string name="tvMyItemsFeedItemBoughtFrom">Phone Shop at Seventh and Main</string>
+    <string name="bMyItemsFeedActionButtonRate">Rate</string>
+    <string name="bMyItemsFeedActionButtonComment">Comment</string>
+    <string name="bMyItemsFeedActionButtonDelete">Delete</string>
+    <string name="bMyItemsFeedActionButtonSell">Sell</string>
+    <string name="tvFilterByCategory">Filter By Category:</string>
+ <!-- Not sure whether this one is at My Items -->
+    <string name="tvEmptyMyProfileItems">You haven\'t added any items to your collection yet. Get your phone, see something you\'d like to brag about and add it to your collection!</string>
+    <string name="bEmptyMyProfileItemsAddAnItem">Add An Item</string>
+    <string name="tvEmptyMyProfileFollowings">You haven\'t followed any items yet.</string>
+    <string name="bEmptyMyProfileFollowingsVisitItemsFeed">Visit Items Feed</string>
+    <string name="bEmptyMyProfileFollowingsSearchItems">Search Items</string>
+    <string name="tvEmptyMyProfileFriends">You don\'t have any friends yet.</string>
+    <string name="bEmptyMyProfileFriendsFindFriends">Find Friends</string>
+    <string name="bEmptyMyProfileFriendsInviteFBFriends">Invite FB Friends</string>
+    <string name="tvEmptyMyProfileComments">You haven\'t commented on any items yet</string>
+    <string name="bEmptyMyProfileCommentsVisitItemsFeed">Visit Items Feed</string>
+    <string name="bEmptyMyProfileCommentsSearchItems">Search Items</string>
+
+    <!-- My Profile Friends -->
+    <string name="tvMyNameUserFriendsList">My Friends [5]</string>
+    <string name="etMyFriendsListSearch">Search Friends</string>
+    <string name="ibMyFriendsListSearchContentDescription">Image of a magnifying glass</string>
+    <string name="iMyFriendsFriendAvatarImage">Image of a friends avatar</string>
+    <string name="bMyFriendsUnfriend">Unfriend</string>
+    <string name="bMyFriendsMessage">Message</string>
+    <string name="tvMyFriendsListFriendName">Jenny Kowalski</string>
+
+    <!-- My Profile Following -->
+    <string name="iFollowingFeedItemImageDescription">Image of a user item</string>
+    <string name="tvFollowingListItemName">Samsung Galaxy S4</string>
+    <string name="tvFollowingFeedItemPrice">&#36;140</string>
+    <string name="tvFollowingFeedItemRatingAndComments">8.2/10 (214)</string>
+    <string name="tvFollowingFeedItemBrandName">Samsung</string>
+    <string name="tvFollowingFeedItemBoughtFromLabel">bought from</string>
+    <string name="tvFollowingFeedItemBoughtFrom">Phone Shop at Seventh and Main</string>
+    <string name="bFollowingFeedActionButtonRate">Rate</string>
+    <string name="bFollowingFeedActionButtonComment">Comment</string>
+    <string name="bFollowingFeedActionButtonUnfollow">Delete</string>
+    <string name="bFollowingFeedActionButtonSell">Sell</string>
+    <string name="tvUserNameFollowingList">Following [7]</string>
+    <string name="etFollowingListSearchHint">Search following</string>
+
+    <!-- My Profile Comments -->
+    <string name="tvUserNameMyCommentsList">My Comments [9]</string>
+    <string name="etMyCommentsListSearch">Search Comments</string>
+    <string name="ibMyCommentsListSearchContentDescription">Image of a magnifying glass</string>
+    <string name="bMyCommentsEditComment">Edit</string>
+    <string name="bMyCommentsDeleteComment">Delete</string>
+    <string name="tvMyCommentsCommentedItemName">Samsung Galaxy S2</string>
+    <string name="tvMyCommentsCommentedItemTitle">My Comment on</string>
+    <string name="tvMyCommentsCommentedItemDate">14.11.2013</string>
+    <string name="tvMyCommentsCommentedItemRating">My Rating: 4/10 (change)</string>
+    <string name="tvMyCommentsCommentedItemContent">&#34;I think this is the best phone I ever had. It is very elegant, screen is huge, it works very well and battery lasts long.&#34;</string>
+
+    <!-- My Profile Gallery -->
+    <string name="tvMyImageGalleryTitle">My Images (17)</string>
+
+    <!-- Sliding menu -->
+    <string name="tvSlidingMenuUserName">User Userski</string>
+    <string name="ivSlidingMenuUserAvatarContentDescription">User Avatar</string>
+
+    <!-- Add an Item -->
+    <string name="iAddAnItemAvatarImageDescription">Adding an Image Avatar</string>
+    <string name="tvAddAnItemTitle">Add an Item</string>
+    <string name="tvAddAnItemSubTitle">to your collection and brag about it</string>
+    <string name="etAddAnItemName">Full Name / Model*</string>
+    <string name="etAddAnItemBrandManufacturer">Brand / Manufacturer</string>
+    <string name="sAddAnItemCategory">Category*</string>
+    <string name="sAddAnItemSubcategory">Subcategory*</string>
+    <string name="etAddAnItemWhereDidYouGetItFrom">Which Place did you get it from?</string>
+    <string name="etAddAnItemWhoDidYouGetItFrom">Who? (if they are a Rggarb user)</string>
+    <string name="etAddAnItemPrice">Price</string>
+    <string name="etAddAnItemRateIt">Rate It!</string>
+    <string name="etAddAnItemComment">Comment&#8230;</string>
+    <string name="bAddAnItemSubmit">Add To Collection</string>
+    <string name="iAddAnItemPhotoOneImageDescription">Adding additional images to the item</string>
+    <string name="iAddAnItemPhotoTwoImageDescription">Adding additional images to the item</string>
+    <string name="iAddAnItemPhotoThreeImageDescription">Adding additional images to the item</string>
+    <string name="iAddAnItemPhotoFourImageDescription">Adding additional images to the item</string>
+    <string name="tvUserProfileStatsAreVisibleNote">Who can see my stats?</string>
+    <string name="tvItemBoughtFromPrompt">Item Bought From?</string>
+    <string name="rbBoughtFromPlace">Place</string>
+    <string name="rbBoughtFromUser">Person</string>
+    <string name="tvItemConditionPrompt">Item Condition?</string>
+    <string name="rbItemConditionUsed">Used</string>
+    <string name="rbItemConditionNew">New</string>
+    <string name="tvLeaveAddAnItemPageDialogTitle">You have unsaved changes. Are you sure you want to navigate back from this screen?</string>
+    <string name="bStayOnThisScreen">Stay</string>
+    <string name="bLeaveThisScreen">Leave</string>
+    <string name="tvAddAnItemStepOneDescription">Step 1: Add at least one photo (max is 5)</string>
+    <string name="etItemImageOneDescription">Enter photo one description (not required)</string>
+    <string name="etItemImageTwoDescription">Enter photo two description (not required)</string>
+    <string name="etItemImageThreeDescription">Enter photo three description (not required)</string>
+    <string name="etItemImageFourDescription">Enter photo four description (not required)</string>
+    <string name="etItemImageFiveDescription">Enter photo five description (not required)</string>
+    <string name="bAddAnItemStepOneSubmit">Continue</string>
+    <string name="tvAddAnItemStepTwoDescription">Step 2: Provide information about your item. Only fields marked with * are required.</string>
+    <string name="cbAddAnItemIsGift">I got this as a gift</string>
+
+    <!-- Item Profile -->
+    <string name="tvItemProfileItemName">Item Name</string>
+    <string name="tvItemProfileBrandName">Brand</string>
+    <string name="iItemProfileImageDescription">An Image of the Item</string>
+    <string name="iItemProfilePlaceImageDescription">An Image of a Place that offers this item</string>
+    <string name="iItemProfileUserImageDescription">An image of one of the users that have an item of this kind</string>
+    <string name="tvItemProfilePhotosValue">143</string>
+    <string name="tvItemProfileBy">by</string>
+    <string name="tvItemProfilePhotosHeading">Photos</string>
+    <string name="tvItemProfileActionCallToAddAPhoto">Add A Photo</string>
+    <string name="tvItemProfileViewAggregateProfile">View Aggregate Profile</string>
+    <string name="tvItemProfileRatingHeading">Rating</string>
+    <string name="tvItemProfileRatingValue">8.2/10 (43)</string>
+    <string name="tvItemProfileFollowedByValue">432</string>
+    <string name="tvItemProfileFollowedByHeading">Followers</string>
+    <string name="tvItemProfileCommentsValue">178</string>
+    <string name="tvItemProfileCommentsHeading">Comments</string>
+    <string name="tvItemProfileActionCallToFollow">Follow and get updates</string>
+    <string name="tvItemProfileOwnedByUsersValue">132</string>
+    <string name="tvItemProfileOwnedByUsersHeading">people have one</string>
+    <string name="tvItemProfileSimilarItemsValue">73</string>
+    <string name="tvItemProfileSimilarItemsHeading">similar items</string>
+    <string name="tvItemProfileOwnedByFriendsValue">4</string>
+    <string name="tvItemProfileUsersSellingTheirItemsValue">7</string>
+    <string name="tvItemProfileUsersSellingTheirItemsHeader">users are selling theirs</string>
+    <string name="tvItemProfileOfferedAtPlacesValue">18</string>
+    <string name="tvItemProfileOfferedAtPlacesHeading">places offer this item</string>
+    <string name="tvItemProfileOwnedByFriendsHeading"> of them are friends of yours!</string>
+    <string name="tvItemProfileAveragePriceValue">$123</string>
+    <string name="tvItemProfileAveragePriceText">Average Price</string>
+    <string name="tvItemProfilePriceText">Price</string>
+    <string name="tvItemProfilePrivateDescription">Description of the item</string>
+    <string name="bItemProfileRate">Rate</string>
+    <string name="bItemProfileComment">Comment</string>
+    <string name="bItemProfileFollow">Follow</string>
+    <string name="bItemProfileGet">Get One</string>
+    <string name="bItemProfileAddYours">Add Yours</string>
+    <string name="bItemProfilePrivateEditItem">Edit</string>
+    <string name="bItemProfilePrivateDeleteItem">Delete</string>
+    <string name="bItemProfilePrivateSellItem">Sell</string>
+    <string name="bItemProfileSuggestAMerge">Suggest a Merge</string>
+    <string name="bItemProfileMainCategory">Electronics, Consumer Technology</string>
+    <string name="bItemProfileMainSubcategory">Phones, Smartphones and Tablets</string>
+    <string name="bItemProfileViewSubcategories">View 14 more subcategories</string>
+    <string name="bItemProfilePrivateViewPublicProfile">View Public Profile</string>
+    <string name="tvItemProfilePopularComments">Popular Comments</string>
+    <string name="tvItemProfilePopularCommentMaker">Jake Atkins</string>
+    <string name="tvItemProfilePopularCommentContent">I got one of those for my wife. She thanked me in a way I would not dare sharing here</string>
+    <string name="tvItemProfileViewAllComments">View All Comments</string>
+    <string name="tvItemProfileStatistics">Stats and Rankings</string>
+    <string name="tvItemProfileActivity">Activity Stream</string>
+    <string name="tvItemProfilePrivateAddedHeading">Added </string>
+    <string name="tvItemProfilePrivateAddedTimestamp">2013-01-02 17:45</string>
+    <string name="tvItemProfilePrivateGottenFromHeading">Gotten from</string>
+    <string name="tvItemProfilePrivateGottenFromPlaceUserName">The Place Name</string>
+
+    <!-- Search and Search Results -->
+    <string name="tvSearchItemsTitle">Search Items</string>
+    <string name="etWhatSearch">What</string>
+    <string name="sCategorySearch">Category</string>
+    <string name="sSubcategorySearch">Subcategory</string>
+    <string name="etBrandSearch">Brand / Manufacturer</string>
+    <string name="sCountrySearch">Country</string>
+    <string name="etCitySearch">City</string>
+    <string name="etPlaceSearch">Place</string>
+    <string name="etPriceFromSearch">Price From</string>
+    <string name="etPriceToSearch">Price To</string>
+    <string name="sRatingAboveSearch">Rating Above</string>
+    <string name="rbNewItemSearch">New</string>
+    <string name="rbUsedItemSearch">Used</string>
+    <string name="bSubmitSearch">Search</string>
+    <string name="tvSearchOrSearchUsers">or Search Users</string>
+    <string name="tvSearchUsersTitle">Search Users</string>
+    <string name="tvSearchOrSearchItems">or Search Items</string>
+    <string name="etNameSearchUsers">Name</string>
+    <string name="etEmailSearchUsers">Email</string>
+    <string name="sCountrySearchUsers">Select a Country</string>
+    <string name="bSubmitSearchUsers">Search Users</string>
+    <string name="tvAppliedFiltersSearchItemsResults">Applied filters:</string>
+    <string name="tvClearSearchFiltersSearchItemsResults">clear search filters</string>
+    <string name="tvSearchItemsResultsTitle">Items Search Results</string>
+    <string name="bModifyItemsSearch">Modify Search</string>
+    <string name="rbSortByDescending">Desc</string>
+    <string name="rbSortByAscending">Asc</string>
+    <string name="sSortBySearchItemsResults">Sort Results By</string>
+
+    <string-array name="sortSearchItemsResultsBy">
+        <item>Name</item>
+        <item>Rating</item>
+        <item>Price</item>
+    </string-array>
+    <string-array name="sortSearchUsersResultsBy">
+        <item>Name</item>
+        <item>Email</item>
+        <item>Country</item>
+    </string-array>
+
+    <string name="tvAppliedFiltersSearchUsersResults">Applied filters:</string>
+    <string name="tvClearSearchFiltersSearchUsersResults">clear search filters</string>
+    <string name="tvSearchUsersResultsTitle">Items Search Results</string>
+    <string name="bModifyUsersSearch">Modify Search</string>
+    <string name="sSortBySearchUsersResults">Sort Users By</string>
+    <string name="tvSortBySearchItemsResults">Sort Results By:</string>
+    <string name="tvSortBySearchUsersResults">Sort Users By:</string>
+    <string name="tvPrivacyPolicyTitle">Privacy Policy</string>
+
+    <!-- Facebook -->
+    <string name="app_id">503530253077733</string>
+
+    <!-- Contact Us -->
+    <string name="tvContactUsTitle">Contact Us</string>
+    <string name="tvContactUsSubject">What is your Line of inquiry?</string>
+
+    <string-array name="sContactUsLineOfInquiry">
+        <item>General</item>
+        <item>Jobs</item>
+        <item>Media</item>
+        <item>Developers / API</item>
+        <item>Business</item>
+    </string-array>
+
+    <string name="etContactUsEnterYourMessage">Enter your message here</string>
+    <string name="bContactUsSubmit">Submit</string>
+
+>>>>>>> GoWild
 </resources>

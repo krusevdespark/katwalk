@@ -14,6 +14,14 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.os.AsyncTask;
 
+/**
+* This will probably become obsolete and the regular user registration asynctask class will be used instead with a couple of
+* tweaks
+*
+* @author Kaloyan Roussev
+*
+*/
+
 public class RegisterFacebookUserOnServerAsync extends AsyncTask<String, String, Integer> {
 
 	private Context context;
@@ -44,15 +52,18 @@ public class RegisterFacebookUserOnServerAsync extends AsyncTask<String, String,
 
 	@Override
 	protected void onPreExecute() {
-		ShowLoadingMessage.loading(context, "Registering User");
+
 		super.onPreExecute();
+
+		ShowLoadingMessage.loading(context, "Registering User");
+
 	}
 
 	@Override
 	protected Integer doInBackground(String... args) {
-		
+
 		int serverResponseCode;
-		
+
 		try {
 
 			List<NameValuePair> params = new ArrayList<NameValuePair>();
@@ -95,6 +106,9 @@ public class RegisterFacebookUserOnServerAsync extends AsyncTask<String, String,
 
 	@Override
 	protected void onPostExecute(Integer result) {
+
+		super.onPostExecute(result);
+
 		ShowLoadingMessage.dismissDialog();
 		if (listener != null) {
 			if (result != null) {
@@ -104,7 +118,7 @@ public class RegisterFacebookUserOnServerAsync extends AsyncTask<String, String,
 				listener.OnFacebookUserRegisteredFailure(); // TODO send reason
 			}
 		}
-		super.onPostExecute(result);
+
 	}
 
 } // End of Class

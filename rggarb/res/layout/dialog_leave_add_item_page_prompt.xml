@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llLeaveItemPagePrompt"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@android:color/white"
@@ -10,9 +11,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="5dp"
-        android:textSize="18sp"
         android:text="@string/tvLeaveAddAnItemPageDialogTitle"
-        android:textColor="@android:color/black" />
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/bStayOnThisScreen"

@@ -3,7 +3,7 @@ package net.shiftinpower.activities;
 import java.util.ArrayList;
 
 import net.shiftinpower.adapters.MessagesAdapter;
-import net.shiftinpower.core.RggarbSlidingMenu;
+import net.shiftinpower.core.KatwalkSlidingMenu;
 import net.shiftinpower.koldrain.R;
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,7 +13,15 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class Messages extends RggarbSlidingMenu {
+/**
+*
+* NOTE: This is just a draft ot the class with the Empty List View implemented
+*
+* @author Kaloyan Kalinov
+*
+*/
+
+public class Messages extends KatwalkSlidingMenu {
 
 	// XML view elements
 	private TextView tvMessagesTitle;
@@ -75,8 +83,8 @@ public class Messages extends RggarbSlidingMenu {
 
 		// Try setting fonts for different XML views on screen
 		try {
-			tvMessagesTitle.setTypeface(font1);
-			tvEmptyMessages.setTypeface(font2);
+			tvMessagesTitle.setTypeface(katwalk.font1);
+			tvEmptyMessages.setTypeface(katwalk.font2);
 		} catch (Exception e) {
 		}
 

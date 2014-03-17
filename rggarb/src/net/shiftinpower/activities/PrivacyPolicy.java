@@ -1,13 +1,13 @@
 package net.shiftinpower.activities;
 
-import net.shiftinpower.core.RggarbSlidingMenu;
+import net.shiftinpower.core.KatwalkSlidingMenu;
 import net.shiftinpower.koldrain.R;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.widget.TextView;
 
-public class PrivacyPolicy extends RggarbSlidingMenu {
+public class PrivacyPolicy extends KatwalkSlidingMenu {
 	
 	private TextView tvPrivacyPolicyTitle;
 	private TextView tvPrivacyPolicyContent;
@@ -21,6 +21,7 @@ public class PrivacyPolicy extends RggarbSlidingMenu {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
 		setContentView(R.layout.activity_layout_privacy_policy);
 		
 		tvPrivacyPolicyTitle = (TextView) findViewById(R.id.tvPrivacyPolicyTitle);

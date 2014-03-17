@@ -2,7 +2,6 @@ package net.shiftinpower.asynctasks;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import net.shiftinpower.core.C;
 import net.shiftinpower.interfaces.OnAddNewItemToServerListener;
 import net.shiftinpower.localsqlitedb.DBTools;
@@ -15,7 +14,21 @@ import org.json.JSONObject;
 import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
+
+/**
+* This is one of three asynctask classes that work together in order to efficiently add a user's item to the server database
+*
+* When a user clicks Add an item, they are taken to a screen where they upload up to 5 images and their descriptions When
+* they submit that screen UploadItemPhotoFilesToServerAsync.class starts In the meantime user is busy entering name, brand,
+* category, description etc for their item When they submit that screen this task is called and it creates a record in the
+* server database for the new item
+*
+* We already know where on the servers item images will be saved and how they will be called, so we take that information
+* along with the image descriptions and start AddItemPhotoPathsAndDescriptionsInServerAsync.class when we are finished here
+*
+* @author Kaloyan Roussev
+*
+*/
 
 public class AddNewItemToServerAsync extends AsyncTask<String, String, Bundle> {
 
@@ -41,9 +54,8 @@ public class AddNewItemToServerAsync extends AsyncTask<String, String, Bundle> {
 	private String timeItemWasAddedToDB;
 	private String reason;
 
-	public AddNewItemToServerAsync(DBTools dbTools, Context context, OnAddNewItemToServerListener listener, int currentlyLoggedInUser, String itemName,
-			String itemBrand, String itemCategoryID, String itemSubcategoryID, String itemBoughtFrom, String itemPrice, ArrayList<String> imageFilenames,
-			ArrayList<String> imageDescriptions, String itemDescription, boolean itemNew, boolean itemBoughtFromPlace, boolean itemIsAGift) {
+	public AddNewItemToServerAsync(DBTools dbTools, Context context, OnAddNewItemToServerListener listener, int currentlyLoggedInUser, String itemName, String itemBrand, String itemCategoryID, String itemSubcategoryID, String itemBoughtFrom,
+			String itemPrice, ArrayList<String> imageFilenames, ArrayList<String> imageDescriptions, String itemDescription, boolean itemNew, boolean itemBoughtFromPlace, boolean itemIsAGift) {
 		this.dbTools = dbTools;
 		this.context = context;
 		this.listener = listener;
@@ -68,6 +80,7 @@ public class AddNewItemToServerAsync extends AsyncTask<String, String, Bundle> {
 
 	@Override
 	protected void onPreExecute() {
+		super.onPreExecute();
 		ShowLoadingMessage.loading(context, C.LoadingMessages.ADDING_NEW_ITEM_TO_USER_COLLECTION);
 	}
 
@@ -108,8 +121,7 @@ public class AddNewItemToServerAsync extends AsyncTask<String, String, Bundle> {
 				dataRegardingTheItemJustAdded.putInt("transactionId", transactionId);
 				dataRegardingTheItemJustAdded.putString("timeItemWasAddedToDB", timeItemWasAddedToDB);
 
-				new AddItemPhotoPathsAndDescriptionsInServerDatabaseAsync(dbTools, context, currentlyLoggedInUser, itemId, imageDescriptions, imageFilenames)
-						.execute();
+				new AddItemPhotoPathsAndDescriptionsInServerDatabaseAsync(dbTools, context, currentlyLoggedInUser, itemId, imageDescriptions, imageFilenames).execute();
 
 				return dataRegardingTheItemJustAdded;
 
@@ -122,7 +134,7 @@ public class AddNewItemToServerAsync extends AsyncTask<String, String, Bundle> {
 
 				setReason(C.Tagz.DB_PROBLEM);
 				String message = json.getString("message");
-				Log.d("message", message);
+			
 				return null;
 
 			} else {
@@ -149,9 +161,10 @@ public class AddNewItemToServerAsync extends AsyncTask<String, String, Bundle> {
 
 	@Override
 	protected void onPostExecute(Bundle dataRegardingTheItemJustAdded) {
+		super.onPostExecute(dataRegardingTheItemJustAdded);
 
 		ShowLoadingMessage.dismissDialog();
-		
+
 		if (listener != null) {
 			if (dataRegardingTheItemJustAdded != null) {
 
@@ -165,7 +178,6 @@ public class AddNewItemToServerAsync extends AsyncTask<String, String, Bundle> {
 
 			}
 		}
-		super.onPostExecute(dataRegardingTheItemJustAdded);
 
 	} // End of onPostExecute
 

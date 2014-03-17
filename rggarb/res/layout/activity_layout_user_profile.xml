@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llUserProfile"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/feed_item_margin"
@@ -15,18 +16,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
-        <ImageButton
+        <net.shiftinpower.customviews.SquareImageView
             android:id="@+id/iUserAvatar"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginRight="7dp"
-            android:adjustViewBounds="true"
             android:contentDescription="@string/ivUserAvatarDescription"
             android:padding="0dp"
             android:scaleType="centerCrop"
             android:src="@drawable/images_default_avatar_male" />
 
         <RelativeLayout
+            android:id="@+id/rlUserProfile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
@@ -141,6 +142,7 @@
             android:weightSum="2" >
 
             <LinearLayout
+                android:id="@+id/llUserProfileInner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -163,6 +165,7 @@
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/llUserProfileInnerTwo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashSet;
 import net.shiftinpower.asynctasks.AddNewItemToServerAsync;
 import net.shiftinpower.core.C;
-import net.shiftinpower.core.RggarbSlidingMenu;
+import net.shiftinpower.core.KatwalkSlidingMenu;
 import net.shiftinpower.interfaces.OnAddNewItemToServerListener;
 import net.shiftinpower.interfaces.OnGetCategoriesListener;
 import net.shiftinpower.interfaces.OnGetSubcategoriesListener;
@@ -17,7 +17,6 @@ import net.shiftinpower.utilities.LoadSpinnerData;
 import net.shiftinpower.utilities.Transporter;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnFocusChangeListener;
@@ -32,8 +31,15 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
-
-public class ItemAddStepTwoData extends RggarbSlidingMenu implements OnAddNewItemToServerListener, OnGetCategoriesListener, OnGetSubcategoriesListener {
+/**
+* While the images from step one are being uploaded asynchronously, the user is going to enter the data
+* regarding the item - name, brand, category, where they got it from, how much did it cost etc.
+*
+* Autocomplete feature will be implemented in the future, so creating different products due to different spellings is avoided as much as possible
+* @author Kaloyan Roussev
+*
+*/
+public class ItemAddStepTwoData extends KatwalkSlidingMenu implements OnAddNewItemToServerListener, OnGetCategoriesListener, OnGetSubcategoriesListener {
 
 	// Set up XML View Components
 	private TextView tvAddAnItemTitle;
@@ -53,11 +59,11 @@ public class ItemAddStepTwoData extends RggarbSlidingMenu implements OnAddNewIte
 	// Data holding variables
 	private ArrayList<String> imageFilenames = new ArrayList<String>();
 	private ArrayList<String> imageDescriptions = new ArrayList<String>();
-	private boolean dataEntered = false;
 	private String itemName;
 	private String itemBrand;
 	private String itemBoughtFrom;
 	private String itemPriceString;
+	
 	// If the user doesnt touch anything category related, we need to ensure we arent sending an empty value or a 0 value for
 	// itemCategoryID
 	private int itemCategoryID = 1;
@@ -95,9 +101,9 @@ public class ItemAddStepTwoData extends RggarbSlidingMenu implements OnAddNewIte
 
 		// Set the fonts
 		try {
-			tvAddAnItemTitle.setTypeface(font1);
-			tvAddAnItemSubTitle.setTypeface(font2);
-			bAddAnItemSubmit.setTypeface(font1);
+			tvAddAnItemTitle.setTypeface(katwalk.font1);
+			tvAddAnItemSubTitle.setTypeface(katwalk.font2);
+			bAddAnItemSubmit.setTypeface(katwalk.font1);
 		} catch (Exception e) {
 			e.printStackTrace();
 			// Nothing can be done here
@@ -114,10 +120,7 @@ public class ItemAddStepTwoData extends RggarbSlidingMenu implements OnAddNewIte
 
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
-				// TODO here the autosuggest feature will take place
-				if (etAddAnItemName.getText().toString() != null) {
-					dataEntered = true;
-				}
+				// TODO change this to a textwatcher for the autocomplete feature
 			}
 		});
 
@@ -125,10 +128,8 @@ public class ItemAddStepTwoData extends RggarbSlidingMenu implements OnAddNewIte
 
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
-				// TODO here the autosuggest feature will take place
-				if (etAddAnItemBrandManufacturer.getText().toString() != null) {
-					dataEntered = true;
-				}
+				// TODO change this to a textwatcher for the autocomplete feature
+
 			}
 		});
 
@@ -136,15 +137,13 @@ public class ItemAddStepTwoData extends RggarbSlidingMenu implements OnAddNewIte
 
 			@Override
 			public void onFocusChange(View v, boolean hasFocus) {
-				// TODO here the autosuggest feature will take place
-				if (etAddAnItemWhereWhoDidYouGetItFrom.getText().toString() != null) {
-					dataEntered = true;
-				}
+				// TODO change this to a textwatcher for the autocomplete feature
+
 			}
 		});
 
 		// Try populating spinners with Categories & Subcategories
-		new GetCategoriesFromDB(ItemAddStepTwoData.this, ItemAddStepTwoData.this, dbTools).execute();
+		new GetCategoriesFromDB(ItemAddStepTwoData.this, ItemAddStepTwoData.this, katwalk.dbTools).execute();
 
 		cbAddAnItemIsGift.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
@@ -199,9 +198,9 @@ public class ItemAddStepTwoData extends RggarbSlidingMenu implements OnAddNewIte
 				if (count > 0) {
 					ItemCategory itemCategory = (ItemCategory) arg0.getItemAtPosition(arg2);
 					itemCategoryID = itemCategory.getId();
-					
-					new GetSubcategoriesFromDB(ItemAddStepTwoData.this, ItemAddStepTwoData.this, dbTools, (sAddAnItemCategory.getSelectedItemPosition() + 1))
-							.execute();
+
+					new GetSubcategoriesFromDB(ItemAddStepTwoData.this, ItemAddStepTwoData.this, katwalk.dbTools,
+							(sAddAnItemCategory.getSelectedItemPosition() + 1)).execute();
 
 				}
 				count++;
@@ -234,21 +233,22 @@ public class ItemAddStepTwoData extends RggarbSlidingMenu implements OnAddNewIte
 			@Override
 			public void onClick(View v) {
 
-				itemName = etAddAnItemName.getText().toString();
-				itemBrand = etAddAnItemBrandManufacturer.getText().toString();
+				itemName = etAddAnItemName.getText().toString().trim();
+				itemBrand = etAddAnItemBrandManufacturer.getText().toString().trim();
 
-				itemBoughtFrom = etAddAnItemWhereWhoDidYouGetItFrom.getText().toString();
+				itemBoughtFrom = etAddAnItemWhereWhoDidYouGetItFrom.getText().toString().trim();
 
-				itemPriceString = etAddAnItemPrice.getText().toString();
-				itemDescription = etAddAnItemComment.getText().toString();
+				itemPriceString = etAddAnItemPrice.getText().toString().trim();
+				itemDescription = etAddAnItemComment.getText().toString().trim();
 
 				if ((itemName.contentEquals("") || itemName == null)) {
-					toastMaker.toast(net.shiftinpower.activities.ItemAddStepTwoData.this, C.Errorz.ADDING_AN_ITEM_SOME_FIELDS_REQUIRED, Toast.LENGTH_LONG);
+					katwalk.toastMaker.toast(net.shiftinpower.activities.ItemAddStepTwoData.this, C.Errorz.ADDING_AN_ITEM_SOME_FIELDS_REQUIRED,
+							Toast.LENGTH_LONG);
 
 				} else {
-					new AddNewItemToServerAsync(dbTools, ItemAddStepTwoData.this, ItemAddStepTwoData.this, currentlyLoggedInUser, itemName, itemBrand, String
-							.valueOf(itemCategoryID), String.valueOf(itemSubcategoryID), itemBoughtFrom, itemPriceString, imageFilenames, imageDescriptions,
-							itemDescription, itemNew, itemBoughtFromPlace, itemIsAGift).execute();
+					new AddNewItemToServerAsync(katwalk.dbTools, ItemAddStepTwoData.this, ItemAddStepTwoData.this, currentlyLoggedInUser, itemName, itemBrand,
+							String.valueOf(itemCategoryID), String.valueOf(itemSubcategoryID), itemBoughtFrom, itemPriceString, imageFilenames,
+							imageDescriptions, itemDescription, itemNew, itemBoughtFromPlace, itemIsAGift).execute();
 				}
 			}
 		}); // End of Submit button click handling
@@ -261,12 +261,9 @@ public class ItemAddStepTwoData extends RggarbSlidingMenu implements OnAddNewIte
 	 */
 	@Override
 	public void onBackPressed() {
-		if (dataEntered == true) {
-			Intent leaveScreenConfirmation = new Intent(ItemAddStepTwoData.this, LeaveScreenConfirmation.class);
-			startActivityForResult(leaveScreenConfirmation, C.Miscellaneous.LEAVE_SCREEN_CONFIRMATION_REQUEST_CODE);
-		} else {
-			super.onBackPressed();
-		}
+
+		Intent leaveScreenConfirmation = new Intent(ItemAddStepTwoData.this, LeaveScreenConfirmation.class);
+		startActivityForResult(leaveScreenConfirmation, C.Miscellaneous.LEAVE_SCREEN_CONFIRMATION_REQUEST_CODE);
 
 	} // End of onBackPressed
 
@@ -290,11 +287,11 @@ public class ItemAddStepTwoData extends RggarbSlidingMenu implements OnAddNewIte
 	@Override
 	public void onAddNewItemFailure(String reason) {
 		if (reason.contentEquals(C.Tagz.BAD_REQUEST)) {
-			toastMaker.toast(net.shiftinpower.activities.ItemAddStepTwoData.this, C.Errorz.ITEM_NOT_ADDED_BAD_REQUEST_EXCUSE, Toast.LENGTH_LONG);
+			katwalk.toastMaker.toast(net.shiftinpower.activities.ItemAddStepTwoData.this, C.Errorz.ITEM_NOT_ADDED_BAD_REQUEST_EXCUSE, Toast.LENGTH_LONG);
 		} else if (reason.contentEquals(C.Tagz.DB_PROBLEM)) {
-			toastMaker.toast(net.shiftinpower.activities.ItemAddStepTwoData.this, C.Errorz.ITEM_NOT_ADDED_DB_PROBLEM_EXCUSE, Toast.LENGTH_LONG);
+			katwalk.toastMaker.toast(net.shiftinpower.activities.ItemAddStepTwoData.this, C.Errorz.ITEM_NOT_ADDED_DB_PROBLEM_EXCUSE, Toast.LENGTH_LONG);
 		} else if (reason.contentEquals(C.Tagz.UNKNOWN_PROBLEM)) {
-			toastMaker.toast(net.shiftinpower.activities.ItemAddStepTwoData.this, C.Errorz.ITEM_NOT_ADDED_UNKNOWN_PROBLEM_EXCUSE, Toast.LENGTH_LONG);
+			katwalk.toastMaker.toast(net.shiftinpower.activities.ItemAddStepTwoData.this, C.Errorz.ITEM_NOT_ADDED_UNKNOWN_PROBLEM_EXCUSE, Toast.LENGTH_LONG);
 		}
 
 	} // End of onAddNewItemFailure
@@ -315,7 +312,7 @@ public class ItemAddStepTwoData extends RggarbSlidingMenu implements OnAddNewIte
 					// TODO Start deleting images uploaded task
 				}
 			}
-		}
+		} // End of resultCode != RESULT_CANCELED
 
 	} // End of onActivityResult
 
@@ -333,13 +330,13 @@ public class ItemAddStepTwoData extends RggarbSlidingMenu implements OnAddNewIte
 
 		// Initially we are loading subcategories for the first category in the spinner, so we are passing 1 to the
 		// constructor
-		new GetSubcategoriesFromDB(ItemAddStepTwoData.this, ItemAddStepTwoData.this, dbTools, 1).execute();
+		new GetSubcategoriesFromDB(ItemAddStepTwoData.this, ItemAddStepTwoData.this, katwalk.dbTools, 1).execute();
 
 	}
 
 	@Override
 	public void onGetCategoriesFailure(String reason) {
-		toastMaker.toast(net.shiftinpower.activities.ItemAddStepTwoData.this, C.Errorz.CATEGORIES_NOT_LOADED_DUE_TO_UNKOWN_ERROR, Toast.LENGTH_LONG);
+		katwalk.toastMaker.toast(net.shiftinpower.activities.ItemAddStepTwoData.this, C.Errorz.CATEGORIES_NOT_LOADED_DUE_TO_UNKOWN_ERROR, Toast.LENGTH_LONG);
 	}
 
 	@Override
@@ -360,7 +357,7 @@ public class ItemAddStepTwoData extends RggarbSlidingMenu implements OnAddNewIte
 	public void onGetSubcategoriesFailure(String reason) {
 
 		// Tell the user we have a problem
-		toastMaker.toast(net.shiftinpower.activities.ItemAddStepTwoData.this, C.Errorz.CATEGORIES_NOT_LOADED_DUE_TO_UNKOWN_ERROR, Toast.LENGTH_LONG);
+		katwalk.toastMaker.toast(net.shiftinpower.activities.ItemAddStepTwoData.this, C.Errorz.CATEGORIES_NOT_LOADED_DUE_TO_UNKOWN_ERROR, Toast.LENGTH_LONG);
 
 	}
 

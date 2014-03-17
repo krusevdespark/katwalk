@@ -1,16 +1,18 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/llAdapterableUserGainedStatus"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/feed_item_margin"
     android:background="@android:color/black"
+    android:orientation="vertical"
     android:paddingBottom="@dimen/feed_item_padding"
     android:paddingLeft="@dimen/feed_item_padding"
     android:paddingRight="@dimen/feed_item_padding"
-    android:paddingTop="@dimen/feed_item_padding"
-    android:orientation="vertical" >
+    android:paddingTop="@dimen/feed_item_padding" >
 
     <TableRow
+        android:id="@+id/trAdapterableUserGainedStatus"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
@@ -25,6 +27,7 @@
             android:src="@drawable/images_default_avatar_male" />
 
         <RelativeLayout
+            android:id="@+id/rlAdapterableUserGainedStatus"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" >
 
@@ -36,9 +39,9 @@
                 android:layout_marginTop="4dp"
                 android:singleLine="true"
                 android:text="@string/tvFeedUserGainedStatusUsername"
+                android:textColor="@android:color/white"
                 android:textSize="12sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white" />
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/tvFeedUserGainedStatus"
@@ -70,11 +73,11 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_below="@id/tvFeedUserGainedStatusStatusName"
-                android:text="@string/tvFeedUserGainedStatusDescription"
-                android:textSize="12sp"
-                android:textStyle="italic"
                 android:gravity="right"
-                android:textColor="@android:color/white" />
+                android:text="@string/tvFeedUserGainedStatusDescription"
+                android:textColor="@android:color/white"
+                android:textSize="12sp"
+                android:textStyle="italic" />
 
             <TextView
                 android:id="@+id/tvFeedUserGainedStatusTimestamp"
@@ -86,7 +89,7 @@
                 android:text="@string/tvFeedUserGainedStatusTimestamp"
                 android:textColor="@color/light_grey"
                 android:textSize="12sp" />
-
         </RelativeLayout>
     </TableRow>
+
 </LinearLayout>

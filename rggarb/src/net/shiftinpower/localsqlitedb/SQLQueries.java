@@ -1,5 +1,13 @@
 package net.shiftinpower.localsqlitedb;
 
+/**
+ * 
+ * Here the SQLQueries for working with the local SQLite DB are defined.
+ * These were made with the rawQuery method in mind but will be changed later and will reference Column names from the Confituration class C
+ * 
+ * @author Kaloyan Roussev
+ *
+ */
 public final class SQLQueries {
 
 	// Create queries

@@ -3,12 +3,10 @@ package net.shiftinpower.activities;
 import java.io.File;
 import java.io.IOException;
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -20,15 +18,27 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Toast;
 import net.shiftinpower.core.C;
+import net.shiftinpower.core.KatwalkApplication;
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.utilities.PhotoHandler;
-import net.shiftinpower.utilities.ToastMaker;
 
-/* Unfortunately we cannot use most of the global variables and features here because we cannot extend the RggarbCore class
- * The RggarbCore class is using the Sherlock library because it enables older versions of Android to use the Action bar and the Sliding menu
- * The Sherlock Library does not allow an activity to use Theme.Dialog, but only Theme.Sherlock.xx themes, which do not include a Dialog theme for quite some time now
- * So we have to instantiate some variables and utility classes all over again, and when starting this activity, we are including some data along with the intent.
- * To work with this class you need to pass extra data to the intent - currentImageExists (so this class knows to display it) and imagePath (where to get it from)
+/**
+ * 
+ * This is an activity that looks like a dialog It is used throughout the app when a user wants to view/change/delete an
+ * image
+ * 
+ * Unfortunately we cannot use most of the global variables and features here because we cannot extend the RggarbCore class
+ * The RggarbCore class is using the Sherlock library because it enables older versions of Android to use the Action bar and
+ * the Sliding menu The Sherlock Library does not allow an activity to use Theme.Dialog, but only Theme.Sherlock.xx themes,
+ * which do not include a Dialog theme for quite some time now So we have to instantiate some variables and utility classes
+ * all over again, and when starting this activity, we are including some data along with the intent. To work with this class
+ * you need to pass extra data to the intent - currentImageExists (so this class knows to display it) and imagePath (where to
+ * get it from)
+ * 
+ * NOTE: When I have time, I will make use of the global variables so we dont have to instantiate fonts, utility classes and
+ * shared prefs here
+ * 
+ * @author Kaloyan Roussev
  */
 public class ProvideImageDialog extends Activity {
 
@@ -48,25 +58,16 @@ public class ProvideImageDialog extends Activity {
 	protected SharedPreferences sharedPreferences;
 	protected static final String APP_SHARED_PREFS = C.Preferences.SHARED_PREFERENCES_FILENAME;
 
-	// Fonts
-	protected Typeface font1;
-	protected Typeface font2;
-
-	// Photo Handler custom class containing several methods that deal with images
-	protected PhotoHandler photoHandler = new PhotoHandler(this);
-
-	// Custom class to display toasts
-	protected ToastMaker toastMaker = new ToastMaker();
+	private KatwalkApplication katwalk;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+		katwalk = (KatwalkApplication) getApplication();
+
 		// We dont want the ugly grey title bar to interrupt our dialog design, so this line removes it
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-
-		// Shared Preferences
-		sharedPreferences = getApplicationContext().getSharedPreferences(APP_SHARED_PREFS, Context.MODE_PRIVATE);
 
 		// Obtain the vital user Information from the starting intent
 		Bundle extras = getIntent().getExtras();
@@ -79,30 +80,21 @@ public class ProvideImageDialog extends Activity {
 			}
 		}
 
-		// Setting up fonts
-		try {
-			font1 = Typeface.createFromAsset(getApplicationContext().getAssets(), C.Fontz.FONT_1);
-			font2 = Typeface.createFromAsset(getApplicationContext().getAssets(), C.Fontz.FONT_2);
-		} catch (Exception e) {
-			e.printStackTrace();
-			// Nothing can be done here
-		}
-
 		if (!currentImageExists) {
-			setContentView(R.layout.image_upload_without_image);
+			setContentView(R.layout.dialog_image_upload_without_image);
 
 		} else {
 			// This version of the Dialog layout enables the user to
 			// delete the avatar they just uploaded, also they can view
 			// it
-			setContentView(R.layout.image_upload_with_image);
+			setContentView(R.layout.dialog_iimage_upload_with_image);
 
 			// setting the views that exist on this layout only
 			imageView = (ImageButton) findViewById(R.id.iImage);
 			bDeletePhoto = (Button) findViewById(R.id.bDeleteImage);
 			// Setting font
 			try {
-				bDeletePhoto.setTypeface(font1);
+				bDeletePhoto.setTypeface(katwalk.font1);
 			} catch (Exception e) {
 			}
 			bDeletePhoto.setOnClickListener(new OnClickListener() {
@@ -126,24 +118,7 @@ public class ProvideImageDialog extends Activity {
 			});
 		}
 
-		// Setting the views that exist on both dialog layouts
-		bTakeAPhoto = (Button) findViewById(R.id.bTakeAPhoto);
-		bPickFromGallery = (Button) findViewById(R.id.bSelectPhotoFromFile);
-		bCancelPhotoUpload = (Button) findViewById(R.id.bCancelImageUpload);
-
-		// Setting fonts
-		try {
-			bTakeAPhoto.setTypeface(font1);
-			bPickFromGallery.setTypeface(font1);
-			bCancelPhotoUpload.setTypeface(font1);
-		} catch (Exception e) {
-			e.printStackTrace();
-			// Nothing can be done here
-		}
-
-		// if the user hasnt got an avatar, we are getting their gender
-		// and assigning them a default one
-
+		// Display the image
 		if (currentImageExists) {
 
 			try {
@@ -151,8 +126,23 @@ public class ProvideImageDialog extends Activity {
 
 			} catch (OutOfMemoryError ex) {
 				ex.printStackTrace();
-				imageView.setImageBitmap(photoHandler.getBitmapAndResizeIt(imagePath));
+				imageView.setImageBitmap(katwalk.photoHandler.getBitmapAndResizeIt(imagePath));
 			}
+		}
+
+		// Setting the views that exist on both dialog layouts
+		bTakeAPhoto = (Button) findViewById(R.id.bTakeAPhoto);
+		bPickFromGallery = (Button) findViewById(R.id.bSelectPhotoFromFile);
+		bCancelPhotoUpload = (Button) findViewById(R.id.bCancelImageUpload);
+
+		// Setting fonts
+		try {
+			bTakeAPhoto.setTypeface(katwalk.font1);
+			bPickFromGallery.setTypeface(katwalk.font1);
+			bCancelPhotoUpload.setTypeface(katwalk.font1);
+		} catch (Exception e) {
+			e.printStackTrace();
+			// Nothing can be done here
 		}
 
 		bTakeAPhoto.setOnClickListener(new OnClickListener() {
@@ -169,7 +159,7 @@ public class ProvideImageDialog extends Activity {
 					// store the taken image in
 					File imageFile = null;
 					try {
-						imageFile = photoHandler.createImageFile();
+						imageFile = katwalk.photoHandler.createImageFile();
 						imagePath = imageFile.getAbsolutePath();
 						takePictureIntent.putExtra(MediaStore.EXTRA_OUTPUT, Uri.fromFile(imageFile));
 					} catch (IOException e) {
@@ -185,7 +175,7 @@ public class ProvideImageDialog extends Activity {
 				} else { // Notify the user that their device is unable
 							// to take photos
 
-					toastMaker.toast(net.shiftinpower.activities.ProvideImageDialog.this, C.Errorz.DEVICE_UNABLE_TO_TAKE_PHOTOS, Toast.LENGTH_LONG);
+					katwalk.toastMaker.toast(net.shiftinpower.activities.ProvideImageDialog.this, C.Errorz.DEVICE_UNABLE_TO_TAKE_PHOTOS, Toast.LENGTH_LONG);
 					currentImageExists = false;
 
 					// finish();
@@ -212,7 +202,7 @@ public class ProvideImageDialog extends Activity {
 			}
 		}); // End of Pick a Photo from Gallery button handling
 
-	} // End of onClick
+	} // End of onResume
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -223,8 +213,8 @@ public class ProvideImageDialog extends Activity {
 
 				// The Camera intent has provided the photo in the file created
 				// eariler on, we need to deal with it
-				if(!(photoHandler.handleBigCameraPhoto())) {
-					
+				if (!(katwalk.photoHandler.handleBigCameraPhoto())) {
+
 					// Something went wrong while dealing with the image
 					// Remove visible avatar on the screen
 					imagePath = C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE;
@@ -234,12 +224,12 @@ public class ProvideImageDialog extends Activity {
 					intent.putExtra(C.ImageHandling.INTENT_EXTRA_IMAGE_PATH_KEY, imagePath);
 					setResult(RESULT_OK, intent);
 					finish();
-				} 
+				}
 
 			} else if (requestCode == C.ImageHandling.REQUEST_CODE_PICK_IMAGE && resultCode == RESULT_OK && null != data) {
 
 				// obtaining the path to the new bitmap and setting the userAvatar
-				if(!(photoHandler.handleGalleryPhoto(data))) {
+				if (!(katwalk.photoHandler.handleGalleryPhoto(data))) {
 					// Something went wrong while dealing with the image
 					// Remove visible avatar on the screen
 					imagePath = C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE;
@@ -253,7 +243,7 @@ public class ProvideImageDialog extends Activity {
 
 			} // End of requestCode == PICK_IMAGE Case
 
-			imagePath = photoHandler.getImagePath();
+			imagePath = katwalk.photoHandler.getImagePath();
 			currentImageExists = true;
 
 			Intent intent = new Intent();
@@ -264,5 +254,15 @@ public class ProvideImageDialog extends Activity {
 		}
 
 	} // End of onActivityResult
+
+	@Override
+	protected void onStop() {
+		super.onStop();
+		katwalk.recycleViewsDrawables(imageView);
+	}
+
+	/*
+	 * @Override public void onTrimMemory(int level) { // TODO Auto-generated method stub super.onTrimMemory(level); }
+	 */
 
 } // End of Class

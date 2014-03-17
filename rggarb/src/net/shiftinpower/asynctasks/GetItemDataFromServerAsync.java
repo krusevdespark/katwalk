@@ -24,7 +24,14 @@ import net.shiftinpower.utilities.JSONParser;
 import net.shiftinpower.utilities.ShowLoadingMessage;
 import android.content.Context;
 import android.os.AsyncTask;
-import android.util.Log;
+
+/**
+* This class gets an item basic and extended set of data so we can display its public profile
+* including users and friends that have the item along with their basic info, places that sell the item and so on
+*
+* @author Kaloyan Roussev
+*
+*/
 
 public class GetItemDataFromServerAsync extends AsyncTask<String, String, ItemExtended> {
 
@@ -51,12 +58,12 @@ public class GetItemDataFromServerAsync extends AsyncTask<String, String, ItemEx
 	@Override
 	protected void onPreExecute() {
 
+		super.onPreExecute();
+
 		if (context != null) {
 			ShowLoadingMessage.loading(context, C.LoadingMessages.LOADING_ITEM_DATA);
 			loadingMessageShown = true;
 		}
-
-		super.onPreExecute();
 
 	}
 
@@ -351,6 +358,8 @@ public class GetItemDataFromServerAsync extends AsyncTask<String, String, ItemEx
 	@Override
 	protected void onPostExecute(ItemExtended itemExtended) {
 
+		super.onPostExecute(itemExtended);
+
 		if ((context != null) && (loadingMessageShown)) {
 			ShowLoadingMessage.dismissDialog();
 			loadingMessageShown = false;
@@ -363,7 +372,6 @@ public class GetItemDataFromServerAsync extends AsyncTask<String, String, ItemEx
 				listener.onGetItemDataFailure();
 			}
 		}
-		super.onPostExecute(itemExtended);
 
 	} // End of onPostExecute
 

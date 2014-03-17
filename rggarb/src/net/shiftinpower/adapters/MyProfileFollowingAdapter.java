@@ -73,6 +73,8 @@ public class MyProfileFollowingAdapter extends BaseAdapter {
 			convertView = layoutInflater.inflate(R.layout.item_adapterable_my_profile_followed_item, parent, false);
 		}
 		
+		// TODO employ the viewholder pattern here
+		
 		iFollowingFeedItemImage = (ImageButton) convertView.findViewById(R.id.iFollowingFeedItemImage);
 		tvFollowingListItemName = (TextView) convertView.findViewById(R.id.tvFollowingListItemName);
 		tvFollowingFeedItemPrice = (TextView) convertView.findViewById(R.id.tvFollowingFeedItemPrice);

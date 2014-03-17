@@ -14,7 +14,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 public class LogUserInAsync extends AsyncTask<String, String, String> {
-	
+
 	private int serverResponseCode;
 	private Context context;
 	private String userEmailLoginPage;
@@ -24,21 +24,24 @@ public class LogUserInAsync extends AsyncTask<String, String, String> {
 	protected String userIdString;
 	private OnUserLoginAttemptListener listener;
 	private String reason;
-	
+
 	public LogUserInAsync(Context context, OnUserLoginAttemptListener listener, String userEmailLoginPage, String userPasswordLoginPageHashed) {
 		this.context = context;
 		this.listener = listener;
 		this.userEmailLoginPage = userEmailLoginPage;
 		this.userPasswordLoginPageHashed = userPasswordLoginPageHashed;
 	}
-	
+
 	private void setReason(String reason) {
 		this.reason = reason;
 	}
+
 	@Override
 	protected void onPreExecute() {
-		ShowLoadingMessage.loading(context);
+
 		super.onPreExecute();
+		ShowLoadingMessage.loading(context);
+
 	}
 
 	@Override
@@ -78,23 +81,25 @@ public class LogUserInAsync extends AsyncTask<String, String, String> {
 		} catch (Exception e) {
 			e.printStackTrace();
 			setReason(C.Tagz.UNKNOWN_PROBLEM);
-			return null;				
+			return null;
 		}
 	} // End of doInBackground
 
 	@Override
 	protected void onPostExecute(String result) {
+
+		super.onPostExecute(result);
+
 		ShowLoadingMessage.dismissDialog();
 
 		if (listener != null) {
-			if ((result!=null) && result.contentEquals(C.Tagz.SUCCESS)) { //TODO add (result!=null) in the if
+			if ((result != null) && result.contentEquals(C.Tagz.SUCCESS)) { // TODO add (result!=null) in the if
 				listener.onUserLoginAttemptSuccess(currentLoggedInUserId);
-			} else if (reason!=null) {
+			} else if (reason != null) {
 				listener.onUserLoginAttemptFailure(reason);
 			}
 		}
-		super.onPostExecute(result);
-		
+
 	} // End of onPostExecute
 
 } // End of Class

@@ -11,7 +11,12 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.TextView;
-
+/**
+* Just a draft
+*
+* @author Kaloyan Roussev
+*
+*/
 public class MyProfileCommentAdapter extends BaseAdapter {
 
 	private ArrayList<String> itemNames =  new ArrayList<String>();
@@ -62,6 +67,7 @@ public class MyProfileCommentAdapter extends BaseAdapter {
 		if(convertView==null) {
 			convertView = layoutInflater.inflate(R.layout.item_adapterable_my_profile_comment, parent, false);
 		}
+		// TODO Employ the ViewHolder pattern here
 
 		
 		iMyCommentsCommentedProductImage = (ImageButton) convertView.findViewById(R.id.iMyCommentsCommentedProductImage);

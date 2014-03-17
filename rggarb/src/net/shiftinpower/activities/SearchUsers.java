@@ -1,6 +1,6 @@
 package net.shiftinpower.activities;
 
-import net.shiftinpower.core.RggarbSlidingMenu;
+import net.shiftinpower.core.KatwalkSlidingMenu;
 import net.shiftinpower.koldrain.R;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,7 +11,14 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-public class SearchUsers extends RggarbSlidingMenu{
+/**
+* This class is laid out and the activity is visible in the app but it does not do Search work yet.
+*
+* @author Kaloyan Roussev
+*
+*/
+
+public class SearchUsers extends KatwalkSlidingMenu{
 	
 	// XML view elements
 	private TextView tvSearchUsersTitle;
@@ -42,9 +49,9 @@ public class SearchUsers extends RggarbSlidingMenu{
 		
 		// Try setting fonts for different XML views on screen
 		try {
-			tvSearchUsersTitle.setTypeface(font1);
-			tvSearchOrSearchItems.setTypeface(font2);
-			bSubmitSearchUsers.setTypeface(font1);
+			tvSearchUsersTitle.setTypeface(katwalk.font1);
+			tvSearchOrSearchItems.setTypeface(katwalk.font2);
+			bSubmitSearchUsers.setTypeface(katwalk.font1);
 		} catch (Exception e) {
 			// Nothing can be done here
 			e.printStackTrace();

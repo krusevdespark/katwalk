@@ -4,11 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import net.shiftinpower.activities.ItemAddStepOnePhotos;
-import net.shiftinpower.asynctasks.GetItemDataFromServerAsync;
 import net.shiftinpower.core.C;
-import net.shiftinpower.core.RggarbSlidingMenu;
+import net.shiftinpower.core.KatwalkSlidingMenu;
 import net.shiftinpower.customviews.SquareImageView;
-import net.shiftinpower.interfaces.OnGetItemDataListener;
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.objects.Brand;
 import net.shiftinpower.objects.Image;
@@ -28,7 +26,20 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDataListener {
+/**
+* NOTE: This class, the ItemProfilePrivate and the ItemProfileOtherUsers will be grouped in another package and will extend a
+* superclass that is going to contain the code they share so code duplication is avoided.
+*
+* An item has a personal profile, that displays data only for my particular item of a given kind.
+* Example: my personal Samsung Galaxy S2 with its white color, 16GB of storage, the pictures I've taken for it etc
+*
+* An item also has a public profile - aggregated information, stats and images from all users that possess a Galaxy S2
+*
+* @author Kaloyan Roussev
+*
+*/
+
+public class ItemProfilePublic extends KatwalkSlidingMenu {
 
 	// Set up XML View Components
 	private TextView tvItemProfileItemName;
@@ -55,6 +66,7 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 
 	// Variables holding data
 	private int itemId;
+	private ItemExtended itemExtended;
 	private ItemBasic itemBasic;
 	private Brand brand;
 	private LinkedHashSet<Image> itemImages;
@@ -83,6 +95,8 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		// Inflate the XML layout for this activity
 		setContentView(R.layout.activity_layout_item_profile_public);
 
 		// Assign and inflate an XML file as the view component for this screen
@@ -108,23 +122,24 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 
 		// Set fonts
 		try {
-			tvItemProfileItemName.setTypeface(font2);
-			tvItemProfileBrandName.setTypeface(font1);
-			tvItemProfilePhotosValue.setTypeface(font2);
-			tvItemProfileAveragePriceValue.setTypeface(font2);
-			tvItemProfileRatingValue.setTypeface(font2);
-			tvItemProfileFollowedByValue.setTypeface(font2);
-			tvItemProfileOwnedByUsersValue.setTypeface(font2);
-			tvItemProfileOwnedByFriendsValue.setTypeface(font2);
-			tvItemProfileOfferedAtPlacesValue.setTypeface(font2);
-			tvItemProfileUsersSellingTheirItemsValue.setTypeface(font2);
-			tvItemProfileCommentsValue.setTypeface(font2);
-			tvItemProfileSimilarItemsValue.setTypeface(font2);
+			tvItemProfileItemName.setTypeface(katwalk.font2);
+			tvItemProfileBrandName.setTypeface(katwalk.font1);
+			tvItemProfilePhotosValue.setTypeface(katwalk.font2);
+			tvItemProfileAveragePriceValue.setTypeface(katwalk.font2);
+			tvItemProfileRatingValue.setTypeface(katwalk.font2);
+			tvItemProfileFollowedByValue.setTypeface(katwalk.font2);
+			tvItemProfileOwnedByUsersValue.setTypeface(katwalk.font2);
+			tvItemProfileOwnedByFriendsValue.setTypeface(katwalk.font2);
+			tvItemProfileOfferedAtPlacesValue.setTypeface(katwalk.font2);
+			tvItemProfileUsersSellingTheirItemsValue.setTypeface(katwalk.font2);
+			tvItemProfileCommentsValue.setTypeface(katwalk.font2);
+			tvItemProfileSimilarItemsValue.setTypeface(katwalk.font2);
 		} catch (Exception e) {
 			// Nothing can be done here
 			e.printStackTrace();
 		}
 
+<<<<<<< HEAD
 		// Obtain the itemId from the intent that started this activity
 		ItemBasic userItem = Transporter.instance().userItem;
 
@@ -142,17 +157,20 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 	@Override
 	public void onGetItemDataSuccess(ItemExtended itemParameters) {
 
+=======
+>>>>>>> GoWild
 		// Unpack the data
-		itemBasic = itemParameters.getItemBasic();
-		brand = itemParameters.getBrand();
-		itemImages = itemParameters.getItemImages();
-		itemCategories = itemParameters.getItemCategories();
-		itemSubcategories = itemParameters.getItemSubcategories();
-		itemUsers = itemParameters.getItemUsers();
-		itemPlaces = itemParameters.getItemPlaces();
-		itemComments = itemParameters.getItemComments();
-		itemRatings = itemParameters.getItemRatings();
-		itemFollowers = itemParameters.getItemFollowers();
+		itemExtended = Transporter.instance().itemExtended;
+		itemBasic = itemExtended.getItemBasic();
+		brand = itemExtended.getBrand();
+		itemImages = itemExtended.getItemImages();
+		itemCategories = itemExtended.getItemCategories();
+		itemSubcategories = itemExtended.getItemSubcategories();
+		itemUsers = itemExtended.getItemUsers();
+		itemPlaces = itemExtended.getItemPlaces();
+		itemComments = itemExtended.getItemComments();
+		itemRatings = itemExtended.getItemRatings();
+		itemFollowers = itemExtended.getItemFollowers();
 
 		// Calculate average price
 		// TODO int averagePrice = //
@@ -237,8 +255,8 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 		}
 
 		// An item cannot be added if there is no at least one image, so we always have the first image
-		imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[0], iItemProfileImageSlotOne);
-		
+		katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[0], iItemProfileImageSlotOne);
+
 		int[] initialImageViews = { R.id.iItemProfileImageSlotTwo, R.id.iItemProfileImageSlotThree, R.id.iItemProfileImageSlotFour,
 				R.id.iItemProfileImageSlotFive };
 
@@ -249,7 +267,7 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 			fetchableImageView.setVisibility(View.VISIBLE);
 			if (!imageUrls[x + 1].contentEquals("null")) {
 
-				imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[x + 1], fetchableImageView);
+				katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[x + 1], fetchableImageView);
 			}
 
 		}
@@ -272,7 +290,7 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 				imageViewsWhoseBitmapsShouldBeRecycled.add(fetchableImageView);
 				if (!itemUser.getUserAvatar().contentEquals("null")) {
 
-					imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_USERS_FOLDER_THUMBNAIL + itemUser.getUserAvatar(), fetchableImageView);
+					katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_USERS_FOLDER_THUMBNAIL + itemUser.getUserAvatar(), fetchableImageView);
 				}
 				a++;
 			}
@@ -309,7 +327,7 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 				fetchableImageView.setVisibility(View.VISIBLE);
 				if (!friendsAvatarsUrls.get(b).contentEquals("null")) {
 
-					imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_USERS_FOLDER_THUMBNAIL + friendsAvatarsUrls.get(b), fetchableImageView);
+					katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_USERS_FOLDER_THUMBNAIL + friendsAvatarsUrls.get(b), fetchableImageView);
 				}
 
 			}
@@ -340,7 +358,7 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 				fetchableImageView.setVisibility(View.VISIBLE);
 				if (!itemPlace.getPlaceAvatar().contentEquals("null")) {
 
-					imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_PLACES_FOLDER_THUMBNAIL + itemPlace.getPlaceAvatar(), fetchableImageView);
+					katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_PLACES_FOLDER_THUMBNAIL + itemPlace.getPlaceAvatar(), fetchableImageView);
 				}
 
 				c++;
@@ -390,12 +408,17 @@ public class ItemProfilePublic extends RggarbSlidingMenu implements OnGetItemDat
 			}
 		});
 
+<<<<<<< HEAD
 	} //End of onGetItemDataSuccess
+=======
+	} // End of onCreate
+>>>>>>> GoWild
 
 	@Override
-	public void onGetItemDataFailure() {
-		// TODO USE THE ITEM BASIC AND APOLOGIZE FOR THE INCONVENIENCE
-
+	protected void onPause() {
+		super.onPause();
+		katwalk.recycleViewsDrawables(imageViewsWhoseBitmapsShouldBeRecycled);
+		finish();
 	}
 
 } // End of Class

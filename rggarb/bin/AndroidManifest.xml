@@ -19,6 +19,7 @@
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
     <application
+        android:name="net.shiftinpower.core.KatwalkApplication"
         android:allowBackup="true"
         android:debuggable="true"
         android:icon="@drawable/images_ic_launcher"
@@ -42,7 +43,8 @@
         </activity>
         <activity
             android:name="net.shiftinpower.activities.LogUserOut"
-            android:label="LogUserOut" >
+            android:label="LogUserOut"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="net.shiftinpower.activities.Signup"
@@ -95,7 +97,8 @@
         </activity>
         <activity
             android:name="net.shiftinpower.core.InitialDataLoader"
-            android:label="Loading data" >
+            android:label="Loading data"
+            android:screenOrientation="portrait" >
         </activity>
         <activity
             android:name="net.shiftinpower.activities.ProvideImageDialog"
@@ -112,7 +115,7 @@
             android:label="Item" >
         </activity>
         <activity
-            android:name="net.shiftinpower.activities.item.ItemProfileMine"
+            android:name="net.shiftinpower.activities.item.ItemProfilePrivate"
             android:label="Item" >
         </activity>
         <activity
