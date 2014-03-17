@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -69,7 +70,7 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 	protected int personGalleryPhotosCount;
 	protected int personActivityCount;
 	protected double personMoneySpentOnItems;
-	protected boolean personHasProvidedOwnPhoto;
+	protected boolean personHasProvidedOwnPhoto;;
 
 	// Image handling variables
 	protected Bitmap personAvatarBitmap;
@@ -133,25 +134,14 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		tvUserProfileGalleryTab.setOnClickListener(this);
 		tvUserProfileActivityTab.setOnClickListener(this);
 
-		// Determine whether the person whose profile we are looking at is the current user or another user
-
 	} // End of onCreate
 
 	@Override
-	protected void onResume() {
-		super.onResume();
-		// Set avatar image
-		iUserAvatar = (SquareImageView) findViewById(R.id.iUserAvatar);
-		katwalk.setUserImageToImageView(iUserAvatar, personAvatarPath, personSex);
+	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
+		// TODO Auto-generated method stub
+		super.onActivityResult(arg0, arg1, arg2);
 	}
 
-	@Override
-	protected void onPause() {
-		super.onPause();
-		// Memory management
-		katwalk.recycleViewsDrawables(iUserAvatar);
-	}
-	
 	@Override
 	public void onClick(View v) {
 		int id = v.getId();

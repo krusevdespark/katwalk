@@ -99,7 +99,7 @@ public class KatwalkSlidingMenu extends KatwalkActionBar {
 			}
 		});
 	} // End of onCreate
-
+	
 	// When the user presses the hardware Settings button, the sliding menu should open
 	public boolean onKeyUp(int keyCode, KeyEvent event) {
 		if (keyCode == KeyEvent.KEYCODE_MENU) {

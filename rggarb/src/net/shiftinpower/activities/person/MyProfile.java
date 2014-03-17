@@ -14,6 +14,7 @@ import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -25,7 +26,7 @@ import android.widget.Toast;
  * 
  * This is the current user's profile class and it should always be started this way:
  * 
- * Intent myProfile = new Intent(getActivity(), MyProfile.class); 
+ * Intent myProfile = new Intent(getActivity(), MyProfile.class);
  * 
  * myProfile.putExtra("currentUser", true);
  * 
@@ -199,7 +200,8 @@ public class MyProfile extends PersonProfile implements OnClickListener, OnChang
 
 				// Uploading the new avatar to the Server. In that method's onPostExecute we are running the
 				// SetUserAvatarAsync class that sets the new path to the avatar in the Database on the Server
-				String imageFilename = PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX, C.ImageHandling.IMAGES_FILE_EXTENSION, true);
+				String imageFilename = PhotoHandler.generateImageFilename(String.valueOf(currentlyLoggedInUser) + C.ImageHandling.IMAGE_FILENAME_PREFIX,
+						C.ImageHandling.IMAGES_FILE_EXTENSION, true);
 				new UploadUserAvatarToServerAsync(String.valueOf(currentlyLoggedInUser), userAvatarPath, imageFilename).execute();
 			}
 

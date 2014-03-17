@@ -23,23 +23,23 @@ import net.shiftinpower.koldrain.R;
 import net.shiftinpower.utilities.PhotoHandler;
 
 /**
-*
-* This is an activity that looks like a dialog It is used throughout the app when a user wants to view/change/delete an
-* image
-*
-* Unfortunately we cannot use most of the global variables and features here because we cannot extend the RggarbCore class
-* The RggarbCore class is using the Sherlock library because it enables older versions of Android to use the Action bar and
-* the Sliding menu The Sherlock Library does not allow an activity to use Theme.Dialog, but only Theme.Sherlock.xx themes,
-* which do not include a Dialog theme for quite some time now So we have to instantiate some variables and utility classes
-* all over again, and when starting this activity, we are including some data along with the intent. To work with this class
-* you need to pass extra data to the intent - currentImageExists (so this class knows to display it) and imagePath (where to
-* get it from)
-*
-* NOTE: When I have time, I will make use of the global variables so we dont have to instantiate fonts, utility classes and
-* shared prefs here
-*
-* @author Kaloyan Roussev
-*/
+ * 
+ * This is an activity that looks like a dialog It is used throughout the app when a user wants to view/change/delete an
+ * image
+ * 
+ * Unfortunately we cannot use most of the global variables and features here because we cannot extend the RggarbCore class
+ * The RggarbCore class is using the Sherlock library because it enables older versions of Android to use the Action bar and
+ * the Sliding menu The Sherlock Library does not allow an activity to use Theme.Dialog, but only Theme.Sherlock.xx themes,
+ * which do not include a Dialog theme for quite some time now So we have to instantiate some variables and utility classes
+ * all over again, and when starting this activity, we are including some data along with the intent. To work with this class
+ * you need to pass extra data to the intent - currentImageExists (so this class knows to display it) and imagePath (where to
+ * get it from)
+ * 
+ * NOTE: When I have time, I will make use of the global variables so we dont have to instantiate fonts, utility classes and
+ * shared prefs here
+ * 
+ * @author Kaloyan Roussev
+ */
 public class ProvideImageDialog extends Activity {
 
 	// Set up XML View Components
@@ -63,12 +63,12 @@ public class ProvideImageDialog extends Activity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-				
+
 		katwalk = (KatwalkApplication) getApplication();
-	
+
 		// We dont want the ugly grey title bar to interrupt our dialog design, so this line removes it
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		
+
 		// Obtain the vital user Information from the starting intent
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
@@ -79,7 +79,7 @@ public class ProvideImageDialog extends Activity {
 				currentImageExists = false;
 			}
 		}
-		
+
 		if (!currentImageExists) {
 			setContentView(R.layout.dialog_image_upload_without_image);
 
@@ -117,8 +117,7 @@ public class ProvideImageDialog extends Activity {
 				}
 			});
 		}
-		
-		
+
 		// Display the image
 		if (currentImageExists) {
 
@@ -255,17 +254,15 @@ public class ProvideImageDialog extends Activity {
 		}
 
 	} // End of onActivityResult
-	
+
 	@Override
 	protected void onStop() {
 		super.onStop();
-		katwalk.recycleViewsDrawables(imageView);		
-	}	
-	
-/*	@Override
-	public void onTrimMemory(int level) {
-		// TODO Auto-generated method stub
-		super.onTrimMemory(level);
-	}*/
+		katwalk.recycleViewsDrawables(imageView);
+	}
+
+	/*
+	 * @Override public void onTrimMemory(int level) { // TODO Auto-generated method stub super.onTrimMemory(level); }
+	 */
 
 } // End of Class
