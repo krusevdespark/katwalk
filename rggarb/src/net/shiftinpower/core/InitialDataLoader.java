@@ -1,12 +1,10 @@
 package net.shiftinpower.core;
 
 import java.util.LinkedHashSet;
-
-import com.actionbarsherlock.view.Window;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-
 import net.shiftinpower.activities.Home;
 import net.shiftinpower.activities.LogUserOut;
+import net.shiftinpower.activities.person.PersonProfileItems;
 import net.shiftinpower.asynctasks.DownloadImage;
 import net.shiftinpower.asynctasks.GetCategoriesFromServerAsync;
 import net.shiftinpower.asynctasks.GetSubcategoriesFromServerAsync;
@@ -23,21 +21,12 @@ import net.shiftinpower.objects.ItemCategory;
 import net.shiftinpower.objects.ItemSubcategory;
 import net.shiftinpower.objects.UserExtended;
 import net.shiftinpower.objects.ItemBasic;
-import net.shiftinpower.utilities.PhotoHandler;
-import net.shiftinpower.utilities.ToastMaker;
-import net.shiftinpower.utilities.Transporter;
 import net.shiftinpower.asynctasks.GetUserDataFromServerAsync;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
-import android.content.SharedPreferences.Editor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -220,8 +209,11 @@ public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesLis
 					new GetUserItemsFromServerAsync(this, currentlyLoggedInUser, this).execute();
 				} else {
 					// And now the user can go to the Home Screen
-					Intent home = new Intent(this, Home.class);
-					startActivity(home);
+					//Intent home = new Intent(this, Home.class);
+					//startActivity(home);
+					Intent myItems = new Intent(this, PersonProfileItems.class); // Temporarily we are sending the user to their items instead of the feed, because the feed is not implemented yet
+					startActivity(myItems);
+
 				}
 
 			}
@@ -238,8 +230,11 @@ public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesLis
 					new GetUserItemsFromServerAsync(this, currentlyLoggedInUser, this).execute();
 				} else {
 					// And now the user can go to the Home Screen
-					Intent home = new Intent(this, Home.class);
-					startActivity(home);
+					//Intent home = new Intent(this, Home.class);
+					//startActivity(home);
+					Intent myItems = new Intent(this, PersonProfileItems.class); // Temporarily we are sending the user to their items instead of the feed, because the feed is not implemented yet
+					startActivity(myItems);
+
 				}
 			}
 
@@ -273,8 +268,11 @@ public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesLis
 			new GetUserItemsFromServerAsync(this, currentlyLoggedInUser, this).execute();
 		} else {
 			// And now the user can go to the Home Screen
-			Intent home = new Intent(this, Home.class);
-			startActivity(home);
+			//Intent home = new Intent(this, Home.class);
+			//startActivity(home);
+			Intent myItems = new Intent(this, PersonProfileItems.class); // Temporarily we are sending the user to their items instead of the feed, because the feed is not implemented yet
+			startActivity(myItems);
+
 		}
 	}
 
@@ -292,8 +290,11 @@ public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesLis
 			new GetUserItemsFromServerAsync(this, currentlyLoggedInUser, this).execute();
 		} else {
 			// And now the user can go to the Home Screen
-			Intent home = new Intent(this, Home.class);
-			startActivity(home);
+			//Intent home = new Intent(this, Home.class);
+			//startActivity(home);
+			Intent myItems = new Intent(this, PersonProfileItems.class); // Temporarily we are sending the user to their items instead of the feed, because the feed is not implemented yet
+			startActivity(myItems);
+
 		}
 	}
 
@@ -309,15 +310,21 @@ public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesLis
 
 		katwalk.toastMaker.toast(this, C.Errorz.PROBLEM_LOADING_USER_ITEMS, Toast.LENGTH_SHORT);
 
-		Intent home = new Intent(this, Home.class);
-		startActivity(home);
+		//Intent home = new Intent(this, Home.class);
+		//startActivity(home);
+		Intent myItems = new Intent(this, PersonProfileItems.class); // Temporarily we are sending the user to their items instead of the feed, because the feed is not implemented yet
+		startActivity(myItems);
+
 	}
 
 	@Override
 	public void onInsertUserItemsInDBSuccess() {
 		// And now the user can go to the Home Screen
-		Intent home = new Intent(this, Home.class);
-		startActivity(home);
+		//Intent home = new Intent(this, Home.class);
+		//startActivity(home);
+		Intent myItems = new Intent(this, PersonProfileItems.class); // Temporarily we are sending the user to their items instead of the feed, because the feed is not implemented yet
+		startActivity(myItems);
+
 
 	}
 
@@ -325,9 +332,10 @@ public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesLis
 	public void onInsertUserItemsInDBFailure() {
 		katwalk.toastMaker.toast(this, C.Errorz.PROBLEM_LOADING_USER_ITEMS, Toast.LENGTH_SHORT);
 		// And now the user can go to the Home Screen
-		Intent home = new Intent(this, Home.class);
-		startActivity(home);
-
+		//Intent home = new Intent(this, Home.class);
+		//startActivity(home);
+		Intent myItems = new Intent(this, PersonProfileItems.class); // Temporarily we are sending the user to their items instead of the feed, because the feed is not implemented yet
+		startActivity(myItems);
 	}
 
 } // End of Class
