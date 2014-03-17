@@ -7,11 +7,19 @@ import net.shiftinpower.utilities.EmailVerifier;
 import net.shiftinpower.utilities.HashPassword;
 import net.shiftinpower.utilities.PhotoHandler;
 import net.shiftinpower.utilities.ToastMaker;
+
+import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiscCache;
+import com.nostra13.universalimageloader.cache.disc.naming.HashCodeFileNameGenerator;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.display.RoundedBitmapDisplayer;
+import com.nostra13.universalimageloader.utils.StorageUtils;
+
 import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.Bitmap.CompressFormat;
 import android.graphics.BitmapFactory;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -43,6 +51,7 @@ public class KatwalkApplication extends Application {
 
 	// Declare the Universal Image Loader for lazy load of images
 	public ImageLoader imageLoader;
+	public DisplayImageOptions imageLoaderOptions;
 	
 	// Verifies the validity of the Email format entered by the user
 	public EmailVerifier emailVerifier = new EmailVerifier();
@@ -74,7 +83,16 @@ public class KatwalkApplication extends Application {
 
 		// Create global configuration and initialize ImageLoader with this configuration
 		// https://github.com/nostra13/Android-Universal-Image-Loader
-		ImageLoaderConfiguration imageLoaderConfiguration = new ImageLoaderConfiguration.Builder(this).build();
+		ImageLoaderConfiguration imageLoaderConfiguration = new ImageLoaderConfiguration.Builder(this)
+		.discCacheExtraOptions(C.ImageHandling.MAX_IMAGE_WIDTH, C.ImageHandling.MAX_IMAGE_HEIGHT, CompressFormat.PNG, 100, null)
+        .discCache(new UnlimitedDiscCache(StorageUtils.getOwnCacheDirectory(this, C.Preferences.RGGARB_DIRECTORY_ON_USER_STORAGE)))
+        .discCacheFileNameGenerator(new HashCodeFileNameGenerator())
+        .build();
+		
+		imageLoaderOptions = new DisplayImageOptions.Builder()
+		    .cacheInMemory(false)
+		    .cacheOnDisc(true)
+		    .build();
 		imageLoader = ImageLoader.getInstance();
 		imageLoader.init(imageLoaderConfiguration);
 

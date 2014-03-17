@@ -2,6 +2,8 @@ package net.shiftinpower.activities.person;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
+
+import net.shiftinpower.activities.Home;
 import net.shiftinpower.activities.ItemAddStepOnePhotos;
 import net.shiftinpower.adapters.MyProfileItemAdapter;
 import net.shiftinpower.core.*;
@@ -63,7 +65,7 @@ public class PersonProfileItems extends KatwalkSlidingMenu implements OnGetUserI
 
 		// Set the XML layout
 		setContentView(R.layout.activity_layout_my_profile_items);
-		
+
 		// Assign java objects to XML View elements
 		tvMyItemsTitle = (TextView) findViewById(R.id.tvMyItemsTitle);
 		etMyItemsListSearch = (EditText) findViewById(R.id.etMyItemsListSearch);
@@ -148,7 +150,6 @@ public class PersonProfileItems extends KatwalkSlidingMenu implements OnGetUserI
 		// And loading those category names to the Spinner using this custom class
 		LoadSpinnerData.loadCategoriesIntoSpinner(PersonProfileItems.this, categoryNamesArray, sMyItems);
 
-		
 		// Enable the user to filter the items by Category
 		sMyItems.setOnItemSelectedListener(new OnItemSelectedListener() {
 
@@ -163,13 +164,13 @@ public class PersonProfileItems extends KatwalkSlidingMenu implements OnGetUserI
 					int selectedItemId = itemCategory.getId();
 
 					if (userItemsObtained != null) {
-						
+
 						MyProfileItemAdapter myItemsItemAdapter;
 						if (selectedItemId != 99) {
-							myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, katwalk.imageLoader, userItemsObtained, selectedItemId);
+							myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, katwalk.imageLoader, katwalk.imageLoaderOptions, userItemsObtained, selectedItemId);
 
 						} else {
-							myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, katwalk.imageLoader,  userItemsObtained);
+							myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, katwalk.imageLoader, katwalk.imageLoaderOptions, userItemsObtained);
 
 						}
 						listOfItems.setAdapter(myItemsItemAdapter);
@@ -184,7 +185,7 @@ public class PersonProfileItems extends KatwalkSlidingMenu implements OnGetUserI
 			}
 		}); // End of Spinner OnItemSelected Listener
 
-	}
+	} // End of onGetCategoriesSuccess
 
 	@Override
 	public void onGetCategoriesFailure(String reason) {
@@ -195,37 +196,45 @@ public class PersonProfileItems extends KatwalkSlidingMenu implements OnGetUserI
 	public void onGetUserItemsSuccess(LinkedHashSet<ItemBasic> userItems) {
 		// Instantiate the adapter, feed the data to it via its constructor and set the listview to use it
 		userItemsObtained = userItems;
-		MyProfileItemAdapter myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this,  katwalk.imageLoader, userItems);
+		MyProfileItemAdapter myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, katwalk.imageLoader, katwalk.imageLoaderOptions, userItems);
 		listOfItems.setAdapter(myItemsItemAdapter);
-		
+
 		etMyItemsListSearch.addTextChangedListener(new TextWatcher() {
-			
+
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				MyProfileItemAdapter myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this,  katwalk.imageLoader, userItemsObtained, s);
+				MyProfileItemAdapter myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, katwalk.imageLoader, katwalk.imageLoaderOptions, userItemsObtained, s);
 				listOfItems.setAdapter(myItemsItemAdapter);
-				
+
 			}
-			
+
 			@Override
 			public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-				
-				
+
 			}
-			
+
 			@Override
 			public void afterTextChanged(Editable s) {
-				
-				
+
 			}
 		}); // End of TextWatcher
 
-	}
+	} // End of onGetUserItemsSuccess
 
 	@Override
 	public void onGetUserItemsFailure(String reason) {
 		katwalk.toastMaker.toast(net.shiftinpower.activities.person.PersonProfileItems.this, C.Errorz.PROBLEM_LOADING_USER_ITEMS, Toast.LENGTH_LONG);
 
 	}
+
+	// This is temporarily here as this plays the role of Home now
+	@Override
+	public void onBackPressed() {
+		Intent intent = new Intent(this, PersonProfileItems.class);
+		intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+		startActivity(intent);
+		finish();
+		super.onBackPressed();
+	} // End of onBackPressed
 
 } // End of Class

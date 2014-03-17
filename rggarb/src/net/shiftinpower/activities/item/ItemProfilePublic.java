@@ -235,7 +235,7 @@ public class ItemProfilePublic extends KatwalkSlidingMenu {
 		}
 
 		// An item cannot be added if there is no at least one image, so we always have the first image
-		katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[0], iItemProfileImageSlotOne);
+		katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[0], iItemProfileImageSlotOne, katwalk.imageLoaderOptions);
 
 		int[] initialImageViews = { R.id.iItemProfileImageSlotTwo, R.id.iItemProfileImageSlotThree, R.id.iItemProfileImageSlotFour,
 				R.id.iItemProfileImageSlotFive };
@@ -247,7 +247,7 @@ public class ItemProfilePublic extends KatwalkSlidingMenu {
 			fetchableImageView.setVisibility(View.VISIBLE);
 			if (!imageUrls[x + 1].contentEquals("null")) {
 
-				katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[x + 1], fetchableImageView);
+				katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[x + 1], fetchableImageView, katwalk.imageLoaderOptions);
 			}
 
 		}
@@ -270,7 +270,7 @@ public class ItemProfilePublic extends KatwalkSlidingMenu {
 				imageViewsWhoseBitmapsShouldBeRecycled.add(fetchableImageView);
 				if (!itemUser.getUserAvatar().contentEquals("null")) {
 
-					katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_USERS_FOLDER_THUMBNAIL + itemUser.getUserAvatar(), fetchableImageView);
+					katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_USERS_FOLDER_THUMBNAIL + itemUser.getUserAvatar(), fetchableImageView, katwalk.imageLoaderOptions);
 				}
 				a++;
 			}
@@ -307,7 +307,7 @@ public class ItemProfilePublic extends KatwalkSlidingMenu {
 				fetchableImageView.setVisibility(View.VISIBLE);
 				if (!friendsAvatarsUrls.get(b).contentEquals("null")) {
 
-					katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_USERS_FOLDER_THUMBNAIL + friendsAvatarsUrls.get(b), fetchableImageView);
+					katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_USERS_FOLDER_THUMBNAIL + friendsAvatarsUrls.get(b), fetchableImageView, katwalk.imageLoaderOptions);
 				}
 
 			}
@@ -338,7 +338,7 @@ public class ItemProfilePublic extends KatwalkSlidingMenu {
 				fetchableImageView.setVisibility(View.VISIBLE);
 				if (!itemPlace.getPlaceAvatar().contentEquals("null")) {
 
-					katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_PLACES_FOLDER_THUMBNAIL + itemPlace.getPlaceAvatar(), fetchableImageView);
+					katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_PLACES_FOLDER_THUMBNAIL + itemPlace.getPlaceAvatar(), fetchableImageView, katwalk.imageLoaderOptions);
 				}
 
 				c++;
@@ -389,13 +389,6 @@ public class ItemProfilePublic extends KatwalkSlidingMenu {
 		});
 
 	} // End of onCreate
-
-	@Override
-	protected void onPause() {
-		super.onPause();
-		katwalk.recycleViewsDrawables(imageViewsWhoseBitmapsShouldBeRecycled);
-		finish();
-	}
 
 } // End of Class
 

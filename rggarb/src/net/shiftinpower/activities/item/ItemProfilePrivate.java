@@ -119,13 +119,6 @@ public class ItemProfilePrivate extends KatwalkSlidingMenu implements OnGetItemD
 	} // End of onCreate
 
 	@Override
-	protected void onPause() {
-		super.onPause();
-		katwalk.recycleViewsDrawables(imageViewsWhoseBitmapsShouldBeRecycled);
-		finish();
-	}
-
-	@Override
 	public void onGetItemDataSuccess(ItemExtended itemParameters) {
 		
 		// Create a class-wide copy of itemParameters, so we can send it to ItemProfilePublic
@@ -241,7 +234,7 @@ public class ItemProfilePrivate extends KatwalkSlidingMenu implements OnGetItemD
 		}
 
 		// An item cannot be added if there is no at least one image, so we always have the first image
-		katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[0], iItemProfilePrivateImageSlotOne);
+		katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[0], iItemProfilePrivateImageSlotOne, katwalk.imageLoaderOptions);
 
 		int[] initialImageViews = { R.id.iItemProfilePrivateImageSlotTwo, R.id.iItemProfilePrivateImageSlotThree, R.id.iItemProfilePrivateImageSlotFour,
 				R.id.iItemProfilePrivateImageSlotFive };
@@ -252,7 +245,7 @@ public class ItemProfilePrivate extends KatwalkSlidingMenu implements OnGetItemD
 			SquareImageView fetchableImageView = (SquareImageView) findViewById(necessaryImageViews[x]);
 			imageViewsWhoseBitmapsShouldBeRecycled.add(fetchableImageView);
 			fetchableImageView.setVisibility(View.VISIBLE);
-			katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[x + 1], fetchableImageView);
+			katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[x + 1], fetchableImageView, katwalk.imageLoaderOptions);
 		}
 	} // End of onGetItemDataSuccess
 

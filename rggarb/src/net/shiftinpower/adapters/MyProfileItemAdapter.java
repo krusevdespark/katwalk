@@ -5,10 +5,10 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Locale;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 
 import net.shiftinpower.activities.item.ItemProfilePrivate;
-import net.shiftinpower.activities.item.ItemProfilePublic;
 import net.shiftinpower.core.C;
 import net.shiftinpower.customviews.SquareImageView;
 import net.shiftinpower.koldrain.R;
@@ -23,6 +23,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+
 /**
 * This adapter supports autocomplete and uses the UniversalImageLoader library for lazy load of images (might go back to shutterburg or picasso for their speed)
 *
@@ -47,6 +48,7 @@ public class MyProfileItemAdapter extends BaseAdapter {
 	private int selectedCategoryId;
 	private CharSequence autocompleteInput;
 	private ImageLoader imageLoader;
+	private DisplayImageOptions options;
 
 	static class ViewHolder {
 		SquareImageView iMyItemsFeedItemImage;
@@ -64,11 +66,12 @@ public class MyProfileItemAdapter extends BaseAdapter {
 	}
 
 	// Default Constructor
-	public MyProfileItemAdapter(Context context, ImageLoader imageLoader, LinkedHashSet<ItemBasic> myItems) {
+	public MyProfileItemAdapter(Context context, ImageLoader imageLoader, DisplayImageOptions options, LinkedHashSet<ItemBasic> myItems) {
 
 		this.context = context;
 		this.myItems = myItems;
 		this.imageLoader = imageLoader;
+		this.options = options;
 		
 		layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -77,12 +80,13 @@ public class MyProfileItemAdapter extends BaseAdapter {
 	}
 
 	// Constructor allowing items from a given category to be displayed only
-	public MyProfileItemAdapter(Context context, ImageLoader imageLoader, LinkedHashSet<ItemBasic> myItems, int selectedCategoryId) {
+	public MyProfileItemAdapter(Context context, ImageLoader imageLoader, DisplayImageOptions options, LinkedHashSet<ItemBasic> myItems, int selectedCategoryId) {
 
 		this.context = context;
 		this.myItems = myItems;
 		this.imageLoader = imageLoader;
 		this.selectedCategoryId = selectedCategoryId;
+		this.options = options;
 
 		layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -92,12 +96,13 @@ public class MyProfileItemAdapter extends BaseAdapter {
 
 	// Constructor used from the search edittext, passing a part of a string, so the adapter only shows items who correspond
 	// to it
-	public MyProfileItemAdapter(Context context, ImageLoader imageLoader, LinkedHashSet<ItemBasic> myItems, CharSequence autocompleteInput) {
+	public MyProfileItemAdapter(Context context, ImageLoader imageLoader, DisplayImageOptions options, LinkedHashSet<ItemBasic> myItems, CharSequence autocompleteInput) {
 
 		this.context = context;
 		this.myItems = myItems;
 		this.imageLoader = imageLoader;
 		this.autocompleteInput = autocompleteInput;
+		this.options = options;
 
 		imageLoader = ImageLoader.getInstance();
 		layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -152,7 +157,7 @@ public class MyProfileItemAdapter extends BaseAdapter {
 		// itemImages.get(position),
 		// R.drawable.images_default_product);
 
-		imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_THUMBNAIL + itemImages.get(position), holder.iMyItemsFeedItemImage);
+		imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_THUMBNAIL + itemImages.get(position), holder.iMyItemsFeedItemImage, options);
 
 		if (itemRatings.get(position) == 0) {
 			holder.tvMyItemsFeedItemRatingAndComments.setText("No ratings yet");
