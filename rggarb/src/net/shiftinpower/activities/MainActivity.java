@@ -2,9 +2,6 @@ package net.shiftinpower.activities;
 
 import java.util.Timer;
 import java.util.TimerTask;
-import com.actionbarsherlock.app.SherlockFragment;
-import com.actionbarsherlock.app.SherlockFragmentActivity;
-import com.actionbarsherlock.view.Window;
 import net.shiftinpower.koldrain.R;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -14,11 +11,14 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.graphics.Typeface;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -45,7 +45,7 @@ import net.shiftinpower.fragments.WelcomeSlideFragment;
 * @author Kaloyan Roussev
 */
 
-public class MainActivity extends SherlockFragmentActivity implements OnClickListener {
+public class MainActivity extends FragmentActivity implements OnClickListener {
 
 	// Set up XML View Components
 	private TextView tvWelcome;
@@ -85,7 +85,7 @@ public class MainActivity extends SherlockFragmentActivity implements OnClickLis
 		}
 
 		// This app operates in No Title, Fullscreen mode
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
+		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
 		// Deal with Shared Preferences
@@ -172,7 +172,7 @@ public class MainActivity extends SherlockFragmentActivity implements OnClickLis
 		}
 
 		@Override
-		public SherlockFragment getItem(int position) {
+		public Fragment getItem(int position) {
 			return new WelcomeSlideFragment().newInstance(position);
 		}
 

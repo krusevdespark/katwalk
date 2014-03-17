@@ -6,14 +6,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
-
-import com.actionbarsherlock.app.SherlockFragment;
 
 /**
 * This is used by the ViewPager at MainActivity
@@ -22,7 +19,7 @@ import com.actionbarsherlock.app.SherlockFragment;
 *
 */
 
-public class WelcomeSlideFragment extends SherlockFragment {
+public class WelcomeSlideFragment extends Fragment {
 
 	private String TAG_ARGUMENT = "visiblePage";
 	private ImageView ivViewPagerSlide;
@@ -96,7 +93,7 @@ public class WelcomeSlideFragment extends SherlockFragment {
 
 	}
 
-	public SherlockFragment newInstance(int visiblePage) {
+	public Fragment newInstance(int visiblePage) {
 
 		WelcomeSlideFragment welcomeSlideFragment = new WelcomeSlideFragment();
 
