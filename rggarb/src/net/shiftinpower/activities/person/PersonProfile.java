@@ -137,12 +137,6 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 	} // End of onCreate
 
 	@Override
-	protected void onActivityResult(int arg0, int arg1, Intent arg2) {
-		// TODO Auto-generated method stub
-		super.onActivityResult(arg0, arg1, arg2);
-	}
-
-	@Override
 	public void onClick(View v) {
 		int id = v.getId();
 
