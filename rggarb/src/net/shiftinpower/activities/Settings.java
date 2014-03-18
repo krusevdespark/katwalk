@@ -273,7 +273,7 @@ public class Settings extends KatwalkSlidingMenu implements OnUserSettingsChange
 			public void onClick(View v) {
 
 				Intent changeAvatarDialog = new Intent(Settings.this, ProvideImageDialog.class);
-				changeAvatarDialog.putExtra(C.ImageHandling.INTENT_EXTRA_IMAGE_PATH_KEY, userAvatarPath);
+				changeAvatarDialog.putExtra(C.ImageHandling.INTENT_EXTRA_IMAGE_PATH_KEY, userAvatarPathSettingsScreen);
 				startActivityForResult(changeAvatarDialog, C.ImageHandling.REQUEST_CODE_CHANGE_IMAGE);
 
 			}

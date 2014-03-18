@@ -43,7 +43,7 @@ import net.shiftinpower.fragments.WelcomeSlideFragment;
 * I can fix this, but I havent had the time to do so.
 *
 * @author Kaloyan Roussev
-*/
+*/ 
 
 public class MainActivity extends FragmentActivity implements OnClickListener {
 

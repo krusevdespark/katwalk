@@ -255,12 +255,6 @@ public class ProvideImageDialog extends Activity {
 
 	} // End of onActivityResult
 
-	@Override
-	protected void onStop() {
-		super.onStop();
-		katwalk.recycleViewsDrawables(imageView);
-	}
-
 	/*
 	 * @Override public void onTrimMemory(int level) { // TODO Auto-generated method stub super.onTrimMemory(level); }
 	 */
