@@ -25,7 +25,7 @@ import net.shiftinpower.objects.UserExtended;
  * @author Kaloyan Roussev
  * 
  */
-public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener, OnGetUserDataFromServerListener {
+public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener, OnGetUserDataFromServerListener { //asd
 
 	// set up XML View Components
 	protected TextView tvUserName;
