@@ -26,7 +26,6 @@
                 android:id="@+id/iUserAvatar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="7dp"
                 android:contentDescription="@string/ivUserAvatarDescription"
                 android:padding="0dp"
                 android:scaleType="centerCrop"

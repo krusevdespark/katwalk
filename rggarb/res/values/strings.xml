@@ -206,6 +206,7 @@
     <!-- User Profile -->
     <string name="bAnotherUserProfileMessage">Message</string>
     <string name="bAnotherUserProfileAddFriend">Add Friend</string>
+    <string name="bAnotherUserProfileFriendshipRequestSent">Request Sent</string>
 
     <!-- My Profile -->
     <string name="ivUserAvatarDescription">User Avatar Image</string>

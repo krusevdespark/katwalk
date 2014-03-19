@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import net.shiftinpower.activities.ItemAddStepOnePhotos;
+import net.shiftinpower.activities.person.UserProfile;
 import net.shiftinpower.core.C;
 import net.shiftinpower.core.KatwalkSlidingMenu;
 import net.shiftinpower.customviews.SquareImageView;
@@ -27,17 +28,17 @@ import android.widget.Button;
 import android.widget.TextView;
 
 /**
-* NOTE: This class, the ItemProfilePrivate and the ItemProfileOtherUsers will be grouped in another package and will extend a
-* superclass that is going to contain the code they share so code duplication is avoided.
-*
-* An item has a personal profile, that displays data only for my particular item of a given kind.
-* Example: my personal Samsung Galaxy S2 with its white color, 16GB of storage, the pictures I've taken for it etc
-*
-* An item also has a public profile - aggregated information, stats and images from all users that possess a Galaxy S2
-*
-* @author Kaloyan Roussev
-*
-*/
+ * NOTE: This class, the ItemProfilePrivate and the ItemProfileOtherUsers will be grouped in another package and will extend
+ * a superclass that is going to contain the code they share so code duplication is avoided.
+ * 
+ * An item has a personal profile, that displays data only for my particular item of a given kind. Example: my personal
+ * Samsung Galaxy S2 with its white color, 16GB of storage, the pictures I've taken for it etc
+ * 
+ * An item also has a public profile - aggregated information, stats and images from all users that possess a Galaxy S2
+ * 
+ * @author Kaloyan Roussev
+ * 
+ */
 
 public class ItemProfilePublic extends KatwalkSlidingMenu {
 
@@ -82,6 +83,7 @@ public class ItemProfilePublic extends KatwalkSlidingMenu {
 	private String itemSubcategory;
 	private String[] imageUrls;
 	private ArrayList<String> friendsAvatarsUrls;
+	private ArrayList<Integer> friendsAvatarsIDs;
 	private ArrayList<String> itemPlacesUrls;
 	private int[] necessaryImageViews;
 	private int[] necessaryUserImageViews;
@@ -95,7 +97,7 @@ public class ItemProfilePublic extends KatwalkSlidingMenu {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		// Inflate the XML layout for this activity
 		setContentView(R.layout.activity_layout_item_profile_public);
 
@@ -235,7 +237,8 @@ public class ItemProfilePublic extends KatwalkSlidingMenu {
 		}
 
 		// An item cannot be added if there is no at least one image, so we always have the first image
-		katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[0], iItemProfileImageSlotOne, katwalk.imageLoaderOptions);
+		katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[0], iItemProfileImageSlotOne,
+				katwalk.imageLoaderOptions);
 
 		int[] initialImageViews = { R.id.iItemProfileImageSlotTwo, R.id.iItemProfileImageSlotThree, R.id.iItemProfileImageSlotFour,
 				R.id.iItemProfileImageSlotFive };
@@ -247,7 +250,17 @@ public class ItemProfilePublic extends KatwalkSlidingMenu {
 			fetchableImageView.setVisibility(View.VISIBLE);
 			if (!imageUrls[x + 1].contentEquals("null")) {
 
-				katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[x + 1], fetchableImageView, katwalk.imageLoaderOptions);
+				katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_ITEMS_FOLDER_ORIGINAL + imageUrls[x + 1], fetchableImageView,
+						katwalk.imageLoaderOptions);
+
+				fetchableImageView.setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+
+					}
+				});
 			}
 
 		}
@@ -270,7 +283,23 @@ public class ItemProfilePublic extends KatwalkSlidingMenu {
 				imageViewsWhoseBitmapsShouldBeRecycled.add(fetchableImageView);
 				if (!itemUser.getUserAvatar().contentEquals("null")) {
 
-					katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_USERS_FOLDER_THUMBNAIL + itemUser.getUserAvatar(), fetchableImageView, katwalk.imageLoaderOptions);
+					final int focusedUserId = itemUser.getUserId();
+					katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_USERS_FOLDER_THUMBNAIL + itemUser.getUserAvatar(), fetchableImageView,
+							katwalk.imageLoaderOptions);
+					fetchableImageView.setOnClickListener(new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							Intent goToUserProfile = new Intent(ItemProfilePublic.this, UserProfile.class);
+							goToUserProfile.putExtra("userId", focusedUserId);
+							if (focusedUserId == currentlyLoggedInUser) {
+								goToUserProfile.putExtra("currentUser", true);
+							} else {
+								goToUserProfile.putExtra("currentUser", false);
+							}
+							startActivity(goToUserProfile);
+						}
+					});
 				}
 				a++;
 			}
@@ -288,14 +317,19 @@ public class ItemProfilePublic extends KatwalkSlidingMenu {
 		int friendsThatOwnThisItemCount = 0;
 
 		friendsAvatarsUrls = new ArrayList<String>();
+		friendsAvatarsIDs = new ArrayList<Integer>();
 
-		for (UserBasic itemUser : itemUsers)
+		for (UserBasic itemUser : itemUsers) {
 			if (itemUser.isUserFriendOfCurrentUser()) {
-				if (friendsAvatarsUrls.size() < initialFriendAvatarViews.size()) {
-					friendsAvatarsUrls.add(itemUser.getUserAvatar());
+				if (itemUser.getUserId() != currentlyLoggedInUser) {
+					if (friendsAvatarsUrls.size() < initialFriendAvatarViews.size()) {
+						friendsAvatarsUrls.add(itemUser.getUserAvatar());
+						friendsAvatarsIDs.add(itemUser.getUserId());
+					}
+					friendsThatOwnThisItemCount++;
 				}
-				friendsThatOwnThisItemCount++;
 			}
+		}
 
 		// Show up to 4 images of friends that have this item
 		if (friendsAvatarsUrls != null) {
@@ -307,11 +341,25 @@ public class ItemProfilePublic extends KatwalkSlidingMenu {
 				fetchableImageView.setVisibility(View.VISIBLE);
 				if (!friendsAvatarsUrls.get(b).contentEquals("null")) {
 
-					katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_USERS_FOLDER_THUMBNAIL + friendsAvatarsUrls.get(b), fetchableImageView, katwalk.imageLoaderOptions);
+					final int focusedFriendId = friendsAvatarsIDs.get(b);
+
+					katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_USERS_FOLDER_THUMBNAIL + friendsAvatarsUrls.get(b), fetchableImageView,
+							katwalk.imageLoaderOptions);
+					fetchableImageView.setOnClickListener(new OnClickListener() {
+
+						@Override
+						public void onClick(View v) {
+							Intent goToUserProfile = new Intent(ItemProfilePublic.this, UserProfile.class);
+							goToUserProfile.putExtra("userId", focusedFriendId);
+							goToUserProfile.putExtra("currentUser", false);
+							startActivity(goToUserProfile);
+
+						}
+					});
 				}
 
-			}
-		}
+			} // End of for loop
+		} // End of if statement
 
 		// Set text for the friends that own item value
 		if (friendsThatOwnThisItemCount == 1) {
@@ -338,7 +386,8 @@ public class ItemProfilePublic extends KatwalkSlidingMenu {
 				fetchableImageView.setVisibility(View.VISIBLE);
 				if (!itemPlace.getPlaceAvatar().contentEquals("null")) {
 
-					katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_PLACES_FOLDER_THUMBNAIL + itemPlace.getPlaceAvatar(), fetchableImageView, katwalk.imageLoaderOptions);
+					katwalk.imageLoader.displayImage(C.API.WEB_ADDRESS + C.API.IMAGES_PLACES_FOLDER_THUMBNAIL + itemPlace.getPlaceAvatar(), fetchableImageView,
+							katwalk.imageLoaderOptions);
 				}
 
 				c++;

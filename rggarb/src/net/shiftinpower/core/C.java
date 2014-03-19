@@ -520,6 +520,8 @@ public final class C {
 		public static final String USER_QUOTE_SUCCESSFULLY_CHANGED = "User Quote Successfully Changed!";
 		public static final String DONT_FORGET_TO_SAVE_SETTINGS = "Don't forget to Save Settings Changed!";
 		public static final String INQUIRY_SENT = "Your Inquiry has been Sent to Our Team";
+		public static final String FRIEND_REQUEST_CANCELLED = "Friend Request Cancelled";
+		public static final String FRIEND_REQUEST_SENT = "Friend Request Sent";
 	}
 
 	public static final class LoadingMessages {

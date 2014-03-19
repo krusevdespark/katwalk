@@ -2272,32 +2272,33 @@ containing a value of this type.
         public static final int action_settings=0x7f070027;
         /**  Facebook 
          */
-        public static final int app_id=0x7f0701b5;
+        public static final int app_id=0x7f0701b6;
         /**  Main Activity 
          */
         public static final int app_name=0x7f070026;
-        public static final int bAddAnItemStepOneSubmit=0x7f070158;
-        public static final int bAddAnItemSubmit=0x7f070143;
+        public static final int bAddAnItemStepOneSubmit=0x7f070159;
+        public static final int bAddAnItemSubmit=0x7f070144;
         public static final int bAnotherUserProfileAddFriend=0x7f0700b8;
+        public static final int bAnotherUserProfileFriendshipRequestSent=0x7f0700b9;
         /**  User Profile 
          */
         public static final int bAnotherUserProfileMessage=0x7f0700b7;
         public static final int bCancelForgottenPasswordDialog=0x7f070035;
         public static final int bCancelImageUpload=0x7f070042;
-        public static final int bChangeUserQuoteCancel=0x7f0700c9;
-        public static final int bChangeUserQuoteSubmit=0x7f0700c8;
-        public static final int bContactUsSubmit=0x7f0701b9;
-        public static final int bDeleteAccountCancel=0x7f0700e8;
-        public static final int bDeleteAccountSubmit=0x7f0700e9;
+        public static final int bChangeUserQuoteCancel=0x7f0700ca;
+        public static final int bChangeUserQuoteSubmit=0x7f0700c9;
+        public static final int bContactUsSubmit=0x7f0701ba;
+        public static final int bDeleteAccountCancel=0x7f0700e9;
+        public static final int bDeleteAccountSubmit=0x7f0700ea;
         public static final int bDeleteImage=0x7f070043;
-        public static final int bDeleteMyProfileSettingsPage=0x7f0700e5;
-        public static final int bEmptyMyProfileCommentsSearchItems=0x7f070115;
-        public static final int bEmptyMyProfileCommentsVisitItemsFeed=0x7f070114;
-        public static final int bEmptyMyProfileFollowingsSearchItems=0x7f07010f;
-        public static final int bEmptyMyProfileFollowingsVisitItemsFeed=0x7f07010e;
-        public static final int bEmptyMyProfileFriendsFindFriends=0x7f070111;
-        public static final int bEmptyMyProfileFriendsInviteFBFriends=0x7f070112;
-        public static final int bEmptyMyProfileItemsAddAnItem=0x7f07010c;
+        public static final int bDeleteMyProfileSettingsPage=0x7f0700e6;
+        public static final int bEmptyMyProfileCommentsSearchItems=0x7f070116;
+        public static final int bEmptyMyProfileCommentsVisitItemsFeed=0x7f070115;
+        public static final int bEmptyMyProfileFollowingsSearchItems=0x7f070110;
+        public static final int bEmptyMyProfileFollowingsVisitItemsFeed=0x7f07010f;
+        public static final int bEmptyMyProfileFriendsFindFriends=0x7f070112;
+        public static final int bEmptyMyProfileFriendsInviteFBFriends=0x7f070113;
+        public static final int bEmptyMyProfileItemsAddAnItem=0x7f07010d;
         /**  User changed quote 
          */
         public static final int bFeedUserChangedQuoteMessage=0x7f07007a;
@@ -2310,68 +2311,68 @@ containing a value of this type.
         public static final int bFeedUserSellsTheirViewItem=0x7f07009f;
         public static final int bFeedUsersViewProfileOfFriendOne=0x7f070086;
         public static final int bFeedUsersViewProfileOfFriendTwo=0x7f070087;
-        public static final int bFollowingFeedActionButtonComment=0x7f070125;
-        public static final int bFollowingFeedActionButtonRate=0x7f070124;
-        public static final int bFollowingFeedActionButtonSell=0x7f070127;
-        public static final int bFollowingFeedActionButtonUnfollow=0x7f070126;
-        public static final int bItemProfileAddYours=0x7f07017e;
-        public static final int bItemProfileComment=0x7f07017b;
-        public static final int bItemProfileFollow=0x7f07017c;
-        public static final int bItemProfileGet=0x7f07017d;
-        public static final int bItemProfileMainCategory=0x7f070183;
-        public static final int bItemProfileMainSubcategory=0x7f070184;
-        public static final int bItemProfilePrivateDeleteItem=0x7f070180;
-        public static final int bItemProfilePrivateEditItem=0x7f07017f;
-        public static final int bItemProfilePrivateSellItem=0x7f070181;
-        public static final int bItemProfilePrivateViewPublicProfile=0x7f070186;
-        public static final int bItemProfileRate=0x7f07017a;
-        public static final int bItemProfileSuggestAMerge=0x7f070182;
-        public static final int bItemProfileViewSubcategories=0x7f070185;
+        public static final int bFollowingFeedActionButtonComment=0x7f070126;
+        public static final int bFollowingFeedActionButtonRate=0x7f070125;
+        public static final int bFollowingFeedActionButtonSell=0x7f070128;
+        public static final int bFollowingFeedActionButtonUnfollow=0x7f070127;
+        public static final int bItemProfileAddYours=0x7f07017f;
+        public static final int bItemProfileComment=0x7f07017c;
+        public static final int bItemProfileFollow=0x7f07017d;
+        public static final int bItemProfileGet=0x7f07017e;
+        public static final int bItemProfileMainCategory=0x7f070184;
+        public static final int bItemProfileMainSubcategory=0x7f070185;
+        public static final int bItemProfilePrivateDeleteItem=0x7f070181;
+        public static final int bItemProfilePrivateEditItem=0x7f070180;
+        public static final int bItemProfilePrivateSellItem=0x7f070182;
+        public static final int bItemProfilePrivateViewPublicProfile=0x7f070187;
+        public static final int bItemProfileRate=0x7f07017b;
+        public static final int bItemProfileSuggestAMerge=0x7f070183;
+        public static final int bItemProfileViewSubcategories=0x7f070186;
         public static final int bItemsFeedActionButtonComment=0x7f070051;
         public static final int bItemsFeedActionButtonEnvy=0x7f070053;
         public static final int bItemsFeedActionButtonFollow=0x7f070052;
         public static final int bItemsFeedActionButtonRate=0x7f070050;
         public static final int bItemsFeedActionButtonSell=0x7f070054;
-        public static final int bLeaveThisScreen=0x7f070151;
+        public static final int bLeaveThisScreen=0x7f070152;
         public static final int bLoginLoginPage=0x7f07002d;
-        public static final int bMessageFromUserReply=0x7f0700d3;
-        public static final int bMessageFromUserView=0x7f0700d2;
-        public static final int bModifyItemsSearch=0x7f0701a9;
-        public static final int bModifyUsersSearch=0x7f0701b0;
-        public static final int bMyCommentsDeleteComment=0x7f07012e;
-        public static final int bMyCommentsEditComment=0x7f07012d;
-        public static final int bMyFriendsMessage=0x7f07011b;
-        public static final int bMyFriendsUnfriend=0x7f07011a;
-        public static final int bMyItemsFeedActionButtonComment=0x7f070107;
-        public static final int bMyItemsFeedActionButtonDelete=0x7f070108;
-        public static final int bMyItemsFeedActionButtonRate=0x7f070106;
-        public static final int bMyItemsFeedActionButtonSell=0x7f070109;
-        public static final int bMyItemsFilterByCategoryShowAllCategories=0x7f0700fe;
+        public static final int bMessageFromUserReply=0x7f0700d4;
+        public static final int bMessageFromUserView=0x7f0700d3;
+        public static final int bModifyItemsSearch=0x7f0701aa;
+        public static final int bModifyUsersSearch=0x7f0701b1;
+        public static final int bMyCommentsDeleteComment=0x7f07012f;
+        public static final int bMyCommentsEditComment=0x7f07012e;
+        public static final int bMyFriendsMessage=0x7f07011c;
+        public static final int bMyFriendsUnfriend=0x7f07011b;
+        public static final int bMyItemsFeedActionButtonComment=0x7f070108;
+        public static final int bMyItemsFeedActionButtonDelete=0x7f070109;
+        public static final int bMyItemsFeedActionButtonRate=0x7f070107;
+        public static final int bMyItemsFeedActionButtonSell=0x7f07010a;
+        public static final int bMyItemsFilterByCategoryShowAllCategories=0x7f0700ff;
         public static final int bPeopleFeedActionButtonAddFriend=0x7f070055;
         public static final int bPeopleFeedActionButtonBuy=0x7f070057;
         public static final int bPeopleFeedActionButtonMessage=0x7f070056;
         /**  Settings 
          */
-        public static final int bSaveChangesSettings=0x7f0700d5;
+        public static final int bSaveChangesSettings=0x7f0700d6;
         public static final int bSelectPhotoFromFile=0x7f070041;
-        public static final int bStayOnThisScreen=0x7f070150;
+        public static final int bStayOnThisScreen=0x7f070151;
         public static final int bSubmitForgottenPasswordDialog=0x7f070036;
-        public static final int bSubmitSearch=0x7f07019e;
-        public static final int bSubmitSearchUsers=0x7f0701a5;
+        public static final int bSubmitSearch=0x7f07019f;
+        public static final int bSubmitSearchUsers=0x7f0701a6;
         public static final int bSubmitSignupPage=0x7f07003b;
         public static final int bTakeAPhoto=0x7f070040;
-        public static final int bUserItemsFeedActionButtonComment=0x7f0700ed;
-        public static final int bUserItemsFeedActionButtonFollow=0x7f0700ec;
+        public static final int bUserItemsFeedActionButtonComment=0x7f0700ee;
+        public static final int bUserItemsFeedActionButtonFollow=0x7f0700ed;
         /**  My Profile Items 
          */
-        public static final int bUserItemsFeedActionButtonGet=0x7f0700eb;
-        public static final int bUserItemsFeedActionButtonRate=0x7f0700ee;
-        public static final int bUserProfileActionButtonOne=0x7f0700be;
-        public static final int bUserProfileActionButtonTwo=0x7f0700bf;
-        public static final int cbAddAnItemIsGift=0x7f07015a;
-        public static final int cbDeleteAccountDeleteItemImagesAsWell=0x7f0700e7;
-        public static final int cbShowMoneySpentSettings=0x7f0700df;
-        public static final int cbShowStatsSettings=0x7f0700e0;
+        public static final int bUserItemsFeedActionButtonGet=0x7f0700ec;
+        public static final int bUserItemsFeedActionButtonRate=0x7f0700ef;
+        public static final int bUserProfileActionButtonOne=0x7f0700bf;
+        public static final int bUserProfileActionButtonTwo=0x7f0700c0;
+        public static final int cbAddAnItemIsGift=0x7f07015b;
+        public static final int cbDeleteAccountDeleteItemImagesAsWell=0x7f0700e8;
+        public static final int cbShowMoneySpentSettings=0x7f0700e0;
+        public static final int cbShowStatsSettings=0x7f0700e1;
         public static final int cbUserAgreesWithTermsOfUse=0x7f070044;
         public static final int com_facebook_choose_friends=0x7f07000f;
         public static final int com_facebook_dialogloginactivity_ok_button=0x7f070000;
@@ -2399,64 +2400,64 @@ containing a value of this type.
         public static final int com_facebook_usersettingsfragment_logged_in=0x7f070009;
         public static final int com_facebook_usersettingsfragment_not_logged_in=0x7f07000a;
         public static final int contentDescriptionHomeIcon=0x7f07004a;
-        public static final int etAddAnItemBrandManufacturer=0x7f07013b;
-        public static final int etAddAnItemComment=0x7f070142;
-        public static final int etAddAnItemName=0x7f07013a;
-        public static final int etAddAnItemPrice=0x7f070140;
-        public static final int etAddAnItemRateIt=0x7f070141;
-        public static final int etAddAnItemWhereDidYouGetItFrom=0x7f07013e;
-        public static final int etAddAnItemWhoDidYouGetItFrom=0x7f07013f;
-        public static final int etBrandSearch=0x7f070195;
-        public static final int etChangeUserQuoteContent=0x7f0700c7;
-        public static final int etCitySearch=0x7f070197;
-        public static final int etContactUsEnterYourMessage=0x7f0701b8;
-        public static final int etDeleteAccountPassword=0x7f0700ea;
-        public static final int etEmailSearchUsers=0x7f0701a3;
-        public static final int etFollowingListSearchHint=0x7f070129;
+        public static final int etAddAnItemBrandManufacturer=0x7f07013c;
+        public static final int etAddAnItemComment=0x7f070143;
+        public static final int etAddAnItemName=0x7f07013b;
+        public static final int etAddAnItemPrice=0x7f070141;
+        public static final int etAddAnItemRateIt=0x7f070142;
+        public static final int etAddAnItemWhereDidYouGetItFrom=0x7f07013f;
+        public static final int etAddAnItemWhoDidYouGetItFrom=0x7f070140;
+        public static final int etBrandSearch=0x7f070196;
+        public static final int etChangeUserQuoteContent=0x7f0700c8;
+        public static final int etCitySearch=0x7f070198;
+        public static final int etContactUsEnterYourMessage=0x7f0701b9;
+        public static final int etDeleteAccountPassword=0x7f0700eb;
+        public static final int etEmailSearchUsers=0x7f0701a4;
+        public static final int etFollowingListSearchHint=0x7f07012a;
         public static final int etForgottenPasswordEmailHint=0x7f070034;
-        public static final int etItemImageFiveDescription=0x7f070157;
-        public static final int etItemImageFourDescription=0x7f070156;
-        public static final int etItemImageOneDescription=0x7f070153;
-        public static final int etItemImageThreeDescription=0x7f070155;
-        public static final int etItemImageTwoDescription=0x7f070154;
-        public static final int etMessagesSearch=0x7f0700cb;
-        public static final int etMyCommentsListSearch=0x7f07012b;
-        public static final int etMyFriendsListSearch=0x7f070117;
-        public static final int etMyItemsListSearchHint=0x7f0700fb;
-        public static final int etNameSearchUsers=0x7f0701a2;
-        public static final int etPlaceSearch=0x7f070198;
-        public static final int etPriceFromSearch=0x7f070199;
-        public static final int etPriceToSearch=0x7f07019a;
-        public static final int etUserItemsListSearchHint=0x7f0700f7;
-        public static final int etUserNameSettings=0x7f0700d8;
-        public static final int etUserPasswordNewAgainSettings=0x7f0700dc;
-        public static final int etUserPasswordNewSettings=0x7f0700db;
-        public static final int etUserPasswordOldSettings=0x7f0700da;
-        public static final int etWhatSearch=0x7f070192;
+        public static final int etItemImageFiveDescription=0x7f070158;
+        public static final int etItemImageFourDescription=0x7f070157;
+        public static final int etItemImageOneDescription=0x7f070154;
+        public static final int etItemImageThreeDescription=0x7f070156;
+        public static final int etItemImageTwoDescription=0x7f070155;
+        public static final int etMessagesSearch=0x7f0700cc;
+        public static final int etMyCommentsListSearch=0x7f07012c;
+        public static final int etMyFriendsListSearch=0x7f070118;
+        public static final int etMyItemsListSearchHint=0x7f0700fc;
+        public static final int etNameSearchUsers=0x7f0701a3;
+        public static final int etPlaceSearch=0x7f070199;
+        public static final int etPriceFromSearch=0x7f07019a;
+        public static final int etPriceToSearch=0x7f07019b;
+        public static final int etUserItemsListSearchHint=0x7f0700f8;
+        public static final int etUserNameSettings=0x7f0700d9;
+        public static final int etUserPasswordNewAgainSettings=0x7f0700dd;
+        public static final int etUserPasswordNewSettings=0x7f0700dc;
+        public static final int etUserPasswordOldSettings=0x7f0700db;
+        public static final int etWhatSearch=0x7f070193;
         /**  Add an Item 
          */
-        public static final int iAddAnItemAvatarImageDescription=0x7f070137;
-        public static final int iAddAnItemPhotoFourImageDescription=0x7f070147;
-        public static final int iAddAnItemPhotoOneImageDescription=0x7f070144;
-        public static final int iAddAnItemPhotoThreeImageDescription=0x7f070146;
-        public static final int iAddAnItemPhotoTwoImageDescription=0x7f070145;
+        public static final int iAddAnItemAvatarImageDescription=0x7f070138;
+        public static final int iAddAnItemPhotoFourImageDescription=0x7f070148;
+        public static final int iAddAnItemPhotoOneImageDescription=0x7f070145;
+        public static final int iAddAnItemPhotoThreeImageDescription=0x7f070147;
+        public static final int iAddAnItemPhotoTwoImageDescription=0x7f070146;
         public static final int iFeedItemHasBeenCommentedByUserImageDescription=0x7f070062;
         /**  My Profile Following 
          */
-        public static final int iFollowingFeedItemImageDescription=0x7f07011d;
-        public static final int iItemProfileImageDescription=0x7f07015d;
-        public static final int iItemProfilePlaceImageDescription=0x7f07015e;
-        public static final int iItemProfileUserImageDescription=0x7f07015f;
-        public static final int iMyFriendsFriendAvatarImage=0x7f070119;
-        public static final int iMyItemsFeedItemImageDescription=0x7f0700ff;
-        public static final int iUserItemsFeedItemImageDescription=0x7f0700f5;
+        public static final int iFollowingFeedItemImageDescription=0x7f07011e;
+        public static final int iItemProfileImageDescription=0x7f07015e;
+        public static final int iItemProfilePlaceImageDescription=0x7f07015f;
+        public static final int iItemProfileUserImageDescription=0x7f070160;
+        public static final int iMyFriendsFriendAvatarImage=0x7f07011a;
+        public static final int iMyItemsFeedItemImageDescription=0x7f070100;
+        public static final int iUserItemsFeedItemImageDescription=0x7f0700f6;
         /**  Currently not used 
          */
         public static final int ibAvatarUploadText=0x7f07003e;
-        public static final int ibMyCommentsListSearchContentDescription=0x7f07012c;
-        public static final int ibMyFriendsListSearchContentDescription=0x7f070118;
-        public static final int ibMyItemsListSearchContentDescription=0x7f0700fc;
-        public static final int ibUserItemsListSearchContentDescription=0x7f0700f8;
+        public static final int ibMyCommentsListSearchContentDescription=0x7f07012d;
+        public static final int ibMyFriendsListSearchContentDescription=0x7f070119;
+        public static final int ibMyItemsListSearchContentDescription=0x7f0700fd;
+        public static final int ibUserItemsListSearchContentDescription=0x7f0700f9;
         public static final int ifLoginEmailHint=0x7f07002f;
         public static final int ifLoginPasswordHint=0x7f070030;
         public static final int ifLoginPasswordRepeatHint=0x7f070031;
@@ -2468,64 +2469,64 @@ containing a value of this type.
         public static final int ivFeedUserImageDescription=0x7f07005d;
         /**  Message Item 
          */
-        public static final int ivMessageFromUserImageDescription=0x7f0700ce;
-        public static final int ivSlidingMenuUserAvatarContentDescription=0x7f070136;
+        public static final int ivMessageFromUserImageDescription=0x7f0700cf;
+        public static final int ivSlidingMenuUserAvatarContentDescription=0x7f070137;
         public static final int ivUserAvatarContentDescription=0x7f07003f;
-        public static final int ivUserAvatarContentDescriptionSettings=0x7f0700de;
+        public static final int ivUserAvatarContentDescriptionSettings=0x7f0700df;
         /**  My Profile 
          */
-        public static final int ivUserAvatarDescription=0x7f0700b9;
+        public static final int ivUserAvatarDescription=0x7f0700ba;
         public static final int login=0x7f070028;
-        public static final int rbBoughtFromPlace=0x7f07014a;
-        public static final int rbBoughtFromUser=0x7f07014b;
-        public static final int rbItemConditionNew=0x7f07014e;
-        public static final int rbItemConditionUsed=0x7f07014d;
-        public static final int rbNewItemSearch=0x7f07019c;
-        public static final int rbSortByAscending=0x7f0701ab;
-        public static final int rbSortByDescending=0x7f0701aa;
-        public static final int rbUsedItemSearch=0x7f07019d;
+        public static final int rbBoughtFromPlace=0x7f07014b;
+        public static final int rbBoughtFromUser=0x7f07014c;
+        public static final int rbItemConditionNew=0x7f07014f;
+        public static final int rbItemConditionUsed=0x7f07014e;
+        public static final int rbNewItemSearch=0x7f07019d;
+        public static final int rbSortByAscending=0x7f0701ac;
+        public static final int rbSortByDescending=0x7f0701ab;
+        public static final int rbUsedItemSearch=0x7f07019e;
         public static final int rgSexFemale=0x7f07003a;
         public static final int rgSexMale=0x7f070039;
-        public static final int sAddAnItemCategory=0x7f07013c;
-        public static final int sAddAnItemSubcategory=0x7f07013d;
-        public static final int sCategorySearch=0x7f070193;
-        public static final int sCountrySearch=0x7f070196;
-        public static final int sCountrySearchUsers=0x7f0701a4;
-        public static final int sMyItems=0x7f0700fd;
-        public static final int sRatingAboveSearch=0x7f07019b;
-        public static final int sSortBySearchItemsResults=0x7f0701ac;
-        public static final int sSortBySearchUsersResults=0x7f0701b1;
-        public static final int sSubcategorySearch=0x7f070194;
-        public static final int sWhoCanInteractWithYourActivitySettings=0x7f0700e4;
-        public static final int sWhoCanSendYouMessagesSettings=0x7f0700e2;
+        public static final int sAddAnItemCategory=0x7f07013d;
+        public static final int sAddAnItemSubcategory=0x7f07013e;
+        public static final int sCategorySearch=0x7f070194;
+        public static final int sCountrySearch=0x7f070197;
+        public static final int sCountrySearchUsers=0x7f0701a5;
+        public static final int sMyItems=0x7f0700fe;
+        public static final int sRatingAboveSearch=0x7f07019c;
+        public static final int sSortBySearchItemsResults=0x7f0701ad;
+        public static final int sSortBySearchUsersResults=0x7f0701b2;
+        public static final int sSubcategorySearch=0x7f070195;
+        public static final int sWhoCanInteractWithYourActivitySettings=0x7f0700e5;
+        public static final int sWhoCanSendYouMessagesSettings=0x7f0700e3;
         public static final int signup=0x7f070029;
         /**  Currently not used 
          */
         public static final int spCitySpinnerPrompt=0x7f07003d;
         public static final int spCountrySpinnerPrompt=0x7f07003c;
-        public static final int tvAddAnItemStepOneDescription=0x7f070152;
-        public static final int tvAddAnItemStepTwoDescription=0x7f070159;
-        public static final int tvAddAnItemSubTitle=0x7f070139;
-        public static final int tvAddAnItemTitle=0x7f070138;
-        public static final int tvAppliedFiltersSearchItemsResults=0x7f0701a6;
-        public static final int tvAppliedFiltersSearchUsersResults=0x7f0701ad;
+        public static final int tvAddAnItemStepOneDescription=0x7f070153;
+        public static final int tvAddAnItemStepTwoDescription=0x7f07015a;
+        public static final int tvAddAnItemSubTitle=0x7f07013a;
+        public static final int tvAddAnItemTitle=0x7f070139;
+        public static final int tvAppliedFiltersSearchItemsResults=0x7f0701a7;
+        public static final int tvAppliedFiltersSearchUsersResults=0x7f0701ae;
         public static final int tvBraggr=0x7f070038;
-        public static final int tvChangePasswordSettings=0x7f0700dd;
-        public static final int tvChangeUserQuoteTitle=0x7f0700c6;
-        public static final int tvClearSearchFiltersSearchItemsResults=0x7f0701a7;
-        public static final int tvClearSearchFiltersSearchUsersResults=0x7f0701ae;
-        public static final int tvContactUsSubject=0x7f0701b7;
+        public static final int tvChangePasswordSettings=0x7f0700de;
+        public static final int tvChangeUserQuoteTitle=0x7f0700c7;
+        public static final int tvClearSearchFiltersSearchItemsResults=0x7f0701a8;
+        public static final int tvClearSearchFiltersSearchUsersResults=0x7f0701af;
+        public static final int tvContactUsSubject=0x7f0701b8;
         /**  Contact Us 
          */
-        public static final int tvContactUsTitle=0x7f0701b6;
-        public static final int tvDeleteAccountDialogTitle=0x7f0700e6;
-        public static final int tvEmptyMessages=0x7f0700cc;
-        public static final int tvEmptyMyProfileComments=0x7f070113;
-        public static final int tvEmptyMyProfileFollowings=0x7f07010d;
-        public static final int tvEmptyMyProfileFriends=0x7f070110;
+        public static final int tvContactUsTitle=0x7f0701b7;
+        public static final int tvDeleteAccountDialogTitle=0x7f0700e7;
+        public static final int tvEmptyMessages=0x7f0700cd;
+        public static final int tvEmptyMyProfileComments=0x7f070114;
+        public static final int tvEmptyMyProfileFollowings=0x7f07010e;
+        public static final int tvEmptyMyProfileFriends=0x7f070111;
         /**  Not sure whether this one is at My Items 
          */
-        public static final int tvEmptyMyProfileItems=0x7f07010b;
+        public static final int tvEmptyMyProfileItems=0x7f07010c;
         /**  Place is now open 
          */
         public static final int tvFeedPlaceIsNowOpenAtX=0x7f0700b2;
@@ -2600,16 +2601,16 @@ containing a value of this type.
         public static final int tvFeedUserSellsTheirPrice=0x7f07009d;
         public static final int tvFeedUserSellsTheirTimestamp=0x7f07009c;
         public static final int tvFeedUserSellsTheirUsername=0x7f07009a;
-        public static final int tvFilterByCategory=0x7f07010a;
-        public static final int tvFollowingFeedItemBoughtFrom=0x7f070123;
-        public static final int tvFollowingFeedItemBoughtFromLabel=0x7f070122;
-        public static final int tvFollowingFeedItemBrandName=0x7f070121;
-        public static final int tvFollowingFeedItemPrice=0x7f07011f;
-        public static final int tvFollowingFeedItemRatingAndComments=0x7f070120;
-        public static final int tvFollowingListItemName=0x7f07011e;
+        public static final int tvFilterByCategory=0x7f07010b;
+        public static final int tvFollowingFeedItemBoughtFrom=0x7f070124;
+        public static final int tvFollowingFeedItemBoughtFromLabel=0x7f070123;
+        public static final int tvFollowingFeedItemBrandName=0x7f070122;
+        public static final int tvFollowingFeedItemPrice=0x7f070120;
+        public static final int tvFollowingFeedItemRatingAndComments=0x7f070121;
+        public static final int tvFollowingListItemName=0x7f07011f;
         public static final int tvForgottenPasswordLoginPage=0x7f070033;
-        public static final int tvItemBoughtFromPrompt=0x7f070149;
-        public static final int tvItemConditionPrompt=0x7f07014c;
+        public static final int tvItemBoughtFromPrompt=0x7f07014a;
+        public static final int tvItemConditionPrompt=0x7f07014d;
         public static final int tvItemFeedItemIsNowBeingOfferedAtItemName=0x7f07006c;
         public static final int tvItemFeedItemIsNowBeingOfferedAtPlaceName=0x7f07006d;
         /**  Item has been commented by 
@@ -2636,46 +2637,46 @@ containing a value of this type.
         public static final int tvItemIsNowAmongTheItemsOf=0x7f070064;
         public static final int tvItemIsNowAmongTheItemsOfUserName=0x7f070065;
         public static final int tvItemIsNowBeingFollowedByUserName=0x7f070073;
-        public static final int tvItemProfileActionCallToAddAPhoto=0x7f070163;
-        public static final int tvItemProfileActionCallToFollow=0x7f07016b;
-        public static final int tvItemProfileActivity=0x7f07018c;
-        public static final int tvItemProfileAveragePriceText=0x7f070177;
-        public static final int tvItemProfileAveragePriceValue=0x7f070176;
-        public static final int tvItemProfileBrandName=0x7f07015c;
-        public static final int tvItemProfileBy=0x7f070161;
-        public static final int tvItemProfileCommentsHeading=0x7f07016a;
-        public static final int tvItemProfileCommentsValue=0x7f070169;
-        public static final int tvItemProfileFollowedByHeading=0x7f070168;
-        public static final int tvItemProfileFollowedByValue=0x7f070167;
+        public static final int tvItemProfileActionCallToAddAPhoto=0x7f070164;
+        public static final int tvItemProfileActionCallToFollow=0x7f07016c;
+        public static final int tvItemProfileActivity=0x7f07018d;
+        public static final int tvItemProfileAveragePriceText=0x7f070178;
+        public static final int tvItemProfileAveragePriceValue=0x7f070177;
+        public static final int tvItemProfileBrandName=0x7f07015d;
+        public static final int tvItemProfileBy=0x7f070162;
+        public static final int tvItemProfileCommentsHeading=0x7f07016b;
+        public static final int tvItemProfileCommentsValue=0x7f07016a;
+        public static final int tvItemProfileFollowedByHeading=0x7f070169;
+        public static final int tvItemProfileFollowedByValue=0x7f070168;
         /**  Item Profile 
          */
-        public static final int tvItemProfileItemName=0x7f07015b;
-        public static final int tvItemProfileOfferedAtPlacesHeading=0x7f070174;
-        public static final int tvItemProfileOfferedAtPlacesValue=0x7f070173;
-        public static final int tvItemProfileOwnedByFriendsHeading=0x7f070175;
-        public static final int tvItemProfileOwnedByFriendsValue=0x7f070170;
-        public static final int tvItemProfileOwnedByUsersHeading=0x7f07016d;
-        public static final int tvItemProfileOwnedByUsersValue=0x7f07016c;
-        public static final int tvItemProfilePhotosHeading=0x7f070162;
-        public static final int tvItemProfilePhotosValue=0x7f070160;
-        public static final int tvItemProfilePopularCommentContent=0x7f070189;
-        public static final int tvItemProfilePopularCommentMaker=0x7f070188;
-        public static final int tvItemProfilePopularComments=0x7f070187;
-        public static final int tvItemProfilePriceText=0x7f070178;
-        public static final int tvItemProfilePrivateAddedHeading=0x7f07018d;
-        public static final int tvItemProfilePrivateAddedTimestamp=0x7f07018e;
-        public static final int tvItemProfilePrivateDescription=0x7f070179;
-        public static final int tvItemProfilePrivateGottenFromHeading=0x7f07018f;
-        public static final int tvItemProfilePrivateGottenFromPlaceUserName=0x7f070190;
-        public static final int tvItemProfileRatingHeading=0x7f070165;
-        public static final int tvItemProfileRatingValue=0x7f070166;
-        public static final int tvItemProfileSimilarItemsHeading=0x7f07016f;
-        public static final int tvItemProfileSimilarItemsValue=0x7f07016e;
-        public static final int tvItemProfileStatistics=0x7f07018b;
-        public static final int tvItemProfileUsersSellingTheirItemsHeader=0x7f070172;
-        public static final int tvItemProfileUsersSellingTheirItemsValue=0x7f070171;
-        public static final int tvItemProfileViewAggregateProfile=0x7f070164;
-        public static final int tvItemProfileViewAllComments=0x7f07018a;
+        public static final int tvItemProfileItemName=0x7f07015c;
+        public static final int tvItemProfileOfferedAtPlacesHeading=0x7f070175;
+        public static final int tvItemProfileOfferedAtPlacesValue=0x7f070174;
+        public static final int tvItemProfileOwnedByFriendsHeading=0x7f070176;
+        public static final int tvItemProfileOwnedByFriendsValue=0x7f070171;
+        public static final int tvItemProfileOwnedByUsersHeading=0x7f07016e;
+        public static final int tvItemProfileOwnedByUsersValue=0x7f07016d;
+        public static final int tvItemProfilePhotosHeading=0x7f070163;
+        public static final int tvItemProfilePhotosValue=0x7f070161;
+        public static final int tvItemProfilePopularCommentContent=0x7f07018a;
+        public static final int tvItemProfilePopularCommentMaker=0x7f070189;
+        public static final int tvItemProfilePopularComments=0x7f070188;
+        public static final int tvItemProfilePriceText=0x7f070179;
+        public static final int tvItemProfilePrivateAddedHeading=0x7f07018e;
+        public static final int tvItemProfilePrivateAddedTimestamp=0x7f07018f;
+        public static final int tvItemProfilePrivateDescription=0x7f07017a;
+        public static final int tvItemProfilePrivateGottenFromHeading=0x7f070190;
+        public static final int tvItemProfilePrivateGottenFromPlaceUserName=0x7f070191;
+        public static final int tvItemProfileRatingHeading=0x7f070166;
+        public static final int tvItemProfileRatingValue=0x7f070167;
+        public static final int tvItemProfileSimilarItemsHeading=0x7f070170;
+        public static final int tvItemProfileSimilarItemsValue=0x7f07016f;
+        public static final int tvItemProfileStatistics=0x7f07018c;
+        public static final int tvItemProfileUsersSellingTheirItemsHeader=0x7f070173;
+        public static final int tvItemProfileUsersSellingTheirItemsValue=0x7f070172;
+        public static final int tvItemProfileViewAggregateProfile=0x7f070165;
+        public static final int tvItemProfileViewAllComments=0x7f07018b;
         public static final int tvItemsFeedItemActionDefault=0x7f07004d;
         public static final int tvItemsFeedItemActorDefault=0x7f07004e;
         public static final int tvItemsFeedItemHasBeenCommentedByCommentContent=0x7f070060;
@@ -2695,95 +2696,95 @@ containing a value of this type.
         public static final int tvItemsFeedItemIsNowBeingSoldByTimeStamp=0x7f070068;
         public static final int tvItemsFeedItemNameDefault=0x7f07004c;
         public static final int tvItemsFeedItemTimeStampDefault=0x7f07004f;
-        public static final int tvLeaveAddAnItemPageDialogTitle=0x7f07014f;
+        public static final int tvLeaveAddAnItemPageDialogTitle=0x7f070150;
         /**  Loading 
          */
-        public static final int tvLoading=0x7f0700d4;
+        public static final int tvLoading=0x7f0700d5;
         /**  Login 
          */
         public static final int tvLoginTitle=0x7f07002c;
-        public static final int tvMessageFromUserContent=0x7f0700d1;
-        public static final int tvMessageFromUserLastMessageDate=0x7f0700d0;
-        public static final int tvMessageFromUserName=0x7f0700cf;
+        public static final int tvMessageFromUserContent=0x7f0700d2;
+        public static final int tvMessageFromUserLastMessageDate=0x7f0700d1;
+        public static final int tvMessageFromUserName=0x7f0700d0;
         /**  Messages 
          */
-        public static final int tvMessagesTitle=0x7f0700ca;
-        public static final int tvMessagesWhoCanSendMeMessagesNote=0x7f0700cd;
-        public static final int tvMoneySpentDefault=0x7f0700bc;
-        public static final int tvMyCommentsCommentedItemContent=0x7f070133;
-        public static final int tvMyCommentsCommentedItemDate=0x7f070131;
-        public static final int tvMyCommentsCommentedItemName=0x7f07012f;
-        public static final int tvMyCommentsCommentedItemRating=0x7f070132;
-        public static final int tvMyCommentsCommentedItemTitle=0x7f070130;
-        public static final int tvMyFriendsListFriendName=0x7f07011c;
+        public static final int tvMessagesTitle=0x7f0700cb;
+        public static final int tvMessagesWhoCanSendMeMessagesNote=0x7f0700ce;
+        public static final int tvMoneySpentDefault=0x7f0700bd;
+        public static final int tvMyCommentsCommentedItemContent=0x7f070134;
+        public static final int tvMyCommentsCommentedItemDate=0x7f070132;
+        public static final int tvMyCommentsCommentedItemName=0x7f070130;
+        public static final int tvMyCommentsCommentedItemRating=0x7f070133;
+        public static final int tvMyCommentsCommentedItemTitle=0x7f070131;
+        public static final int tvMyFriendsListFriendName=0x7f07011d;
         /**  My Profile Gallery 
          */
-        public static final int tvMyImageGalleryTitle=0x7f070134;
-        public static final int tvMyItemsFeedItemBoughtFrom=0x7f070105;
-        public static final int tvMyItemsFeedItemBoughtFromLabel=0x7f070104;
-        public static final int tvMyItemsFeedItemBrandName=0x7f070103;
-        public static final int tvMyItemsFeedItemName=0x7f070100;
-        public static final int tvMyItemsFeedItemPrice=0x7f070101;
-        public static final int tvMyItemsFeedItemRatingAndComments=0x7f070102;
-        public static final int tvMyItemsFilter=0x7f0700fa;
-        public static final int tvMyItemsTitle=0x7f0700f9;
+        public static final int tvMyImageGalleryTitle=0x7f070135;
+        public static final int tvMyItemsFeedItemBoughtFrom=0x7f070106;
+        public static final int tvMyItemsFeedItemBoughtFromLabel=0x7f070105;
+        public static final int tvMyItemsFeedItemBrandName=0x7f070104;
+        public static final int tvMyItemsFeedItemName=0x7f070101;
+        public static final int tvMyItemsFeedItemPrice=0x7f070102;
+        public static final int tvMyItemsFeedItemRatingAndComments=0x7f070103;
+        public static final int tvMyItemsFilter=0x7f0700fb;
+        public static final int tvMyItemsTitle=0x7f0700fa;
         /**  My Profile Friends 
          */
-        public static final int tvMyNameUserFriendsList=0x7f070116;
+        public static final int tvMyNameUserFriendsList=0x7f070117;
         public static final int tvOrLoginPage=0x7f070032;
-        public static final int tvPrivacyPolicyTitle=0x7f0701b4;
-        public static final int tvSearchItemsResultsTitle=0x7f0701a8;
+        public static final int tvPrivacyPolicyTitle=0x7f0701b5;
+        public static final int tvSearchItemsResultsTitle=0x7f0701a9;
         /**  Search and Search Results 
          */
-        public static final int tvSearchItemsTitle=0x7f070191;
-        public static final int tvSearchOrSearchItems=0x7f0701a1;
-        public static final int tvSearchOrSearchUsers=0x7f07019f;
-        public static final int tvSearchUsersResultsTitle=0x7f0701af;
-        public static final int tvSearchUsersTitle=0x7f0701a0;
-        public static final int tvSettingsTitle=0x7f0700d7;
+        public static final int tvSearchItemsTitle=0x7f070192;
+        public static final int tvSearchOrSearchItems=0x7f0701a2;
+        public static final int tvSearchOrSearchUsers=0x7f0701a0;
+        public static final int tvSearchUsersResultsTitle=0x7f0701b0;
+        public static final int tvSearchUsersTitle=0x7f0701a1;
+        public static final int tvSettingsTitle=0x7f0700d8;
         /**  Signup 
          */
         public static final int tvSignupTitle=0x7f070037;
         /**  Sliding menu 
          */
-        public static final int tvSlidingMenuUserName=0x7f070135;
-        public static final int tvSortBySearchItemsResults=0x7f0701b2;
-        public static final int tvSortBySearchUsersResults=0x7f0701b3;
+        public static final int tvSlidingMenuUserName=0x7f070136;
+        public static final int tvSortBySearchItemsResults=0x7f0701b3;
+        public static final int tvSortBySearchUsersResults=0x7f0701b4;
         /**  InitialDataLoader 
          */
         public static final int tvSplashScreenDescription=0x7f07002b;
-        public static final int tvUserDefaultStatus=0x7f0700bb;
-        public static final int tvUserEmailSettings=0x7f0700d9;
+        public static final int tvUserDefaultStatus=0x7f0700bc;
+        public static final int tvUserEmailSettings=0x7f0700da;
         /**  Unused for now, need to think about this 
          */
         public static final int tvUserEnviesXForY=0x7f0700a2;
-        public static final int tvUserItemsFeedItemBoughtFrom=0x7f0700f3;
-        public static final int tvUserItemsFeedItemBoughtFromLabel=0x7f0700f4;
-        public static final int tvUserItemsFeedItemBrandName=0x7f0700f2;
-        public static final int tvUserItemsFeedItemName=0x7f0700ef;
-        public static final int tvUserItemsFeedItemPrice=0x7f0700f0;
-        public static final int tvUserItemsFeedItemRatingAndComments=0x7f0700f1;
-        public static final int tvUserNameDefault=0x7f0700ba;
-        public static final int tvUserNameFollowingList=0x7f070128;
+        public static final int tvUserItemsFeedItemBoughtFrom=0x7f0700f4;
+        public static final int tvUserItemsFeedItemBoughtFromLabel=0x7f0700f5;
+        public static final int tvUserItemsFeedItemBrandName=0x7f0700f3;
+        public static final int tvUserItemsFeedItemName=0x7f0700f0;
+        public static final int tvUserItemsFeedItemPrice=0x7f0700f1;
+        public static final int tvUserItemsFeedItemRatingAndComments=0x7f0700f2;
+        public static final int tvUserNameDefault=0x7f0700bb;
+        public static final int tvUserNameFollowingList=0x7f070129;
         /**  My Profile Comments 
          */
-        public static final int tvUserNameMyCommentsList=0x7f07012a;
-        public static final int tvUserNameSettings=0x7f0700d6;
-        public static final int tvUserNameUserItemsList=0x7f0700f6;
-        public static final int tvUserProfileActivityTab=0x7f0700c5;
-        public static final int tvUserProfileCommentsTab=0x7f0700c1;
-        public static final int tvUserProfileFollowingTab=0x7f0700c0;
-        public static final int tvUserProfileFriendsTab=0x7f0700c3;
-        public static final int tvUserProfileGalleryTab=0x7f0700c4;
-        public static final int tvUserProfileItemsTab=0x7f0700c2;
-        public static final int tvUserProfileStatsAreVisibleNote=0x7f070148;
-        public static final int tvUserQuoteDefault=0x7f0700bd;
+        public static final int tvUserNameMyCommentsList=0x7f07012b;
+        public static final int tvUserNameSettings=0x7f0700d7;
+        public static final int tvUserNameUserItemsList=0x7f0700f7;
+        public static final int tvUserProfileActivityTab=0x7f0700c6;
+        public static final int tvUserProfileCommentsTab=0x7f0700c2;
+        public static final int tvUserProfileFollowingTab=0x7f0700c1;
+        public static final int tvUserProfileFriendsTab=0x7f0700c4;
+        public static final int tvUserProfileGalleryTab=0x7f0700c5;
+        public static final int tvUserProfileItemsTab=0x7f0700c3;
+        public static final int tvUserProfileStatsAreVisibleNote=0x7f070149;
+        public static final int tvUserQuoteDefault=0x7f0700be;
         /**  User has rated an item 
          */
         public static final int tvUserRatedXYstars=0x7f070088;
         public static final int tvWelcome=0x7f07002a;
-        public static final int tvWhoCanInteractWithYourActivitySettings=0x7f0700e3;
-        public static final int tvWhoCanSendYouMessagesSettings=0x7f0700e1;
+        public static final int tvWhoCanInteractWithYourActivitySettings=0x7f0700e4;
+        public static final int tvWhoCanSendYouMessagesSettings=0x7f0700e2;
     }
     public static final class style {
         public static final int AppBaseTheme=0x7f08005b;

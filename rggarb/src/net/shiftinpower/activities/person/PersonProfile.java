@@ -289,7 +289,7 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 	protected void identifyUser(Bundle extras) {
 
 		currentUser = extras.getBoolean("currentUser");
-		personId = extras.getInt("personId", currentlyLoggedInUser);
+		personId = extras.getInt("userId", currentlyLoggedInUser);
 
 		if (currentUser) {
 
