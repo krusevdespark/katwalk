@@ -4,7 +4,6 @@ import java.text.DecimalFormat;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -15,7 +14,7 @@ import net.shiftinpower.asynctasks.GetUserDataFromServerAsync;
 import net.shiftinpower.core.C;
 import net.shiftinpower.core.KatwalkSlidingMenu;
 import net.shiftinpower.customviews.SquareImageView;
-import net.shiftinpower.interfaces.OnDownloadUserInfoFromServerListener;
+import net.shiftinpower.interfaces.OnGetUserDataFromServerListener;
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.objects.UserExtended;
 
@@ -26,7 +25,7 @@ import net.shiftinpower.objects.UserExtended;
  * @author Kaloyan Roussev
  * 
  */
-public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener, OnDownloadUserInfoFromServerListener {
+public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener, OnGetUserDataFromServerListener {
 
 	// set up XML View Components
 	protected TextView tvUserName;
@@ -84,7 +83,7 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
+		
 		// Assign and inflate an XML file as the view component for this screen
 		setContentView(R.layout.activity_layout_user_profile);
 
@@ -134,6 +133,11 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		tvUserProfileGalleryTab.setOnClickListener(this);
 		tvUserProfileActivityTab.setOnClickListener(this);
 
+		
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			identifyUser(extras);
+		}
 	} // End of onCreate
 
 	@Override
@@ -201,14 +205,16 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 	} // End of setUserStatus
 
 	@Override
-	public void onDownloadUserInfoFromServerSuccess(UserExtended userDetailsAndStats) {
+	public void onGetUserDataFromServerSuccess(UserExtended userDetailsAndStats) {
 		userExtendedData = userDetailsAndStats;
 		handleUserDetails(userExtendedData);
-		setDisplayedData();
+		
+		Intent userProfile = new Intent (PersonProfile.this, UserProfile.class);
+		startActivity(userProfile);
 	}
 
 	@Override
-	public void onDownloadUserInfoFromServerFailure(String reason) {
+	public void onGetUserDataFromServerFailure(String reason) {
 		// TODO Auto-generated method stub
 
 	}
@@ -233,7 +239,7 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		personMoneySpentOnItems = userExtendedData.getUserMoneySpentOnItems();
 	}
 
-	private void handleCurrentUserDetails() {
+	private void handleUserDetails() {
 		personName = userName;
 		personSex = userSex;
 		personEmail = userEmail;
@@ -253,7 +259,7 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		personMoneySpentOnItems = userMoneySpentOnItems;
 	}
 
-	private void setDisplayedData() {
+	protected void setDisplayedData() {
 		// Set displayed text
 		bUserProfileActionButtonOne.setText(String.valueOf(personPoints) + " points");
 		tvUserProfileItemsTab.setText("[" + personItemsCount + "] Items");
@@ -282,24 +288,27 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		}
 
 		// Set avatar image
-		katwalk.setUserImageToImageView(iUserAvatar, personAvatarPath, personSex);
+		katwalk.setUserImageToImageViewFromWeb(iUserAvatar, personAvatarPath, C.API.IMAGES_USERS_FOLDER_ORIGINAL, personSex);
 
 	} // End of SetDisplayData
 
 	protected void identifyUser(Bundle extras) {
 
-		currentUser = extras.getBoolean("currentUser");
+		currentUser = extras.getBoolean("currentUser", false);
 		personId = extras.getInt("userId", currentlyLoggedInUser);
 
 		if (currentUser) {
 
-			handleCurrentUserDetails();
+			handleUserDetails();
 			personAvatarPath = sharedPreferences.getString(C.SharedPreferencesItems.USER_AVATAR_PATH, C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE);
 			setDisplayedData();
+			Intent myProfile = new Intent(PersonProfile.this, MyProfile.class);
+			startActivity(myProfile);
 
 		} else {
+
 			new GetUserDataFromServerAsync(String.valueOf(personId), PersonProfile.this, PersonProfile.this).execute();
-			// TODO
+			
 		}
 	}
 

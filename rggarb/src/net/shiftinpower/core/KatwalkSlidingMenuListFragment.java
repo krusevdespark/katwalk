@@ -1,7 +1,9 @@
 package net.shiftinpower.core;
 
 import net.shiftinpower.activities.*;
+import net.shiftinpower.activities.item.ItemProfilePublic;
 import net.shiftinpower.activities.person.MyProfile;
+import net.shiftinpower.activities.person.PersonProfile;
 import net.shiftinpower.activities.person.PersonProfileItems;
 import net.shiftinpower.koldrain.R;
 import android.content.Intent;
@@ -16,28 +18,15 @@ import android.widget.TextView;
 import com.actionbarsherlock.app.SherlockListFragment;
 
 public class KatwalkSlidingMenuListFragment extends SherlockListFragment {
-	
+
 	// Define the menu items
 	private TextView text1;
-	
+
 	// Fonts
 	private Typeface font2;
 
-	private String[] menuItems = { 
-			C.SlidingMenuItems.FEED, 
-			C.SlidingMenuItems.MY_PROFILE, 
-			C.SlidingMenuItems.ITEM_ADD, 
-			C.SlidingMenuItems.MY_ITEMS, 
-			C.SlidingMenuItems.SEARCH_USERS, 
-			C.SlidingMenuItems.SEARCH_ITEMS, 
-			C.SlidingMenuItems.MESSAGES, 
-			C.SlidingMenuItems.NOTIFICATIONS, 
-			C.SlidingMenuItems.POINTS_AND_STATUSES, 
-			C.SlidingMenuItems.PRIVACY_POLICY, 
-			C.SlidingMenuItems.TERMS_OF_SERVICE, 
-			C.SlidingMenuItems.ABOUT, 
-			C.SlidingMenuItems.CONTACT_US, 
-			C.SlidingMenuItems.SETTINGS, 
+	private String[] menuItems = { C.SlidingMenuItems.FEED, C.SlidingMenuItems.MY_PROFILE, C.SlidingMenuItems.ITEM_ADD, C.SlidingMenuItems.MY_ITEMS, C.SlidingMenuItems.SEARCH_USERS, C.SlidingMenuItems.SEARCH_ITEMS, C.SlidingMenuItems.MESSAGES,
+			C.SlidingMenuItems.NOTIFICATIONS, C.SlidingMenuItems.POINTS_AND_STATUSES, C.SlidingMenuItems.PRIVACY_POLICY, C.SlidingMenuItems.TERMS_OF_SERVICE, C.SlidingMenuItems.ABOUT, C.SlidingMenuItems.CONTACT_US, C.SlidingMenuItems.SETTINGS,
 			C.SlidingMenuItems.LOG_OUT };
 
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,7 +42,7 @@ public class KatwalkSlidingMenuListFragment extends SherlockListFragment {
 			public View getView(int position, View convertView, ViewGroup parent) {
 				View rowView = super.getView(position, convertView, parent);
 				text1 = (TextView) rowView.findViewById(android.R.id.text1);
-				
+
 				// Setting fonts
 				try {
 					font2 = Typeface.createFromAsset(getActivity().getApplicationContext().getAssets(), C.Fontz.FONT_2);
@@ -61,7 +50,7 @@ public class KatwalkSlidingMenuListFragment extends SherlockListFragment {
 				} catch (Exception e) {
 					// Nothing can be done here
 				}
-				
+
 				return rowView;
 			}
 		};
@@ -75,54 +64,82 @@ public class KatwalkSlidingMenuListFragment extends SherlockListFragment {
 			Intent feed = new Intent(getActivity(), Home.class);
 			startActivity(feed);
 		} else if (itemSelected(v, C.SlidingMenuItems.MY_PROFILE)) {
-			Intent myProfile = new Intent(getActivity(), MyProfile.class);
-			myProfile.putExtra("currentUser", true);
-			startActivity(myProfile);
+
+			Intent goToUserProfile = new Intent(getActivity(), PersonProfile.class);
+			goToUserProfile.putExtra("currentUser", true);
+			startActivity(goToUserProfile);
+
 		} else if (itemSelected(v, C.SlidingMenuItems.ITEM_ADD)) {
+			
 			Intent addItem = new Intent(getActivity(), ItemAddStepOnePhotos.class);
 			startActivity(addItem);
+			
 		} else if (itemSelected(v, C.SlidingMenuItems.MY_ITEMS)) {
+			
 			Intent userItems = new Intent(getActivity(), PersonProfileItems.class);
 			startActivity(userItems);
+			
 		} else if (itemSelected(v, C.SlidingMenuItems.SEARCH_ITEMS)) {
+			
 			Intent searchItems = new Intent(getActivity(), SearchItems.class);
 			startActivity(searchItems);
+			
 		} else if (itemSelected(v, C.SlidingMenuItems.SEARCH_USERS)) {
+			
 			Intent searchUsers = new Intent(getActivity(), SearchUsers.class);
 			startActivity(searchUsers);
+			
 		} else if (itemSelected(v, C.SlidingMenuItems.MESSAGES)) {
+			
 			Intent messages = new Intent(getActivity(), Messages.class);
 			startActivity(messages);
+			
 		} else if (itemSelected(v, C.SlidingMenuItems.NOTIFICATIONS)) {
+			
 			Intent notifications = new Intent(getActivity(), NotImplementedYetScreen.class);
-			//Intent notifications = new Intent(getActivity(), Notifications.class);
+			// Intent notifications = new Intent(getActivity(), Notifications.class);
 			startActivity(notifications);
+			
 		} else if (itemSelected(v, C.SlidingMenuItems.POINTS_AND_STATUSES)) {
+			
 			Intent pointsAndStatuses = new Intent(getActivity(), NotImplementedYetScreen.class);
-			//Intent pointsAndStatuses = new Intent(getActivity(), PointsAndStatuses.class);
+			// Intent pointsAndStatuses = new Intent(getActivity(), PointsAndStatuses.class);
 			startActivity(pointsAndStatuses);
+			
 		} else if (itemSelected(v, C.SlidingMenuItems.PRIVACY_POLICY)) {
+			
 			Intent privacyPolicy = new Intent(getActivity(), NotImplementedYetScreen.class);
-			//Intent privacyPolicy = new Intent(getActivity(), PrivacyPolicy.class);
+			// Intent privacyPolicy = new Intent(getActivity(), PrivacyPolicy.class);
 			startActivity(privacyPolicy);
+			
 		} else if (itemSelected(v, C.SlidingMenuItems.TERMS_OF_SERVICE)) {
+			
 			Intent termsOfService = new Intent(getActivity(), NotImplementedYetScreen.class);
-			//Intent termsOfService = new Intent(getActivity(), TermsOfService.class);
+			// Intent termsOfService = new Intent(getActivity(), TermsOfService.class);
 			startActivity(termsOfService);
+			
 		} else if (itemSelected(v, C.SlidingMenuItems.ABOUT)) {
+			
 			Intent about = new Intent(getActivity(), NotImplementedYetScreen.class);
-			//Intent about = new Intent(getActivity(), About.class);
+			// Intent about = new Intent(getActivity(), About.class);
 			startActivity(about);
+			
 		} else if (itemSelected(v, C.SlidingMenuItems.CONTACT_US)) {
+			
 			Intent contactUs = new Intent(getActivity(), ContactUs.class);
-			//Intent contactUs = new Intent(getActivity(), ContactUs.class);
+			// Intent contactUs = new Intent(getActivity(), ContactUs.class);
 			startActivity(contactUs);
+			
 		} else if (itemSelected(v, C.SlidingMenuItems.SETTINGS)) {
+			
 			Intent settings = new Intent(getActivity(), net.shiftinpower.activities.Settings.class);
 			startActivity(settings);
+			
 		} else if (itemSelected(v, C.SlidingMenuItems.LOG_OUT)) {
+			
 			Intent logOut = new Intent(getActivity(), LogUserOut.class);
 			startActivity(logOut);
+			
 		}
 	} // End of onListItemClick
 

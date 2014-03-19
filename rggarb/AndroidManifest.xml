@@ -53,11 +53,6 @@
             android:windowSoftInputMode="adjustNothing" >
         </activity>
         <activity
-            android:name="net.shiftinpower.activities.WhatIsRggarb"
-            android:label="What is Raggarb"
-            android:screenOrientation="portrait" >
-        </activity>
-        <activity
             android:name="net.shiftinpower.activities.Home"
             android:label="Home" >
         </activity>
@@ -174,12 +169,12 @@
             android:label="Terms Of Service" >
         </activity>
         <activity
-            android:name="net.shiftinpower.activities.UserProfile"
+            android:name="net.shiftinpower.activities.person.UserProfile"
             android:label="Profile" >
         </activity>
         <activity
-            android:name="net.shiftinpower.activities.UserDataController"
-            android:label="User Data Controller" >
+            android:name="net.shiftinpower.activities.person.PersonProfile"
+            android:label="User Profiler" >
         </activity>
         <activity
             android:name="net.shiftinpower.activities.person.MyProfile"
@@ -214,18 +209,6 @@
             android:label="My Points" >
         </activity>
         <activity
-            android:name="net.shiftinpower.activities.UserProfileEdit"
-            android:label="Edit User Profile" >
-        </activity>
-        <activity
-            android:name="net.shiftinpower.activities.UserProfileFriends"
-            android:label="Friends" >
-        </activity>
-        <activity
-            android:name="net.shiftinpower.activities.UserProfileItems"
-            android:label="User Items" >
-        </activity>
-        <activity
             android:name="net.shiftinpower.activities.FriendRequests"
             android:label="Friend Requests" >
         </activity>
@@ -247,12 +230,6 @@
             android:name="net.shiftinpower.activities.LoginWithFacebook"
             android:label="Log In With Facebook" >
         </activity>
-        <activity
-            android:name="net.shiftinpower.activities.RggarbActionBar"
-            android:label="Action Bar"
-            android:theme="@style/Theme.SherlockCustom" >
-        </activity>
-
         <meta-data
             android:name="com.facebook.sdk.ApplicationId"
             android:value="@string/app_id" />

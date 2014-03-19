@@ -33,10 +33,10 @@ public class GetUserDataFromServerAsync extends AsyncTask<String, Integer, UserE
 	private JSONParser jsonParser = new JSONParser();
 	private boolean loadingMessageShown;
 	private Context context;
-	private OnDownloadUserInfoFromServerListener listener;
+	private OnGetUserDataFromServerListener listener;
 	private String reason;
 
-	public GetUserDataFromServerAsync(String userId, Context context, OnDownloadUserInfoFromServerListener listener) {
+	public GetUserDataFromServerAsync(String userId, Context context, OnGetUserDataFromServerListener listener) {
 		this.userId = userId;
 		this.listener = listener;
 		this.context = context;
@@ -152,10 +152,10 @@ public class GetUserDataFromServerAsync extends AsyncTask<String, Integer, UserE
 		if (listener != null) {
 			if (userExtended == null) {
 
-				listener.onDownloadUserInfoFromServerFailure(reason);
+				listener.onGetUserDataFromServerFailure(reason);
 			} else {
 
-				listener.onDownloadUserInfoFromServerSuccess(userExtended);
+				listener.onGetUserDataFromServerSuccess(userExtended);
 			}
 		}
 	} // End of onPostExecute

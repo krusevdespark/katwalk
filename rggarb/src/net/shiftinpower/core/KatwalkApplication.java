@@ -52,7 +52,7 @@ public class KatwalkApplication extends Application {
 	// Declare the Universal Image Loader for lazy load of images
 	public ImageLoader imageLoader;
 	public DisplayImageOptions imageLoaderOptions;
-	
+
 	// Verifies the validity of the Email format entered by the user
 	public EmailVerifier emailVerifier = new EmailVerifier();
 
@@ -83,16 +83,10 @@ public class KatwalkApplication extends Application {
 
 		// Create global configuration and initialize ImageLoader with this configuration
 		// https://github.com/nostra13/Android-Universal-Image-Loader
-		ImageLoaderConfiguration imageLoaderConfiguration = new ImageLoaderConfiguration.Builder(this)
-		.discCacheExtraOptions(C.ImageHandling.MAX_IMAGE_WIDTH, C.ImageHandling.MAX_IMAGE_HEIGHT, CompressFormat.PNG, 100, null)
-        .discCache(new UnlimitedDiscCache(StorageUtils.getOwnCacheDirectory(this, C.Preferences.RGGARB_DIRECTORY_ON_USER_STORAGE)))
-        .discCacheFileNameGenerator(new HashCodeFileNameGenerator())
-        .build();
-		
-		imageLoaderOptions = new DisplayImageOptions.Builder()
-		    .cacheInMemory(false)
-		    .cacheOnDisc(true)
-		    .build();
+		ImageLoaderConfiguration imageLoaderConfiguration = new ImageLoaderConfiguration.Builder(this).discCacheExtraOptions(C.ImageHandling.MAX_IMAGE_WIDTH, C.ImageHandling.MAX_IMAGE_HEIGHT, CompressFormat.PNG, 100, null)
+				.discCache(new UnlimitedDiscCache(StorageUtils.getOwnCacheDirectory(this, C.Preferences.RGGARB_DIRECTORY_ON_USER_STORAGE))).discCacheFileNameGenerator(new HashCodeFileNameGenerator()).build();
+
+		imageLoaderOptions = new DisplayImageOptions.Builder().cacheInMemory(false).cacheOnDisc(true).build();
 		imageLoader = ImageLoader.getInstance();
 		imageLoader.init(imageLoaderConfiguration);
 
@@ -135,7 +129,7 @@ public class KatwalkApplication extends Application {
 	public void setUserImageToImageView(ImageView imageView, String imagePath, String sex) {
 		Bitmap imageBitmap;
 
-		if (!imagePath.contentEquals(C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE) && !imagePath.contentEquals("") && imagePath != null) {
+		if (imagePath != null && !imagePath.contentEquals(C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE) && !imagePath.contentEquals("")) {
 
 			try {
 				imageBitmap = BitmapFactory.decodeFile(imagePath);
@@ -158,13 +152,50 @@ public class KatwalkApplication extends Application {
 			}
 
 		} else {
-			if (sex.equalsIgnoreCase("male")) {
-				imageView.setImageResource(R.drawable.images_default_avatar_male);
+			if (sex != null) {
+				if (sex.equalsIgnoreCase("male")) {
+					imageView.setImageResource(R.drawable.images_default_avatar_male);
+				} else {
+					imageView.setImageResource(R.drawable.images_default_avatar_female);
+				}
 			} else {
-				imageView.setImageResource(R.drawable.images_default_avatar_female);
+				imageView.setImageResource(R.drawable.images_default_avatar_male);
 			}
 		}
 	} // End of setUserImageToImageView
+
+	public <T extends ImageView> void setUserImageToImageViewFromWeb(T imageView, String imagePath, String imageSize, String sex) {
+
+		if (imagePath != null && !imagePath.contentEquals(C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE) && !imagePath.contentEquals("")) {
+
+			try {
+				imageLoader.displayImage(C.API.WEB_ADDRESS + imageSize + imagePath, imageView, imageLoaderOptions);
+
+			} catch (Exception ex) {
+				ex.printStackTrace();
+
+				if (sex.equalsIgnoreCase("male")) {
+					imageView.setImageResource(R.drawable.images_default_avatar_male);
+				} else {
+					imageView.setImageResource(R.drawable.images_default_avatar_female);
+				}
+
+			}
+
+		} else {
+			if (sex != null) {
+				if (sex.equalsIgnoreCase("male")) {
+					imageView.setImageResource(R.drawable.images_default_avatar_male);
+				} else {
+					imageView.setImageResource(R.drawable.images_default_avatar_female);
+				}
+			} else {
+				imageView.setImageResource(R.drawable.images_default_avatar_male);
+			}
+
+		}
+
+	} // End of setUserImageToImageViewFromWeb
 
 	// This method gets an ArrayList of ImageViews and recycles their bitmaps, for memory management reasons. Usually called
 	// in onPause.

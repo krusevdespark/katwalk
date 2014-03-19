@@ -12,7 +12,7 @@ import net.shiftinpower.asynctasks.GetUserItemsFromServerAsync;
 import net.shiftinpower.interfaces.OnDownloadImageListener;
 import net.shiftinpower.interfaces.OnGetCategoriesListener;
 import net.shiftinpower.interfaces.OnGetSubcategoriesListener;
-import net.shiftinpower.interfaces.OnDownloadUserInfoFromServerListener;
+import net.shiftinpower.interfaces.OnGetUserDataFromServerListener;
 import net.shiftinpower.interfaces.OnGetUserItemsListener;
 import net.shiftinpower.interfaces.OnInsertUserItemsInDBListener;
 import net.shiftinpower.koldrain.R;
@@ -51,7 +51,7 @@ import android.widget.Toast;
  * @author Kaloyan Roussev
  * 
  */
-public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesListener, OnGetSubcategoriesListener, OnDownloadUserInfoFromServerListener, OnDownloadImageListener, OnGetUserItemsListener, OnInsertUserItemsInDBListener {
+public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesListener, OnGetSubcategoriesListener, OnGetUserDataFromServerListener, OnDownloadImageListener, OnGetUserItemsListener, OnInsertUserItemsInDBListener {
 
 	// This is the AsyncTask that communicates with the server
 	private GetUserDataFromServerAsync userDetailsDownloader;
@@ -152,7 +152,7 @@ public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesLis
 	}
 
 	@Override
-	public void onDownloadUserInfoFromServerSuccess(UserExtended userDetailsAndStats) {
+	public void onGetUserDataFromServerSuccess(UserExtended userDetailsAndStats) {
 
 		/*
 		 * There is no putDouble method for SharedPreferences, so we can either rewrite the class, or just convert to long
@@ -248,7 +248,7 @@ public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesLis
 	} // End of onDownloadUserInfoFromServerSuccess Method
 
 	@Override
-	public void onDownloadUserInfoFromServerFailure(String reason) {
+	public void onGetUserDataFromServerFailure(String reason) {
 		katwalk.toastMaker.toast(this, C.Errorz.PROBLEM_LOADING_USER_DATA, Toast.LENGTH_SHORT);
 		Intent logUserOut = new Intent(this, LogUserOut.class);
 		startActivity(logUserOut);
