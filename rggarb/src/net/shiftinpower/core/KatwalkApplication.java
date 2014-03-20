@@ -126,7 +126,7 @@ public class KatwalkApplication extends Application {
 
 	// This method is used throughout the application, whenever the current user's image should be displayed and might have
 	// been recently changed
-	public void setUserImageToImageView(ImageView imageView, String imagePath, String sex) {
+	public <T extends ImageView> void setUserImageToImageView(T imageView, String imagePath, String sex) {
 		Bitmap imageBitmap;
 
 		if (imagePath != null && !imagePath.contentEquals(C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE) && !imagePath.contentEquals("")) {

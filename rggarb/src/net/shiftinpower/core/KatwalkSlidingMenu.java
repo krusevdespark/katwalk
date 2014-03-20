@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import net.shiftinpower.activities.person.MyProfile;
+import net.shiftinpower.activities.person.PersonProfile;
 import net.shiftinpower.koldrain.R;
 
 /**
@@ -77,7 +78,7 @@ public class KatwalkSlidingMenu extends KatwalkActionBar {
 
 			@Override
 			public void onClick(View v) {
-				Intent myProfile = new Intent(KatwalkSlidingMenu.this, MyProfile.class);
+				Intent myProfile = new Intent(KatwalkSlidingMenu.this, PersonProfile.class);
 				myProfile.putExtra("currentUser", true);
 				startActivity(myProfile);
 
@@ -92,9 +93,10 @@ public class KatwalkSlidingMenu extends KatwalkActionBar {
 
 			@Override
 			public void onClick(View v) {
-				Intent myProfile = new Intent(KatwalkSlidingMenu.this, MyProfile.class);
-				myProfile.putExtra("currentUser", true);
-				startActivity(myProfile);
+				
+				Intent goToUserProfile = new Intent(KatwalkSlidingMenu.this, PersonProfile.class);
+				goToUserProfile.putExtra("currentUser", true);
+				startActivity(goToUserProfile);
 
 			}
 		});

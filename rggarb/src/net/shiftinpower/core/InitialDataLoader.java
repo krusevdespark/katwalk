@@ -51,7 +51,8 @@ import android.widget.Toast;
  * @author Kaloyan Roussev
  * 
  */
-public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesListener, OnGetSubcategoriesListener, OnGetUserDataFromServerListener, OnDownloadImageListener, OnGetUserItemsListener, OnInsertUserItemsInDBListener {
+public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesListener, OnGetSubcategoriesListener, OnGetUserDataFromServerListener,
+		OnDownloadImageListener, OnGetUserItemsListener, OnInsertUserItemsInDBListener {
 
 	// This is the AsyncTask that communicates with the server
 	private GetUserDataFromServerAsync userDetailsDownloader;

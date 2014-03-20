@@ -30,8 +30,6 @@ public class UserProfile extends PersonProfile {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		super.setDisplayedData();
-
 		// Set action buttons' text
 		bUserProfileActionButtonOne.setText(R.string.bAnotherUserProfileMessage);
 

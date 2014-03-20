@@ -45,12 +45,7 @@ public class MyProfile extends PersonProfile implements OnClickListener, OnChang
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
-		Bundle extras = getIntent().getExtras();
-		if (extras != null) {
-			super.identifyUser(extras);
-		}
-
+				
 		// Set OnClick Listeners
 		bUserProfileActionButtonOne.setOnClickListener(this);
 		bUserProfileActionButtonTwo.setOnClickListener(this);

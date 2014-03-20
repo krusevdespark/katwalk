@@ -77,7 +77,6 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 	// Constructor needed because of the way the super class works
 	public PersonProfile() {
 		super(R.string.app_name);
-
 	}
 
 	@Override
@@ -259,7 +258,7 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		personMoneySpentOnItems = userMoneySpentOnItems;
 	}
 
-	protected void setDisplayedData() {
+	protected void setDisplayedData(Boolean currentUser) {
 		// Set displayed text
 		bUserProfileActionButtonOne.setText(String.valueOf(personPoints) + " points");
 		tvUserProfileItemsTab.setText("[" + personItemsCount + "] Items");
@@ -288,8 +287,13 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		}
 
 		// Set avatar image
-		katwalk.setUserImageToImageViewFromWeb(iUserAvatar, personAvatarPath, C.API.IMAGES_USERS_FOLDER_ORIGINAL, personSex);
+		if(currentUser){
+			katwalk.setUserImageToImageView(iUserAvatar, personAvatarPath, personSex);
+		}else {
+			katwalk.setUserImageToImageViewFromWeb(iUserAvatar, personAvatarPath, C.API.IMAGES_USERS_FOLDER_ORIGINAL, personSex);
 
+		}
+		
 	} // End of SetDisplayData
 
 	protected void identifyUser(Bundle extras) {
@@ -300,8 +304,7 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		if (currentUser) {
 
 			handleUserDetails();
-			personAvatarPath = sharedPreferences.getString(C.SharedPreferencesItems.USER_AVATAR_PATH, C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE);
-			setDisplayedData();
+			setDisplayedData(true);
 			Intent myProfile = new Intent(PersonProfile.this, MyProfile.class);
 			startActivity(myProfile);
 
