@@ -1,6 +1,5 @@
 package net.shiftinpower.core;
 
-import net.shiftinpower.activities.LogUserOut;
 import net.shiftinpower.localsqlitedb.SQLQueries;
 import net.shiftinpower.utilities.ShowLoadingMessage;
 import net.shiftinpower.utilities.StorageStatusChecker;
@@ -9,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.WindowManager;
 import android.widget.Toast;
 import com.jeremyfeinstein.slidingmenu.lib.app.SlidingFragmentActivity;

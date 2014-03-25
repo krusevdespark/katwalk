@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import net.shiftinpower.activities.ItemAddStepOnePhotos;
+import net.shiftinpower.activities.person.MyProfile;
 import net.shiftinpower.activities.person.PersonProfile;
 import net.shiftinpower.activities.person.UserProfile;
 import net.shiftinpower.core.C;
@@ -291,11 +292,15 @@ public class ItemProfilePublic extends KatwalkSlidingMenu {
 
 						@Override
 						public void onClick(View v) {
-							Intent goToUserProfile = new Intent(ItemProfilePublic.this, PersonProfile.class);
-							goToUserProfile.putExtra("userId", focusedUserId);
+							
+							Intent goToUserProfile;
+							
 							if (focusedUserId == currentlyLoggedInUser) {
+								goToUserProfile = new Intent(ItemProfilePublic.this, MyProfile.class);
 								goToUserProfile.putExtra("currentUser", true);
 							} else {
+								goToUserProfile = new Intent(ItemProfilePublic.this, UserProfile.class);
+								goToUserProfile.putExtra("personId", focusedUserId);
 								goToUserProfile.putExtra("currentUser", false);
 							}
 							startActivity(goToUserProfile);

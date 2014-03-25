@@ -25,7 +25,7 @@ import net.shiftinpower.objects.UserExtended;
  * @author Kaloyan Roussev
  * 
  */
-public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener, OnGetUserDataFromServerListener { //asd
+public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener, OnGetUserDataFromServerListener {
 
 	// set up XML View Components
 	protected TextView tvUserName;
@@ -77,12 +77,13 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 	// Constructor needed because of the way the super class works
 	public PersonProfile() {
 		super(R.string.app_name);
+
 	}
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		// Assign and inflate an XML file as the view component for this screen
 		setContentView(R.layout.activity_layout_user_profile);
 
@@ -132,11 +133,6 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		tvUserProfileGalleryTab.setOnClickListener(this);
 		tvUserProfileActivityTab.setOnClickListener(this);
 
-		
-		Bundle extras = getIntent().getExtras();
-		if (extras != null) {
-			identifyUser(extras);
-		}
 	} // End of onCreate
 
 	@Override
@@ -178,11 +174,6 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 			// TODO scroll down and show the activity perhaps?
 			break;
 
-		case R.id.bUserProfileActionButtonOne:
-			// Intent myPoints = new Intent(this, MyPoints.class);
-			// startActivity(myPoints);
-			break;
-
 		} // End of Switch
 
 	} // End of onClick Method
@@ -202,21 +193,6 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 			personStatus = C.Statuses.STATUS_5; // TODO Later on an option for a custom status will be provided
 		}
 	} // End of setUserStatus
-
-	@Override
-	public void onGetUserDataFromServerSuccess(UserExtended userDetailsAndStats) {
-		userExtendedData = userDetailsAndStats;
-		handleUserDetails(userExtendedData);
-		
-		Intent userProfile = new Intent (PersonProfile.this, UserProfile.class);
-		startActivity(userProfile);
-	}
-
-	@Override
-	public void onGetUserDataFromServerFailure(String reason) {
-		// TODO Auto-generated method stub
-
-	}
 
 	private void handleUserDetails(UserExtended userExtendedData) {
 		personName = userExtendedData.getUserName();
@@ -238,7 +214,7 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		personMoneySpentOnItems = userExtendedData.getUserMoneySpentOnItems();
 	}
 
-	private void handleUserDetails() {
+	private void handleCurrentUserDetails() {
 		personName = userName;
 		personSex = userSex;
 		personEmail = userEmail;
@@ -258,9 +234,9 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		personMoneySpentOnItems = userMoneySpentOnItems;
 	}
 
-	protected void setDisplayedData(Boolean currentUser) {
+	private void setDisplayedData(Boolean currentUser) {
 		// Set displayed text
-		bUserProfileActionButtonOne.setText(String.valueOf(personPoints) + " points");
+		
 		tvUserProfileItemsTab.setText("[" + personItemsCount + "] Items");
 		tvUserProfileCommentsTab.setText("[" + personCommentsCount + "] Comments");
 		tvUserProfileFollowingTab.setText("[" + personFollowingItemsCount + "] Following");
@@ -289,30 +265,40 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		// Set avatar image
 		if(currentUser){
 			katwalk.setUserImageToImageView(iUserAvatar, personAvatarPath, personSex);
-		}else {
+		} else {
 			katwalk.setUserImageToImageViewFromWeb(iUserAvatar, personAvatarPath, C.API.IMAGES_USERS_FOLDER_ORIGINAL, personSex);
-
 		}
 		
 	} // End of SetDisplayData
 
 	protected void identifyUser(Bundle extras) {
 
-		currentUser = extras.getBoolean("currentUser", false);
-		personId = extras.getInt("userId", currentlyLoggedInUser);
+		currentUser = extras.getBoolean("currentUser");
+		personId = extras.getInt("personId", currentlyLoggedInUser);
 
 		if (currentUser) {
 
-			handleUserDetails();
+			handleCurrentUserDetails();
+			personAvatarPath = sharedPreferences.getString(C.SharedPreferencesItems.USER_AVATAR_PATH, C.ImageHandling.TAG_DEFAULT_AS_SET_IN_DATABASE);
 			setDisplayedData(true);
-			Intent myProfile = new Intent(PersonProfile.this, MyProfile.class);
-			startActivity(myProfile);
 
 		} else {
-
 			new GetUserDataFromServerAsync(String.valueOf(personId), PersonProfile.this, PersonProfile.this).execute();
-			
+			// TODO
 		}
+	} // End of identifyUser
+
+	@Override
+	public void onGetUserDataFromServerSuccess(UserExtended userDetailsAndStats) {
+		userExtendedData = userDetailsAndStats;
+		handleUserDetails(userExtendedData);
+		setDisplayedData(false);
+	}
+
+	@Override
+	public void onGetUserDataFromServerFailure(String reason) {
+		// TODO Auto-generated method stub
+
 	}
 
 } // End of Class

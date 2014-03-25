@@ -65,7 +65,7 @@ public class KatwalkSlidingMenuListFragment extends SherlockListFragment {
 			startActivity(feed);
 		} else if (itemSelected(v, C.SlidingMenuItems.MY_PROFILE)) {
 
-			Intent goToUserProfile = new Intent(getActivity(), PersonProfile.class);
+			Intent goToUserProfile = new Intent(getActivity(), MyProfile.class);
 			goToUserProfile.putExtra("currentUser", true);
 			startActivity(goToUserProfile);
 

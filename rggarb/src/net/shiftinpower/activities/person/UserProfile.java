@@ -22,6 +22,7 @@ import net.shiftinpower.core.*;
  * @author Kaloyan Roussev
  * 
  */
+
 public class UserProfile extends PersonProfile {
 
 	private boolean thereIsAPendingFriendRequest = false; // TODO false for testing reasons atm
@@ -29,6 +30,11 @@ public class UserProfile extends PersonProfile {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			super.identifyUser(extras);
+		}
 
 		// Set action buttons' text
 		bUserProfileActionButtonOne.setText(R.string.bAnotherUserProfileMessage);
@@ -45,8 +51,8 @@ public class UserProfile extends PersonProfile {
 		bUserProfileActionButtonTwo.setOnClickListener(this);
 
 		tvUserProfileStatsAreVisibleNote.setVisibility(View.GONE);
-		
-		if (personQuote==null || personQuote.contentEquals(C.FallbackCopy.CLICK_HERE_TO_CHANGE_YOUR_QUOTE)) {
+
+		if (personQuote == null || personQuote.contentEquals(C.FallbackCopy.CLICK_HERE_TO_CHANGE_YOUR_QUOTE)) {
 			tvUserQuote.setVisibility(View.GONE);
 		}
 
@@ -58,7 +64,7 @@ public class UserProfile extends PersonProfile {
 		int id = v.getId();
 
 		switch (id) {
-		case R.string.bAnotherUserProfileMessage:
+		case R.id.bUserProfileActionButtonOne:
 			Intent notImplementedYet = new Intent(UserProfile.this, NotImplementedYetScreen.class);
 			// Intent composeMessage = new Intent(UserProfile.this, MessagesCompose.class);
 			// composeMessage.putExtra("receiverId", personId);
@@ -66,7 +72,7 @@ public class UserProfile extends PersonProfile {
 
 			break;
 
-		case R.string.bAnotherUserProfileAddFriend:
+		case R.id.bUserProfileActionButtonTwo:
 			if (thereIsAPendingFriendRequest) {
 				bUserProfileActionButtonTwo.setText(R.string.bAnotherUserProfileAddFriend);
 				// TODO cancel the friend request

@@ -78,7 +78,7 @@ public class KatwalkSlidingMenu extends KatwalkActionBar {
 
 			@Override
 			public void onClick(View v) {
-				Intent myProfile = new Intent(KatwalkSlidingMenu.this, PersonProfile.class);
+				Intent myProfile = new Intent(KatwalkSlidingMenu.this, MyProfile.class);
 				myProfile.putExtra("currentUser", true);
 				startActivity(myProfile);
 
@@ -94,7 +94,7 @@ public class KatwalkSlidingMenu extends KatwalkActionBar {
 			@Override
 			public void onClick(View v) {
 				
-				Intent goToUserProfile = new Intent(KatwalkSlidingMenu.this, PersonProfile.class);
+				Intent goToUserProfile = new Intent(KatwalkSlidingMenu.this, MyProfile.class);
 				goToUserProfile.putExtra("currentUser", true);
 				startActivity(goToUserProfile);
 

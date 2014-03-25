@@ -45,7 +45,12 @@ public class MyProfile extends PersonProfile implements OnClickListener, OnChang
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-				
+
+		Bundle extras = getIntent().getExtras();
+		if (extras != null) {
+			super.identifyUser(extras);
+		}
+
 		// Set OnClick Listeners
 		bUserProfileActionButtonOne.setOnClickListener(this);
 		bUserProfileActionButtonTwo.setOnClickListener(this);
@@ -55,6 +60,9 @@ public class MyProfile extends PersonProfile implements OnClickListener, OnChang
 		if (personQuote == null || personQuote.contentEquals("")) {
 			tvUserQuote.setText(C.FallbackCopy.CLICK_HERE_TO_CHANGE_YOUR_QUOTE);
 		}
+		
+		// Set Points button displayed text
+		bUserProfileActionButtonOne.setText(String.valueOf(personPoints) + " points");
 
 		// Add a click listener to user Quote and open a dialog so user can change it if they want to
 		tvUserQuote.setOnClickListener(new OnClickListener() {
