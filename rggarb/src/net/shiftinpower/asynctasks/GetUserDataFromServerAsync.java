@@ -17,27 +17,34 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 /**
-* This  is a very important class - it is a part of the InitialDataloader sequence of asynctasks carried out right after login/signup.
-*
-* It downloads the user data from the server and stores it in a POJO (Plain old java object) In a future
-* version of the app, this class will be used to get other users information
-*
-*
-* @author Kaloyan Roussev
-*
-*/
+ * This is a very important class - it is a part of the InitialDataloader sequence of asynctasks carried out right after
+ * login/signup.
+ * 
+ * It downloads the user data from the server and stores it in a POJO (Plain old java object) In a future version of the app,
+ * this class will be used to get other users information
+ * 
+ * 
+ * @author Kaloyan Roussev
+ * 
+ * 
+ * This class is also user for obtaining another user's data from the server so we also have "anotherUserId" field so we can check whether the user we are looking
+ * info for is a friend of the current user that is now using the app
+ * 
+ */
 
 public class GetUserDataFromServerAsync extends AsyncTask<String, Integer, UserExtended> {
 
 	private String userId;
+	private String anotherUserId;
 	private JSONParser jsonParser = new JSONParser();
 	private boolean loadingMessageShown;
 	private Context context;
 	private OnGetUserDataFromServerListener listener;
 	private String reason;
 
-	public GetUserDataFromServerAsync(String userId, Context context, OnGetUserDataFromServerListener listener) {
+	public GetUserDataFromServerAsync(String userId, String anotherUserId, Context context, OnGetUserDataFromServerListener listener) {
 		this.userId = userId;
+		this.anotherUserId = anotherUserId;
 		this.listener = listener;
 		this.context = context;
 	}
@@ -57,7 +64,7 @@ public class GetUserDataFromServerAsync extends AsyncTask<String, Integer, UserE
 		}
 
 	}
-	
+
 	@Override
 	protected UserExtended doInBackground(String... params) {
 		int serverResponseCode;
@@ -65,6 +72,7 @@ public class GetUserDataFromServerAsync extends AsyncTask<String, Integer, UserE
 		try {
 			List<NameValuePair> parameters = new ArrayList<NameValuePair>();
 			parameters.add(new BasicNameValuePair(C.DBColumns.USER_ID, userId));
+			parameters.add(new BasicNameValuePair(C.DBColumns.ANOTHER_USER_ID, anotherUserId));
 
 			final JSONObject json = jsonParser.makeHttpRequest(C.API.WEB_ADDRESS + C.API.GET_USER_DATA, "GET", parameters);
 
@@ -93,6 +101,20 @@ public class GetUserDataFromServerAsync extends AsyncTask<String, Integer, UserE
 				userExtended.setUserGalleryPhotosCount(json.getInt(C.DBColumns.USER_GALLERY_PHOTOS_COUNT));
 				userExtended.setUserActivityCount(json.getInt(C.DBColumns.USER_ACTIVITIY_COUNT));
 				userExtended.setUserMoneySpentOnItems(json.getDouble(C.DBColumns.USER_MONEY_SPENT_ON_ITEMS));
+
+				if (json.getString(C.DBColumns.USER_IS_FRIEND_OF_CURRENT_USER).contentEquals("1")) {
+
+					userExtended.setUserIsFriendsWithCurrentUser(true);
+
+				} else if (json.getString(C.DBColumns.USER_IS_FRIEND_OF_CURRENT_USER).contentEquals("0")) {
+
+					userExtended.setUserIsFriendsWithCurrentUser(false);
+
+				} else {
+					
+					userExtended.setUserIsFriendsWithCurrentUser(false);
+					
+				}
 
 				if ((json.getString(C.DBColumns.USER_SHOWS_MONEY)).contentEquals("1")) {
 
@@ -143,12 +165,12 @@ public class GetUserDataFromServerAsync extends AsyncTask<String, Integer, UserE
 	@Override
 	protected void onPostExecute(UserExtended userExtended) {
 		super.onPostExecute(userExtended);
-		
+
 		if ((context != null) && (loadingMessageShown)) {
 			ShowLoadingMessage.dismissDialog();
 			loadingMessageShown = false;
 		}
-		
+
 		if (listener != null) {
 			if (userExtended == null) {
 

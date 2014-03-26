@@ -69,7 +69,8 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 	protected int personGalleryPhotosCount;
 	protected int personActivityCount;
 	protected double personMoneySpentOnItems;
-	protected boolean personHasProvidedOwnPhoto;;
+	protected boolean personHasProvidedOwnPhoto;
+	protected boolean personIsFriendsWithCurrentUser;
 
 	// Image handling variables
 	protected Bitmap personAvatarBitmap;
@@ -212,6 +213,7 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		personGalleryPhotosCount = userExtendedData.getUserGalleryPhotosCount();
 		personActivityCount = userExtendedData.getUserActivityCount();
 		personMoneySpentOnItems = userExtendedData.getUserMoneySpentOnItems();
+		personIsFriendsWithCurrentUser = userExtendedData.isUserIsFriendsWithCurrentUser();
 	}
 
 	private void handleCurrentUserDetails() {
@@ -232,6 +234,7 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		personGalleryPhotosCount = userGalleryPhotosCount;
 		personActivityCount = userActivityCount;
 		personMoneySpentOnItems = userMoneySpentOnItems;
+		
 	}
 
 	private void setDisplayedData(Boolean currentUser) {
@@ -283,8 +286,7 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 			setDisplayedData(true);
 
 		} else {
-			new GetUserDataFromServerAsync(String.valueOf(personId), PersonProfile.this, PersonProfile.this).execute();
-			// TODO
+			new GetUserDataFromServerAsync(String.valueOf(personId), String.valueOf(currentlyLoggedInUser), PersonProfile.this, PersonProfile.this).execute();
 		}
 	} // End of identifyUser
 

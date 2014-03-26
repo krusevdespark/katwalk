@@ -138,7 +138,7 @@ public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesLis
 		new InsertSubcategoriesIntoDB(katwalk.dbTools, itemSubcategories).execute();
 
 		// Next step is downloading the user data from the server
-		new GetUserDataFromServerAsync(String.valueOf(currentlyLoggedInUser), InitialDataLoader.this, InitialDataLoader.this).execute();
+		new GetUserDataFromServerAsync(String.valueOf(currentlyLoggedInUser), String.valueOf(currentlyLoggedInUser), InitialDataLoader.this, InitialDataLoader.this).execute();
 	}
 
 	@Override
@@ -148,7 +148,7 @@ public class InitialDataLoader extends KatwalkCore implements OnGetCategoriesLis
 		}
 		// Even if we havent gotten the categories from the database, we still need to load the user details so we go on down
 		// the chain.
-		new GetUserDataFromServerAsync(String.valueOf(currentlyLoggedInUser), InitialDataLoader.this, InitialDataLoader.this).execute();
+		new GetUserDataFromServerAsync(String.valueOf(currentlyLoggedInUser), String.valueOf(currentlyLoggedInUser), InitialDataLoader.this, InitialDataLoader.this).execute();
 
 	}
 

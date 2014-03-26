@@ -21,11 +21,12 @@ public class UserExtended {
 	private int userGalleryPhotosCount;
 	private int userActivityCount;
 	private double userMoneySpentOnItems;
+	private boolean userIsFriendsWithCurrentUser;
 
 	public UserExtended(String userName, String userEmail, String userSex, String userPassword, String userLastSeen, String userAvatarPath,
 			String userDateRegistered, String userQuote, int userPoints, boolean userShowsMoney, boolean userShowsStats, String userAcceptsMessages,
 			String userInteractsWithActivities, int userItemsCount, int userCommentsCount, int userFollowingItemsCount, int userFriendsCount,
-			int userGalleryPhotosCount, int userActivityCount, double userMoneySpentOnItems) {
+			int userGalleryPhotosCount, int userActivityCount, double userMoneySpentOnItems, boolean userIsFriendsWithCurrentUser) {
 		this.userName = userName;
 		this.userEmail = userEmail;
 		this.userSex = userSex;
@@ -46,10 +47,19 @@ public class UserExtended {
 		this.userGalleryPhotosCount = userGalleryPhotosCount;
 		this.userActivityCount = userActivityCount;
 		this.userMoneySpentOnItems = userMoneySpentOnItems;
+		this.userIsFriendsWithCurrentUser = userIsFriendsWithCurrentUser;
 	}
 
 	public UserExtended() {
 
+	}
+	
+	public boolean isUserIsFriendsWithCurrentUser() {
+		return userIsFriendsWithCurrentUser;
+	}
+
+	public void setUserIsFriendsWithCurrentUser(boolean userIsFriendsWithCurrentUser) {
+		this.userIsFriendsWithCurrentUser = userIsFriendsWithCurrentUser;
 	}
 
 	public boolean isUserShowsMoney() {

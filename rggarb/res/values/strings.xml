@@ -207,6 +207,7 @@
     <string name="bAnotherUserProfileMessage">Message</string>
     <string name="bAnotherUserProfileAddFriend">Add Friend</string>
     <string name="bAnotherUserProfileFriendshipRequestSent">Request Sent</string>
+    <string name="bAnotherUserProfileFriends">Friends</string>
 
     <!-- My Profile -->
     <string name="ivUserAvatarDescription">User Avatar Image</string>
@@ -227,6 +228,11 @@
     <string name="bChangeUserQuoteSubmit">Submit</string>
     <string name="bChangeUserQuoteCancel">Cancel</string>
 
+    <!-- Another user's profile -->
+    <string name="tvDeleteFriendDialogTitle">Are You Sure you want to remove this person from friends?</string>
+    <string name="bDeleteFriendSubmit">Unfriend</string>
+    <string name="bDeleteFriendCancel">Dismiss</string>
+    
     <!-- Messages -->
     <string name="tvMessagesTitle">Messages</string>
     <string name="etMessagesSearch">Search Messages</string>
