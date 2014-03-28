@@ -7,12 +7,10 @@ import net.shiftinpower.interfaces.*;
 import net.shiftinpower.objects.UserExtended;
 import net.shiftinpower.utilities.JSONParser;
 import net.shiftinpower.utilities.ShowLoadingMessage;
-
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import android.content.Context;
 import android.os.AsyncTask;
 
@@ -101,7 +99,7 @@ public class GetUserDataFromServerAsync extends AsyncTask<String, Integer, UserE
 				userExtended.setUserGalleryPhotosCount(json.getInt(C.DBColumns.USER_GALLERY_PHOTOS_COUNT));
 				userExtended.setUserActivityCount(json.getInt(C.DBColumns.USER_ACTIVITIY_COUNT));
 				userExtended.setUserMoneySpentOnItems(json.getDouble(C.DBColumns.USER_MONEY_SPENT_ON_ITEMS));
-
+				
 				if (json.getString(C.DBColumns.USER_IS_FRIEND_OF_CURRENT_USER).contentEquals("1")) {
 
 					userExtended.setUserIsFriendsWithCurrentUser(true);

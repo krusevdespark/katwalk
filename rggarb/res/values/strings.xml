@@ -211,8 +211,8 @@
 
     <!-- My Profile -->
     <string name="ivUserAvatarDescription">User Avatar Image</string>
-    <string name="tvUserNameDefault">User Name</string>
-    <string name="tvUserDefaultStatus">Default Status</string>
+    <string name="tvUserNameDefault"></string>
+    <string name="tvUserDefaultStatus"></string>
     <string name="tvMoneySpentDefault">$0 Spent on items</string>
     <string name="tvUserQuoteDefault">Click here to edit your profile quote</string>
     <string name="bUserProfileActionButtonOne">0 points</string>

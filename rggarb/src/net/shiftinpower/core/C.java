@@ -556,6 +556,7 @@ public final class C {
 		public static final String SENDING_MESSAGE = "Sending message";
 		public static final String LOADING_ITEM_DATA = "Loading Item Data";
 		public static final String LOADING_USER_DATA = "Loading User Data";
+		public static final String REMOVING_FRIEND = "Removing friend";
 	}
 
 	public static final class PointsEarnedToasts {

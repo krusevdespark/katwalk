@@ -1,6 +1,8 @@
 package net.shiftinpower.activities.person;
 
-import net.shiftinpower.interfaces.OnCancelFriendRequestListener;
+import net.shiftinpower.interfaces.OnFriendRequestAcceptListener;
+import net.shiftinpower.interfaces.OnFriendRequestCancelListener;
+import net.shiftinpower.interfaces.OnIdentifyUserListener;
 import net.shiftinpower.interfaces.OnRemoveFriendListener;
 import net.shiftinpower.interfaces.OnFriendRequestSendListener;
 import net.shiftinpower.koldrain.R;
@@ -10,11 +12,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
-import android.widget.TextView;
 import android.widget.Toast;
 import net.shiftinpower.activities.NotImplementedYetScreen;
-import net.shiftinpower.activities.Settings;
-import net.shiftinpower.asynctasks.DeleteUserFromServerAsync;
 import net.shiftinpower.asynctasks.RemoveFriendAsync;
 import net.shiftinpower.asynctasks.FriendRequestSendAsync;
 import net.shiftinpower.core.*;
@@ -34,7 +33,7 @@ import net.shiftinpower.core.*;
  * 
  */
 
-public class UserProfile extends PersonProfile implements OnFriendRequestSendListener, OnCancelFriendRequestListener, OnRemoveFriendListener{
+public class UserProfile extends PersonProfile implements OnFriendRequestSendListener, OnFriendRequestCancelListener, OnRemoveFriendListener, OnFriendRequestAcceptListener, OnIdentifyUserListener{
 
 	// Delete friend dialog and its XML Components
 	public Dialog deleteFriendDialog;
@@ -47,37 +46,11 @@ public class UserProfile extends PersonProfile implements OnFriendRequestSendLis
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		super.setOnIdentifyUserListener(this);
 		
 		Bundle extras = getIntent().getExtras();
 		if (extras != null) {
 			super.identifyUser(extras);
-		}
-		
-		// Set action buttons' text
-		bUserProfileActionButtonOne.setText(R.string.bAnotherUserProfileMessage);
-		
-		if(!personIsFriendsWithCurrentUser){
-			
-			if (thereIsAPendingFriendRequest) {
-				bUserProfileActionButtonTwo.setText(R.string.bAnotherUserProfileFriendshipRequestSent);
-			} else {
-				bUserProfileActionButtonTwo.setText(R.string.bAnotherUserProfileAddFriend);
-			}
-			
-		} else {
-			
-			bUserProfileActionButtonTwo.setText(R.string.bAnotherUserProfileFriends);
-			
-		}
-
-		// Set OnClick Listeners
-		bUserProfileActionButtonOne.setOnClickListener(this);
-		bUserProfileActionButtonTwo.setOnClickListener(this);
-
-		tvUserProfileStatsAreVisibleNote.setVisibility(View.GONE);
-
-		if (personQuote == null || personQuote.contentEquals(C.FallbackCopy.CLICK_HERE_TO_CHANGE_YOUR_QUOTE)) {
-			tvUserQuote.setVisibility(View.GONE);
 		}
 
 	} // End of onCreate
@@ -105,8 +78,7 @@ public class UserProfile extends PersonProfile implements OnFriendRequestSendLis
 					thereIsAPendingFriendRequest = false;
 				} else {
 					bUserProfileActionButtonTwo.setText(R.string.bAnotherUserProfileFriendshipRequestSent);
-					new FriendRequestSendAsync(UserProfile.this, currentlyLoggedInUser, personId);
-					
+					new FriendRequestSendAsync(UserProfile.this, currentlyLoggedInUser, personId).execute();
 				}
 			} else {
 				
@@ -142,7 +114,7 @@ public class UserProfile extends PersonProfile implements OnFriendRequestSendLis
 					@Override
 					public void onClick(View v) {
 
-						new RemoveFriendAsync(UserProfile.this, currentlyLoggedInUser, personId).execute();
+						new RemoveFriendAsync(UserProfile.this, UserProfile.this, currentlyLoggedInUser, personId).execute();
 						deleteFriendDialog.dismiss();
 					}
 
@@ -184,14 +156,58 @@ public class UserProfile extends PersonProfile implements OnFriendRequestSendLis
 	}
 
 	@Override
-	public void onCancelFriendRequestSuccess() {
+	public void onFriendRequestCancelSuccess() {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void onCancelFriendRequestFailure() {
+	public void onFriendRequestCancelFailure() {
 		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onFriendRequestAcceptSuccess() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onFriendRequestAcceptFailure() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void onUserIdentified() {
+		
+		// Set action buttons' text
+		bUserProfileActionButtonOne.setText(R.string.bAnotherUserProfileMessage);
+		
+		if(!personIsFriendsWithCurrentUser){
+			
+			if (thereIsAPendingFriendRequest) {
+				bUserProfileActionButtonTwo.setText(R.string.bAnotherUserProfileFriendshipRequestSent);
+			} else {
+				bUserProfileActionButtonTwo.setText(R.string.bAnotherUserProfileAddFriend);
+			}
+			
+		} else {
+			
+			bUserProfileActionButtonTwo.setText(R.string.bAnotherUserProfileFriends);
+			
+		}
+
+		// Set OnClick Listeners
+		bUserProfileActionButtonOne.setOnClickListener(this);
+		bUserProfileActionButtonTwo.setOnClickListener(this);
+
+		tvUserProfileStatsAreVisibleNote.setVisibility(View.GONE);
+
+		if (personQuote == null || personQuote.contentEquals(C.FallbackCopy.CLICK_HERE_TO_CHANGE_YOUR_QUOTE)) {
+			tvUserQuote.setVisibility(View.GONE);
+		}
 		
 	}
 

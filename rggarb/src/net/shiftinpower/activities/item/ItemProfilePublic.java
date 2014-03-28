@@ -355,9 +355,17 @@ public class ItemProfilePublic extends KatwalkSlidingMenu {
 
 						@Override
 						public void onClick(View v) {
-							Intent goToUserProfile = new Intent(ItemProfilePublic.this, PersonProfile.class);
-							goToUserProfile.putExtra("userId", focusedFriendId);
-							goToUserProfile.putExtra("currentUser", false);
+							
+							Intent goToUserProfile;
+							
+							if (focusedFriendId == currentlyLoggedInUser) {
+								goToUserProfile = new Intent(ItemProfilePublic.this, MyProfile.class);
+								goToUserProfile.putExtra("currentUser", true);
+							} else {
+								goToUserProfile = new Intent(ItemProfilePublic.this, UserProfile.class);
+								goToUserProfile.putExtra("personId", focusedFriendId);
+								goToUserProfile.putExtra("currentUser", false);
+							}
 							startActivity(goToUserProfile);
 
 						}

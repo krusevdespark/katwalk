@@ -4,6 +4,7 @@ import java.text.DecimalFormat;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -15,6 +16,7 @@ import net.shiftinpower.core.C;
 import net.shiftinpower.core.KatwalkSlidingMenu;
 import net.shiftinpower.customviews.SquareImageView;
 import net.shiftinpower.interfaces.OnGetUserDataFromServerListener;
+import net.shiftinpower.interfaces.OnIdentifyUserListener;
 import net.shiftinpower.koldrain.R;
 import net.shiftinpower.objects.UserExtended;
 
@@ -71,6 +73,7 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 	protected double personMoneySpentOnItems;
 	protected boolean personHasProvidedOwnPhoto;
 	protected boolean personIsFriendsWithCurrentUser;
+	private OnIdentifyUserListener listener;
 
 	// Image handling variables
 	protected Bitmap personAvatarBitmap;
@@ -214,6 +217,10 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		personActivityCount = userExtendedData.getUserActivityCount();
 		personMoneySpentOnItems = userExtendedData.getUserMoneySpentOnItems();
 		personIsFriendsWithCurrentUser = userExtendedData.isUserIsFriendsWithCurrentUser();
+		Log.e("personIsFriendsWithCurrentUser", String.valueOf(personIsFriendsWithCurrentUser));
+		if(listener!=null){
+			listener.onUserIdentified();
+		}
 	}
 
 	private void handleCurrentUserDetails() {
@@ -301,6 +308,10 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 	public void onGetUserDataFromServerFailure(String reason) {
 		// TODO Auto-generated method stub
 
+	}
+	
+	protected void setOnIdentifyUserListener(OnIdentifyUserListener listener){
+		this.listener = listener;
 	}
 
 } // End of Class
