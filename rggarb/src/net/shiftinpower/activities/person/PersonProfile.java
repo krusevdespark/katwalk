@@ -4,7 +4,6 @@ import java.text.DecimalFormat;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -45,7 +44,6 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 	protected TextView tvUserProfileActivityTab;
 	protected Button bUserProfileActionButtonOne;
 	protected Button bUserProfileActionButtonTwo;
-	@SuppressWarnings("unused")
 	protected TableRow myProfileActivityHolder;
 
 	// Variables holding data
@@ -73,6 +71,8 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 	protected double personMoneySpentOnItems;
 	protected boolean personHasProvidedOwnPhoto;
 	protected boolean personIsFriendsWithCurrentUser;
+	protected boolean personHasFriendRequestFromUs;
+	protected boolean personHasSentUsFriendRequest;
 	private OnIdentifyUserListener listener;
 
 	// Image handling variables
@@ -199,6 +199,7 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 	} // End of setUserStatus
 
 	private void handleUserDetails(UserExtended userExtendedData) {
+		
 		personName = userExtendedData.getUserName();
 		personSex = userExtendedData.getUserSex();
 		personEmail = userExtendedData.getUserEmail();
@@ -217,7 +218,9 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 		personActivityCount = userExtendedData.getUserActivityCount();
 		personMoneySpentOnItems = userExtendedData.getUserMoneySpentOnItems();
 		personIsFriendsWithCurrentUser = userExtendedData.isUserIsFriendsWithCurrentUser();
-		Log.e("personIsFriendsWithCurrentUser", String.valueOf(personIsFriendsWithCurrentUser));
+		personHasFriendRequestFromUs = userExtendedData.isUserHasFriendRequestFromUs();
+		personHasSentUsFriendRequest = userExtendedData.isUserHasSentUsFriendRequest();
+		
 		if(listener!=null){
 			listener.onUserIdentified();
 		}

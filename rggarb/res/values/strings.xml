@@ -207,6 +207,7 @@
     <string name="bAnotherUserProfileMessage">Message</string>
     <string name="bAnotherUserProfileAddFriend">Add Friend</string>
     <string name="bAnotherUserProfileFriendshipRequestSent">Request Sent</string>
+    <string name="bAnotherUserProfileConfirmFriendRequest">Friends?</string>
     <string name="bAnotherUserProfileFriends">Friends</string>
 
     <!-- My Profile -->
@@ -232,6 +233,15 @@
     <string name="tvDeleteFriendDialogTitle">Are You Sure you want to remove this person from friends?</string>
     <string name="bDeleteFriendSubmit">Unfriend</string>
     <string name="bDeleteFriendCancel">Dismiss</string>
+    
+    <string name="tvDialogCancelFriendRequestTitle">Are you Sure you want to cancel your friend request?</string>
+    <string name="bDialogCancelFriendRequestSubmit">Yes, cancel</string>
+    <string name="bDialogCancelFriendRequestCancel">No, leave it</string>
+    
+    <string name="tvDialogRespondToFriendRequestTitle">This user wants to be friends with you. Do you accept?</string>
+    <string name="bDialogRespondToFriendRequestSubmit">Accept</string>
+    <string name="bDialogRespondToFriendRequestReject">Reject</string>
+    <string name="bDialogRespondToFriendRequestCancel">Ignore</string>
     
     <!-- Messages -->
     <string name="tvMessagesTitle">Messages</string>

@@ -22,38 +22,29 @@ public class UserExtended {
 	private int userActivityCount;
 	private double userMoneySpentOnItems;
 	private boolean userIsFriendsWithCurrentUser;
-
-	public UserExtended(String userName, String userEmail, String userSex, String userPassword, String userLastSeen, String userAvatarPath,
-			String userDateRegistered, String userQuote, int userPoints, boolean userShowsMoney, boolean userShowsStats, String userAcceptsMessages,
-			String userInteractsWithActivities, int userItemsCount, int userCommentsCount, int userFollowingItemsCount, int userFriendsCount,
-			int userGalleryPhotosCount, int userActivityCount, double userMoneySpentOnItems, boolean userIsFriendsWithCurrentUser) {
-		this.userName = userName;
-		this.userEmail = userEmail;
-		this.userSex = userSex;
-		this.userPassword = userPassword;
-		this.userLastSeen = userLastSeen;
-		this.userAvatarPath = userAvatarPath;
-		this.userDateRegistered = userDateRegistered;
-		this.userPoints = userPoints;
-		this.userQuote = userQuote;
-		this.userShowsMoney = userShowsMoney;
-		this.userShowsStats = userShowsStats;
-		this.userAcceptsMessages = userAcceptsMessages;
-		this.userInteractsWithActivities = userInteractsWithActivities;
-		this.userItemsCount = userItemsCount;
-		this.userCommentsCount = userCommentsCount;
-		this.userFollowingItemsCount = userFollowingItemsCount;
-		this.userFriendsCount = userFriendsCount;
-		this.userGalleryPhotosCount = userGalleryPhotosCount;
-		this.userActivityCount = userActivityCount;
-		this.userMoneySpentOnItems = userMoneySpentOnItems;
-		this.userIsFriendsWithCurrentUser = userIsFriendsWithCurrentUser;
-	}
+	private boolean userHasFriendRequestFromUs;
+	private boolean userHasSentUsFriendRequest;
 
 	public UserExtended() {
 
 	}
 	
+	public boolean isUserHasFriendRequestFromUs() {
+		return userHasFriendRequestFromUs;
+	}
+
+	public void setUserHasFriendRequestFromUs(boolean userHasFriendRequestFromUs) {
+		this.userHasFriendRequestFromUs = userHasFriendRequestFromUs;
+	}
+
+	public boolean isUserHasSentUsFriendRequest() {
+		return userHasSentUsFriendRequest;
+	}
+
+	public void setUserHasSentUsFriendRequest(boolean userHasSentUsFriendRequest) {
+		this.userHasSentUsFriendRequest = userHasSentUsFriendRequest;
+	}
+
 	public boolean isUserIsFriendsWithCurrentUser() {
 		return userIsFriendsWithCurrentUser;
 	}

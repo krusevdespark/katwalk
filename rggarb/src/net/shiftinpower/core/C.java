@@ -168,6 +168,8 @@ public final class C {
 		public static final String USER_ITEMS = "user_items";
 		public static final String USER_IS_FRIEND_OF_CURRENT_USER = "is_friend";
 		public static final String ANOTHER_USER_ID = "another_user_id";
+		public static final String WE_SENT_THEM_FRIEND_REQUEST = "we_sent_them_friend_request";
+		public static final String THEY_SENT_US_FRIEND_REQUEST = "they_sent_us_friend_request";
 
 		public static final String MESSAGE = "message";
 		public static final String SUCCESS = "success";
@@ -523,13 +525,18 @@ public final class C {
 		// Contact Us
 		public static final String NO_MESSAGE_ENTERED = "You havent entered a message";
 		public static final String MESSAGE_NOT_SENT = "We were unable to send your message. Please check your connection or try sending it from the website";
-
-		// misc
-		public static final String IMAGE_TOO_LARGE = "Image is too large, the system cannot handle it";
-		public static final String APP_CRASHED = "Oops. Restarting the app...";
+		
+		// User  relations 
 		public static final String FRIENDSHIP_REQUEST_NOT_SENT = "There has been a problem sending your friend request. Please try again later";
 		public static final String FRIEND_NOT_REMOVED = "Friend not removed. Try later";
-
+		public static final String FRIEND_REQUEST_NOT_CANCELLED = "We were unable to cancel the friend request. Try Later.";
+		public static final String FRIEND_REQUEST_NOT_ACCEPTED = "A problem occurred. Please Try later";
+		public static final String FRIEND_REQUEST_NOT_REJECTED = "A problem occurred. Please Try later";
+		
+		// Miscellaneous
+		public static final String IMAGE_TOO_LARGE = "Image is too large, the system cannot handle it";
+		public static final String APP_CRASHED = "Oops. Restarting the app...";
+	
 	} // End of Errorz
 
 	public static final class Confirmationz {
@@ -545,6 +552,9 @@ public final class C {
 		public static final String FRIEND_REQUEST_CANCELLED = "Friend Request Cancelled";
 		public static final String FRIEND_REQUEST_SENT = "Friend Request Sent";
 		public static final String FRIEND_REMOVED = "You are no longer friends";
+		public static final String FRIEND_REQUEST_ACCEPTED = "You are now friends!";
+		public static final String FRIEND_REQUEST_REJECTED = "Friend Request Rejected";
+
 	}
 
 	public static final class LoadingMessages {
@@ -557,6 +567,10 @@ public final class C {
 		public static final String LOADING_ITEM_DATA = "Loading Item Data";
 		public static final String LOADING_USER_DATA = "Loading User Data";
 		public static final String REMOVING_FRIEND = "Removing friend";
+		public static final String FRIEND_REQUEST_REJECTING = "Rejecting Friend Request";
+		public static final String FRIEND_REQUEST_SENDING = "Sending Friend Request";
+		public static final String FRIEND_REQUEST_ACCEPTING = "Accepting Friend Request";
+		public static final String FRIEND_REQUEST_CANCELLING = "Cancelling Friend Request";
 	}
 
 	public static final class PointsEarnedToasts {

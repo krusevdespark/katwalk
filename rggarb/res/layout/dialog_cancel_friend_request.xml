@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llDialogCancelFriendRequest"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@android:color/white"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/tvDialogCancelFriendRequestTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="@string/tvDialogCancelFriendRequestTitle"
+        android:textColor="@android:color/black" />
+
+    <Button
+        android:id="@+id/bDialogCancelFriendRequestSubmit"
+        style="@style/green_button_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="@string/bDialogCancelFriendRequestSubmit"
+        android:textColor="@android:color/white"
+        android:textSize="30sp" />
+
+    <Button
+        android:id="@+id/bDialogCancelFriendRequestCancel"
+        style="@style/purple_button_style"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:text="@string/bDialogCancelFriendRequestCancel"
+        android:textColor="@android:color/white"
+        android:textSize="30sp" />
+
+</LinearLayout>

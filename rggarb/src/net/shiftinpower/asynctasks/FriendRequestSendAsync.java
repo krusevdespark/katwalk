@@ -11,6 +11,8 @@ import org.json.JSONObject;
 import net.shiftinpower.core.C;
 import net.shiftinpower.interfaces.OnFriendRequestSendListener;
 import net.shiftinpower.utilities.JSONParser;
+import net.shiftinpower.utilities.ShowLoadingMessage;
+import android.content.Context;
 import android.os.AsyncTask;
 
 public class FriendRequestSendAsync extends AsyncTask<String, String, Boolean> {
@@ -20,12 +22,26 @@ public class FriendRequestSendAsync extends AsyncTask<String, String, Boolean> {
 	private int receiverId;
 	private OnFriendRequestSendListener listener;
 	private JSONParser jsonParser = new JSONParser();
+	private Context context;
+	private boolean loadingMessageShown;
 
-	public FriendRequestSendAsync(OnFriendRequestSendListener listener, int senderId, int receiverId) {
+	public FriendRequestSendAsync(OnFriendRequestSendListener listener, Context context, int senderId, int receiverId) {
 		this.listener = listener;
 		this.senderId = senderId;
 		this.receiverId = receiverId;
+		this.context = context;
 	}
+	
+	@Override
+	protected void onPreExecute() {
+		super.onPreExecute();
+
+		if (context != null) {
+			ShowLoadingMessage.loading(context, C.LoadingMessages.FRIEND_REQUEST_SENDING);
+			loadingMessageShown = true;
+		}
+
+	} // End of onPreExecute
 
 	@Override
 	protected Boolean doInBackground(String... arg0) {
@@ -57,6 +73,11 @@ public class FriendRequestSendAsync extends AsyncTask<String, String, Boolean> {
 	@Override
 	protected void onPostExecute(Boolean result) {
 		super.onPostExecute(result);
+		
+		if ((context != null) && (loadingMessageShown)) {
+			ShowLoadingMessage.dismissDialog();
+			loadingMessageShown = false;
+		}
 
 		if (listener != null) {
 			if (result) {

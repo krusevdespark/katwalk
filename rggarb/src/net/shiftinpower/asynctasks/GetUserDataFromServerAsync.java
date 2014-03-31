@@ -114,6 +114,34 @@ public class GetUserDataFromServerAsync extends AsyncTask<String, Integer, UserE
 					
 				}
 
+				if (json.getString(C.DBColumns.WE_SENT_THEM_FRIEND_REQUEST).contentEquals("1")) {
+
+					userExtended.setUserHasFriendRequestFromUs(true);
+
+				} else if (json.getString(C.DBColumns.WE_SENT_THEM_FRIEND_REQUEST).contentEquals("0")) {
+
+					userExtended.setUserHasFriendRequestFromUs(false);
+
+				} else {
+					
+					userExtended.setUserHasFriendRequestFromUs(false);
+					
+				}
+				
+				if (json.getString(C.DBColumns.THEY_SENT_US_FRIEND_REQUEST).contentEquals("1")) {
+
+					userExtended.setUserHasSentUsFriendRequest(true);
+
+				} else if (json.getString(C.DBColumns.THEY_SENT_US_FRIEND_REQUEST).contentEquals("0")) {
+
+					userExtended.setUserHasSentUsFriendRequest(false);
+
+				} else {
+					
+					userExtended.setUserHasSentUsFriendRequest(false);
+					
+				}
+				
 				if ((json.getString(C.DBColumns.USER_SHOWS_MONEY)).contentEquals("1")) {
 
 					userExtended.setUserShowsMoney(true);
