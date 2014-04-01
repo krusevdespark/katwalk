@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import net.shiftinpower.activities.Home;
 import net.shiftinpower.activities.SearchItems;
-import net.shiftinpower.adapters.MyProfileFollowingAdapter;
+import net.shiftinpower.adapters.PersonProfileFollowingAdapter;
 import net.shiftinpower.core.*;
 import net.shiftinpower.koldrain.R;
 import android.content.Intent;
@@ -51,7 +51,7 @@ public class PersonProfileFollowing extends KatwalkSlidingMenu {
 		super.onCreate(savedInstanceState);
 
 		// Set the XML layout
-		setContentView(R.layout.activity_layout_my_profile_following);
+		setContentView(R.layout.activity_layout_person_profile_following);
 		
 		// Assign java objects to XML View elements
 		tvUserNameFollowingList = (TextView) findViewById(R.id.tvUserNameFollowingList);
@@ -68,7 +68,7 @@ public class PersonProfileFollowing extends KatwalkSlidingMenu {
 		listOfFollowedItems.setEmptyView(myProfileFollowingsEmptyView);
 
 		// Instantiate the adapter, feed the data to it via its constructor and set the listview to use it
-		MyProfileFollowingAdapter myProfileFollowingAdapter = new MyProfileFollowingAdapter(this, itemNames, itemBrands, itemPrices, itemRatings, itemsBoughtFrom, itemImagePaths, itemIds, imageRatingsCount);
+		PersonProfileFollowingAdapter myProfileFollowingAdapter = new PersonProfileFollowingAdapter(this, itemNames, itemBrands, itemPrices, itemRatings, itemsBoughtFrom, itemImagePaths, itemIds, imageRatingsCount);
 		listOfFollowedItems.setAdapter(myProfileFollowingAdapter);
 
 		// Try setting fonts for different XML views on screen

@@ -2,7 +2,7 @@ package net.shiftinpower.fragments;
 
 import java.util.ArrayList;
 
-import net.shiftinpower.adapters.MyProfileFollowingAdapter;
+import net.shiftinpower.adapters.PersonProfileFollowingAdapter;
 import net.shiftinpower.koldrain.R;
 
 import com.actionbarsherlock.app.SherlockListFragment;

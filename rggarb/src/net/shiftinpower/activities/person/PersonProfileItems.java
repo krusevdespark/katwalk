@@ -2,10 +2,8 @@ package net.shiftinpower.activities.person;
 
 import java.util.ArrayList;
 import java.util.LinkedHashSet;
-
-import net.shiftinpower.activities.Home;
 import net.shiftinpower.activities.ItemAddStepOnePhotos;
-import net.shiftinpower.adapters.MyProfileItemAdapter;
+import net.shiftinpower.adapters.PersonProfileItemsAdapter;
 import net.shiftinpower.core.*;
 import net.shiftinpower.interfaces.OnGetCategoriesListener;
 import net.shiftinpower.interfaces.OnGetUserItemsListener;
@@ -42,8 +40,6 @@ public class PersonProfileItems extends KatwalkSlidingMenu implements OnGetUserI
 	// XML ListView
 	private ListView listOfItems;
 	private LinkedHashSet<ItemBasic> userItemsObtained;
-	private LinkedHashSet<ItemCategory> categoriesInfo;
-	private LinkedHashSet<ItemBasic> myItems;
 
 	// If there is no data to be fed to the adapter, we need to display a custom layout with a call to action, these are its
 	// XML elements
@@ -64,7 +60,7 @@ public class PersonProfileItems extends KatwalkSlidingMenu implements OnGetUserI
 		new GetUserItemsFromDB(PersonProfileItems.this, katwalk.dbTools, currentlyLoggedInUser).execute();
 
 		// Set the XML layout
-		setContentView(R.layout.activity_layout_my_profile_items);
+		setContentView(R.layout.activity_layout_person_profile_items);
 
 		// Assign java objects to XML View elements
 		tvMyItemsTitle = (TextView) findViewById(R.id.tvMyItemsTitle);
@@ -165,12 +161,12 @@ public class PersonProfileItems extends KatwalkSlidingMenu implements OnGetUserI
 
 					if (userItemsObtained != null) {
 
-						MyProfileItemAdapter myItemsItemAdapter;
+						PersonProfileItemsAdapter myItemsItemAdapter;
 						if (selectedItemId != 99) {
-							myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, katwalk.imageLoader, katwalk.imageLoaderOptions, userItemsObtained, selectedItemId);
+							myItemsItemAdapter = new PersonProfileItemsAdapter(PersonProfileItems.this, katwalk.imageLoader, katwalk.imageLoaderOptions, userItemsObtained, selectedItemId);
 
 						} else {
-							myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, katwalk.imageLoader, katwalk.imageLoaderOptions, userItemsObtained);
+							myItemsItemAdapter = new PersonProfileItemsAdapter(PersonProfileItems.this, katwalk.imageLoader, katwalk.imageLoaderOptions, userItemsObtained);
 
 						}
 						listOfItems.setAdapter(myItemsItemAdapter);
@@ -196,14 +192,14 @@ public class PersonProfileItems extends KatwalkSlidingMenu implements OnGetUserI
 	public void onGetUserItemsSuccess(LinkedHashSet<ItemBasic> userItems) {
 		// Instantiate the adapter, feed the data to it via its constructor and set the listview to use it
 		userItemsObtained = userItems;
-		MyProfileItemAdapter myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, katwalk.imageLoader, katwalk.imageLoaderOptions, userItems);
+		PersonProfileItemsAdapter myItemsItemAdapter = new PersonProfileItemsAdapter(PersonProfileItems.this, katwalk.imageLoader, katwalk.imageLoaderOptions, userItems);
 		listOfItems.setAdapter(myItemsItemAdapter);
 
 		etMyItemsListSearch.addTextChangedListener(new TextWatcher() {
 
 			@Override
 			public void onTextChanged(CharSequence s, int start, int before, int count) {
-				MyProfileItemAdapter myItemsItemAdapter = new MyProfileItemAdapter(PersonProfileItems.this, katwalk.imageLoader, katwalk.imageLoaderOptions, userItemsObtained, s);
+				PersonProfileItemsAdapter myItemsItemAdapter = new PersonProfileItemsAdapter(PersonProfileItems.this, katwalk.imageLoader, katwalk.imageLoaderOptions, userItemsObtained, s);
 				listOfItems.setAdapter(myItemsItemAdapter);
 
 			}

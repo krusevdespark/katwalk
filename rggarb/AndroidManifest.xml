@@ -169,7 +169,7 @@
             android:label="Terms Of Service" >
         </activity>
         <activity
-            android:name="net.shiftinpower.activities.person.UserProfile"
+            android:name="net.shiftinpower.activities.person.AnotherUsersProfile"
             android:label="Profile" >
         </activity>
         <activity

@@ -6,7 +6,7 @@ import java.util.LinkedHashSet;
 import net.shiftinpower.activities.ItemAddStepOnePhotos;
 import net.shiftinpower.activities.person.MyProfile;
 import net.shiftinpower.activities.person.PersonProfile;
-import net.shiftinpower.activities.person.UserProfile;
+import net.shiftinpower.activities.person.AnotherUsersProfile;
 import net.shiftinpower.core.C;
 import net.shiftinpower.core.KatwalkSlidingMenu;
 import net.shiftinpower.customviews.SquareImageView;
@@ -299,7 +299,7 @@ public class ItemProfilePublic extends KatwalkSlidingMenu {
 								goToUserProfile = new Intent(ItemProfilePublic.this, MyProfile.class);
 								goToUserProfile.putExtra("currentUser", true);
 							} else {
-								goToUserProfile = new Intent(ItemProfilePublic.this, UserProfile.class);
+								goToUserProfile = new Intent(ItemProfilePublic.this, AnotherUsersProfile.class);
 								goToUserProfile.putExtra("personId", focusedUserId);
 								goToUserProfile.putExtra("currentUser", false);
 							}
@@ -362,7 +362,7 @@ public class ItemProfilePublic extends KatwalkSlidingMenu {
 								goToUserProfile = new Intent(ItemProfilePublic.this, MyProfile.class);
 								goToUserProfile.putExtra("currentUser", true);
 							} else {
-								goToUserProfile = new Intent(ItemProfilePublic.this, UserProfile.class);
+								goToUserProfile = new Intent(ItemProfilePublic.this, AnotherUsersProfile.class);
 								goToUserProfile.putExtra("personId", focusedFriendId);
 								goToUserProfile.putExtra("currentUser", false);
 							}

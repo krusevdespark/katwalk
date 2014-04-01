@@ -129,7 +129,15 @@ public class MyProfile extends PersonProfile implements OnClickListener, OnChang
 			Intent settings = new Intent(this, Settings.class);
 			startActivity(settings);
 			break;
-
+			
+		case R.id.tvUserProfileFriendsTab:
+			Intent personProfileFriends = new Intent(MyProfile.this, PersonProfileFriends.class);
+			personProfileFriends.putExtra("personId", personId);
+			personProfileFriends.putExtra("personName", personName);
+			personProfileFriends.putExtra("comingFromMyProfile", true);
+			startActivity(personProfileFriends);
+			break;
+			
 		case R.id.iUserAvatar:
 			// When the user clicks their avatar they should see a dialog with options to remove it or upload a new one.
 			Intent changeAvatarDialog = new Intent(MyProfile.this, ProvideImageDialog.class);

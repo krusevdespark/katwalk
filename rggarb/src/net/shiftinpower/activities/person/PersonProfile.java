@@ -155,12 +155,6 @@ public class PersonProfile extends KatwalkSlidingMenu implements OnClickListener
 			startActivity(personProfileFollowing);
 			break;
 
-		case R.id.tvUserProfileFriendsTab:
-			Intent personProfileFriends = new Intent(this, PersonProfileFriends.class);
-			personProfileFriends.putExtra("personId", personId);
-			startActivity(personProfileFriends);
-			break;
-
 		case R.id.tvUserProfileGalleryTab:
 
 			Intent personProfilePhotos = new Intent(this, NotImplementedYetScreen.class);

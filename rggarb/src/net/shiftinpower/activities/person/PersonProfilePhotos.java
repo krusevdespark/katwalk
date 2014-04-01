@@ -22,7 +22,7 @@ public class PersonProfilePhotos extends KatwalkSlidingMenu {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
-		setContentView(R.layout.activity_layout_my_profile_image_gallery);
+		setContentView(R.layout.activity_layout_person_profile_image_gallery);
 		
 		tvMyImageGalleryTitle = (TextView) findViewById(R.id.tvMyImageGalleryTitle);
 		

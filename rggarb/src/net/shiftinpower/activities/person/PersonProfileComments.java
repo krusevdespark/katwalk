@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import net.shiftinpower.activities.Home;
 import net.shiftinpower.activities.SearchItems;
-import net.shiftinpower.adapters.MyProfileCommentAdapter;
+import net.shiftinpower.adapters.PersonProfileCommentsAdapter;
 import net.shiftinpower.core.*;
 import net.shiftinpower.koldrain.R;
 import android.content.Intent;
@@ -48,7 +48,7 @@ public class PersonProfileComments extends KatwalkSlidingMenu {
 		super.onCreate(savedInstanceState);
 
 		// set the XML layout
-		setContentView(R.layout.activity_layout_my_profile_comments);
+		setContentView(R.layout.activity_layout_person_profile_comments);
 		
 		// Assign java objects to XML View elements
 		tvUserNameMyReviewsList = (TextView) findViewById(R.id.tvUserNameMyCommentsList);
@@ -65,7 +65,7 @@ public class PersonProfileComments extends KatwalkSlidingMenu {
 		listOfComments.setEmptyView(myProfileCommentsEmptyView);
 		
 		//instantiate the adapter, feed the data to it via its constructor and set the listview to use it
-		MyProfileCommentAdapter myProfileCommentAdapter = new MyProfileCommentAdapter(this, itemNames, itemRatings, itemComments, itemCommentDates, itemIds);
+		PersonProfileCommentsAdapter myProfileCommentAdapter = new PersonProfileCommentsAdapter(this, itemNames, itemRatings, itemComments, itemCommentDates, itemIds);
 		listOfComments.setAdapter(myProfileCommentAdapter);
 		
 		// Try setting fonts for different XML views on screen
