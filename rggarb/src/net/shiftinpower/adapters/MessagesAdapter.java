@@ -11,14 +11,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageButton;
 import android.widget.TextView;
-/**
-* Just a draft
-*
-* @author Kaloyan Roussev
-*
-*/
-public class MessagesAdapter extends BaseAdapter {
 
+/**
+ * Just a draft
+ * 
+ * @author Kaloyan Roussev
+ * 
+ */
+public class MessagesAdapter extends BaseAdapter {
 	private ArrayList<String> userNames = new ArrayList<String>();
 	private ArrayList<String> userAvatarPaths = new ArrayList<String>();
 	private ArrayList<String> datesOfMessages = new ArrayList<String>();
@@ -26,27 +26,27 @@ public class MessagesAdapter extends BaseAdapter {
 	private ArrayList<Integer> userIds = new ArrayList<Integer>();
 	private Context context;
 	private LayoutInflater layoutInflater;
-	
+
 	private boolean lastMessageOutgoing = false;
-	
+
 	private ImageButton ivMessageFromUserImage;
 	private ImageButton ivMessageFromUserSentOrReceivedIndicator;
 	private TextView tvMessageFromUserName;
 	private TextView tvMessageFromUserLastMessageDate;
 	private TextView tvMessageFromUserContent;
-	
-	public MessagesAdapter(Context context, ArrayList<String> userNames, ArrayList<String> userAvatarPaths, ArrayList<String> datesOfMessages, ArrayList<String> messageContents, ArrayList<Integer> userIds){
-		
+
+	public MessagesAdapter(Context context, ArrayList<String> userNames, ArrayList<String> userAvatarPaths, ArrayList<String> datesOfMessages, ArrayList<String> messageContents, ArrayList<Integer> userIds) {
+
 		this.context = context;
 		this.userNames = userNames;
 		this.userAvatarPaths = userAvatarPaths;
 		this.datesOfMessages = datesOfMessages;
 		this.messageContents = messageContents;
 		this.userIds = userIds;
-		
+
 		layoutInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 	}
-	
+
 	@Override
 	public int getCount() {
 		return userIds.size();
@@ -54,7 +54,7 @@ public class MessagesAdapter extends BaseAdapter {
 
 	@Override
 	public Object getItem(int arg0) {
-		return userIds.get(arg0)	;
+		return userIds.get(arg0);
 	}
 
 	@Override
@@ -64,26 +64,25 @@ public class MessagesAdapter extends BaseAdapter {
 
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent) {
-		if(convertView==null) {
+		if (convertView == null) {
 			convertView = layoutInflater.inflate(R.layout.item_adapterable_inbox_message, parent, false);
 		}
-		
+
 		ivMessageFromUserImage = (ImageButton) convertView.findViewById(R.id.ivMessageFromUserImage);
 		ivMessageFromUserSentOrReceivedIndicator = (ImageButton) convertView.findViewById(R.id.ivMessageFromUserSentOrReceivedIndicator);
-	    tvMessageFromUserName= (TextView) convertView.findViewById(R.id.tvMessageFromUserName);
-		tvMessageFromUserLastMessageDate= (TextView) convertView.findViewById(R.id.tvMessageFromUserLastMessageDate);
-		tvMessageFromUserContent= (TextView) convertView.findViewById(R.id.tvMessageFromUserContent);
-		
+		tvMessageFromUserName = (TextView) convertView.findViewById(R.id.tvMessageFromUserName);
+		tvMessageFromUserLastMessageDate = (TextView) convertView.findViewById(R.id.tvMessageFromUserLastMessageDate);
+		tvMessageFromUserContent = (TextView) convertView.findViewById(R.id.tvMessageFromUserContent);
+
 		tvMessageFromUserName.setText(userNames.get(position));
 		tvMessageFromUserLastMessageDate.setText(datesOfMessages.get(position));
 		tvMessageFromUserContent.setText(messageContents.get(position));
-		
+
 		ivMessageFromUserImage.setImageBitmap(BitmapFactory.decodeFile(userAvatarPaths.get(position)));
-		if(lastMessageOutgoing) {
+		if (lastMessageOutgoing) {
 			ivMessageFromUserSentOrReceivedIndicator.setImageResource(R.drawable.images_arrow_purple_up);
 		}
-		
-		
+
 		return convertView;
 	} // End of getView
 

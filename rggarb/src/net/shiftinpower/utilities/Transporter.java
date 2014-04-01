@@ -7,6 +7,7 @@ import net.shiftinpower.objects.ItemExtended;
 import net.shiftinpower.objects.ItemSubcategory;
 import net.shiftinpower.objects.TemporaryImage;
 import net.shiftinpower.objects.ItemBasic;
+import net.shiftinpower.objects.UserBasic;
 import net.shiftinpower.objects.UserExtended;
 
 /**
@@ -37,6 +38,7 @@ public class Transporter {
 	public LinkedHashSet<ItemSubcategory> itemSubcategories;
 	public ItemBasic itemBasic;
 	public ItemExtended itemExtended;
+	public UserBasic userBasic;
 	public UserExtended userExtended;
 	public ItemBasic userItem;
 

@@ -52,7 +52,8 @@ public final class C {
 		public static final String REGISTER_FACEBOOK_USER = "register_facebook_user.php";
 		public static final String SET_USER_AVATAR = "set_user_avatar.php";
 		public static final String DELETE_USER_AVATAR = "delete_user_avatar.php";
-
+		public static final String GET_USER_FRIENDS = "get_user_friends.php";
+		
 		// Categories Related
 		public static final String GET_CATEGORIES = "get_categories.php";
 		public static final String GET_SUBCATEGORIES = "get_subcategories.php";
@@ -74,6 +75,8 @@ public final class C {
 		public static final String FRIEND_REQUEST_ACCEPT = "friend_request_accept.php";
 
 		public static final String FRIEND_REMOVE = "friend_remove.php";
+
+
 
 	} // End of API
 
@@ -170,6 +173,7 @@ public final class C {
 		public static final String ANOTHER_USER_ID = "another_user_id";
 		public static final String WE_SENT_THEM_FRIEND_REQUEST = "we_sent_them_friend_request";
 		public static final String THEY_SENT_US_FRIEND_REQUEST = "they_sent_us_friend_request";
+		public static final String USER_FRIENDS = "user_friends";
 
 		public static final String MESSAGE = "message";
 		public static final String SUCCESS = "success";
@@ -200,6 +204,7 @@ public final class C {
 		// Remove Friend
 		public static final String REMOVE_FRIEND_REMOVER = "remover_id";
 		public static final String REMOVE_FRIEND_REMOVED = "removed_id";
+
 		
 
 	} // End of DBColumns
@@ -571,6 +576,7 @@ public final class C {
 		public static final String FRIEND_REQUEST_SENDING = "Sending Friend Request";
 		public static final String FRIEND_REQUEST_ACCEPTING = "Accepting Friend Request";
 		public static final String FRIEND_REQUEST_CANCELLING = "Cancelling Friend Request";
+		public static final String LOADING_USER_FRIENDS = "Loading user friends";
 	}
 
 	public static final class PointsEarnedToasts {

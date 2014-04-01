@@ -10,7 +10,6 @@ import net.shiftinpower.koldrain.R;
 import android.app.Dialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -121,11 +120,7 @@ public class UserProfile extends PersonProfile implements OnFriendRequestSendLis
 
 	@Override
 	public void onUserIdentified() {
-		
-		Log.e("personHasFriendRequestFromUs", String.valueOf(personHasFriendRequestFromUs));
-		Log.e("personHasSentUsFriendRequest", String.valueOf(personHasSentUsFriendRequest));
-		
-		
+			
 		// Set action buttons' text and actions
 		if (personHasFriendRequestFromUs) {
 
