@@ -157,13 +157,13 @@ public class PersonProfileItems extends KatwalkSlidingMenu implements OnGetUserI
 
 				if (count > 0) {
 					ItemCategory itemCategory = (ItemCategory) arg0.getItemAtPosition(arg2);
-					int selectedItemId = itemCategory.getId();
+					int selectedItemCategoryId = itemCategory.getId();
 
 					if (userItemsObtained != null) {
 
 						PersonProfileItemsAdapter myItemsItemAdapter;
-						if (selectedItemId != 99) {
-							myItemsItemAdapter = new PersonProfileItemsAdapter(PersonProfileItems.this, katwalk.imageLoader, katwalk.imageLoaderOptions, userItemsObtained, selectedItemId);
+						if (selectedItemCategoryId != 99) { // TODO What on Earth is that?
+							myItemsItemAdapter = new PersonProfileItemsAdapter(PersonProfileItems.this, katwalk.imageLoader, katwalk.imageLoaderOptions, userItemsObtained, selectedItemCategoryId);
 
 						} else {
 							myItemsItemAdapter = new PersonProfileItemsAdapter(PersonProfileItems.this, katwalk.imageLoader, katwalk.imageLoaderOptions, userItemsObtained);

@@ -1,12 +1,18 @@
 package net.shiftinpower.activities.person;
 
 import java.util.ArrayList;
-
+import java.util.LinkedHashSet;
 import net.shiftinpower.activities.Home;
 import net.shiftinpower.activities.SearchItems;
 import net.shiftinpower.adapters.PersonProfileFollowingAdapter;
+import net.shiftinpower.asynctasks.GetUserFollowedItemsFromServerAsync;
 import net.shiftinpower.core.*;
+import net.shiftinpower.interfaces.OnGetCategoriesListener;
+import net.shiftinpower.interfaces.OnGetUserFollowedItemsListener;
 import net.shiftinpower.koldrain.R;
+import net.shiftinpower.localsqlitedb.GetUserItemsFromDB;
+import net.shiftinpower.objects.ItemBasic;
+import net.shiftinpower.objects.ItemCategory;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,26 +22,18 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
-public class PersonProfileFollowing extends KatwalkSlidingMenu {
+public class PersonProfileFollowing extends KatwalkSlidingMenu implements OnGetUserFollowedItemsListener, OnGetCategoriesListener {
 
 	// XML view elements
 	private TextView tvUserNameFollowingList;
 	private EditText etFollowingListSearch;
-	
+
 	// XML ListView
 	private ListView listOfFollowedItems;
-	
-	// Data fed to the adapter
-	private ArrayList<String> itemNames = new ArrayList<String>();
-	private ArrayList<String> itemBrands = new ArrayList<String>();
-	private ArrayList<Integer> itemPrices = new ArrayList<Integer>();
-	private ArrayList<Double> itemRatings = new ArrayList<Double>();
-	private ArrayList<String> itemsBoughtFrom = new ArrayList<String>();
-	private ArrayList<String> itemImagePaths = new ArrayList<String>();
-	private ArrayList<Integer> imageRatingsCount = new ArrayList<Integer>();
-	private ArrayList<Integer> itemIds = new ArrayList<Integer>();
-	
-	// If there is no data to be fed to the adapter, we need to display a custom layout with a call to action, these are its XML elements
+	private LinkedHashSet<ItemBasic> userFollowedItemsObtained;
+
+	// If there is no data to be fed to the adapter, we need to display a custom layout with a call to action, these are its
+	// XML elements
 	private View myProfileFollowingsEmptyView;
 	private Button bEmptyMyProfileFollowingsSearchItems;
 	private Button bEmptyMyProfileFollowingsVisitItemsFeed;
@@ -49,6 +47,10 @@ public class PersonProfileFollowing extends KatwalkSlidingMenu {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		
+		// Obtain the userItems from Database
+		new GetUserFollowedItemsFromServerAsync(PersonProfileFollowing.this, currentlyLoggedInUser, PersonProfileFollowing.this).execute();
+
 
 		// Set the XML layout
 		setContentView(R.layout.activity_layout_person_profile_following);
@@ -68,7 +70,7 @@ public class PersonProfileFollowing extends KatwalkSlidingMenu {
 		listOfFollowedItems.setEmptyView(myProfileFollowingsEmptyView);
 
 		// Instantiate the adapter, feed the data to it via its constructor and set the listview to use it
-		PersonProfileFollowingAdapter myProfileFollowingAdapter = new PersonProfileFollowingAdapter(this, itemNames, itemBrands, itemPrices, itemRatings, itemsBoughtFrom, itemImagePaths, itemIds, imageRatingsCount);
+		PersonProfileFollowingAdapter myProfileFollowingAdapter = new PersonProfileFollowingAdapter(this, katwalk.imageLoader, katwalk.imageLoaderOptions, userFollowedItemsObtained);
 		listOfFollowedItems.setAdapter(myProfileFollowingAdapter);
 
 		// Try setting fonts for different XML views on screen
@@ -105,5 +107,29 @@ public class PersonProfileFollowing extends KatwalkSlidingMenu {
 		//etFollowingListSearch
 		
 	} // End of onCreate
+
+	@Override
+	public void onGetCategoriesSuccess(LinkedHashSet<ItemCategory> itemCategories) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onGetCategoriesFailure(String reason) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onGetUserFollowedItemsSuccess(LinkedHashSet<ItemBasic> userItems) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void onGetUserFollowedItemsFailure(String reason) {
+		// TODO Auto-generated method stub
+
+	}
 
 } // End of Class

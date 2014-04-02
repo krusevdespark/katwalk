@@ -53,6 +53,7 @@ public final class C {
 		public static final String SET_USER_AVATAR = "set_user_avatar.php";
 		public static final String DELETE_USER_AVATAR = "delete_user_avatar.php";
 		public static final String GET_USER_FRIENDS = "get_user_friends.php";
+		public static final String GET_USER_FOLLOWED_ITEMS = "get_user_followed_items.php";
 		
 		// Categories Related
 		public static final String GET_CATEGORIES = "get_categories.php";
@@ -75,9 +76,7 @@ public final class C {
 		public static final String FRIEND_REQUEST_ACCEPT = "friend_request_accept.php";
 
 		public static final String FRIEND_REMOVE = "friend_remove.php";
-
-
-
+		
 	} // End of API
 
 	public static final class DBTables {
